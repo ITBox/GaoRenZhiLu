@@ -2,6 +2,7 @@ package com.itbox.grzl.activity;
 
 import java.util.List;
 
+import com.itbox.fx.core.AppContext;
 import com.itbox.fx.core.L;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
@@ -19,6 +20,8 @@ import butterknife.OnClick;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -59,18 +62,8 @@ public class LoginActicity extends BaseActivity {
 		RequestParams params = new RequestParams();
 		params.put("account", userName);
 		params.put("userpassword", password);
-//		Net.request(params, Api.getUrl(Api.User.Login), new ResponseHandler(){
-//			@Override
-//			public void onSuccess(String content) {
-//				super.onSuccess(content);
-//				L.i(Net.TAG, content);
-//			}
-//			@Override
-//			public void onFailure(Throwable e, int statusCode, String content) {
-//				// TODO Auto-generated method stub
-//				super.onFailure(e, statusCode, content);
-//			}
-//		});
+		
+		showProgressDialog("登录中...");
 		Net.request(params, Api.getUrl(Api.User.Login), new GsonResponseHandler<Login>(Login.class) {
 
 			@Override
@@ -83,20 +76,26 @@ public class LoginActicity extends BaseActivity {
 			public void onSuccess(Login object) {
 				// TODO Auto-generated method stub
 				super.onSuccess(object);
+				SharedPreferences sp = AppContext.getUserPreferences();
+				sp.edit().putInt("userid", object.getUserid()).commit();
 				startActivity(MainActivity.class);
-				finish();
+				mActThis.finish();
 			}
 			
 			@Override
 			public void onFailure(Throwable e, int statusCode, String content) {
-				// TODO Auto-generated method stub
 				super.onFailure(e, statusCode, content);
+				switch (statusCode) {
+
+				default:
+					break;
+				}
 			}
 			
 			@Override
 			public void onFinish() {
-				// TODO Auto-generated method stub
 				super.onFinish();
+				dismissProgressDialog();
 			}
 		});
 	}

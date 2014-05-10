@@ -90,7 +90,7 @@ public class RegistEmailActivity extends BaseActivity {
 	@OnClick(R.id.regist_email_regist)
 	public void registEmailAccount() {
 		// 验证邮箱是否注册过
-//		showProgressDialog("注册中...");
+		showProgressDialog("注册中...");
 		Net.request("useremail", mLLEmailEmail.getRightText(), Api.getUrl(Api.User.CheckAccount), new GsonResponseHandler<CheckAccount>(CheckAccount.class) {
 			@Override
 			public void onSuccess(CheckAccount object) {
@@ -130,10 +130,10 @@ public class RegistEmailActivity extends BaseActivity {
 				super.onSuccess(object);
 				if (object.getResult() > 0){
 					// 注册成功
+					ToastUtils.showToast(mActThis, "注册成功");
 				} else {
 					// 
 				}
-				
 			}
 			@Override
 			public void onFinish() {
