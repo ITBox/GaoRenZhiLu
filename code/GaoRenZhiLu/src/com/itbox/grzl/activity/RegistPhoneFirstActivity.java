@@ -4,10 +4,17 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.fx.net.Net;
 import com.itbox.fx.util.StringUtil;
 import com.itbox.fx.util.ToastUtils;
+import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
+import com.itbox.grzl.bean.CheckAccount;
+import com.itbox.grzl.bean.Register;
+import com.loopj.android.http.RequestParams;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -48,7 +55,47 @@ public class RegistPhoneFirstActivity extends BaseActivity {
         if(StringUtil.isBlank(mPhone)) {
         	ToastUtils.showToast(mActThis, "手机号不为空");
         } else{
-        	
+        	if (StringUtil.checkPhone(mPhone)){
+        		checkIsRegistServer(mPhone);
+        	} else {
+        		ToastUtils.showToast(mActThis, "手机号不符合规定");
+        	}
         }
 	}
+
+	private void checkIsRegistServer(final String mPhone) {
+		// TODO Auto-generated method stub
+		
+		Net.request("userphone", mPhone, Api.getUrl(Api.User.CheckAccount), new GsonResponseHandler<CheckAccount>(CheckAccount.class){
+			public void onSuccess(CheckAccount object) {
+				if (object.getUserPhone() == 0) {
+					sendAuthCode(mPhone);
+				} else {
+					ToastUtils.makeCustomPosition(mActThis, "该邮箱已被注册", R.id.alternate_view_group);
+				}
+			}
+		}
+		);
+	}
+	
+	private void sendAuthCode(final String mPhone) {
+		// TODO Auto-generated method stub
+		RequestParams params = new RequestParams();
+		params.put("userphone", mPhone);
+		params.put("type", String.valueOf(1));
+		Net.request(params, Api.getUrl(Api.User.SendVerifyCode), new GsonResponseHandler<Register>(Register.class) {
+			@Override
+			public void onSuccess(Register object) {
+				super.onSuccess(object);
+				int result = object.getResult();
+				if(result == 1){
+					Intent intent = new Intent(mActThis, RegistPhoneSecondActivity.class);
+					intent.putExtra("registPhone", mPhone);
+					startActivity(intent);
+				} else if (result == 5){
+					ToastUtils.showToast(mActThis, "此号码操作频繁");
+				}
+			}
+		});
+	};
 }
