@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/top_title"
+        layout="@layout/unit_top_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp" >
+
+        <com.itbox.fx.widget.CellView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cellBgType="top"
+            app:cellType="edit_text" />
+
+        <com.itbox.fx.widget.CellView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cellBgType="middle"
+            app:cellType="edit_text"
+            app:leftText="密码：" />
+
+        <com.itbox.fx.widget.CellView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cellBgType="middle"
+            app:cellType="edit_text"
+            app:leftText="昵称：" />
+        <com.itbox.fx.widget.CellView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cellBgType="middle"
+            app:cellType="edit_text"
+            app:leftText="性别：" />
+        
+        <com.itbox.fx.widget.CellView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cellBgType="middle"
+            app:cellType="edit_text"
+            app:leftText="生日：" />
+        
+        <com.itbox.fx.widget.CellView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cellBgType="middle"
+            app:cellType="edit_text"
+            app:leftText="所在地：" />
+
+        <com.itbox.fx.widget.CellView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cellBgType="bottom"
+            app:cellType="spinner"
+            app:leftText="类型"
+            />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:text="注册" />
+
+</LinearLayout>
