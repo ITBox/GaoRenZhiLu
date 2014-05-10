@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -8,25 +7,30 @@
         android:id="@+id/top_title"
         layout="@layout/unit_top_title" />
 
-    <com.itbox.fx.widget.CellView
+    <EditText
         android:id="@+id/regist_phone_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/top_title"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="5dp"
+        android:textSize="14sp"
+        android:background="@drawable/rectangle_radius_white"
+        android:hint="请输入要注册的手机号"
         android:minHeight="@dimen/cell_height"
-        app:cellBgType="single"
-        app:cellType="edit_text" />
+        android:textColor="@color/light_blue" />
 
     <CheckBox
         android:id="@+id/regist_cb"
+        style="@style/CheckBOX"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/regist_phone_et"
         android:layout_below="@id/regist_phone_et"
-        android:layout_marginTop="10dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:id="@+id/refist_cb_tv"
@@ -38,22 +42,26 @@
         android:text="我已阅读并同意" />
 
     <TextView
+        android:id="@+id/regist_clause"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/refist_cb_tv"
         android:layout_alignBottom="@+id/refist_cb_tv"
-        android:layout_alignRight="@+id/regist_phone_et"
-        android:text="《黄埔天下服务条款》" />
+        android:layout_toRightOf="@id/refist_cb_tv"
+        android:text="《高人指路服务条款》" />
 
     <Button
         android:id="@+id/regist_get_authCode"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/cell_height"
         android:layout_alignLeft="@id/regist_phone_et"
         android:layout_alignRight="@id/regist_phone_et"
         android:layout_below="@+id/regist_cb"
         android:layout_marginTop="10dp"
-        android:text="向我发送验证码" />
+        android:background="@drawable/button_blue_selector"
+        android:text="向我发送验证码"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/regist_email"
@@ -64,22 +72,4 @@
         android:layout_marginBottom="20dp"
         android:text="用邮箱注册" />
 
-    <TextView
-        android:id="@+id/refist_cb_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/regist_cb"
-        android:layout_alignBottom="@+id/regist_cb"
-        android:layout_toRightOf="@+id/regist_cb"
-        android:text="我已阅读并同意" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/refist_cb_tv"
-        android:layout_alignBottom="@+id/refist_cb_tv"
-        android:layout_alignRight="@+id/regist_phone_et"
-        android:text="《高人指路服务条款》" />
-
->>>>>>> .r71
 </RelativeLayout>

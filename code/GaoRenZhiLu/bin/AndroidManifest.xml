@@ -46,6 +46,10 @@
             android:name="com.itbox.grzl.activity.RegistEmailActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.itbox.grzl.activity.RegistClauseActivity"
+            android:screenOrientation="portrait" />
+        
+        <activity
             android:name="com.itbox.grzl.activity.ConsultationSearchActivity"
             android:screenOrientation="portrait" />
         <activity
