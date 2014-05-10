@@ -1,0 +1,54 @@
+<resources>
+
+    <style name="cell">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/cell_height</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="button_blue" parent="@style/cell">
+        <item name="android:background">@drawable/button_blue_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="button_yellow" parent="@style/button_blue">
+        <item name="android:background">@drawable/button_yellow_selector</item>
+    </style>
+
+    <!-- 页面标题栏 -->
+    <style name="page_titlebar">
+        <item name="android:background">@color/smalt_titlebar</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 页面标题栏返回键 -->
+    <style name="page_backbtn">
+        <item name="android:background">@drawable/selector_button_back</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <!-- 页面标题 -->
+    <style name="page_title">
+        <item name="android:textSize">@dimen/textsize_title_bar</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:singleLine">true</item>
+    </style>
+    
+        <style name="listview">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingLeft">5dip</item>
+        <item name="android:paddingRight">5dip</item>
+        <item name="android:dividerHeight">10dip</item>
+        <item name="android:divider">@android:color/transparent</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+    </style>
+</resources>

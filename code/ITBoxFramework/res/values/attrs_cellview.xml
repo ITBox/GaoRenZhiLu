@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CellView">
+        <attr name="cellType" format="enum">
+            <enum name="button_arrow" value="0" />
+            <enum name="button_text" value="1" />
+            <enum name="edit_text" value="2" />
+            <enum name="switch_button" value="3" />
+            <enum name="spinner" value="4" />
+        </attr>
+        <attr name="cellBgType" format="enum">
+            <enum name="single" value="0" />
+            <enum name="top" value="1" />
+            <enum name="middle" value="2" />
+            <enum name="bottom" value="3" />
+        </attr>
+        <attr name="leftText" format="string"/>
+        <attr name="rightText" format="string"/>
+        <attr name="layout" format="reference"/>
+    </declare-styleable>
+    <item type="id" name="cellview_left" />
+    <item type="id" name="cellview_right" />
+</resources>
