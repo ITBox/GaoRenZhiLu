@@ -12,6 +12,7 @@ import com.itbox.fx.widget.CellView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.Login;
+import com.itbox.grzl.common.Contasts;
 import com.loopj.android.http.RequestParams;
 
 import butterknife.ButterKnife;
@@ -77,7 +78,7 @@ public class LoginActicity extends BaseActivity {
 				// TODO Auto-generated method stub
 				super.onSuccess(object);
 				SharedPreferences sp = AppContext.getUserPreferences();
-				sp.edit().putInt("userid", object.getUserid()).commit();
+				sp.edit().putInt(Contasts.USERID, object.getUserid()).commit();
 				startActivity(MainActivity.class);
 				mActThis.finish();
 			}
