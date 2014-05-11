@@ -1,0 +1,82 @@
+package com.itbox.grzl.engine;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.L;
+import com.itbox.fx.net.Net;
+import com.itbox.fx.net.ResponseHandler;
+import com.itbox.grzl.Api;
+import com.itbox.grzl.bean.ExamInscribe;
+import com.loopj.android.http.RequestParams;
+
+/**
+ * 测评业务
+ * 
+ * @author byz
+ * @date 2014-5-10下午10:53:46
+ */
+public class ExamEngine {
+
+	public static final String EXAM_FILE = "exam/exam_1";
+
+	/**
+	 * 获取测评题目
+	 * 
+	 * @return
+	 */
+	public static List<ExamInscribe> getExamInscribes() {
+		List<ExamInscribe> list = new ArrayList<ExamInscribe>();
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(
+					AppContext.getInstance().getAssets().open(EXAM_FILE)));
+			String line;
+			ExamInscribe bean = null;
+			while ((line = br.readLine()) != null) {
+				String[] array = line.split("\\|");
+				if (array != null && array.length == 3) {
+					bean = new ExamInscribe();
+					bean.setContent(array[0]);
+					bean.setOptionA(array[1]);
+					bean.setOptionB(array[2]);
+					list.add(bean);
+				}
+			}
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	public static void submit(List<ExamInscribe> list, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("userid", "16"); // TODO userid
+		params.put("data", createExamResult(list)); // 测评答案
+		Net.request(params, Api.User.SUBMIT_EXAM, handler);
+	}
+
+	/**
+	 * 生成测评试题的回答结果
+	 * 
+	 * @param list
+	 * @return
+	 */
+	private static String createExamResult(List<ExamInscribe> list) {
+		StringBuilder sb = new StringBuilder();
+		if (list != null) {
+			int index = 1;
+			for (ExamInscribe bean : list) {
+				sb.append(Integer.toString(index)).append(",")
+						.append(bean.getSelected()).append(";");
+				index++;
+			}
+		}
+		return sb.toString();
+	}
+}

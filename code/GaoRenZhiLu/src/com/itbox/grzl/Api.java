@@ -144,6 +144,8 @@ public class Api {
 		/** 42我的资金 */
 		public static final String MyFund = PartName + "getusercapital";
 		
+		/** 测评 */
+		public static final String SUBMIT_EXAM = PartName + "addusertesting";
 		
 	}
 
