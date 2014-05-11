@@ -6,5 +6,66 @@
     <string name="online_study">在线学习</string>
 
     <string name="loading">正在加载...</string>
+    
+    <string name="hint_input">请填写</string>
+    <string name="hint_select">请选择</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="enter">确定</string>
+    <string name="commit">提交</string>
+    <string name="cancel">取消</string>
+    <string name="next">下一步</string>
+    
+    <string name="event_find">找活动</string>
+    <string name="event_add">发活动</string>
+    <string name="event_title">活动</string>
+    <string name="event_detial_title">活动详情</string>
+    <string name="event_add_title">发布活动</string>
+    <string name="event_search_title">活动搜索</string>
+    <string name="event_map_title">活动地图</string>
+    <string name="event_immediately">即时活动</string>
+    <string name="event_normal">普通活动</string>
+    
+    <!-- 发活动 -->
+        <string name="label_event_price">活动费用：</string>
+    <string name="hint_addr_desc">添加详细信息，例如门牌号，限20字</string>
+    <string name="hint_event_type_select">请选择活动类型</string>
+    <string name="warn_event_type_empty">@string/hint_event_type_select</string>
+    <string name="hint_event_title">2-20个字</string>
+    <string name="warn_event_title_empty">请输入活动名称</string>
+    <string name="warn_event_title_formatewrong">活动名称为2-20个字</string>
+    <string name="hint_event_begintime">请选择开始时间</string>
+    <string name="warn_event_begintime_empty">@string/hint_event_begintime</string>
+    <string name="hint_event_endtime">请选择结束时间</string>
+    <string name="warn_event_endtime_empty">@string/hint_event_endtime</string>
+    <string name="hint_event_addr">请输入活动地址</string>
+    <string name="warn_event_addr_empty">@string/hint_event_addr</string>
+    <string name="warn_event_addr_tolong">活动地址在50个字以内</string>
+    <string name="hint_event_num">除发布者之外需要的人数</string>
+    <string name="warn_event_num_empty">请输入活动人数</string>
+    <string name="hint_event_price">0元为免费</string>
+    <string name="warn_event_price_empty">请输入人均费用</string>
+    <string name="warn_event_price_formatewrong">人均费用范围在0-999元</string>
+    <string name="hint_event_paytype">请选择支付方式</string>
+    <string name="warn_event_paytype_empty">@string/hint_event_paytype</string>
+    <string name="hint_event_keyword">2-8个字，最多5个，空格隔开</string>
+    <string name="warn_event_keyword_empty">请填写关键字</string>
+    <string name="warn_event_keyword_toomuch">关键字最多只能填写5个</string>
+    <string name="warn_event_keyword_toolong">每个关键字为2-8个字</string>
+    <string name="hint_event_desc">请输入活动描述</string>
+    <string name="warn_event_desc_empty">@string/hint_event_desc</string>
+    <string name="warn_event_desc_formatewrong">活动描述为15-500个字</string>
+    <string name="warn_event_bill_empty">请上传活动海报</string>
+    <string name="warn_event_bill_toobig">请上传小于5M的图片</string>
+    <string name="warn_event_bill_formatewrong">图片仅支持JPG、PNG和GIF格式</string>
+    <string name="warn_event_busy">你这段时间已有其他活动</string>
+    <string name="warn_event_add_success">发布成功</string>
+    <string name="warn_event_join_full">很抱歉，该活动人数已满</string>
+    <string name="warn_event_join_unavailable">很抱歉，该活动已不能报名</string>
+    <string name="warn_event_join_time_conflict">该时间段您已参加活动</string>
+    <string name="warn_event_join_notmeet">您不符合该活动设置的报名条件</string>
+    <string name="warn_event_join_failure">报名失败</string>
+    <string name="warn_event_join_over2times">@string/warn_event_join_failure</string>
 
+    
 </resources>
