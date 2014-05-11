@@ -36,7 +36,7 @@
             android:clickable="true"
             android:padding="8dp"
             android:text="发起的活动"
-            android:textColor="@drawable/selector_color_gary_white"
+            android:textColor="@color/selector_color_gary_white"
             android:textSize="@dimen/textsize_text" />
 
         <Button
@@ -48,7 +48,7 @@
             android:clickable="true"
             android:padding="8dp"
             android:text="参加的活动"
-            android:textColor="@drawable/selector_color_gary_white"
+            android:textColor="@color/selector_color_gary_white"
             android:textSize="@dimen/textsize_text" />
     </LinearLayout>
 

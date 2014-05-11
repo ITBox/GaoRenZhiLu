@@ -3,6 +3,6 @@
 
     <item android:state_pressed="true" android:drawable="@drawable/rectangle_radius_red_pressed"/>
     <item android:state_focused="true" android:drawable="@drawable/rectangle_radius_red_pressed"/>
-    <item android:drawable="@drawable/rectangle_radius_red"></item>
+    <item android:drawable="@drawable/rect_radius_red"></item>
 
 </selector>
