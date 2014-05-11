@@ -11,6 +11,9 @@ public class Api {
 	private static final String CODE_HOST  = "http://whoyao.com/checkcode.ashx?key=android_remark";
 	private static final String IMAGE_HOST = "http://image.whoyao.net/";
 	
+	
+	public static final int PAGE_SIZE = 15;
+	public static final int PAGE_DEFAULT_INDEX = 1;
 //	/**测试  接口地址*/
 //	private static final String Api_d = "http://api.d.whoyao.com/";
 //	private static final String Api_r = "http://api.r.whoyao.com/";
