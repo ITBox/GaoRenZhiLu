@@ -46,7 +46,11 @@ public class RegistPhoneFirstActivity extends BaseActivity {
 		mTVTopCancel.setVisibility(View.VISIBLE);
 		mTVTopMedium.setText("手机注册");
 	}
-
+    @OnClick(R.id.regist_clause)
+    public void registClause(){
+    	startActivity(LicenceActivity.class);
+    }
+    
 	@OnClick(R.id.regist_get_authCode)
 	@Override
 	public void onClick(View v) {

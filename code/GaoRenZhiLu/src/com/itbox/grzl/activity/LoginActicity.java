@@ -6,7 +6,6 @@ import com.itbox.fx.core.AppContext;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.util.ToastUtils;
-import com.itbox.fx.widget.CellView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.Login;
@@ -22,6 +21,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.widget.EditText;
 import android.widget.TextView;
 /**
  * 
@@ -30,8 +30,8 @@ import android.widget.TextView;
  */
 public class LoginActicity extends BaseActivity {
 	private long exitTime;
-	@InjectView(R.id.login_username) CellView mETLoginUserName;
-	@InjectView(R.id.login_password) CellView mETLoginPassword;
+	@InjectView(R.id.login_username) EditText mETLoginUserName;
+	@InjectView(R.id.login_password) EditText mETLoginPassword;
     @InjectView(R.id.login_regist_pass_tv) TextView mTVLoginRegist;
     @InjectView(R.id.login_find_pass_tv) TextView mTVLoginFind;
 //    @InjectView(R.id.login_login_bt) Button mBTLoginLogin;
@@ -45,8 +45,8 @@ public class LoginActicity extends BaseActivity {
 	
 	@OnClick(R.id.login_login_bt)
 	public void userLogin() {
-		String userName = mETLoginUserName.getRightText();
-		String password = mETLoginPassword.getRightText();
+		String userName = mETLoginUserName.getText().toString();
+		String password = mETLoginPassword.getText().toString();
 		if (TextUtils.isEmpty(userName)){
 			ToastUtils.showToast(mActThis, "帐号为空");
 			return;
