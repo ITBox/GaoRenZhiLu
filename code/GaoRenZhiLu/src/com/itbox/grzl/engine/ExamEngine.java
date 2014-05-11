@@ -33,8 +33,10 @@ public class ExamEngine {
 	 */
 	public static void getExamReport(int pageNum, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
-		params.put("userid",
-				AppContext.getUserPreferences().getString(Contasts.USERID, ""));
+		params.put(
+				"userid",
+				Integer.toString(AppContext.getUserPreferences().getInt(
+						Contasts.USERID, 0)));
 		params.put("pagesize", Integer.toString(PAGE_NUM));
 		params.put("pageindex", Integer.toString(pageNum));
 		Net.request(params, Api.getUrl(Api.User.EXAM_REPORT), handler);

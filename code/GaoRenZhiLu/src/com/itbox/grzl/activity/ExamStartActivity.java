@@ -123,6 +123,9 @@ public class ExamStartActivity extends BaseActivity {
 				super.onSuccess(result);
 				if (result.isSuccess()) {
 					showToast("提交成功");
+					// 进入测评报告页面
+					startActivity(ExamReportActivity.class);
+					finish();
 				} else {
 					showToast("提交失败");
 				}

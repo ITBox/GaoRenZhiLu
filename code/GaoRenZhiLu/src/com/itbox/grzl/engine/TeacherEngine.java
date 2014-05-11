@@ -27,10 +27,12 @@ public class TeacherEngine {
 	 */
 	public static void addWithdrawals(double price, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
-		params.put("userid",
-				AppContext.getUserPreferences().getString(Contasts.USERID, ""));
+		params.put(
+				"userid",
+				Integer.toString(AppContext.getUserPreferences().getInt(
+						Contasts.USERID, 0)));
 		params.put("price", Double.toString(price));
-		Net.request(params , Api.getUrl(Api.User.ADD_USER_WITHDRAWALS), handler);
+		Net.request(params, Api.getUrl(Api.User.ADD_USER_WITHDRAWALS), handler);
 	}
 
 	/**
@@ -40,14 +42,15 @@ public class TeacherEngine {
 	 * @param teacheruserid
 	 * @param handler
 	 */
-	public static void getIncoming(int pageNum, int teacheruserid, ResponseHandler handler) {
+	public static void getIncoming(int pageNum, int teacheruserid,
+			ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("pagesize", Integer.toString(PAGE_NUM));
 		params.put("pageindex", Integer.toString(pageNum));
 		params.put("teacheruserid", Integer.toString(teacheruserid));
 		Net.request(params, Api.getUrl(Api.User.GET_TEACHER_INCOME), handler);
 	}
-	
+
 	/**
 	 * 获取提现记录
 	 * 
@@ -55,7 +58,8 @@ public class TeacherEngine {
 	 * @param userid
 	 * @param handler
 	 */
-	public static void getWithdrawals(int pageNum, int userid, ResponseHandler handler) {
+	public static void getWithdrawals(int pageNum, int userid,
+			ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("pagesize", Integer.toString(PAGE_NUM));
 		params.put("pageindex", Integer.toString(pageNum));
