@@ -75,7 +75,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/rectangle_radius_white"
+                android:background="@drawable/rect_radius_white"
                 android:hint="请输入详细地址"
                 android:padding="5dp"
                 android:singleLine="true"

@@ -6,34 +6,50 @@
     android:orientation="vertical" >
 
     <include
-        android:id="@+id/top_title"
         layout="@layout/unit_top_title" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
         android:text="请输入收到的验证码" />
 
-    <com.itbox.fx.widget.CellView
-        android:id="@+id/regist_phone_et"
+   <EditText
+        android:id="@+id/regist_authcode_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
+        android:paddingLeft="5dp"
+        android:textSize="14sp"
+        android:background="@drawable/rect_radius_white"
+        android:hint="请输入验证码"
         android:minHeight="@dimen/cell_height"
-        app:cellBgType="single"
-        app:cellType="edit_text" />
+        android:textColor="@color/light_blue" />
 
     <Button
         android:id="@+id/regist_next_bt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/cell_height"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:layout_marginTop="15dp"
+        android:background="@drawable/button_blue_selector"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
         android:text="下一步" />
-
+    
+    <TextView 
+        android:id="@+id/regist_auth_again_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:text="50s重新获取"
+        android:padding="5dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#E64638"
+        android:visibility="gone" />
 </LinearLayout>

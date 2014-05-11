@@ -3,15 +3,14 @@ package com.itbox.grzl.activity;
 import java.util.List;
 
 import com.itbox.fx.core.AppContext;
-import com.itbox.fx.core.L;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
-import com.itbox.fx.net.ResponseHandler;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.fx.widget.CellView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.Login;
+import com.itbox.grzl.common.Contasts;
 import com.loopj.android.http.RequestParams;
 
 import butterknife.ButterKnife;
@@ -19,13 +18,10 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.widget.Button;
 import android.widget.TextView;
 /**
  * 
@@ -77,7 +73,7 @@ public class LoginActicity extends BaseActivity {
 				// TODO Auto-generated method stub
 				super.onSuccess(object);
 				SharedPreferences sp = AppContext.getUserPreferences();
-				sp.edit().putInt("userid", object.getUserid()).commit();
+				sp.edit().putInt(Contasts.USERID, object.getUserid()).commit();
 				startActivity(MainActivity.class);
 				mActThis.finish();
 			}
@@ -109,10 +105,10 @@ public class LoginActicity extends BaseActivity {
 				// TODO Auto-generated method stub
 				switch (which) {
 				case 0:
-					startActivity(new Intent(mActThis, RegistPhoneFirstActivity.class));
+					startActivity(RegistPhoneFirstActivity.class);
 					break;
 				case 1:
-					startActivity(new Intent(mActThis, RegistEmailActivity.class));
+					startActivity(RegistEmailActivity.class);
 					break;
 				default:
 					break;

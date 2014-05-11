@@ -68,9 +68,9 @@ public class Api {
 		/**4.验证账号是否已注册*/
 		public static final String CheckAccount =  PartName + "checkaccount";
 		/**5.获取短信验证码*/
-		public static final String SendVerifyCode =  PartName + "sendverifycode";
+		public static final String SendVerifyCode =  PartName + "sendphonecode";
 		/**6.校验短信验证码*/
-		public static final String CheckVerifyCode =  PartName + "checkverifycode";
+		public static final String CheckVerifyCode =  PartName + "checkphonecode";
 		/**8.邮箱找回密码*/
 		public static final String ResetPwdEmail = PartName + "uppwdbyemail";
 		/**9.获取用户详细信息*/

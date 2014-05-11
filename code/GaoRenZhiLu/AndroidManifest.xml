@@ -42,6 +42,9 @@
          <activity
             android:name="com.itbox.grzl.activity.RegistPhoneFirstActivity"
             android:screenOrientation="portrait" />
+         <activity
+            android:name="com.itbox.grzl.activity.RegistPhoneSecondActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.RegistEmailActivity"
             android:screenOrientation="portrait" />
