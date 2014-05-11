@@ -20,7 +20,7 @@
         android:id="@+id/chaddr_lv"
         android:layout_margin="10dp"
         android:padding="10dp"
-        android:background="@drawable/rectangle_radius_white"
+        android:background="@drawable/rect_radius_white"
         android:dividerHeight="1dp"
         
         android:divider="@color/gray_stroke"

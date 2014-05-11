@@ -194,7 +194,7 @@
             android:padding="5dp"
             android:text="可报名"
             android:layout_margin="3dp"
-            android:textColor="@drawable/selector_color_black"
+            android:textColor="@color/selector_color_black"
             android:textSize="@dimen/textsize_text"
             android:visibility="invisible" />
     </LinearLayout>

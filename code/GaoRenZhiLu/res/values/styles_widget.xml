@@ -223,7 +223,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:singleLine">true</item>
         <item name="android:drawableRight">@drawable/selector_triangle</item>
-        <item name="android:textColor">@drawable/selector_color_gary_white</item>
+        <item name="android:textColor">@color/selector_color_gary_white</item>
         <item name="android:textSize">@dimen/textsize_text</item>
         <item name="android:gravity">center</item>
     </style>

@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="确定"
         android:textSize="@dimen/textsize_title"
-        android:textColor="@drawable/selector_color_black"
+        android:textColor="@color/selector_color_black"
         android:background="@drawable/selector_button_plugin_select" />
 
     <Button

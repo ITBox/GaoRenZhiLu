@@ -17,7 +17,7 @@
         android:layout_marginTop="30dp"
         android:paddingLeft="5dp"
         android:textSize="14sp"
-        android:background="@drawable/rectangle_radius_white"
+        android:background="@drawable/rect_radius_white"
         android:hint="请输入要注册的手机号"
         android:minHeight="@dimen/cell_height"
         android:textColor="@color/light_blue" />

@@ -44,7 +44,7 @@
                     android:clickable="true"
                     android:text="即时活动"
                     android:textSize="@dimen/textsize_button"
-                    android:textColor="@drawable/selector_color_black" />
+                    android:textColor="@color/selector_color_black" />
 
                 <Button
                     android:id="@+id/event_add_btn_normal"
@@ -54,7 +54,7 @@
                     android:clickable="true"
                     android:text="普通活动"
                     android:textSize="@dimen/textsize_button"
-                    android:textColor="@drawable/selector_color_black" />
+                    android:textColor="@color/selector_color_black" />
             </LinearLayout>
 
             <LinearLayout
