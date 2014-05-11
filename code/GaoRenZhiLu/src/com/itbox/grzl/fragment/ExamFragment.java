@@ -11,7 +11,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.itbox.grzl.R;
-import com.itbox.grzl.activity.StartExamActivity;
+import com.itbox.grzl.activity.ExamStartActivity;
 
 /**
  * 测评页面
@@ -43,6 +43,6 @@ public class ExamFragment extends BaseFragment {
 	@OnClick(R.id.bt_start_exam)
 	public void onClick(View v) {
 		// 开始测评
-		startActivity(new Intent(getActivity(), StartExamActivity.class));
+		startActivity(new Intent(getActivity(), ExamStartActivity.class));
 	}
 }

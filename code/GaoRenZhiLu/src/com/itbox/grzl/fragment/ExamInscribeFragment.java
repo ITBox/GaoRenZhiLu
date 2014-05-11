@@ -48,9 +48,13 @@ public class ExamInscribeFragment extends BaseFragment {
 		ButterKnife.inject(this, view);
 
 		if (mBean != null) {
-			mContentTv.setText(mBean.getContent());
+			mContentTv.setText(mBean.getInscribe());
 			mOptionARb.setText(mBean.getOptionA());
 			mOptionBRb.setText(mBean.getOptionB());
+			if (ExamInscribe.SELECT_B.equals(mBean.getSelected())) {
+				// 选择B
+				mOptionBRb.setChecked(true);
+			}
 		}
 
 		return view;

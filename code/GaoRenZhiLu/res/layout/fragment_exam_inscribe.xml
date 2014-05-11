@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="@color/gray_e4" >
 
     <TextView
         android:id="@+id/tv_content"
@@ -18,12 +19,15 @@
             android:id="@+id/rb_option_a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="A选择项" />
-        <RadioButton
+
+        <RadioButton
             android:id="@+id/rb_option_b"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="B选择项" />
+
     </RadioGroup>
 
 </LinearLayout>

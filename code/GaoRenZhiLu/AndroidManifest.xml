@@ -76,7 +76,28 @@
             android:name="com.itbox.grzl.activity.LicenceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.itbox.grzl.activity.StartExamActivity"
+            android:name="com.itbox.grzl.activity.ExamStartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.ExamReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.CommentAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.CommentInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.CommentListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.TeacherIncomingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.TeacherWithdrawalsAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.TeacherWithdrawalsListActivity"
             android:screenOrientation="portrait" />
     </application>
 
