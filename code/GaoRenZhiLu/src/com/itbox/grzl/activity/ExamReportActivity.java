@@ -39,6 +39,6 @@ public class ExamReportActivity extends BaseActivity {
 	}
 	
 	private void initData(){
-		ExamEngine.getExamReport(0, null);
+		ExamEngine.getExamReport(1, null);
 	}
 }
