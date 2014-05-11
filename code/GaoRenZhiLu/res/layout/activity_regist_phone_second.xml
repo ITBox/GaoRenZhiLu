@@ -24,7 +24,7 @@
         android:layout_marginRight="15dp"
         android:paddingLeft="5dp"
         android:textSize="14sp"
-        android:background="@drawable/rectangle_radius_white"
+        android:background="@drawable/rect_radius_white"
         android:hint="请输入验证码"
         android:minHeight="@dimen/cell_height"
         android:textColor="@color/light_blue" />

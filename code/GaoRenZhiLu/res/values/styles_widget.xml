@@ -51,4 +51,16 @@
         <item name="android:divider">@android:color/transparent</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>
     </style>
+    
+            <style name="line_gray_v">
+        <item name="android:background">@color/gray_c8</item>
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="line_gray_h">
+        <item name="android:background">@color/gray_c8</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
 </resources>
