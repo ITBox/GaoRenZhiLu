@@ -22,64 +22,180 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="15dp" >
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical" >
 
-                <com.itbox.fx.widget.CellView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="邮    箱"
+                    android:textSize="16sp" />
+
+                <EditText
                     android:id="@+id/regist_email_email"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cellBgType="top"
-                    app:cellType="edit_text"
-                    app:leftText="邮箱：" />
+                    android:layout_height="35dp"
+                    android:background="@drawable/rectangle_radius_white"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/light_blue"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-                <com.itbox.fx.widget.CellView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="密    码"
+                    android:textSize="16sp" />
+
+                <EditText
                     android:id="@+id/regist_email_pass"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cellBgType="middle"
-                    app:cellType="edit_text"
-                    app:leftText="密码：" />
+                    android:layout_height="35dp"
+                    android:background="@drawable/rectangle_radius_white"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/light_blue"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-                <com.itbox.fx.widget.CellView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="昵    称"
+                    android:textSize="16sp" />
+
+                <EditText
                     android:id="@+id/regist_email_name"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cellBgType="middle"
-                    app:cellType="edit_text"
-                    app:leftText="昵称：" />
+                    android:layout_height="35dp"
+                    android:background="@drawable/rectangle_radius_white"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/light_blue"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-                <com.itbox.fx.widget.CellView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="性    别"
+                    android:textSize="16sp" />
+
+                <EditText
                     android:id="@+id/regist_email_sex"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cellBgType="middle"
-                    app:cellType="spinner"
-                    app:leftText="性别：" />
+                    android:layout_height="35dp"
+                    android:background="@drawable/rectangle_radius_white"
+                    android:focusable="false"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/light_blue"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-                <com.itbox.fx.widget.CellView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="生    日"
+                    android:textSize="16sp" />
+
+                <EditText
                     android:id="@+id/regist_email_birthday"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cellBgType="middle"
-                    app:cellType="spinner"
-                    app:leftText="生日：" />
+                    android:layout_height="35dp"
+                    android:background="@drawable/rectangle_radius_white"
+                    android:focusable="false"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/light_blue"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-                <com.itbox.fx.widget.CellView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="所在地"
+                    android:textSize="16sp" />
+
+                <EditText
                     android:id="@+id/regist_email_area"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cellBgType="middle"
-                    app:cellType="spinner"
-                    app:leftText="所在地：" />
+                    android:layout_height="35dp"
+                    android:background="@drawable/rectangle_radius_white"
+                    android:focusable="false"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/light_blue"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-                <com.itbox.fx.widget.CellView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:text="类    型"
+                    android:textSize="16sp" />
+
+                <EditText
                     android:id="@+id/regist_email_type"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cellBgType="bottom"
-                    app:cellType="spinner"
-                    app:leftText="类型" />
+                    android:layout_height="35dp"
+                    android:background="@drawable/rectangle_radius_white"
+                    android:focusable="false"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/light_blue"
+                    android:textSize="14sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -88,6 +204,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center_vertical" >
 
                 <CheckBox
@@ -117,11 +234,19 @@
                 android:text="注册" />
 
             <Button
-                android:id="@+id/button1"
+                android:id="@+id/regist_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="15dp"
-                android:text="手机注册" />
+                android:background="@drawable/button_orange_selector"
+                android:paddingBottom="10dp"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:paddingTop="10dp"
+                android:text="手机注册"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
         </LinearLayout>
     </ScrollView>
 

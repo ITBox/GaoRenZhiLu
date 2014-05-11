@@ -71,7 +71,7 @@ public class RegistPhoneFirstActivity extends BaseActivity {
 				if (object.getUserPhone() == 0) {
 					sendAuthCode(mPhone);
 				} else {
-					ToastUtils.makeCustomPosition(mActThis, "该邮箱已被注册", R.id.alternate_view_group);
+					ToastUtils.makeCustomPosition(mActThis, "该手机号已被注册", R.id.alternate_view_group);
 				}
 			}
 		}
