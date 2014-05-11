@@ -1,0 +1,20 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/unit_top_title" />
+
+    <Button
+        android:id="@+id/bt_start_exam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="马上开始测评" 
+        />
+    
+</LinearLayout>

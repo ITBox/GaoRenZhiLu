@@ -1,6 +1,7 @@
 package com.itbox.grzl.activity;
 
 import com.itbox.fx.util.DialogUtil;
+import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.R;
 
 import android.app.Activity;
@@ -52,10 +53,11 @@ public class BaseActivity extends FragmentActivity  implements OnClickListener{
 	}
 	
 	protected void showToast(String msg){
-		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+		ToastUtils.showToast(this, msg);
 	}
+	
 	protected void showToast(int stringResID){
-		Toast.makeText(this, stringResID, Toast.LENGTH_SHORT).show();
+		ToastUtils.showToast(this, stringResID);
 	}
 	
 	protected void startActivity(Class<? extends Activity> activity) {

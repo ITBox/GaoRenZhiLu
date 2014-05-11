@@ -11,6 +11,9 @@ public class Api {
 	private static final String CODE_HOST  = "http://whoyao.com/checkcode.ashx?key=android_remark";
 	private static final String IMAGE_HOST = "http://image.whoyao.net/";
 	
+	
+	public static final int PAGE_SIZE = 15;
+	public static final int PAGE_DEFAULT_INDEX = 1;
 //	/**测试  接口地址*/
 //	private static final String Api_d = "http://api.d.whoyao.com/";
 //	private static final String Api_r = "http://api.r.whoyao.com/";
@@ -144,7 +147,34 @@ public class Api {
 		/** 42我的资金 */
 		public static final String MyFund = PartName + "getusercapital";
 		
+		/** 测评 */
+		/** 提交测评 */
+		public static final String SUBMIT_EXAM = PartName + "addusertesting";
+		/** 测评记录 */
+		public static final String EXAM_REPORT = PartName + "getusertesting";
+
+		/** 论坛 */
+		/** 添加论坛 */
+		public static final String ADD_COMMENT = PartName + "addcomment";
+		/** 添加论坛评论 */
+		public static final String ADD_COMMENTRE_MARK = PartName
+				+ "addcommentremark";
+		/** 获取论坛 */
+		public static final String GET_COMMENT = PartName + "getcomment";
+		/** 获取论坛 */
+		public static final String GET_COMMENTRE_MARK = PartName
+				+ "getcommentremark";
 		
+		/** 收入 */
+		/** 获取收入明细 */
+		public static final String GET_TEACHER_INCOME = PartName
+				+ "getteacherincome";
+		/** 申请提现 */
+		public static final String ADD_USER_WITHDRAWALS = PartName
+				+ "adduserwithdrawals";
+		/** 获取申请提现记录 */
+		public static final String GET_USER_WITHDRAWALS = PartName
+				+ "getuserwithdrawals";
 	}
 
 	/**活动模块接口*/

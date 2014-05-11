@@ -1,11 +1,14 @@
 package com.itbox.grzl.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.View.OnClickListener;
 
 import com.itbox.fx.util.DialogUtil;
+import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.R;
 
 public class BaseFragment extends Fragment implements OnClickListener {
@@ -43,5 +46,20 @@ public class BaseFragment extends Fragment implements OnClickListener {
 	protected void dismissProgressDialog() {
 		DialogUtil.dismissProgressDialog();
 	}
-
+	protected void showToast(String msg){
+		ToastUtils.showToast(getActivity(), msg);
+	}
+	protected void showToast(int stringResID){
+		ToastUtils.showToast(getActivity(), stringResID);
+	}
+	
+	protected void startActivity(Class<? extends Activity> activity) {
+		Intent intent = new Intent(getActivity(), activity);
+		startActivity(intent);
+	}
+	
+	protected void startActivityForResult(Class<? extends Activity> activity, int requestCode) {
+		Intent intent = new Intent(getActivity(), activity);
+		startActivityForResult(intent, requestCode);
+	}
 }

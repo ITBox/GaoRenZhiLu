@@ -22,11 +22,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Splash" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.itbox.grzl.activity.GuideActivity"
@@ -35,6 +30,11 @@
         <activity
             android:name="com.itbox.grzl.activity.MainActivity"
             android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
          <activity
             android:name="com.itbox.grzl.activity.LoginActicity"
@@ -77,6 +77,30 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.LicenceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.ExamStartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.ExamReportActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.CommentAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.CommentInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.CommentListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.TeacherIncomingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.TeacherWithdrawalsAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.TeacherWithdrawalsListActivity"
             android:screenOrientation="portrait" />
     </application>
 

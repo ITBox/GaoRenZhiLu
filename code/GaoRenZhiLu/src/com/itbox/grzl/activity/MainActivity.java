@@ -20,7 +20,9 @@ import com.itbox.grzl.fragment.MoreFragment;
 import com.itbox.grzl.fragment.OnlineStudyFragment;
 
 public class MainActivity extends BaseActivity {
-
+	public static final int REQUESTCODE_PRIVATE = 1;
+	public static final int REQUESTCODE_NOTICE = 2;
+	public static final int REQUEST_CODE_CITY = 3;
 	private long exitTime;
 	@InjectView(android.R.id.tabhost)
 	protected FragmentTabHost mTabHost;
