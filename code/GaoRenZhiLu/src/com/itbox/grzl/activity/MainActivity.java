@@ -20,6 +20,7 @@ import com.itbox.grzl.fragment.MoreFragment;
 import com.itbox.grzl.fragment.OnlineStudyFragment;
 
 public class MainActivity extends BaseActivity {
+
 	public static final int REQUESTCODE_PRIVATE = 1;
 	public static final int REQUESTCODE_NOTICE = 2;
 	public static final int REQUEST_CODE_CITY = 3;
@@ -30,8 +31,9 @@ public class MainActivity extends BaseActivity {
 	private LayoutInflater layoutInflater;
 
 	// 定义数组来存放Fragment界面
-	private Class fragmentArray[] = { ExamFragment.class, ConsultationFragment.class,
-			ActivityFragment.class, OnlineStudyFragment.class, MoreFragment.class };
+	private Class fragmentArray[] = { ExamFragment.class,
+			ConsultationFragment.class, ActivityFragment.class,
+			OnlineStudyFragment.class, MoreFragment.class };
 
 	// 定义数组来存放按钮图片
 	private int mImageViewArray[] = { R.drawable.ic_launcher,
@@ -90,7 +92,7 @@ public class MainActivity extends BaseActivity {
 
 		return view;
 	}
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK

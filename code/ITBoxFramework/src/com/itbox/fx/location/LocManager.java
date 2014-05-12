@@ -8,7 +8,7 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 
 
 /**
@@ -30,7 +30,7 @@ public class LocManager {
 	}
 	
 	private LocManager() {
-		mLocClient = new LocationClient(AppContext.getInstance());
+		mLocClient = new LocationClient(Application.getInstance());
 		BDLocationListener myListener = new LocationListenner();
 		mLocClient.registerLocationListener(myListener);
 		LocationClientOption option = new LocationClientOption();
@@ -65,7 +65,7 @@ public class LocManager {
             	intent.setAction(LocReceiver.LOC_FAIL);
             }
 			mLocClient.stop();
-			AppContext.getInstance().sendBroadcast(intent);         
+			Application.getInstance().sendBroadcast(intent);         
         }
         
         public void onReceivePoi(BDLocation poiLocation) {

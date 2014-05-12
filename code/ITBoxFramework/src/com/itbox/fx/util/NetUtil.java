@@ -1,7 +1,7 @@
 package com.itbox.fx.util;
 
 
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -18,7 +18,7 @@ public class NetUtil {
 	
 	public static NetworkInfo getNetworkInfo() {
 		if (null == connectivityManager) {
-			connectivityManager = (ConnectivityManager) AppContext.getInstance()
+			connectivityManager = (ConnectivityManager) Application.getInstance()
 					.getSystemService(Context.CONNECTIVITY_SERVICE);
 		}
 		netState = connectivityManager.getActiveNetworkInfo();

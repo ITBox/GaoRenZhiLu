@@ -95,7 +95,7 @@ public class AppState {
      *  获取AppConteaxt
      * */
 	private static Context getAppContext() {
-		return AppContext.getInstance();
+		return Application.getInstance();
 	}
 	/**
 	 * 捕获异常的处理

@@ -1,7 +1,7 @@
 package com.itbox.fx.widget;
 
 import com.itbox.fx.R;
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 import com.itbox.fx.core.AppException;
 
 import android.app.Dialog;
@@ -37,7 +37,7 @@ public class LoadingDialog extends Dialog {
 	}
 
 	public void setMessage(int msgResID) {
-		messageTv.setText(AppContext.getRes().getString(msgResID));
+		messageTv.setText(Application.getRes().getString(msgResID));
 	}
 
 	public void setMessage(String message) {

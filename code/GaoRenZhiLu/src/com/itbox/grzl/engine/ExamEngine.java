@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
@@ -35,7 +35,7 @@ public class ExamEngine {
 		RequestParams params = new RequestParams();
 		params.put(
 				"userid",
-				Integer.toString(AppContext.getUserPreferences().getInt(
+				Integer.toString(Application.getUserPreferences().getInt(
 						Contasts.USERID, 0)));
 		params.put("pagesize", Integer.toString(PAGE_NUM));
 		params.put("pageindex", Integer.toString(pageNum));
@@ -51,7 +51,7 @@ public class ExamEngine {
 		List<ExamInscribe> list = new ArrayList<ExamInscribe>();
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
-					AppContext.getInstance().getAssets().open(EXAM_FILE)));
+					Application.getInstance().getAssets().open(EXAM_FILE)));
 			String line;
 			ExamInscribe bean = null;
 			String title = null;
