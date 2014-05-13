@@ -1,5 +1,6 @@
 package com.itbox.grzl;
 
+import com.activeandroid.ActiveAndroid;
 import com.itbox.fx.core.Application;
 import com.itbox.grzl.bean.Account;
 
@@ -20,6 +21,14 @@ public class AppContext extends Application {
 	public void onCreate() {
 		instance = this;
 		super.onCreate();
+		
+		ActiveAndroid.initialize(this);
+	}
+	
+	@Override
+	public void onTerminate() {
+		super.onTerminate();
+		ActiveAndroid.dispose();
 	}
 
 	public Account getAccount() {

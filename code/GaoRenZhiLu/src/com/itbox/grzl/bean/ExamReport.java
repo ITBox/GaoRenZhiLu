@@ -1,5 +1,8 @@
 package com.itbox.grzl.bean;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
 /**
  * 测评记录
@@ -7,13 +10,20 @@ package com.itbox.grzl.bean;
  * @author byz
  * 
  */
-public class ExamReport {
+@Table(name = "exam_report", id = "_id")
+public class ExamReport extends Model {
 
+	@Column(name="er_type")
 	private String type;
-	private int userid;
+	@Column(name="er_userid")
+	private String userid;
+	@Column(name="er_contents")
 	private String contents;
+	@Column(name="er_username")
 	private String username;
+	@Column(name="er_useravatarversion")
 	private String useravatarversion;
+	@Column(name="er_createtime")
 	private String createtime;
 
 	public String getType() {
@@ -24,11 +34,11 @@ public class ExamReport {
 		this.type = type;
 	}
 
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 

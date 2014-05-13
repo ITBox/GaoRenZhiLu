@@ -11,6 +11,7 @@ import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.bean.ExamInscribe;
+import com.itbox.grzl.bean.ExamReport;
 import com.itbox.grzl.common.Contasts;
 import com.loopj.android.http.RequestParams;
 
@@ -103,5 +104,24 @@ public class ExamEngine {
 			}
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * 测评报告
+	 * 
+	 * @author byz
+	 * @date 2014-5-13下午9:58:32
+	 */
+	public static class UserTestingItem {
+		private List<ExamReport> UserTestingItem;
+
+		public List<ExamReport> getUserTestingItem() {
+			return UserTestingItem;
+		}
+
+		public void setUserTestingItem(List<ExamReport> userTestingItem) {
+			UserTestingItem = userTestingItem;
+		}
+
 	}
 }
