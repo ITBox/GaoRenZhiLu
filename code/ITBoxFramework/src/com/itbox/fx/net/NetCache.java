@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 import org.apache.http.Header;
 
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 import com.itbox.fx.util.DateUtil;
 import com.itbox.fx.util.GSON;
 
@@ -91,7 +91,7 @@ public class NetCache {
 	 * @return
 	 */
 	private static SharedPreferences getCachePreferences() {
-		return AppContext.getInstance().getSharedPreferences(CACHE_XML, Context.MODE_PRIVATE);
+		return Application.getInstance().getSharedPreferences(CACHE_XML, Context.MODE_PRIVATE);
 	}
 
 	/**

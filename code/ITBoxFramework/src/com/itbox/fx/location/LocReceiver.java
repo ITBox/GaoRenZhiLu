@@ -1,6 +1,6 @@
 package com.itbox.fx.location;
 
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -23,7 +23,7 @@ public abstract class LocReceiver extends BroadcastReceiver {
 
 	public LocReceiver(int receiveType) {
 		super();
-		context = AppContext.getInstance();
+		context = Application.getInstance();
 		filter = new IntentFilter();
 		switch (receiveType) {
 		case 0:

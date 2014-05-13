@@ -1,7 +1,7 @@
 package com.itbox.grzl.widget;
 
 
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 import com.itbox.grzl.R;
 
 import android.content.Context;
@@ -52,13 +52,13 @@ public class LetterListView extends View {
 		for (int i = 0; i < b.length; i++) {
 			// 设置未选中字的颜色
 			paint.setColor(Color.WHITE);
-			paint.setTextSize(AppContext.getRes().getDimension(R.dimen.textsize_copyright));
+			paint.setTextSize(Application.getRes().getDimension(R.dimen.textsize_copyright));
 			paint.setTypeface(Typeface.DEFAULT_BOLD);
 			paint.setAntiAlias(true);
 			// 选中状态
 			if (i == choose) {
 				// 选中状态下字颜色
-				paint.setColor(AppContext.getRes().getColor(R.color.blue_text));
+				paint.setColor(Application.getRes().getColor(R.color.blue_text));
 				paint.setFakeBoldText(true);
 			}
 			float xPos = width / 2 - paint.measureText(b[i]) / 2;

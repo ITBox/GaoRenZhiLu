@@ -1,6 +1,6 @@
 package com.itbox.grzl.engine;
 
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
@@ -29,7 +29,7 @@ public class TeacherEngine {
 		RequestParams params = new RequestParams();
 		params.put(
 				"userid",
-				Integer.toString(AppContext.getUserPreferences().getInt(
+				Integer.toString(Application.getUserPreferences().getInt(
 						Contasts.USERID, 0)));
 		params.put("price", Double.toString(price));
 		Net.request(params, Api.getUrl(Api.User.ADD_USER_WITHDRAWALS), handler);

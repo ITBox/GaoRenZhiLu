@@ -7,7 +7,7 @@ import java.util.Locale;
 import java.util.regex.Pattern;
 
 import com.baidu.location.BDLocation;
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 import com.itbox.fx.core.AppException;
 import com.itbox.fx.location.LocManager;
 import com.itbox.fx.location.LocReceiver;

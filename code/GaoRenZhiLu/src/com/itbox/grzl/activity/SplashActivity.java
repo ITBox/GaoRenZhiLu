@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 import com.itbox.fx.core.AppException;
 import com.itbox.fx.core.AppTime;
 import com.itbox.grzl.common.AppTimeEngine;
@@ -128,7 +128,7 @@ public class SplashActivity extends BaseActivity {
 	}
 	
 	private boolean hasShowGuide(){
-		SharedPreferences appConfig = AppContext.getAppPreferences();
+		SharedPreferences appConfig = Application.getAppPreferences();
 		boolean hasShowGuide = appConfig.getBoolean(GuideActivity.HAS_SHOW_GUIDE, true);
 		return hasShowGuide;
 	}

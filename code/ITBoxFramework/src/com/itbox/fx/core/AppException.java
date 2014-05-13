@@ -145,7 +145,7 @@ public class AppException implements UncaughtExceptionHandler {
 	}
 	
 	private static Context getAppContext(){
-		return AppContext.getInstance();
+		return Application.getInstance();
 	}
 	
 	@SuppressWarnings("unused")

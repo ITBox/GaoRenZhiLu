@@ -1,142 +1,106 @@
 package com.itbox.grzl.activity;
 
-import java.util.List;
-
-import com.itbox.fx.core.AppContext;
-import com.itbox.fx.net.GsonResponseHandler;
-import com.itbox.fx.net.Net;
-import com.itbox.fx.util.ToastUtils;
-import com.itbox.grzl.Api;
-import com.itbox.grzl.R;
-import com.itbox.grzl.bean.Login;
-import com.itbox.grzl.common.Contasts;
-import com.loopj.android.http.RequestParams;
-
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.widget.EditText;
+import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.KeyEvent;
-import android.widget.EditText;
-import android.widget.TextView;
+
+import com.activeandroid.content.ContentProvider;
+import com.itbox.grzl.AppContext;
+import com.itbox.grzl.R;
+import com.itbox.grzl.api.LoginAndRegisterApi;
+import com.itbox.grzl.bean.Account;
+import com.itbox.grzl.constants.AccountTable;
+
 /**
  * 
- * @author youzh
- * 2014年5月2日 下午5:43:55
+ * @author youzh 2014年5月2日 下午5:43:55
  */
-public class LoginActicity extends BaseActivity {
-	private long exitTime;
-	@InjectView(R.id.login_username) EditText mETLoginUserName;
-	@InjectView(R.id.login_password) EditText mETLoginPassword;
-    @InjectView(R.id.login_regist_pass_tv) TextView mTVLoginRegist;
-    @InjectView(R.id.login_find_pass_tv) TextView mTVLoginFind;
-//    @InjectView(R.id.login_login_bt) Button mBTLoginLogin;
-    
+public class LoginActicity extends BaseActivity implements
+		LoaderCallbacks<Cursor> {
+	@InjectView(R.id.login_username)
+	EditText usernameEditText;
+	@InjectView(R.id.login_password)
+	EditText passwordEditText;
+	@InjectView(R.id.login_regist_pass_tv)
+	TextView registerTextView;
+	@InjectView(R.id.login_find_pass_tv)
+	TextView forgetPasswordTextView;
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setContentView(R.layout.activity_login);
-		ButterKnife.inject(mActThis);
+		getSupportLoaderManager().initLoader(0, null, this);
 	}
-	
+
 	@OnClick(R.id.login_login_bt)
 	public void userLogin() {
-		String userName = mETLoginUserName.getText().toString();
-		String password = mETLoginPassword.getText().toString();
-		if (TextUtils.isEmpty(userName)){
-			ToastUtils.showToast(mActThis, "帐号为空");
-			return;
-		}
-		if (TextUtils.isEmpty(password)){
-			ToastUtils.showToast(mActThis, "密码为空");
-			return;
-		}
-		RequestParams params = new RequestParams();
-		params.put("account", userName);
-		params.put("userpassword", password);
-		
-		showProgressDialog("登录中...");
-		Net.request(params, Api.getUrl(Api.User.Login), new GsonResponseHandler<Login>(Login.class) {
-
-			@Override
-			public void onSuccess(List<Login> list) {
-				// TODO Auto-generated method stub
-				super.onSuccess(list);
-			}
-			
-			@Override
-			public void onSuccess(Login object) {
-				// TODO Auto-generated method stub
-				super.onSuccess(object);
-				SharedPreferences sp = AppContext.getUserPreferences();
-				sp.edit().putInt(Contasts.USERID, object.getUserid()).commit();
-				startActivity(MainActivity.class);
-				mActThis.finish();
-			}
-			
-			@Override
-			public void onFailure(Throwable e, int statusCode, String content) {
-				super.onFailure(e, statusCode, content);
-				switch (statusCode) {
-
-				default:
-					break;
-				}
-			}
-			
-			@Override
-			public void onFinish() {
-				super.onFinish();
-				dismissProgressDialog();
-			}
-		});
+		String username = usernameEditText.getText().toString();
+		String password = passwordEditText.getText().toString();
+		new LoginAndRegisterApi().login(username, password);
 	}
-	
+
 	@OnClick(R.id.login_regist_pass_tv)
 	public void userRegist() {
-		new AlertDialog.Builder(this).setItems(new String[]{"手机注册", "邮箱注册"} , new DialogInterface.OnClickListener() {
-			
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				// TODO Auto-generated method stub
-				switch (which) {
-				case 0:
-					startActivity(RegistPhoneFirstActivity.class);
-					break;
-				case 1:
-					startActivity(RegistEmailActivity.class);
-					break;
-				default:
-					break;
-				}
-			}
-		}).show();
+		new AlertDialog.Builder(this).setItems(new String[] { "手机注册", "邮箱注册" },
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch (which) {
+						case 0:
+							startActivity(RegistPhoneFirstActivity.class);
+							break;
+						case 1:
+							startActivity(RegistEmailActivity.class);
+							break;
+						default:
+							break;
+						}
+					}
+				}).show();
 	}
-    
+
 	@OnClick(R.id.login_find_pass_tv)
 	public void userFindPass() {
-		
-	}
-	
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK
-				&& event.getAction() == KeyEvent.ACTION_DOWN) {
 
-			if ((System.currentTimeMillis() - exitTime) > 2000) {
-				ToastUtils.showToast(mActThis, "再按一次退出程序");
-				exitTime = System.currentTimeMillis();
-			} else {
-				finish();
-				System.exit(0);
-			}
-			return true;
-		}
-		return super.onKeyDown(keyCode, event);
 	}
-   
+
+	@Override
+	public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
+		return new CursorLoader(this, ContentProvider.createUri(Account.class,
+				null), null, null, null, null);
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		if (cursor != null && cursor.moveToNext()) {
+			Integer userid = cursor.getInt(cursor
+					.getColumnIndexOrThrow(AccountTable.COLUMN_USERID));
+			Account account = new Account();
+			account.setUserid(userid);
+			AppContext.getInstance().setAccount(account);
+			Intent intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
+			finish();
+		} else {
+			setContentView(R.layout.activity_login);
+			ButterKnife.inject(this);
+		}
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> loader) {
+
+	}
+
 }

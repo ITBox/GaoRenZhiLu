@@ -20,7 +20,7 @@ public class AppTime extends BroadcastReceiver {
 	private boolean isRegistered;
 	private Context context;
 	static {
-		mInstance = new AppTime(AppContext.getInstance());
+		mInstance = new AppTime(Application.getInstance());
 	}
 
 	public static AppTime getInstance() {
@@ -84,7 +84,7 @@ public class AppTime extends BroadcastReceiver {
 
 	public static synchronized long getTimeMillis() {
 		if(deviationMills == 0){
-			deviationMills = AppContext.getAppPreferences().getLong(KEY_TIME_DEVIATION, 1);
+			deviationMills = Application.getAppPreferences().getLong(KEY_TIME_DEVIATION, 1);
 		}
 		long clientTime = System.currentTimeMillis();
 		long svrTime = clientTime + deviationMills;
@@ -98,7 +98,7 @@ public class AppTime extends BroadcastReceiver {
 
 			deviationMills = svrTimeMills - (startMills / 2) - (endMills / 2);
 			L.e("deviationMills:　"+deviationMills);
-			Editor edit = AppContext.getAppPreferences().edit();
+			Editor edit = Application.getAppPreferences().edit();
 			edit.putLong(KEY_TIME_DEVIATION, deviationMills);
 			edit.commit();
 

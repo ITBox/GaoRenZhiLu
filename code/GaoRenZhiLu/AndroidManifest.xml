@@ -12,17 +12,24 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.itbox.fx.core.AppContext"
+        android:name="com.itbox.grzl.AppContext"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="gaorenzhilu.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="5" />
+
         <activity
             android:name="com.itbox.grzl.activity.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/Splash" >
-             <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -36,16 +43,16 @@
             android:name="com.itbox.grzl.activity.MainActivity"
             android:screenOrientation="portrait" >
         </activity>
-         <activity
+        <activity
             android:name="com.itbox.grzl.activity.LoginActicity"
             android:screenOrientation="portrait" />
-         <activity
+        <activity
             android:name="com.itbox.grzl.activity.RegistPhoneFirstActivity"
             android:screenOrientation="portrait" />
-         <activity
+        <activity
             android:name="com.itbox.grzl.activity.RegistPhoneSecondActivity"
             android:screenOrientation="portrait" />
-         <activity
+        <activity
             android:name="com.itbox.grzl.activity.RegistPhoneResultActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -54,27 +61,24 @@
         <activity
             android:name="com.itbox.grzl.activity.RegistClauseActivity"
             android:screenOrientation="portrait" />
-        
         <activity
             android:name="com.itbox.grzl.activity.ConsultationSearchActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.QuickAskActivity"
             android:screenOrientation="portrait" />
-        
-        
         <activity
             android:name="com.itbox.grzl.activity.SelectButton3Activity"
-            android:theme="@style/Translucent_NoTitleBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Translucent_NoTitleBar" />
         <activity
             android:name="com.itbox.grzl.activity.SelectDateActivity"
-            android:theme="@style/Translucent_NoTitleBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Translucent_NoTitleBar" />
         <activity
             android:name="com.itbox.grzl.activity.SelectAddrActivity"
-            android:theme="@style/Translucent_NoTitleBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/Translucent_NoTitleBar" />
         <activity
             android:name="com.itbox.grzl.activity.LicenceActivity"
             android:screenOrientation="portrait" />
@@ -102,6 +106,11 @@
         <activity
             android:name="com.itbox.grzl.activity.TeacherWithdrawalsListActivity"
             android:screenOrientation="portrait" />
+
+        <provider
+            android:name="com.activeandroid.content.ContentProvider"
+            android:authorities="com.itbox.grzl"
+            android:exported="false" />
     </application>
 
 </manifest>

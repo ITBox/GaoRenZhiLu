@@ -1,15 +1,14 @@
 package com.itbox.grzl.common.db;
 
-import com.itbox.fx.core.AppContext;
-import com.itbox.fx.core.L;
-
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.itbox.fx.core.Application;
+import com.itbox.fx.core.L;
+
 /**
- * @author WCT
- * create at：2012-11-20 下午02:14:57
+ * @author WCT create at：2012-11-20 下午02:14:57
  */
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -22,18 +21,14 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static final String CREATE_INVITE_TABLE = "CREATE TABLE InviteTable (_id INTEGER PRIMARY KEY AUTOINCREMENT, current_ofusername text, message_type int, is_friend_request int, message_eventid text, message_eventstatus int, event_userstatus int, message_title text, message_content text, message_from text, message_to text, message_createtime text, message_state int, friend_imgurl text, friend_nickname text, is_user int, user_id text)";
 	private static final String CREATE_GOODFRIEND_TABLE = "CREATE TABLE GoodFriendListTable (_id INTEGER PRIMARY KEY AUTOINCREMENT, friend_imgurl text, friend_nickname text, friend_age text, friend_sex text, friend_sig text, friend_ofusername text, friend_userid text, current_user text)";
 	private static final String DROP_PURCHASE_RECORDS = "DROP TABLE IF EXISTS purchchase_records;";
-	
-	public DBHelper() {
-		super(AppContext.getInstance(), DATABASE_NAME, null, DATABASE_VERSION);
-	}
 
-	
+	public DBHelper() {
+		super(Application.getInstance(), DATABASE_NAME, null, DATABASE_VERSION);
+	}
 
 	public DBHelper(String name) {
-		super(AppContext.getInstance(), name, null, DATABASE_VERSION);
+		super(Application.getInstance(), name, null, DATABASE_VERSION);
 	}
-
-
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {

@@ -12,7 +12,7 @@ import org.apache.http.message.BasicHeader;
 import android.os.Build;
 import android.widget.Toast;
 
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 import com.itbox.fx.core.AppException;
 import com.itbox.fx.core.L;
 import com.itbox.fx.net.NetCache.CacheModel;
@@ -39,7 +39,7 @@ public class Net {
 
 	static {
 		client = new AsyncHttpClient();
-		cookieStore = new PersistentCookieStore(AppContext.getInstance());
+		cookieStore = new PersistentCookieStore(Application.getInstance());
 		client.setCookieStore(cookieStore);
 		client.setTimeout(NetTimeout);
 		headers[0] = new BasicHeader("User-Agent", USER_AGENT);
@@ -151,7 +151,7 @@ public class Net {
 		L.i(TAG,"header: "+ headers[0].toString() + " & "+ headers[1].toString());
 		
 		//cookieStore.addCookie(new BasicClientCookie("t", AppContext.serviceTimeMillis()+""));
-		client.post(AppContext.getInstance(), url, headers, params, null, responseHandler);
+		client.post(Application.getInstance(), url, headers, params, null, responseHandler);
 	}
 	/***
 	 * <font color='#ff0000' size='4'><strong>不能用了下载大文件</strong></font>

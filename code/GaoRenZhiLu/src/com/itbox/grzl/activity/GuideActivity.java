@@ -6,7 +6,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 import com.itbox.fx.widget.adapter.ViewPagerAdapter;
 import com.itbox.grzl.R;
 
@@ -44,7 +44,7 @@ public class GuideActivity  extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		SharedPreferences appConfig = AppContext.getAppPreferences();
+		SharedPreferences appConfig = Application.getAppPreferences();
 		appConfig.edit().putBoolean(HAS_SHOW_GUIDE, false).commit();
 
 		setContentView(R.layout.activity_guride);

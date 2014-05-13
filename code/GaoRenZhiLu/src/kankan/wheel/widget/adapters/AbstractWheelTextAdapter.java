@@ -16,7 +16,7 @@
 package kankan.wheel.widget.adapters;
 
 
-import com.itbox.fx.core.AppContext;
+import com.itbox.fx.core.Application;
 import com.itbox.fx.core.AppException;
 import com.itbox.grzl.R;
 
@@ -74,10 +74,10 @@ public abstract class AbstractWheelTextAdapter extends AbstractWheelAdapter {
 
 	static {
 		try {
-			DisplayMetrics metrics = AppContext.getRes().getDisplayMetrics();
+			DisplayMetrics metrics = Application.getRes().getDisplayMetrics();
 
 			int maxWidth = metrics.widthPixels;
-			float density = AppContext.getRes().getDimension(R.dimen.sp1);
+			float density = Application.getRes().getDimension(R.dimen.sp1);
 			float spsize = maxWidth / density;
 			int wheelTextSize = (int) (spsize / 18) ;
 			int divider = wheelTextSize / 2;
