@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <!-- 浅蓝 -->
-	<color name="light_blue">#FF0D95E3</color>
+    <color name="light_blue">#FF0D95E3</color>
+
+    <drawable name="transparent">#00000000</drawable>
+
 </resources>

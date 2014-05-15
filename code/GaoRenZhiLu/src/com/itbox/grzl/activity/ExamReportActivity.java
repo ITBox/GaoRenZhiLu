@@ -1,5 +1,8 @@
 package com.itbox.grzl.activity;
 
+import handmark.pulltorefresh.library.PullToRefreshBase;
+import handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.List;
@@ -9,6 +12,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -16,11 +20,10 @@ import butterknife.InjectView;
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.content.ContentProvider;
 import com.activeandroid.query.Delete;
-import com.activeandroid.util.SQLiteUtils;
 import com.itbox.fx.core.L;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.R;
-import com.itbox.grzl.api.ConsultationApi;
+import com.itbox.grzl.adapter.ExamReportAdapter;
 import com.itbox.grzl.bean.ExamReport;
 import com.itbox.grzl.engine.ExamEngine;
 import com.itbox.grzl.engine.ExamEngine.UserTestingItem;
@@ -40,6 +43,7 @@ public class ExamReportActivity extends BaseActivity implements
 	protected PullToRefreshListView mListView;
 
 	private int page = 1;
+	private ExamReportAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +53,35 @@ public class ExamReportActivity extends BaseActivity implements
 		ButterKnife.inject(this);
 
 		initView();
-		 loadData(page);
-
-//		new ConsultationApi().searchConsultation("1", "", "20", "1", "1", "1");
+		getSupportLoaderManager().initLoader(0, null, this);
+		
+		if (getIntent().getBooleanExtra("isRefresh", false)) {
+			loadData();
+		}
 	}
 
 	private void initView() {
 		mTitleTv.setText("测评报告");
+		mListView.setOnRefreshListener(new OnRefreshListener2<ListView>() {
 
+			@Override
+			public void onPullDownToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				page = 1;
+				loadData();
+			}
+
+			@Override
+			public void onPullUpToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				page++;
+				loadData();
+			}
+		});
+		mListView.setMode(Mode.BOTH);
 	}
 
-	private void loadData(final int page) {
+	private void loadData() {
 		ExamEngine
 				.getExamReport(page, new GsonResponseHandler<UserTestingItem>(
 						UserTestingItem.class) {
@@ -67,6 +89,12 @@ public class ExamReportActivity extends BaseActivity implements
 					public void onSuccess(UserTestingItem bean) {
 						// 保存到数据库
 						saveData(page, bean);
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						mListView.onRefreshComplete();
 					}
 
 				});
@@ -79,14 +107,19 @@ public class ExamReportActivity extends BaseActivity implements
 	 * @param bean
 	 */
 	private void saveData(int page, UserTestingItem bean) {
+		L.i(bean.getUserTestingItem().toString());
 		if (bean != null) {
 			List<ExamReport> list = bean.getUserTestingItem();
 			if (list != null) {
 				try {
 					ActiveAndroid.beginTransaction();
 					if (page == 1) {
-						// 清空数据库
-						new Delete().from(ExamReport.class).execute();
+						try {
+							// 清空数据库
+							new Delete().from(ExamReport.class).execute();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
 					}
 					// 保存
 					for (ExamReport er : list) {
@@ -105,13 +138,22 @@ public class ExamReportActivity extends BaseActivity implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		return new CursorLoader(this, ContentProvider.createUri(
-				ExamReport.class, null), null, null, null, null);
+				ExamReport.class, null), new String[] { ExamReport.ID,
+				ExamReport.TYPE, ExamReport.USERID, ExamReport.CONTENTS,
+				ExamReport.USERNAME, ExamReport.USERAVATARVERSION,
+				ExamReport.CREATETIME }, null, null, ExamReport.CREATETIME
+				+ " desc");
 	}
 
 	@Override
-	public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
+	public void onLoadFinished(Loader<Cursor> loder, Cursor cursor) {
 		// load完毕
-		L.i("..............................load完毕");
+		if (cursor.getCount() == 0) {
+			loadData();
+		} else {
+			mAdapter = new ExamReportAdapter(getContext(), cursor);
+			mListView.setAdapter(mAdapter);
+		}
 	}
 
 	@Override

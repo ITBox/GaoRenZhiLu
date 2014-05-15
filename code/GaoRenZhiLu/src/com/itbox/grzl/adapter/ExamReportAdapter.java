@@ -1,0 +1,67 @@
+package com.itbox.grzl.adapter;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CursorAdapter;
+import android.widget.ImageView;
+import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
+import com.activeandroid.content.ContentProvider;
+import com.activeandroid.util.ReflectionUtils;
+import com.itbox.fx.core.L;
+import com.itbox.grzl.R;
+import com.itbox.grzl.bean.ExamReport;
+
+/**
+ * 
+ * 
+ * @author Baoyz
+ * 
+ */
+public class ExamReportAdapter extends CursorAdapter {
+	
+	private Context mContext;
+
+	public ExamReportAdapter(Context context, Cursor c) {
+		super(context, c, true);
+		mContext = context;
+	}
+
+	@Override
+	public View newView(Context context, Cursor cursor, ViewGroup parent) {
+		View view = View.inflate(mContext, R.layout.item_list_exam_report, null);
+		new ViewHolder(view);
+		return view;
+	}
+
+	@Override
+	public void bindView(View view, Context context, Cursor cursor) {
+		ViewHolder holder = (ViewHolder) view.getTag();
+		ExamReport bean = ExamReport.from(cursor);
+		L.i(bean.toString());
+		holder.tv_name.setText(bean.getUsername());
+		holder.tv_content.setText(bean.getContents());
+		holder.tv_time.setText(bean.getCreatetime());
+	}
+
+	static class ViewHolder {
+		@InjectView(R.id.iv_head)
+		ImageView iv_head;
+		@InjectView(R.id.tv_name)
+		TextView tv_name;
+		@InjectView(R.id.tv_content)
+		TextView tv_content;
+		@InjectView(R.id.tv_time)
+		TextView tv_time;
+
+		public ViewHolder(View view) {
+			ButterKnife.inject(this, view);
+			view.setTag(this);
+		}
+	}
+
+}
