@@ -2,9 +2,9 @@ package com.itbox.grzl.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CursorAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -41,8 +41,8 @@ public class ExamReportAdapter extends CursorAdapter {
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
 		ViewHolder holder = (ViewHolder) view.getTag();
-		ExamReport bean = ExamReport.from(cursor);
-		L.i(bean.toString());
+		ExamReport bean = new ExamReport();
+		bean.loadFromCursor(cursor);
 		holder.tv_name.setText(bean.getUsername());
 		holder.tv_content.setText(bean.getContents());
 		holder.tv_time.setText(bean.getCreatetime());

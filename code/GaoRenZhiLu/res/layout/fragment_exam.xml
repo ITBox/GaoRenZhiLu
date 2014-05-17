@@ -14,7 +14,12 @@
         android:id="@+id/bt_start_exam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="马上开始测评" 
-        />
-    
+        android:text="马上开始测评" />
+
+    <Button
+        android:id="@+id/bt_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="行业论坛"/>
+
 </LinearLayout>

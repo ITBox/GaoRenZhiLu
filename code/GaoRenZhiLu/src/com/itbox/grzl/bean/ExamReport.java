@@ -91,15 +91,4 @@ public class ExamReport extends Model {
 				+ ", useravatarversion=" + useravatarversion + ", createtime="
 				+ createtime + "]";
 	}
-
-	public static ExamReport from(Cursor cursor) {
-		ExamReport bean = new ExamReport();
-		bean.setType(cursor.getString(1));
-		bean.setUserid(cursor.getString(2));
-		bean.setContents(cursor.getString(3));
-		bean.setUsername(cursor.getString(4));
-		bean.setUseravatarversion(cursor.getString(5));
-		bean.setCreatetime(cursor.getString(6));
-		return bean;
-	}
 }

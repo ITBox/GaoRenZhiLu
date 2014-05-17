@@ -54,10 +54,18 @@ public class ExamReportActivity extends BaseActivity implements
 
 		initView();
 		getSupportLoaderManager().initLoader(0, null, this);
-		
-		if (getIntent().getBooleanExtra("isRefresh", false)) {
-			loadData();
-		}
+
+		loadFirstData();
+	}
+
+	private void loadFirstData() {
+		page = 1;
+		loadData();
+	}
+
+	private void loadNextData() {
+		page++;
+		loadData();
 	}
 
 	private void initView() {
@@ -67,18 +75,20 @@ public class ExamReportActivity extends BaseActivity implements
 			@Override
 			public void onPullDownToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
-				page = 1;
-				loadData();
+				loadFirstData();
 			}
 
 			@Override
 			public void onPullUpToRefresh(
 					PullToRefreshBase<ListView> refreshView) {
-				page++;
-				loadData();
+				loadNextData();
 			}
+
 		});
 		mListView.setMode(Mode.BOTH);
+
+		mAdapter = new ExamReportAdapter(getContext(), null);
+		mListView.setAdapter(mAdapter);
 	}
 
 	private void loadData() {
@@ -138,27 +148,20 @@ public class ExamReportActivity extends BaseActivity implements
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		return new CursorLoader(this, ContentProvider.createUri(
-				ExamReport.class, null), new String[] { ExamReport.ID,
-				ExamReport.TYPE, ExamReport.USERID, ExamReport.CONTENTS,
-				ExamReport.USERNAME, ExamReport.USERAVATARVERSION,
-				ExamReport.CREATETIME }, null, null, ExamReport.CREATETIME
-				+ " desc");
+				ExamReport.class, null), null, null, null,
+				ExamReport.CREATETIME + " desc");
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loder, Cursor cursor) {
 		// load完毕
-		if (cursor.getCount() == 0) {
-			loadData();
-		} else {
-			mAdapter = new ExamReportAdapter(getContext(), cursor);
-			mListView.setAdapter(mAdapter);
+		if (cursor != null) {
+			mAdapter.swapCursor(cursor);
 		}
 	}
 
 	@Override
 	public void onLoaderReset(Loader<Cursor> arg0) {
-		// TODO Auto-generated method stub
-
+		mAdapter.swapCursor(null);
 	}
 }
