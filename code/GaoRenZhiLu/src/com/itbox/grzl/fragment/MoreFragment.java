@@ -6,6 +6,8 @@ import butterknife.OnClick;
 
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.R;
+import com.itbox.grzl.activity.UserInfoActivity;
+import com.itbox.grzl.bean.Account;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -27,12 +29,17 @@ public class MoreFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		View layout = inflater.inflate(R.layout.fragment_more, null);
 		ButterKnife.inject(mActThis, layout);
+		Account account = new Account();
+		mMoreName.setText(account.getUsername());
 		return layout;
 	}
 	
-	@OnClick({R.id.more_my_action, R.id.more_my_ask, R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian, R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult, R.id.more_my_set})
+	@OnClick({R.id.more_my_photo, R.id.more_my_action, R.id.more_my_ask, R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian, R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult, R.id.more_my_set})
     public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.more_my_photo:
+			startActivity(UserInfoActivity.class);
+			break;
 		case R.id.more_my_action://我的活动
 			
 			break;
