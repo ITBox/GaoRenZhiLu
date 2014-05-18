@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECF0F1" >
+    android:background="#ECF0F1"
+    android:scrollbars="none" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,8 +21,8 @@
 
             <com.itbox.fx.widget.CircleImageView
                 android:id="@+id/more_my_photo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
                 android:src="@drawable/ex_photo"
                 app:border_color="@android:color/white"
                 app:border_width="2dp" />
@@ -30,8 +31,14 @@
                 android:id="@+id/more_my_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                android:textColor="#386B30"
+                android:textSize="18sp" />
         </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/top_more_line2" />
 
         <TextView
             android:id="@+id/more_my_action"
