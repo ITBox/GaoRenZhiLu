@@ -26,6 +26,7 @@ import com.itbox.grzl.bean.CommentGet;
 import com.itbox.grzl.bean.CommentMarkGet;
 import com.itbox.grzl.engine.CommentEngine;
 import com.itbox.grzl.engine.CommentEngine.CommentMarkItem;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 论坛列表界面
@@ -75,6 +76,7 @@ public class CommentInfoActivity extends BaseActivity implements
 		mCountTv.setText("回复数：" + mBean.getReplacecount());
 		mNameTv.setText(mBean.getUsername());
 		mCommentTitleTv.setText(mBean.getTitle());
+		ImageLoader.getInstance().displayImage(mBean.getPhoto(), mHeadIv);
 		loadData();
 	}
 

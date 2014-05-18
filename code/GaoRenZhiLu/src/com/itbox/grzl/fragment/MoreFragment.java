@@ -6,6 +6,9 @@ import butterknife.OnClick;
 
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.R;
+import com.itbox.grzl.activity.CommentListActivity;
+import com.itbox.grzl.activity.TeacherIncomingActivity;
+import com.itbox.grzl.activity.TeacherWithdrawalsListActivity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -43,10 +46,13 @@ public class MoreFragment extends BaseFragment {
 		case R.id.more_my_message://我的消息
 			break;
 		case R.id.more_my_tixian://提现明细
+			startActivity(TeacherWithdrawalsListActivity.class);
 			break;
 		case R.id.more_my_shouru://收入明细
+			startActivity(TeacherIncomingActivity.class);
 			break;
 		case R.id.more_my_forum://行业论坛
+			startActivity(CommentListActivity.class);
 			break;
 		case R.id.more_my_consult://免费咨询
 			break;

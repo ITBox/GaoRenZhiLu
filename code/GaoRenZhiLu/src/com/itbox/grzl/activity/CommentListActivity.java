@@ -1,31 +1,16 @@
 package com.itbox.grzl.activity;
 
-import handmark.pulltorefresh.library.PullToRefreshBase;
-import handmark.pulltorefresh.library.PullToRefreshBase.Mode;
-import handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import handmark.pulltorefresh.library.PullToRefreshListView;
-
-import java.util.List;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.CursorAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
-import com.activeandroid.ActiveAndroid;
-import com.activeandroid.content.ContentProvider;
-import com.activeandroid.query.Delete;
-import com.itbox.fx.core.L;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.CommentListAdapter;
@@ -39,15 +24,15 @@ import com.itbox.grzl.engine.CommentEngine.CommentItem;
  * @author byz
  * @date 2014-5-11下午4:26:37
  */
-public class CommentListActivity extends BaseActivity implements
-		LoaderCallbacks<Cursor>, OnItemClickListener {
+public class CommentListActivity extends BaseLoadActivity<CommentGet> {
 
 	@InjectView(R.id.text_medium)
 	protected TextView mTitleTv;
+	@InjectView(R.id.text_right)
+	protected TextView mRightTv;
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
 
-	private int page = 1;
 	private CommentListAdapter mAdapter;
 
 	@Override
@@ -58,45 +43,33 @@ public class CommentListActivity extends BaseActivity implements
 		ButterKnife.inject(this);
 
 		initView();
-		getSupportLoaderManager().initLoader(0, null, this);
-
-		loadFirstData();
-	}
-
-	private void loadFirstData() {
-		page = 1;
-		loadData();
-	}
-
-	private void loadNextData() {
-		page++;
-		loadData();
 	}
 
 	private void initView() {
 		mTitleTv.setText("行业论坛");
-		mListView.setOnRefreshListener(new OnRefreshListener2<ListView>() {
-
-			@Override
-			public void onPullDownToRefresh(
-					PullToRefreshBase<ListView> refreshView) {
-				loadFirstData();
-			}
-
-			@Override
-			public void onPullUpToRefresh(
-					PullToRefreshBase<ListView> refreshView) {
-				loadNextData();
-			}
-
-		});
-		mListView.setMode(Mode.BOTH);
-		mListView.setOnItemClickListener(this);
+		// 右侧发布按钮
+		mRightTv.setText("发布论坛");
+		mRightTv.setVisibility(View.VISIBLE);
 
 		mAdapter = new CommentListAdapter(getContext(), null);
-		mListView.setAdapter(mAdapter);
+		initLoad(mListView, mAdapter, CommentGet.class, CommentGet.CREATETIME
+				+ " desc");
 	}
 
+	@OnClick(R.id.text_right)
+	public void onClick(View v) {
+		// 进入发布论坛页面
+		startActivityForResult(CommentAddActivity.class, 0);
+	}
+
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		super.onActivityResult(arg0, arg1, arg2);
+		// 刷新
+		loadFirstData();
+	}
+
+	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		// 进入论坛详情页面
@@ -110,75 +83,31 @@ public class CommentListActivity extends BaseActivity implements
 	/**
 	 * 从网络加载数据
 	 */
-	private void loadData() {
+	@Override
+	protected void loadData(final int page) {
 		CommentEngine.getComment(page, new GsonResponseHandler<CommentItem>(
 				CommentItem.class) {
 			@Override
 			public void onSuccess(CommentItem bean) {
 				// 保存到数据库
-				saveData(page, bean);
+				if (bean != null) {
+					saveData(page, bean.getCommentItem());
+				}
 			}
 
 			@Override
 			public void onFinish() {
 				super.onFinish();
-				mListView.onRefreshComplete();
+				loadFinish();
 			}
 
+			@Override
+			public void onFailure(Throwable error, String content) {
+				super.onFailure(error, content);
+				showToast(content);
+				// 还原页码
+				restorePage();
+			}
 		});
-	}
-
-	/**
-	 * 保存数据
-	 * 
-	 * @param page
-	 * @param bean
-	 */
-	private void saveData(int page, CommentItem bean) {
-		L.i(bean.getCommentItem().toString());
-		if (bean != null) {
-			List<CommentGet> list = bean.getCommentItem();
-			if (list != null) {
-				try {
-					ActiveAndroid.beginTransaction();
-					if (page == 1) {
-						try {
-							// 清空数据库
-							new Delete().from(CommentGet.class).execute();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-					// 保存
-					for (CommentGet er : list) {
-						er.save();
-					}
-					ActiveAndroid.setTransactionSuccessful();
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					ActiveAndroid.endTransaction();
-				}
-			}
-		}
-	}
-
-	@Override
-	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		return new CursorLoader(this, ContentProvider.createUri(
-				CommentGet.class, null), null, null, null, null);
-	}
-
-	@Override
-	public void onLoadFinished(Loader<Cursor> loder, Cursor cursor) {
-		// load完毕
-		if (cursor != null) {
-			mAdapter.swapCursor(cursor);
-		}
-	}
-
-	@Override
-	public void onLoaderReset(Loader<Cursor> arg0) {
-		mAdapter.swapCursor(null);
 	}
 }
