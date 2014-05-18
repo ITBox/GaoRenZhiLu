@@ -4,10 +4,14 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.Model;
+import com.activeandroid.query.Select;
 import com.itbox.fx.widget.CircleImageView;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.activity.UserInfoActivity;
 import com.itbox.grzl.bean.Account;
+import com.itbox.grzl.constants.AccountTable;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,8 +33,9 @@ public class MoreFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		View layout = inflater.inflate(R.layout.fragment_more, null);
 		ButterKnife.inject(mActThis, layout);
-		Account account = new Account();
-		mMoreName.setText(account.getUsername());
+		mMoreName.setText(AppContext.getInstance().getAccount().getUsername());
+//		Account bean = new Select(AccountTable.COLUMN_USERNAME).from(Account.class).executeSingle();
+//		bean.getUsername();
 		return layout;
 	}
 	
