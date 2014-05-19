@@ -245,6 +245,9 @@ public class Api {
 		/** 2.咨询搜索 */
 		public static final String getteacher = PartName + "getteacher";
 
+		public static final String searchprobleming = PartName
+				+ "searchprobleming";
+
 	}
 
 	private static String getHost() {

@@ -59,6 +59,7 @@ public class ConsultationApi extends BaseApi {
 					@Override
 					public void onSuccess(int statusCode, String content) {
 						super.onSuccess(statusCode, content);
+						Log.e(TAG, "资讯搜索接口" + content);
 					}
 
 					@Override
@@ -69,4 +70,33 @@ public class ConsultationApi extends BaseApi {
 				});
 
 	}
+
+	/**
+	 * 搜索免费咨询
+	 * 
+	 */
+	public void searchFreeConsultation(String orderby, String pagesize,
+			String pageindex, String jobtype) {
+		RequestParams params = new RequestParams();
+		params.put("orderby", orderby);
+		params.put("pagesize", pagesize);
+		params.put("pageindex", pageindex);
+		params.put("jobtype", jobtype);
+		client.post(Api.getUrl(Api.Consultation.searchprobleming), params,
+				new AsyncHttpResponseHandler() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Log.e(TAG, "免费资讯搜索接口" + content);
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						super.onFailure(error, content);
+						Log.e(TAG, "免费资讯搜索接口" + error.toString());
+					}
+				});
+
+	}
+
 }
