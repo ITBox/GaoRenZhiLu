@@ -138,4 +138,5 @@ public class ExamStartActivity extends BaseActivity {
 			}
 		});
 	}
+	
 }

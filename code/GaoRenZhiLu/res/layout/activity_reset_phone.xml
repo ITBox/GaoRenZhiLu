@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <include
+        android:id="@+id/top_title"
+        layout="@layout/unit_top_title" />
+
+    <LinearLayout
+        android:id="@+id/top_remind"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_title"
+        android:orientation="horizontal" 
+        android:padding="5dp"
+        android:background="#19222B">
+
+        <TextView
+            android:id="@+id/reset_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="获取验证码"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/reset_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="手机验证"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/reset_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设置新密码"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/reset_phone_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_remind"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rect_radius_white"
+        android:hint="请输入手机号"
+        android:minHeight="@dimen/cell_height"
+        android:paddingLeft="5dp"
+        android:textColor="@color/light_blue"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/reset_get_authCode"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/cell_height"
+        android:layout_alignLeft="@id/reset_phone_et"
+        android:layout_alignRight="@id/reset_phone_et"
+        android:layout_below="@+id/reset_phone_et"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_blue_selector"
+        android:text="获取验证码"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:id="@+id/alternate_view_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="20dp"
+        android:orientation="vertical"
+        android:padding="5dp" />
+
+    <Button
+        android:id="@+id/reset_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/button_orange_selector"
+        android:paddingBottom="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
+        android:text="用邮箱找回密码"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+</RelativeLayout>

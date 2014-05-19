@@ -1,17 +1,34 @@
 package com.itbox.grzl.bean;
 
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
+import com.itbox.grzl.enumeration.PayState;
+
 /**
  * 收入明细
  * 
  * @author byz
  * @date 2014-5-11下午6:53:43
  */
-public class TeacherIncoming {
+@Table(name = "teacher_incoming", id = TeacherIncoming.ID)
+public class TeacherIncoming extends BaseModel {
 
+	public static final String ID = "_id";
+	public static final String PAYTYPE = "ti_paytype";
+	public static final String PRICE = "ti_price";
+	public static final String PAYID = "ti_payid";
+	public static final String PAYSTATE = "ti_paystate";
+	public static final String CREATETIME = "ti_create";
+
+	@Column(name = TeacherIncoming.PAYTYPE)
 	private String paytype;
+	@Column(name = TeacherIncoming.PRICE)
 	private double price;
+	@Column(name = TeacherIncoming.PAYID)
 	private long payid;
+	@Column(name = TeacherIncoming.PAYSTATE)
 	private int paystate;
+	@Column(name = TeacherIncoming.CREATETIME)
 	private String createtime;
 
 	public String getPaytype() {
@@ -52,6 +69,10 @@ public class TeacherIncoming {
 
 	public void setCreatetime(String createtime) {
 		this.createtime = createtime;
+	}
+
+	public String getPayStateName() {
+		return PayState.getName(paystate);
 	}
 
 }

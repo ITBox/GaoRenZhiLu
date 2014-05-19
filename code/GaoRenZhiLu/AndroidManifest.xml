@@ -22,7 +22,7 @@
             android:value="gaorenzhilu.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="5" />
+            android:value="7" />
 
         <activity
             android:name="com.itbox.grzl.activity.SplashActivity"
@@ -60,6 +60,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.RegistClauseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.ResetPassPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.ResetPassEmailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.UserInfoActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.ConsultationSearchActivity"

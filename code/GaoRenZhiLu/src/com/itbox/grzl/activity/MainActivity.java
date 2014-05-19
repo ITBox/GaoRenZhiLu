@@ -37,9 +37,11 @@ public class MainActivity extends BaseActivity {
 			OnlineStudyFragment.class, MoreFragment.class };
 
 	// 定义数组来存放按钮图片
-	private int mImageViewArray[] = { R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher,
-			R.drawable.ic_launcher, R.drawable.ic_launcher };
+	private int mImageViewArray[] = { R.drawable.selector_tab_item_exam,
+			R.drawable.selector_tab_item_consulation,
+			R.drawable.selector_tab_item_event,
+			R.drawable.selector_tab_item_study,
+			R.drawable.selector_tab_item_more };
 
 	// Tab选项卡的文字
 	private String mTextviewArray[] = { "测评", "咨询", "活动", "学习", "更多" };
@@ -73,9 +75,6 @@ public class MainActivity extends BaseActivity {
 					.setIndicator(getTabItemView(i));
 			// 将Tab按钮添加进Tab选项卡中
 			mTabHost.addTab(tabSpec, fragmentArray[i], null);
-			// 设置Tab按钮的背景
-			mTabHost.getTabWidget().getChildAt(i)
-					.setBackgroundResource(R.drawable.tabbar_bg);
 		}
 	}
 

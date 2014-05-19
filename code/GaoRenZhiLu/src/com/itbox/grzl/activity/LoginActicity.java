@@ -72,7 +72,23 @@ public class LoginActicity extends BaseActivity implements
 
 	@OnClick(R.id.login_find_pass_tv)
 	public void userFindPass() {
+		new AlertDialog.Builder(this).setItems(new String[] { "手机找回", "邮箱找回" },
+				new DialogInterface.OnClickListener() {
 
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch (which) {
+						case 0:
+							startActivity(ResetPassPhoneActivity.class);
+							break;
+						case 1:
+							startActivity(ResetPassEmailActivity.class);
+							break;
+						default:
+							break;
+						}
+					}
+				}).show();
 	}
 
 	@Override

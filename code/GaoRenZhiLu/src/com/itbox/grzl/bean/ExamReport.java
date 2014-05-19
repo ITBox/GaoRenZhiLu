@@ -1,5 +1,10 @@
 package com.itbox.grzl.bean;
 
+import android.database.Cursor;
+
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 
 /**
  * 测评记录
@@ -7,13 +12,28 @@ package com.itbox.grzl.bean;
  * @author byz
  * 
  */
-public class ExamReport {
+@Table(name = "exam_report", id = ExamReport.ID)
+public class ExamReport extends Model {
 
+	public static final String ID = "_id";
+	public static final String TYPE = "er_type";
+	public static final String USERID = "er_userid";
+	public static final String CONTENTS = "er_contents";
+	public static final String USERNAME = "er_username";
+	public static final String USERAVATARVERSION = "er_useravatarversion";
+	public static final String CREATETIME = "er_createtime";
+
+	@Column(name = ExamReport.TYPE)
 	private String type;
-	private int userid;
+	@Column(name = ExamReport.USERID)
+	private String userid;
+	@Column(name = ExamReport.CONTENTS)
 	private String contents;
+	@Column(name = ExamReport.USERNAME)
 	private String username;
+	@Column(name = ExamReport.USERAVATARVERSION)
 	private String useravatarversion;
+	@Column(name = ExamReport.CREATETIME)
 	private String createtime;
 
 	public String getType() {
@@ -24,11 +44,11 @@ public class ExamReport {
 		this.type = type;
 	}
 
-	public int getUserid() {
+	public String getUserid() {
 		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(String userid) {
 		this.userid = userid;
 	}
 
@@ -64,4 +84,11 @@ public class ExamReport {
 		this.createtime = createtime;
 	}
 
+	@Override
+	public String toString() {
+		return "ExamReport [type=" + type + ", userid=" + userid
+				+ ", contents=" + contents + ", username=" + username
+				+ ", useravatarversion=" + useravatarversion + ", createtime="
+				+ createtime + "]";
+	}
 }

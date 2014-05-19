@@ -11,7 +11,9 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.itbox.grzl.R;
+import com.itbox.grzl.activity.CommentListActivity;
 import com.itbox.grzl.activity.ExamStartActivity;
+import com.itbox.grzl.engine.CommentEngine;
 
 /**
  * 测评页面
@@ -44,5 +46,10 @@ public class ExamFragment extends BaseFragment {
 	public void onClick(View v) {
 		// 开始测评
 		startActivity(new Intent(getActivity(), ExamStartActivity.class));
+	}
+
+	@OnClick(R.id.bt_comment)
+	public void test(View v) {
+		startActivity(CommentListActivity.class);
 	}
 }

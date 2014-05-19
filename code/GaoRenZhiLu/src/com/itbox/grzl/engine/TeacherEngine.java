@@ -4,6 +4,7 @@ import com.itbox.fx.core.Application;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.bean.CommentAdd;
 import com.itbox.grzl.bean.CommentMarkAdd;
 import com.itbox.grzl.common.Contasts;
@@ -27,10 +28,8 @@ public class TeacherEngine {
 	 */
 	public static void addWithdrawals(double price, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
-		params.put(
-				"userid",
-				Integer.toString(Application.getUserPreferences().getInt(
-						Contasts.USERID, 0)));
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
 		params.put("price", Double.toString(price));
 		Net.request(params, Api.getUrl(Api.User.ADD_USER_WITHDRAWALS), handler);
 	}

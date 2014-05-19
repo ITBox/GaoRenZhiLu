@@ -1,11 +1,11 @@
 package com.itbox.grzl.activity;
 
-import java.util.List;
-
+import handmark.pulltorefresh.library.PullToRefreshListView;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -13,122 +13,100 @@ import butterknife.OnClick;
 
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.R;
-import com.itbox.grzl.bean.ExamInscribe;
-import com.itbox.grzl.bean.RespResult;
-import com.itbox.grzl.engine.ExamEngine;
-import com.itbox.grzl.fragment.ExamInscribeFragment;
+import com.itbox.grzl.adapter.CommentListAdapter;
+import com.itbox.grzl.bean.CommentGet;
+import com.itbox.grzl.engine.CommentEngine;
+import com.itbox.grzl.engine.CommentEngine.CommentItem;
 
 /**
  * 论坛列表界面
+ * 
  * @author byz
  * @date 2014-5-11下午4:26:37
  */
-public class CommentListActivity extends BaseActivity {
+public class CommentListActivity extends BaseLoadActivity<CommentGet> {
 
 	@InjectView(R.id.text_medium)
 	protected TextView mTitleTv;
-	@InjectView(R.id.bt_pre)
-	protected Button mPreBt;
-	@InjectView(R.id.bt_next)
-	protected Button mNextBt;
+	@InjectView(R.id.text_right)
+	protected TextView mRightTv;
+	@InjectView(R.id.lv_list)
+	protected PullToRefreshListView mListView;
 
-	private int mIndex;
-
-	private List<ExamInscribe> mList;
+	private CommentListAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_exam_report);
+		setContentView(R.layout.activity_comment_list);
 
 		ButterKnife.inject(this);
-
-		// 获取测试题
-		mList = ExamEngine.getExamInscribes();
 
 		initView();
 	}
 
 	private void initView() {
-		mTitleTv.setText("单选题");
+		mTitleTv.setText("行业论坛");
+		// 右侧发布按钮
+		mRightTv.setText("发布论坛");
+		mRightTv.setVisibility(View.VISIBLE);
 
-		// 添加第一题
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		ft.add(R.id.fragment_exam_inscribe,
-				ExamInscribeFragment.newInstance(mList.get(mIndex)));
-		ft.commit();
+		mAdapter = new CommentListAdapter(getContext(), null);
+		initLoad(mListView, mAdapter, CommentGet.class, CommentGet.CREATETIME
+				+ " desc");
 	}
 
-	@OnClick({ R.id.bt_next, R.id.bt_pre })
+	@OnClick(R.id.text_right)
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.bt_next:
-			// 下一题
-			mIndex++;
-			break;
-		case R.id.bt_pre:
-			// 上一题
-			mIndex--;
-			break;
-		}
-		jump();
+		// 进入发布论坛页面
+		startActivityForResult(CommentAddActivity.class, 0);
+	}
+
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		super.onActivityResult(arg0, arg1, arg2);
+		// 刷新
+		loadFirstData();
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		// 进入论坛详情页面
+		Intent intent = new Intent(this, CommentInfoActivity.class);
+		CommentGet bean = new CommentGet();
+		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
+		intent.putExtra("bean", bean);
+		startActivity(intent);
 	}
 
 	/**
-	 * 跳转题目
-	 * 
-	 * @param index
+	 * 从网络加载数据
 	 */
-	private void jump() {
-		if (mIndex < 0) {
-			showToast("已经是第一页");
-			mIndex = 0;
-			return;
-		}
-		if (mIndex == mList.size()) {
-			mIndex--;
-			submit();
-			return;
-		}
-		if (mIndex == (mList.size() - 1)) {
-			mNextBt.setText("提交");
-		} else {
-			mNextBt.setText("下一题");
-		}
-		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-		// ft.setCustomAnimations(R.anim.slide_right_in, R.anim.slide_left_out,
-		// R.anim.slide_left_in, R.anim.slide_right_out);
-		ft.replace(R.id.fragment_exam_inscribe,
-				ExamInscribeFragment.newInstance(mList.get(mIndex)));
-		ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-		// ft.addToBackStack(null); // 可以返回上一个
-		ft.commit();
-	}
-
-	private void submit() {
-		showProgressDialog("正在提交");
-		ExamEngine.submit(mList, new GsonResponseHandler<RespResult>(
-				RespResult.class) {
+	@Override
+	protected void loadData(final int page) {
+		CommentEngine.getComment(page, new GsonResponseHandler<CommentItem>(
+				CommentItem.class) {
 			@Override
-			public void onFinish() {
-				super.onFinish();
-				dismissProgressDialog();
+			public void onSuccess(CommentItem bean) {
+				// 保存到数据库
+				if (bean != null) {
+					saveData(page, bean.getCommentItem());
+				}
 			}
 
 			@Override
-			public void onSuccess(RespResult result) {
-				super.onSuccess(result);
-				if (result.isSuccess()) {
-					showToast("提交成功");
-				} else {
-					showToast("提交失败");
-				}
+			public void onFinish() {
+				super.onFinish();
+				loadFinish();
 			}
 
 			@Override
 			public void onFailure(Throwable error, String content) {
 				super.onFailure(error, content);
 				showToast(content);
+				// 还原页码
+				restorePage();
 			}
 		});
 	}

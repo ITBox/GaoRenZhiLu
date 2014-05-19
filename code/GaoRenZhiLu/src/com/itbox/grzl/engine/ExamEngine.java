@@ -10,7 +10,9 @@ import com.itbox.fx.core.Application;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.bean.ExamInscribe;
+import com.itbox.grzl.bean.ExamReport;
 import com.itbox.grzl.common.Contasts;
 import com.loopj.android.http.RequestParams;
 
@@ -33,10 +35,8 @@ public class ExamEngine {
 	 */
 	public static void getExamReport(int pageNum, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
-		params.put(
-				"userid",
-				Integer.toString(Application.getUserPreferences().getInt(
-						Contasts.USERID, 0)));
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
 		params.put("pagesize", Integer.toString(PAGE_NUM));
 		params.put("pageindex", Integer.toString(pageNum));
 		Net.request(params, Api.getUrl(Api.User.EXAM_REPORT), handler);
@@ -81,7 +81,8 @@ public class ExamEngine {
 
 	public static void submit(List<ExamInscribe> list, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
-		params.put("userid", "16"); // TODO userid
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
 		params.put("data", createExamResult(list)); // 测评答案
 		Net.request(params, Api.getUrl(Api.User.SUBMIT_EXAM), handler);
 	}
@@ -103,5 +104,24 @@ public class ExamEngine {
 			}
 		}
 		return sb.toString();
+	}
+
+	/**
+	 * 测评报告
+	 * 
+	 * @author byz
+	 * @date 2014-5-13下午9:58:32
+	 */
+	public static class UserTestingItem {
+		private List<ExamReport> UserTestingItem;
+
+		public List<ExamReport> getUserTestingItem() {
+			return UserTestingItem;
+		}
+
+		public void setUserTestingItem(List<ExamReport> userTestingItem) {
+			UserTestingItem = userTestingItem;
+		}
+
 	}
 }
