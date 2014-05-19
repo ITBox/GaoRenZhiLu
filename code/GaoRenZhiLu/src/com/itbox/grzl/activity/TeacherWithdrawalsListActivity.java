@@ -1,7 +1,12 @@
 package com.itbox.grzl.activity;
 
 import handmark.pulltorefresh.library.PullToRefreshListView;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -45,6 +50,25 @@ public class TeacherWithdrawalsListActivity extends
 
 		mAdapter = new TeacherWithdrawalsAdapter(getContext(), null);
 		initLoad(mListView, mAdapter, TeacherWithdrawals.class);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		Intent intent = new Intent(this, TeacherWithdrawalsInfoActivity.class);
+		TeacherWithdrawals bean = new TeacherWithdrawals();
+		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
+		intent.putExtra("bean", bean);
+		startActivityForResult(intent, 0);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 1) {
+			// 刷新
+			loadFirstData();
+		}
 	}
 
 	@Override

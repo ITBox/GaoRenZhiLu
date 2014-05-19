@@ -26,11 +26,13 @@ public class TeacherEngine {
 	 * @param bean
 	 * @param handler
 	 */
-	public static void addWithdrawals(double price, ResponseHandler handler) {
+	public static void addWithdrawals(double price, String description,
+			ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()
 				.toString());
 		params.put("price", Double.toString(price));
+		params.put("description", description);
 		Net.request(params, Api.getUrl(Api.User.ADD_USER_WITHDRAWALS), handler);
 	}
 
@@ -64,6 +66,33 @@ public class TeacherEngine {
 		params.put("pageindex", Integer.toString(pageNum));
 		params.put("userid", Integer.toString(userid));
 		Net.request(params, Api.getUrl(Api.User.GET_USER_WITHDRAWALS), handler);
+	}
+
+	/**
+	 * 取消提现记录
+	 * 
+	 * @param pageNum
+	 * @param userid
+	 * @param handler
+	 */
+	public static void cancelWithdrawals(String id, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		Net.request(params, Api.getUrl(Api.User.CANCEL_USER_WITHDRAWALS),
+				handler);
+	}
+
+	/**
+	 * 获取用户信息
+	 * 
+	 * @param handler
+	 */
+	public static void getUserList(ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
+		Net.request(params, Api.getUrl(Api.User.GET_USER_LIST),
+				handler);
 	}
 
 	public static class UserPayDetailItem {

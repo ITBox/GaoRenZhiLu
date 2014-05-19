@@ -2,28 +2,24 @@ package com.itbox.grzl.activity;
 
 import handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import handmark.pulltorefresh.library.PullToRefreshListView;
-
-import java.util.List;
-
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
-import com.activeandroid.ActiveAndroid;
-import com.activeandroid.content.ContentProvider;
-import com.activeandroid.query.Delete;
-import com.itbox.fx.core.L;
 import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.CommentMarkAdapter;
 import com.itbox.grzl.bean.CommentGet;
+import com.itbox.grzl.bean.CommentMarkAdd;
 import com.itbox.grzl.bean.CommentMarkGet;
+import com.itbox.grzl.bean.RespResult;
 import com.itbox.grzl.engine.CommentEngine;
 import com.itbox.grzl.engine.CommentEngine.CommentMarkItem;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -34,8 +30,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
  * @author byz
  * @date 2014-5-11下午4:26:37
  */
-public class CommentInfoActivity extends BaseActivity implements
-		LoaderCallbacks<Cursor> {
+public class CommentInfoActivity extends BaseLoadActivity<CommentMarkGet> {
 
 	@InjectView(R.id.text_medium)
 	protected TextView mTitleTv;
@@ -51,8 +46,9 @@ public class CommentInfoActivity extends BaseActivity implements
 	protected TextView mCommentTitleTv;
 	@InjectView(R.id.iv_head)
 	protected ImageView mHeadIv;
+	@InjectView(R.id.et_content)
+	protected EditText mContentEt;
 
-	private int page = 1;
 	private CommentMarkAdapter mAdapter;
 	private CommentGet mBean;
 
@@ -60,37 +56,76 @@ public class CommentInfoActivity extends BaseActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_comment_info);
+		mBean = getIntent().getParcelableExtra("bean");
+		if (mBean == null) {
+			finish();
+			return;
+		}
 
 		ButterKnife.inject(this);
 
-		getSupportLoaderManager().initLoader(0, null, this);
-
 		initView();
-		initData();
-
 	}
 
-	private void initData() {
-		mBean = getIntent().getParcelableExtra("bean");
+	private void initView() {
+		mTitleTv.setText("论坛详情");
 		mContentTv.setText(mBean.getCommentcontent());
 		mCountTv.setText("回复数：" + mBean.getReplacecount());
 		mNameTv.setText(mBean.getUsername());
 		mCommentTitleTv.setText(mBean.getTitle());
 		ImageLoader.getInstance().displayImage(mBean.getPhoto(), mHeadIv);
-		loadData();
+
+		mAdapter = new CommentMarkAdapter(getContext(), null);
+		initLoad(mListView, mAdapter, CommentMarkGet.class,
+				CommentMarkGet.COMMENTID + "=" + mBean.getCommentId(), null);
+		mListView.setMode(Mode.PULL_FROM_END);
 	}
 
-	private void initView() {
-		mTitleTv.setText("论坛详情");
-		mListView.setMode(Mode.PULL_FROM_END);
-		mAdapter = new CommentMarkAdapter(getContext(), null);
-		mListView.setAdapter(mAdapter);
+	@OnClick(R.id.bt_mark)
+	public void onClick(View v) {
+		// 评论
+		String content = mContentEt.getText().toString();
+		if (TextUtils.isEmpty(content)) {
+			showToast("请输入内容");
+			return;
+		}
+		CommentMarkAdd bean = new CommentMarkAdd();
+		bean.setCommentcontent(content);
+		bean.setId(mBean.getCommentId() + "");
+		bean.setUserid(AppContext.getInstance().getAccount().getUserid()
+				.toString());
+		showProgressDialog("正在提交...");
+		CommentEngine.addCommentMark(bean, new GsonResponseHandler<RespResult>(
+				RespResult.class) {
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				dismissProgressDialog();
+			}
+
+			@Override
+			public void onSuccess(RespResult result) {
+				super.onSuccess(result);
+				if (result.isSuccess()) {
+					showToast("评论成功");
+					loadFirstData();
+				} else {
+					showToast("评论失败");
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable error, String content) {
+				super.onFailure(error, content);
+				showToast(content);
+			}
+		});
 	}
 
 	/**
 	 * 从网络加载数据
 	 */
-	private void loadData() {
+	protected void loadData(final int page) {
 		CommentEngine
 				.getCommentMark(page, mBean.getCommentId(),
 						new GsonResponseHandler<CommentMarkItem>(
@@ -98,68 +133,16 @@ public class CommentInfoActivity extends BaseActivity implements
 							@Override
 							public void onSuccess(CommentMarkItem bean) {
 								// 保存到数据库
-								saveData(page, bean);
+								saveData(page, bean.getCommentItem());
 							}
 
 							@Override
 							public void onFinish() {
 								super.onFinish();
+								loadFinish();
 							}
 
 						});
 	}
 
-	/**
-	 * 保存数据
-	 * 
-	 * @param page
-	 * @param bean
-	 */
-	private void saveData(int page, CommentMarkItem bean) {
-		L.i(bean.getCommentItem().toString());
-		if (bean != null) {
-			List<CommentMarkGet> list = bean.getCommentItem();
-			if (list != null) {
-				try {
-					ActiveAndroid.beginTransaction();
-					if (page == 1) {
-						try {
-							// 清空数据库
-							new Delete().from(CommentMarkGet.class).execute();
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-					// 保存
-					for (CommentMarkGet er : list) {
-						er.save();
-					}
-					ActiveAndroid.setTransactionSuccessful();
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					ActiveAndroid.endTransaction();
-				}
-			}
-		}
-	}
-
-	@Override
-	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		return new CursorLoader(this, ContentProvider.createUri(
-				CommentMarkGet.class, null), null, null, null, null);
-	}
-
-	@Override
-	public void onLoadFinished(Loader<Cursor> loder, Cursor cursor) {
-		// load完毕
-		if (cursor != null) {
-			mAdapter.swapCursor(cursor);
-		}
-	}
-
-	@Override
-	public void onLoaderReset(Loader<Cursor> arg0) {
-		mAdapter.swapCursor(null);
-	}
 }
