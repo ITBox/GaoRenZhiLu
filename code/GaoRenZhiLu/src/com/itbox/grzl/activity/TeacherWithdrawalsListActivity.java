@@ -6,18 +6,22 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.TeacherWithdrawalsAdapter;
 import com.itbox.grzl.bean.TeacherWithdrawals;
 import com.itbox.grzl.engine.TeacherEngine;
+import com.itbox.grzl.engine.TeacherEngine.UserWithdrawalsItem;
 
 /**
  * 提现记录界面
+ * 
  * @author byz
  * @date 2014-5-11下午4:26:37
  */
-public class TeacherWithdrawalsListActivity extends BaseLoadActivity<TeacherWithdrawals> {
+public class TeacherWithdrawalsListActivity extends
+		BaseLoadActivity<TeacherWithdrawals> {
 
 	@InjectView(R.id.text_medium)
 	protected TextView mTitleTv;
@@ -32,7 +36,7 @@ public class TeacherWithdrawalsListActivity extends BaseLoadActivity<TeacherWith
 		setContentView(R.layout.activity_teacher_withdrawals);
 
 		ButterKnife.inject(this);
- 
+
 		initView();
 	}
 
@@ -44,9 +48,33 @@ public class TeacherWithdrawalsListActivity extends BaseLoadActivity<TeacherWith
 	}
 
 	@Override
-	protected void loadData(int page) {
-		TeacherEngine.getWithdrawals(page, AppContext.getInstance().getAccount()
-				.getUserid(), null);
+	protected void loadData(final int page) {
+		TeacherEngine.getWithdrawals(page, AppContext.getInstance()
+				.getAccount().getUserid(),
+				new GsonResponseHandler<UserWithdrawalsItem>(
+						UserWithdrawalsItem.class) {
+					@Override
+					public void onSuccess(UserWithdrawalsItem bean) {
+						// 保存到数据库
+						if (bean != null) {
+							saveData(page, bean.getUserWithdrawalsItem());
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						loadFinish();
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						super.onFailure(error, content);
+						showToast(content);
+						// 还原页码
+						restorePage();
+					}
+				});
 	}
 
 }

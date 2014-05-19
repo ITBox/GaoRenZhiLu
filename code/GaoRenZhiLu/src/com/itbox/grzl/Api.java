@@ -10,6 +10,7 @@ public class Api {
 	private static final String API_HOST = "http://115.28.105.82:8006/";
 	private static final String CODE_HOST = "http://whoyao.com/checkcode.ashx?key=android_remark";
 	private static final String IMAGE_HOST = "http://image.whoyao.net/";
+	private static final String AVATAR_HOST = "http://115.28.105.82:8007/%s/100x100.jpg";
 
 	public static final int PAGE_SIZE = 15;
 	public static final int PAGE_DEFAULT_INDEX = 1;
@@ -185,6 +186,15 @@ public class Api {
 		/** 获取申请提现记录 */
 		public static final String GET_USER_WITHDRAWALS = PartName
 				+ "getuserwithdrawals";
+		
+		/**
+		 * 获取用户头像地址
+		 * @param path
+		 * @return
+		 */
+		public static String getAvatarUrl(String path){
+			return String.format(AVATAR_HOST, path);
+		}
 	}
 
 	/** 活动模块接口 */

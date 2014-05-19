@@ -1,13 +1,13 @@
 package com.itbox.grzl.engine;
 
-import com.itbox.fx.core.Application;
+import java.util.List;
+
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.bean.CommentAdd;
-import com.itbox.grzl.bean.CommentMarkAdd;
-import com.itbox.grzl.common.Contasts;
+import com.itbox.grzl.bean.TeacherIncoming;
+import com.itbox.grzl.bean.TeacherWithdrawals;
 import com.loopj.android.http.RequestParams;
 
 /**
@@ -64,6 +64,33 @@ public class TeacherEngine {
 		params.put("pageindex", Integer.toString(pageNum));
 		params.put("userid", Integer.toString(userid));
 		Net.request(params, Api.getUrl(Api.User.GET_USER_WITHDRAWALS), handler);
+	}
+
+	public static class UserPayDetailItem {
+		public List<TeacherIncoming> UserPayDetailItem;
+
+		public List<TeacherIncoming> getUserPayDetailItem() {
+			return UserPayDetailItem;
+		}
+
+		public void setUserPayDetailItem(List<TeacherIncoming> userPayDetailItem) {
+			UserPayDetailItem = userPayDetailItem;
+		}
+
+	}
+
+	public static class UserWithdrawalsItem {
+		public List<TeacherWithdrawals> UserWithdrawalsItem;
+
+		public List<TeacherWithdrawals> getUserWithdrawalsItem() {
+			return UserWithdrawalsItem;
+		}
+
+		public void setUserWithdrawalsItem(
+				List<TeacherWithdrawals> userWithdrawalsItem) {
+			UserWithdrawalsItem = userWithdrawalsItem;
+		}
+
 	}
 
 }

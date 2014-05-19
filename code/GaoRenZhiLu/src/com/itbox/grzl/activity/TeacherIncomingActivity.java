@@ -6,11 +6,14 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.TeacherIncomingAdapter;
 import com.itbox.grzl.bean.TeacherIncoming;
 import com.itbox.grzl.engine.TeacherEngine;
+import com.itbox.grzl.engine.CommentEngine.CommentItem;
+import com.itbox.grzl.engine.TeacherEngine.UserPayDetailItem;
 
 /**
  * 收入明细界面
@@ -45,9 +48,31 @@ public class TeacherIncomingActivity extends BaseLoadActivity<TeacherIncoming> {
 	}
 
 	@Override
-	protected void loadData(int page) {
+	protected void loadData(final int page) {
 		TeacherEngine.getIncoming(page, AppContext.getInstance().getAccount()
-				.getUserid(), null);
-	}
+				.getUserid(), new GsonResponseHandler<UserPayDetailItem>(
+				UserPayDetailItem.class) {
+			@Override
+			public void onSuccess(UserPayDetailItem bean) {
+				// 保存到数据库
+				if (bean != null) {
+					saveData(page, bean.getUserPayDetailItem());
+				}
+			}
 
+			@Override
+			public void onFinish() {
+				super.onFinish();
+				loadFinish();
+			}
+
+			@Override
+			public void onFailure(Throwable error, String content) {
+				super.onFailure(error, content);
+				showToast(content);
+				// 还原页码
+				restorePage();
+			}
+		});
+	}
 }

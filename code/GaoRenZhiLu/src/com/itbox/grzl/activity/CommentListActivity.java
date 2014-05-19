@@ -11,7 +11,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.itbox.fx.core.L;
 import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.CommentListAdapter;
 import com.itbox.grzl.bean.CommentGet;
@@ -52,8 +54,7 @@ public class CommentListActivity extends BaseLoadActivity<CommentGet> {
 		mRightTv.setVisibility(View.VISIBLE);
 
 		mAdapter = new CommentListAdapter(getContext(), null);
-		initLoad(mListView, mAdapter, CommentGet.class, CommentGet.CREATETIME
-				+ " desc");
+		initLoad(mListView, mAdapter, CommentGet.class);
 	}
 
 	@OnClick(R.id.text_right)
