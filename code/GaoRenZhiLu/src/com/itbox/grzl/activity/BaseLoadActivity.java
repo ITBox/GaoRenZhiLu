@@ -40,46 +40,72 @@ public abstract class BaseLoadActivity<T extends Model> extends BaseActivity
 	private CursorAdapter mAdapter;
 	private Class<T> mClazz;
 	private String mOrderBy;
+	private String mSelection;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	}
 
+	/**
+	 * 初始化加载器
+	 * 
+	 * @param listView
+	 * @param adapter
+	 * @param clazz
+	 * @param orderBy
+	 */
 	public void initLoad(PullToRefreshListView listView, CursorAdapter adapter,
-			Class<T> clazz, String orderBy) {
+			Class<T> clazz, String selection, String orderBy) {
 		mListView = listView;
 		mAdapter = adapter;
 		mClazz = clazz;
+		mSelection = selection;
 		mOrderBy = orderBy;
 		initView();
 		getSupportLoaderManager().initLoader(0, null, this);
 		loadFirstData();
 	}
 
+	/**
+	 * 初始化加载器
+	 * 
+	 * @param listView
+	 * @param adapter
+	 * @param clazz
+	 */
 	public void initLoad(PullToRefreshListView listView, CursorAdapter adapter,
 			Class<T> clazz) {
-		initLoad(listView, adapter, clazz, null);
+		initLoad(listView, adapter, clazz, null, null);
 	}
 
+	/**
+	 * 加载第一页
+	 */
 	protected void loadFirstData() {
 		oldPage = page;
 		page = 1;
 		loadData(page);
 	}
 
+	/**
+	 * 加载下一页
+	 */
 	protected void loadNextData() {
 		oldPage = page;
 		page++;
 		loadData(page);
 	}
 
+	/**
+	 * 还原页码
+	 */
 	protected void restorePage() {
 		page = oldPage;
 	}
 
 	private void initView() {
-
+		// 设置刷新监听器
 		mListView.setOnRefreshListener(new OnRefreshListener2<ListView>() {
 
 			@Override
@@ -101,10 +127,13 @@ public abstract class BaseLoadActivity<T extends Model> extends BaseActivity
 	}
 
 	/**
-	 * 从网络加载数据
+	 * 加载数据
 	 */
 	protected abstract void loadData(int page);
 
+	/**
+	 * 数据加载完毕
+	 */
 	protected void loadFinish() {
 		mListView.onRefreshComplete();
 	}
@@ -116,34 +145,34 @@ public abstract class BaseLoadActivity<T extends Model> extends BaseActivity
 	 * @param bean
 	 */
 	protected void saveData(int page, List<T> list) {
-		if (list != null) {
-			try {
-				ActiveAndroid.beginTransaction();
-				if (page == 1) {
-					try {
-						// 清空数据库
-						new Delete().from(mClazz).execute();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+		try {
+			ActiveAndroid.beginTransaction();
+			if (page == 1) {
+				try {
+					// 清空数据库
+					new Delete().from(mClazz).where(mSelection).execute();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				// 保存
+			}
+			// 保存
+			if (list != null) {
 				for (T er : list) {
 					er.save();
 				}
-				ActiveAndroid.setTransactionSuccessful();
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				ActiveAndroid.endTransaction();
 			}
+			ActiveAndroid.setTransactionSuccessful();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			ActiveAndroid.endTransaction();
 		}
 	}
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		return new CursorLoader(this, ContentProvider.createUri(mClazz, null),
-				null, null, null, mOrderBy);
+				null, mSelection, null, mOrderBy);
 	}
 
 	@Override

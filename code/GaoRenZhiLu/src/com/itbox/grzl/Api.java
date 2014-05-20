@@ -10,6 +10,7 @@ public class Api {
 	private static final String API_HOST = "http://115.28.105.82:8006/";
 	private static final String CODE_HOST = "http://whoyao.com/checkcode.ashx?key=android_remark";
 	private static final String IMAGE_HOST = "http://image.whoyao.net/";
+	private static final String AVATAR_HOST = "http://115.28.105.82:8007/%s/100x100.jpg";
 
 	public static final int PAGE_SIZE = 15;
 	public static final int PAGE_DEFAULT_INDEX = 1;
@@ -135,27 +136,8 @@ public class Api {
 		/*
 		 * 用户模块第2部分
 		 */
-		/** 33:朋友列表 */
-		public static final String GetUserList = PartName + "friendlist";
-		/** 34:朋友搜索 */
-		public static final String Search = PartName + "searchfriend";
-		/** 35:我的好友表 */
-		public static final String GetFridnds = PartName + "getfriends";
-		/** 36:好友管理 */
-		public static final String FriendManage = PartName + "friendmanage";
-		/** 37:好友请求管理 */
-		public static final String FriendRequestManage = PartName
-				+ "operationfriend";
-		/** 38:黑名单管理 */
-		public static final String BlackManage = PartName + "blackmanage";
-		/** 39:收藏管理 */
-		public static final String FaviconsManage = PartName + "faviconsmanage";
-		/** 40:与Ta的关系 */
-		public static final String Relation = PartName + "getuserrelation";
-		/** 41:验证邮箱 */
-		public static final String VerifyEmail = PartName + "checkemail";
-		/** 42我的资金 */
-		public static final String MyFund = PartName + "getusercapital";
+		/** 获取用户信息 **/
+		public static final String GET_USER_LIST = PartName + "getuserlist";
 
 		/** 测评 */
 		/** 提交测评 */
@@ -185,6 +167,18 @@ public class Api {
 		/** 获取申请提现记录 */
 		public static final String GET_USER_WITHDRAWALS = PartName
 				+ "getuserwithdrawals";
+		/** 取消申请提现记录 */
+		public static final String CANCEL_USER_WITHDRAWALS = PartName
+				+ "canceluserwithdrawals";
+		
+		/**
+		 * 获取用户头像地址
+		 * @param path
+		 * @return
+		 */
+		public static String getAvatarUrl(String path){
+			return String.format(AVATAR_HOST, path);
+		}
 	}
 
 	/** 活动模块接口 */

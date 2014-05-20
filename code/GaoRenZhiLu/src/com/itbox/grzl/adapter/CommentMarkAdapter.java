@@ -10,8 +10,10 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.CommentMarkGet;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
@@ -45,6 +47,9 @@ public class CommentMarkAdapter extends CursorAdapter {
 		holder.tv_time.setText(bean.getCreatetime());
 		holder.tv_name.setText(bean.getUsername());
 		holder.tv_floor.setText((cursor.getPosition() + 1) + "楼");
+		ImageLoader.getInstance().displayImage(
+				Api.User.getAvatarUrl(bean.getUseravatarversion()),
+				holder.iv_head);
 	}
 
 	static class ViewHolder {

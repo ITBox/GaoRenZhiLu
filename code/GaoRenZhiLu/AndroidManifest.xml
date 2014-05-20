@@ -115,6 +115,9 @@
         <activity
             android:name="com.itbox.grzl.activity.TeacherWithdrawalsListActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.TeacherWithdrawalsInfoActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"

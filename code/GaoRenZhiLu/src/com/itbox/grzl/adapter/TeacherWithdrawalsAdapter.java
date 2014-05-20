@@ -10,7 +10,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.itbox.grzl.R;
-import com.itbox.grzl.bean.TeacherIncoming;
+import com.itbox.grzl.bean.TeacherWithdrawals;
 
 /**
  * 收入明细列表适配器
@@ -29,8 +29,8 @@ public class TeacherWithdrawalsAdapter extends CursorAdapter {
 
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		View view = View.inflate(mContext, R.layout.item_list_teacher_withdrawals,
-				null);
+		View view = View.inflate(mContext,
+				R.layout.item_list_teacher_withdrawals, null);
 		new ViewHolder(view);
 		return view;
 	}
@@ -38,13 +38,13 @@ public class TeacherWithdrawalsAdapter extends CursorAdapter {
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
 		ViewHolder holder = (ViewHolder) view.getTag();
-		TeacherIncoming bean = new TeacherIncoming();
+		TeacherWithdrawals bean = new TeacherWithdrawals();
 		bean.loadFromCursor(cursor);
-		holder.tv_id.setText(bean.getPayid() + "");
-		holder.tv_name.setText(bean.getPaytype());
+		holder.tv_id.setText(bean.getTwId() + "");
+		holder.tv_name.setText("申请提现");
 		holder.tv_time.setText(bean.getCreatetime());
 		holder.tv_price.setText(bean.getPrice() + "元");
-		holder.tv_state.setText(bean.getPayStateName());
+		holder.tv_state.setText(bean.getStatusName());
 	}
 
 	static class ViewHolder {
