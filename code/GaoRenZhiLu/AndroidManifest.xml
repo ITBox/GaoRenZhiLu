@@ -96,7 +96,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.ExamReportActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" 
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"/>
         <activity
             android:name="com.itbox.grzl.activity.CommentAddActivity"
             android:screenOrientation="portrait" />

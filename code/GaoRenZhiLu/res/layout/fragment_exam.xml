@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,20 +6,106 @@
     android:orientation="vertical" >
 
     <include
+        android:id="@+id/include1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/unit_top_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include1"
+        android:background="@drawable/exam_bg" />
+
+    <View
+        android:id="@+id/icon_1"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_below="@+id/bt_start_exam"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="85dp"
+        android:background="@drawable/exam_list_icon" />
+
+    <TextView
+        android:id="@+id/text_1"
+        style="@style/exam_list_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/icon_1"
+        android:layout_toRightOf="@+id/icon_1"
+        android:text="行走江湖，最重要的是有自知之明，知道自己有啥本事，知道自己有啥不足，" />
+
+    <View
+        android:id="@+id/icon_2"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_below="@+id/text_1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/exam_list_icon" />
+
+    <TextView
+        android:id="@+id/text_2"
+        style="@style/exam_list_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/icon_2"
+        android:layout_toRightOf="@+id/icon_2"
+        android:text="先来测测自己的先天慧根吧。" />
+
+    <View
+        android:id="@+id/icon_3"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_below="@+id/text_2"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/exam_list_icon" />
+
+    <TextView
+        android:id="@+id/text_3"
+        style="@style/exam_list_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/icon_3"
+        android:layout_toRightOf="@+id/icon_3"
+        android:text="请认真进行答题，在进行咨询时，老师将会参考你的测评结果哦。" />
+
+    <View
+        android:id="@+id/icon_4"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_below="@+id/text_3"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/exam_list_icon" />
+
+    <TextView
+        android:id="@+id/text_4"
+        style="@style/exam_list_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/icon_4"
+        android:layout_toRightOf="@+id/icon_4"
+        android:text="答题时，你只需根据对每一题的第一印象，在符合的选项前选中即可。" />
 
     <Button
         android:id="@+id/bt_start_exam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="马上开始测评" />
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/include1"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="90dp"
+        android:background="@drawable/exam_start_bt_bg"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="立即开始考试"
+        android:textColor="#224A7D"
+        android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/bt_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="行业论坛"/>
-
-</LinearLayout>
+</RelativeLayout>

@@ -12,10 +12,11 @@
         android:layout_margin="5dp"
         android:background="@drawable/rect_radius_gray"
         android:gravity="center"
-        android:padding="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
         android:text="首页"
         android:textColor="@android:color/black"
-        android:textSize="16sp" >
+        android:textSize="14sp" >
     </TextView>
 
 </LinearLayout>

@@ -2,11 +2,15 @@ package com.itbox.grzl.activity;
 
 import handmark.pulltorefresh.library.PullToRefreshListView;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.ExamReportAdapter;
 import com.itbox.grzl.bean.ExamReport;
@@ -25,6 +29,8 @@ public class ExamReportActivity extends BaseLoadActivity<ExamReport> {
 	protected TextView mTitleTv;
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
+	@InjectView(R.id.et_search)
+	protected EditText mSeachEt;
 
 	private ExamReportAdapter mAdapter;
 
@@ -43,6 +49,13 @@ public class ExamReportActivity extends BaseLoadActivity<ExamReport> {
 
 		mAdapter = new ExamReportAdapter(getContext(), null);
 		initLoad(mListView, mAdapter, ExamReport.class);
+	}
+
+	@OnClick(R.id.bt_search)
+	public void onClick(View v) {
+		// 搜索
+		ToastUtils.showToast(getApplicationContext(), mSeachEt.getText()
+				.toString());
 	}
 
 	@Override

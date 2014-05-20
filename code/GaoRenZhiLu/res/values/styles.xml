@@ -32,4 +32,9 @@
     <style name="CheckBOX" parent="@android:style/Widget.CompoundButton.CheckBox">
         <item name="android:button">@drawable/checkbox_selector</item>
     </style>
+    <style name="exam_list_text" parent="android:Widget.TextView">
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:textColor">#898989</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>
