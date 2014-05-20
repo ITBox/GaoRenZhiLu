@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/name"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="5.0dip"
+    android:layout_marginRight="5.0dip"
+    android:layout_marginTop="10.0dip"
+    android:background="@drawable/biz_news_column_edit_item_bg"
+    android:gravity="center"
+    android:paddingBottom="5.0dip"
+    android:paddingTop="5.0dip"
+    android:textSize="16sp" />

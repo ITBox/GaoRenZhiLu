@@ -22,7 +22,7 @@
             android:value="gaorenzhilu.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="7" />
+            android:value="8" />
 
         <activity
             android:name="com.itbox.grzl.activity.SplashActivity"

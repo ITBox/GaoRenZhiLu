@@ -13,7 +13,6 @@ import butterknife.InjectView;
 
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.R;
-import com.itbox.grzl.api.ConsultationApi;
 import com.itbox.grzl.fragment.ActivityFragment;
 import com.itbox.grzl.fragment.ConsultationFragment;
 import com.itbox.grzl.fragment.ExamFragment;
@@ -52,7 +51,7 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.activity_main);
 		ButterKnife.inject(this);
 		initView();
-		new ConsultationApi().searchConsultation("1", "", "1", "1", "1", "1");
+
 		// new ConsultationApi().searchFreeConsultation("1", "1", "1", "1");
 	}
 
