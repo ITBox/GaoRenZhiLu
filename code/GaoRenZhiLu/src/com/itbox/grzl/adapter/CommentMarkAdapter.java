@@ -2,6 +2,7 @@ package com.itbox.grzl.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.itbox.grzl.Api;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.CommentMarkGet;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -24,10 +26,13 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 public class CommentMarkAdapter extends CursorAdapter {
 
 	private Context mContext;
+	private int gray;
 
 	public CommentMarkAdapter(Context context, Cursor c) {
 		super(context, c, true);
 		mContext = context;
+		gray = AppContext.getInstance().getResources()
+				.getColor(R.color.gray_e8);
 	}
 
 	@Override
@@ -50,6 +55,13 @@ public class CommentMarkAdapter extends CursorAdapter {
 		ImageLoader.getInstance().displayImage(
 				Api.User.getAvatarUrl(bean.getUseravatarversion()),
 				holder.iv_head);
+		if ((cursor.getPosition() % 2) == 0) {
+			// 偶数，白色背景
+			view.setBackgroundColor(Color.WHITE);
+		} else {
+			// 灰色背景
+			view.setBackgroundColor(gray);
+		}
 	}
 
 	static class ViewHolder {

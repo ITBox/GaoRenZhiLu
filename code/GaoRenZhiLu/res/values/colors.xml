@@ -8,4 +8,5 @@
     <drawable name="gray_bg">#F2F2F2</drawable>
     <color name="dark">#555555</color>
     <color name="black">#000000</color>
+    <color name="activity_bg">#ECF0F1</color>
 </resources>

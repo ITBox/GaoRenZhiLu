@@ -13,8 +13,10 @@ import butterknife.InjectView;
 import com.activeandroid.content.ContentProvider;
 import com.activeandroid.util.ReflectionUtils;
 import com.itbox.fx.core.L;
+import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.ExamReport;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
@@ -23,7 +25,7 @@ import com.itbox.grzl.bean.ExamReport;
  * 
  */
 public class ExamReportAdapter extends CursorAdapter {
-	
+
 	private Context mContext;
 
 	public ExamReportAdapter(Context context, Cursor c) {
@@ -33,7 +35,8 @@ public class ExamReportAdapter extends CursorAdapter {
 
 	@Override
 	public View newView(Context context, Cursor cursor, ViewGroup parent) {
-		View view = View.inflate(mContext, R.layout.item_list_exam_report, null);
+		View view = View
+				.inflate(mContext, R.layout.item_list_exam_report, null);
 		new ViewHolder(view);
 		return view;
 	}
@@ -46,6 +49,9 @@ public class ExamReportAdapter extends CursorAdapter {
 		holder.tv_name.setText(bean.getUsername());
 		holder.tv_content.setText(bean.getContents());
 		holder.tv_time.setText(bean.getCreatetime());
+		ImageLoader.getInstance().displayImage(
+				Api.User.getAvatarUrl(bean.getUseravatarversion()),
+				holder.iv_head);
 	}
 
 	static class ViewHolder {

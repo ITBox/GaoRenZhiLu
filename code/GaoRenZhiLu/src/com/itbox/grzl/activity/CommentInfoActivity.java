@@ -11,8 +11,10 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import butterknife.Optional;
 
 import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.CommentMarkAdapter;
@@ -36,18 +38,21 @@ public class CommentInfoActivity extends BaseLoadActivity<CommentMarkGet> {
 	protected TextView mTitleTv;
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
-	@InjectView(R.id.tv_name)
-	protected TextView mNameTv;
-	@InjectView(R.id.tv_content)
-	protected TextView mContentTv;
-	@InjectView(R.id.tv_count)
-	protected TextView mCountTv;
-	@InjectView(R.id.tv_title)
-	protected TextView mCommentTitleTv;
-	@InjectView(R.id.iv_head)
-	protected ImageView mHeadIv;
 	@InjectView(R.id.et_content)
 	protected EditText mContentEt;
+
+	public static class HeaderView {
+		@InjectView(R.id.tv_name)
+		protected TextView mNameTv;
+		@InjectView(R.id.tv_content)
+		protected TextView mContentTv;
+		@InjectView(R.id.tv_count)
+		protected TextView mCountTv;
+		@InjectView(R.id.tv_title)
+		protected TextView mCommentTitleTv;
+		@InjectView(R.id.iv_head)
+		protected ImageView mHeadIv;
+	}
 
 	private CommentMarkAdapter mAdapter;
 	private CommentGet mBean;
@@ -64,20 +69,31 @@ public class CommentInfoActivity extends BaseLoadActivity<CommentMarkGet> {
 
 		ButterKnife.inject(this);
 
+		// 清空评论数据库，防止显示别的评论
+		saveData(1, null);
+
 		initView();
 	}
 
 	private void initView() {
+		// 添加头
+		View header = View.inflate(getApplicationContext(),
+				R.layout.item_top_comment_info, null);
+		mListView.getRefreshableView().addHeaderView(header);
+
+		HeaderView hv = new HeaderView();
+		ButterKnife.inject(hv, header);
+		hv.mContentTv.setText(mBean.getCommentcontent());
+		hv.mCountTv.setText("回复数：" + mBean.getReplacecount());
+		hv.mNameTv.setText(mBean.getUsername());
+		hv.mCommentTitleTv.setText(mBean.getTitle());
+		ImageLoader.getInstance().displayImage(
+				Api.User.getAvatarUrl(mBean.getPhoto()), hv.mHeadIv);
+
 		mTitleTv.setText("论坛详情");
-		mContentTv.setText(mBean.getCommentcontent());
-		mCountTv.setText("回复数：" + mBean.getReplacecount());
-		mNameTv.setText(mBean.getUsername());
-		mCommentTitleTv.setText(mBean.getTitle());
-		ImageLoader.getInstance().displayImage(mBean.getPhoto(), mHeadIv);
 
 		mAdapter = new CommentMarkAdapter(getContext(), null);
-		initLoad(mListView, mAdapter, CommentMarkGet.class,
-				CommentMarkGet.COMMENTID + "=" + mBean.getCommentId(), null);
+		initLoad(mListView, mAdapter, CommentMarkGet.class, null, null);
 		mListView.setMode(Mode.PULL_FROM_END);
 	}
 
@@ -108,6 +124,7 @@ public class CommentInfoActivity extends BaseLoadActivity<CommentMarkGet> {
 				super.onSuccess(result);
 				if (result.isSuccess()) {
 					showToast("评论成功");
+					mContentEt.setText("");
 					loadFirstData();
 				} else {
 					showToast("评论失败");

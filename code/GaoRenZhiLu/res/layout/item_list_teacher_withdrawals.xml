@@ -15,7 +15,7 @@
 
     <TextView
         android:id="@+id/tv_id"
-        android:layout_width="100dp"
+        android:layout_width="90dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_name"
         android:layout_marginTop="5dp"

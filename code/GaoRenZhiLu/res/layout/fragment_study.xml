@@ -21,7 +21,7 @@
     <GridView
         android:id="@+id/grid"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="@dimen/online_study_gird_height"
         android:layout_below="@+id/tv_title"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
