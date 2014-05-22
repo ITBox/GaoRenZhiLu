@@ -83,4 +83,18 @@ public class BaseActivity extends FragmentActivity  implements OnClickListener{
 		}
 		return super.onKeyDown(keyCode, event);
 	}
+	
+	public void showLeftBackButton(){
+		View left = findViewById(R.id.text_left);
+		if (left != null) {
+			left.setVisibility(View.VISIBLE);
+			left.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
+		}
+	}
 }

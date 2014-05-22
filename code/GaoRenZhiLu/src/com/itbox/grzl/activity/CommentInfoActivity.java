@@ -77,6 +77,7 @@ public class CommentInfoActivity extends BaseLoadActivity<CommentMarkGet> {
 	}
 
 	private void initView() {
+		showLeftBackButton();
 		// 添加头
 		View header = View.inflate(getApplicationContext(),
 				R.layout.item_top_comment_info, null);

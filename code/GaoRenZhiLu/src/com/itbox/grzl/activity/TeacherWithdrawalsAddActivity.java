@@ -40,6 +40,7 @@ public class TeacherWithdrawalsAddActivity extends BaseActivity {
 
 	private void initView() {
 		mTitleTv.setText("申请提现");
+		showLeftBackButton();
 	}
 
 	@OnClick(R.id.bt_add)

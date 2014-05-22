@@ -44,12 +44,13 @@
 
     <TextView
         android:id="@+id/tv_state"
-        android:layout_width="wrap_content"
+        android:layout_width="66dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_price"
         android:layout_marginTop="2dp"
         android:layout_toLeftOf="@+id/iv_right"
         android:background="@color/green_text"
+        android:gravity="center"
         android:padding="2dp"
         android:text="预定成功"
         android:textColor="@android:color/white"

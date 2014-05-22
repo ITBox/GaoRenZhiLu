@@ -47,6 +47,7 @@ public class TeacherWithdrawalsListActivity extends
 
 	private void initView() {
 		mTitleTv.setText("提现明细");
+		showLeftBackButton();
 
 		mAdapter = new TeacherWithdrawalsAdapter(getContext(), null);
 		initLoad(mListView, mAdapter, TeacherWithdrawals.class);

@@ -10,36 +10,11 @@
         android:layout_height="wrap_content"
         layout="@layout/unit_top_title" />
 
-    <EditText
-        android:id="@+id/et_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/search_bar_bg"
-        android:hint="按学生昵称查询"
-        android:paddingLeft="10dp"
-        android:paddingRight="20dp"
-        android:singleLine="true"
-        android:textColor="@android:color/white"
-        android:textSize="14sp" />
-
-    <Button
-        android:id="@+id/bt_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/et_search"
-        android:layout_marginRight="5dp"
-        android:background="@drawable/search_bar_icon" />
-
     <handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/et_search"
+        android:layout_below="@+id/title"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:listSelector="@android:color/transparent" />

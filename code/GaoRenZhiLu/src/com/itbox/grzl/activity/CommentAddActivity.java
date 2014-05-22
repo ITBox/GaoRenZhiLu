@@ -53,6 +53,7 @@ public class CommentAddActivity extends BaseActivity {
 
 	private void initView() {
 		mTitleTv.setText("发布论坛");
+		showLeftBackButton();
 	}
 
 	@Override

@@ -54,6 +54,7 @@ public class ExamStartActivity extends BaseActivity {
 
 	private void initView() {
 		mTitleTv.setText("单选题");
+		showLeftBackButton();
 
 		// 添加第一题
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

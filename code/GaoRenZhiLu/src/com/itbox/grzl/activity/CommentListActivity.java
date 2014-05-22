@@ -49,6 +49,7 @@ public class CommentListActivity extends BaseLoadActivity<CommentGet> {
 
 	private void initView() {
 		mTitleTv.setText("行业论坛");
+		showLeftBackButton();
 		// 右侧发布按钮
 		mRightTv.setText("发布论坛");
 		mRightTv.setVisibility(View.VISIBLE);
