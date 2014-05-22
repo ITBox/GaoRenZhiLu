@@ -105,7 +105,6 @@ public class CommentListActivity extends BaseLoadActivity<CommentGet> {
 			@Override
 			public void onFailure(Throwable error, String content) {
 				super.onFailure(error, content);
-				showToast(content);
 				// 还原页码
 				restorePage();
 			}

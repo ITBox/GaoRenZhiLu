@@ -28,13 +28,13 @@ public class ExamInscribe implements Parcelable {
 	}
 
 	public String getInscribe() {
-		if (inscribe == null) {
-			StringBuilder sb = new StringBuilder();
-			sb.append(num).append("、").append(title).append("\n")
-					.append(content);
-			inscribe = sb.toString();
-		}
-		return inscribe;
+//		if (inscribe == null) {
+//			StringBuilder sb = new StringBuilder();
+//			sb.append(num).append("、").append(title).append("\n")
+//					.append(content);
+//			inscribe = sb.toString();
+//		}
+		return content;
 	}
 
 	public String getNum() {

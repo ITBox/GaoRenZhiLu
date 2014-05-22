@@ -24,7 +24,7 @@ import com.loopj.android.http.RequestParams;
  */
 public class ExamEngine {
 
-	public static final String EXAM_FILE = "exam/exam_1";
+	public static final String EXAM_FILE = "exam/exam";
 	public static final int PAGE_NUM = 20;
 
 	/**
@@ -58,10 +58,6 @@ public class ExamEngine {
 			int num = 0;
 			while ((line = br.readLine()) != null) {
 				String[] array = line.split("\\|");
-				if (num++ == 0) {
-					title = line;
-					continue;
-				}
 				if (array != null && array.length == 3) {
 					bean = new ExamInscribe();
 					bean.setNum(Integer.toString(num));

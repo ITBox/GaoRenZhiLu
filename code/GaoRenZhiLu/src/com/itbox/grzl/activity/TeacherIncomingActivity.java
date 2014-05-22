@@ -130,7 +130,6 @@ public class TeacherIncomingActivity extends BaseLoadActivity<TeacherIncoming> {
 			@Override
 			public void onFailure(Throwable error, String content) {
 				super.onFailure(error, content);
-				showToast(content);
 				// 还原页码
 				restorePage();
 			}

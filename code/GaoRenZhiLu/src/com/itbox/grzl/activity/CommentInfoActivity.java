@@ -13,6 +13,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.Optional;
 
+import com.activeandroid.query.Delete;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
@@ -70,7 +71,7 @@ public class CommentInfoActivity extends BaseLoadActivity<CommentMarkGet> {
 		ButterKnife.inject(this);
 
 		// 清空评论数据库，防止显示别的评论
-		saveData(1, null);
+		new Delete().from(CommentMarkGet.class).execute();
 
 		initView();
 	}
