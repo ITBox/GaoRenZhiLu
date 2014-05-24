@@ -2,6 +2,7 @@ package com.itbox.grzl.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.View;
@@ -10,14 +11,27 @@ import android.view.View.OnClickListener;
 import com.itbox.fx.util.DialogUtil;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 public class BaseFragment extends Fragment implements OnClickListener {
 	protected Fragment mActThis;
+	protected ImageLoader loader;
+	protected DisplayImageOptions photoOptions;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mActThis = this;
+		loader = ImageLoader.getInstance();
+		photoOptions = new DisplayImageOptions.Builder()
+		.bitmapConfig(Bitmap.Config.RGB_565)
+		.imageScaleType(ImageScaleType.EXACTLY)
+		.showImageForEmptyUri(R.drawable.ic_default_avater)
+		.cacheInMemory(true)
+	    .cacheOnDisc(true)
+		.build();
 	}
 
 	@Override

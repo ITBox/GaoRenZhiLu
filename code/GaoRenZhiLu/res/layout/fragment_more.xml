@@ -23,7 +23,6 @@
                 android:id="@+id/more_my_photo"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
-                android:src="@drawable/ex_photo"
                 app:border_color="@android:color/white"
                 app:border_width="2dp" />
 

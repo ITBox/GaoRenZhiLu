@@ -36,7 +36,6 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="40dp"
-                    android:src="@drawable/ex_photo"
                     app:border_color="@android:color/white"
                     app:border_width="2dp" />
 
@@ -130,11 +129,12 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_toLeftOf="@+id/more_my_name_iv"
-                    android:layout_toRightOf="@id/more_my_name_iv"
+                    android:layout_toRightOf="@id/more_my_name"
                     android:background="@android:color/transparent"
                     android:gravity="right"
                     android:singleLine="true"
-                    android:textColor="#9B9FA0"
+                    android:focusable="false"
+                    android:textColor="@color/dark"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -173,6 +173,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/dark"
                     android:layout_toLeftOf="@+id/more_my_city_iv"
                     android:textSize="14sp" />
 
@@ -211,6 +212,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/dark"
                     android:layout_toLeftOf="@+id/more_my_birthday_iv"
                     android:textSize="14sp" />
 
@@ -250,6 +252,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:textColor="@color/dark"
                     android:layout_toLeftOf="@+id/more_my_sex_iv"
                     android:textSize="14sp" />
 
@@ -296,7 +299,8 @@
                     android:background="@android:color/transparent"
                     android:gravity="right"
                     android:singleLine="true"
-                    android:textColor="#9B9FA0"
+                    android:focusable="false"
+                    android:textColor="@color/dark"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -332,7 +336,7 @@
                     android:textSize="15sp" />
 
                 <EditText
-                    android:id="@+id/more_my_intro_et"
+                    android:id="@+id/more_my_email_et"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -342,7 +346,8 @@
                     android:background="@android:color/transparent"
                     android:gravity="right"
                     android:singleLine="true"
-                    android:textColor="#9B9FA0"
+                    android:focusable="false"
+                    android:textColor="@color/dark"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -389,15 +394,17 @@
                     android:layout_toRightOf="@id/more_my_intro"
                     android:gravity="right"
                     android:singleLine="true"
-                    android:textColor="#9B9FA0" />
+                    android:text="fdfdsfd"
+                    android:textColor="@color/dark" />
 
                 <ImageView
+                    android:id="@+id/more_my_intro_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="15dp"
                     android:src="@drawable/ic_more_arrow" />
             </RelativeLayout>
 
@@ -428,7 +435,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginRight="15dp"
                     android:src="@drawable/ic_more_arrow" />
             </RelativeLayout>
 

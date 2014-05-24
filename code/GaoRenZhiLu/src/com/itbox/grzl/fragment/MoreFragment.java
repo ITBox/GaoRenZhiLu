@@ -16,6 +16,8 @@ import com.itbox.grzl.activity.CommentListActivity;
 import com.itbox.grzl.activity.TeacherIncomingActivity;
 import com.itbox.grzl.activity.TeacherWithdrawalsListActivity;
 import com.itbox.grzl.activity.UserInfoActivity;
+import com.itbox.grzl.bean.Account;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
@@ -31,7 +33,9 @@ public class MoreFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		View layout = inflater.inflate(R.layout.fragment_more, null);
 		ButterKnife.inject(mActThis, layout);
-		mMoreName.setText(AppContext.getInstance().getAccount().getUsername());
+		Account account = AppContext.getInstance().getAccount();
+		loader.displayImage(account.getUseravatarversion(), mMorePhoto, photoOptions);
+		mMoreName.setText(account.getUsername());
 //		Account bean = new Select(AccountTable.COLUMN_USERNAME).from(Account.class).executeSingle();
 //		bean.getUsername();
 		return layout;

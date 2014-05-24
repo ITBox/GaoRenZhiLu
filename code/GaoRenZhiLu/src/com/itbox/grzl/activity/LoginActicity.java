@@ -100,10 +100,8 @@ public class LoginActicity extends BaseActivity implements
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		if (cursor != null && cursor.moveToNext()) {
-			Integer userid = cursor.getInt(cursor
-					.getColumnIndexOrThrow(AccountTable.COLUMN_USERID));
 			Account account = new Account();
-			account.setUserid(userid);
+			account.loadFromCursor(cursor);
 			AppContext.getInstance().setAccount(account);
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
