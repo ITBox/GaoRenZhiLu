@@ -184,6 +184,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/bg_more_line" />
+        
+        <TextView
+            android:id="@+id/more_my_exam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_bg_more"
+            android:drawableLeft="@drawable/ic_more_exam"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:text="测评报告" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_more_line" />
 
         <TextView
             android:id="@+id/more_my_set"

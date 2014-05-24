@@ -37,7 +37,7 @@ public class MoreFragment extends BaseFragment {
 		return layout;
 	}
 	
-	@OnClick({R.id.more_my_photo, R.id.more_my_action, R.id.more_my_ask, R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian, R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult, R.id.more_my_set})
+	@OnClick({R.id.more_my_photo, R.id.more_my_action, R.id.more_my_ask, R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian, R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult, R.id.more_my_exam, R.id.more_my_set})
     public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.more_my_photo:
@@ -62,6 +62,8 @@ public class MoreFragment extends BaseFragment {
 			startActivity(CommentListActivity.class);
 			break;
 		case R.id.more_my_consult://免费咨询
+			break;
+		case R.id.more_my_exam://测评报告
 			break;
 		case R.id.more_my_set://个人设置
 			break;

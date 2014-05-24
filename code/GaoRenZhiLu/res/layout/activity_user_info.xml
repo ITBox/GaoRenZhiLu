@@ -54,13 +54,13 @@
                         android:id="@+id/userinfo_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="不哭不闹"
                         android:textColor="#F14F3B"
-                        android:textSize="18sp" />
+                        android:textSize="20sp" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -70,31 +70,32 @@
                             <TextView
                                 android:id="@+id/userinfo_place"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="北京" />
+                                android:layout_height="wrap_content" />
 
                             <TextView
                                 android:id="@+id/userinfo_xingzuo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="15dp"
-                                android:layout_marginRight="15dp"
-                                android:text="天蝎座" />
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                
+                                />
 
                             <TextView
+                                android:id="@+id/userinfo_yearold"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="22岁" />
+                                 />
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/userinfo_yue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:background="@drawable/selector_bg_red"
                             android:padding="3dp"
-                            android:text="2000购买"
                             android:textColor="@android:color/white" />
                     </RelativeLayout>
                 </LinearLayout>
@@ -103,141 +104,333 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/top_more_line2" />
 
-            <TextView
-                android:id="@+id/more_my_action"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/selector_bg_more"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingBottom="10dp"
+                android:paddingBottom="12dp"
                 android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="昵  称" />
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="昵  称" />
+
+                <EditText
+                    android:id="@+id/more_my_name_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_name_iv"
+                    android:layout_toRightOf="@id/more_my_name_iv"
+                    android:background="@android:color/transparent"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="#9B9FA0"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/more_my_name_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bg_more_line" />
 
-            <TextView
-                android:id="@+id/more_my_ask"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_more"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingBottom="10dp"
+                android:paddingBottom="12dp"
                 android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="城  市" />
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="城  市"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/more_my_city_iv"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/more_my_city_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bg_more_line" />
 
-            <TextView
-                android:id="@+id/more_my_evaluate"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_more"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingBottom="10dp"
+                android:paddingBottom="12dp"
                 android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="生  日" />
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="生  日"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/more_my_birthday_iv"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/more_my_birthday_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bg_more_line" />
 
-            <TextView
-                android:id="@+id/more_my_message"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_more"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingBottom="10dp"
+                android:paddingBottom="12dp"
                 android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="性  别" />
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="性  别"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/more_my_sex_iv"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/more_my_sex_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bg_more_line" />
 
-            <TextView
-                android:id="@+id/more_my_tixian"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_more"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingBottom="10dp"
+                android:paddingBottom="12dp"
                 android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="手  机" />
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="手  机"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/more_my_phone_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_phone_iv"
+                    android:layout_toRightOf="@id/more_my_phone"
+                    android:background="@android:color/transparent"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="#9B9FA0"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/more_my_phone_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bg_more_line" />
 
-            <TextView
-                android:id="@+id/more_my_forum"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_bg_more"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingBottom="10dp"
+                android:paddingBottom="12dp"
                 android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="邮  箱" />
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="邮  箱"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/more_my_intro_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_email_iv"
+                    android:layout_toRightOf="@id/more_my_email"
+                    android:background="@android:color/transparent"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="#9B9FA0"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/more_my_email_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bg_more_line" />
 
-            <TextView
-                android:id="@+id/more_my_shouru"
+            <RelativeLayout
+                android:id="@+id/more_my_intro_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_bg_more"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingBottom="10dp"
+                android:paddingBottom="12dp"
                 android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="个人简介" />
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="个人简介"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_intro_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_intro_iv"
+                    android:layout_toRightOf="@id/more_my_intro"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="#9B9FA0" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_more_arrow" />
+            </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/bg_more_line" />
 
-            <TextView
-                android:id="@+id/more_my_consult"
+            <RelativeLayout
+                android:id="@+id/more_my_moreinfo_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_bg_more"
-                android:drawablePadding="10dp"
-                android:gravity="center_vertical"
-                android:paddingBottom="10dp"
+                android:paddingBottom="12dp"
                 android:paddingLeft="15dp"
-                android:paddingTop="10dp"
-                android:text="更多资料" />
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="更多资料"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/ic_more_arrow" />
+            </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
