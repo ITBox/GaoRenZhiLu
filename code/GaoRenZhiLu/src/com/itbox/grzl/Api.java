@@ -140,7 +140,7 @@ public class Api {
 		public static final String GET_USER_LIST = PartName + "getuserlist";
 		/** 上传图片 **/
 		public static final String UPLOAD_IMAGE = PartName + "uploadimage";
-		
+
 		/** 测评 */
 		/** 提交测评 */
 		public static final String SUBMIT_EXAM = PartName + "addusertesting";
@@ -172,13 +172,14 @@ public class Api {
 		/** 取消申请提现记录 */
 		public static final String CANCEL_USER_WITHDRAWALS = PartName
 				+ "canceluserwithdrawals";
-		
+
 		/**
 		 * 获取用户头像地址
+		 * 
 		 * @param path
 		 * @return
 		 */
-		public static String getAvatarUrl(String path){
+		public static String getAvatarUrl(String path) {
 			return String.format(IMAGE_URL, path);
 		}
 	}
@@ -204,10 +205,9 @@ public class Api {
 		public static final String commentList = PartName
 				+ "getactivityusercomment";
 		/** 7:获取活动详情接口 */
-		public static final String detail = PartName + "getactivityusercomment";
+		public static final String detail = PartName + "getactivitydetail";
 		/** 8:我的活动接口 */
-		public static final String listForUser = PartName
-				+ "getactivityusercomment";
+		public static final String listForUser = PartName + "getmyactivity";
 
 	}
 

@@ -9,4 +9,5 @@
     <color name="dark">#555555</color>
     <color name="black">#000000</color>
     <color name="activity_bg">#ECF0F1</color>
+    <color name="search_bar_bg">#C9C9CE</color>
 </resources>
