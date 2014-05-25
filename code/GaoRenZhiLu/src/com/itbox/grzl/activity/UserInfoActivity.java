@@ -159,6 +159,7 @@ public class UserInfoActivity extends BaseActivity {
 			startActivityForResult(intent2, 20);
 			break;
 		case R.id.more_my_moreinfo_rl:
+			startActivity(UserInfoMoreActivity.class);
 			break;
 		default:
 			break;
