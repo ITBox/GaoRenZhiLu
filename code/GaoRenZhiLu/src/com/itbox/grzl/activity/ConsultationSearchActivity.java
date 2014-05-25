@@ -1,10 +1,14 @@
 package com.itbox.grzl.activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -44,6 +48,16 @@ public class ConsultationSearchActivity extends BaseActivity implements
 		mListView.setAdapter(adapter);
 		consultationApi.searchConsultation(null, "0", "0");
 		getSupportLoaderManager().initLoader(0, null, this);
+		mListView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intent = new Intent(ConsultationSearchActivity.this,
+						TeacherDetialActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 	@Override

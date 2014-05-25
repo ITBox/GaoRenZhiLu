@@ -118,6 +118,15 @@
         <activity
             android:name="com.itbox.grzl.activity.TeacherWithdrawalsInfoActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.TeacherDetialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.PictureConsultationDetialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.PayActivity"
+            android:screenOrientation="portrait" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"

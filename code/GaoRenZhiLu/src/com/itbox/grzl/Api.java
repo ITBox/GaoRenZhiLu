@@ -170,13 +170,14 @@ public class Api {
 		/** 取消申请提现记录 */
 		public static final String CANCEL_USER_WITHDRAWALS = PartName
 				+ "canceluserwithdrawals";
-		
+
 		/**
 		 * 获取用户头像地址
+		 * 
 		 * @param path
 		 * @return
 		 */
-		public static String getAvatarUrl(String path){
+		public static String getAvatarUrl(String path) {
 			return String.format(AVATAR_HOST, path);
 		}
 	}
@@ -241,6 +242,8 @@ public class Api {
 
 		public static final String searchprobleming = PartName
 				+ "searchprobleming";
+		public static final String getteacherbooking = PartName
+				+ "getteacherbooking";
 
 	}
 

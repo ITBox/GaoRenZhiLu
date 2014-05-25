@@ -1,5 +1,7 @@
 package com.itbox.grzl.bean;
 
+import android.provider.BaseColumns;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -10,7 +12,7 @@ import com.itbox.grzl.constants.AccountTable;
  * @author malinkang 2014年5月12日
  * 
  */
-@Table(name = AccountTable.TABLE_NAME)
+@Table(name = AccountTable.TABLE_NAME, id = BaseColumns._ID)
 public class Account extends Model {
 	@Column(name = AccountTable.COLUMN_USERID)
 	private Integer userid;
@@ -56,6 +58,18 @@ public class Account extends Model {
 	private String userbirthday;
 	@Column(name = AccountTable.COLUMN_MEMBERID)
 	private Integer memberid;
+	@Column(name = AccountTable.COLUMN_ISMESSAGE)
+	private Integer ismessage;
+	@Column(name = AccountTable.COLUMN_ISMESSAGE)
+	private String answercount;
+	@Column(name = AccountTable.COLUMN_TEACHERTYPE)
+	private String teachertype;
+	@Column(name = AccountTable.COLUMN_JOBTYPE)
+	private String jobtype;
+	@Column(name = AccountTable.COLUMN_TEACHERLEVEL)
+	private String teacherlevel;
+	@Column(name = AccountTable.COLUMN_REMARKCOUNT)
+	private String remarkcount;
 
 	public Integer getUserid() {
 		return userid;

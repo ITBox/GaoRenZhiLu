@@ -30,4 +30,12 @@ public class AccountTable {
 	public static final String COLUMN_USERSTATE = "userstate";
 	public static final String COLUMN_USERBIRTHDAY = "userbirthday";
 	public static final String COLUMN_MEMBERID = "memberid";
+
+	public static final String COLUMN_ISMESSAGE = "ismessage";
+	public static final String COLUMN_ANSWERCOUNT = "answercount";
+	public static final String COLUMN_TEACHERTYPE = "teachertype";
+	public static final String COLUMN_JOBTYPE = "jobtype";
+	public static final String COLUMN_TEACHERLEVEL = "teacherlevel";
+	public static final String COLUMN_REMARKCOUNT = "remarkcount";
+
 }
