@@ -95,7 +95,7 @@ public class CommentInfoActivity extends BaseLoadActivity<CommentMarkGet> {
 		mTitleTv.setText("论坛详情");
 
 		mAdapter = new CommentMarkAdapter(getContext(), null);
-		initLoad(mListView, mAdapter, CommentMarkGet.class, null, null);
+		initLoad(mListView, mAdapter, CommentMarkGet.class);
 		mListView.setMode(Mode.PULL_FROM_END);
 	}
 

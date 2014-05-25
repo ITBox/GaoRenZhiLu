@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <com.itbox.fx.widget.CircleImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="60dip"
+        android:layout_height="60dip"
+        android:layout_margin="10dip"
+        android:src="@drawable/icon" />
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dip"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/tv_jobtype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:text="张三"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_teachertype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dip"
+                android:text="张三"
+                android:textColor="#A3A7AA"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="32dip"
+            android:gravity="center_vertical" >
+
+            <RatingBar
+                android:id="@+id/ratingbar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" />
+
+            <TextView
+                android:id="@+id/tv_teachertype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dip"
+                android:text="专业导师"
+                android:textColor="#A3A7AA"
+                android:textSize="16sp" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_teacher_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:text="kjfdajkf价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价龙宽九段烧录卡经费流失大量飞机这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价这是评价评价龙宽九段烧录卡经费流失大量飞机"
+            android:textColor="#A3A7AA"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+</LinearLayout>

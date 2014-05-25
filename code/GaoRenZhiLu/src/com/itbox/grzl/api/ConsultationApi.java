@@ -48,8 +48,10 @@ public class ConsultationApi extends BaseApi {
 	}
 
 	/**
-	 * 搜索咨询接口
 	 * 
+	 * @param realname
+	 * @param jobtype
+	 * @param teachertype
 	 */
 	public void searchConsultation(String realname, final String jobtype,
 			final String teachertype) {
@@ -94,6 +96,53 @@ public class ConsultationApi extends BaseApi {
 					public void onFailure(Throwable error, String content) {
 						super.onFailure(error, content);
 						Log.e(TAG, "资讯搜索接口" + error.toString());
+					}
+				});
+
+	}
+
+	/**
+	 * 获取电话咨询
+	 */
+	public void getPhoneConsultation(String userid) {
+		RequestParams params = new RequestParams();
+		params.put("userid", userid);
+		params.put("placedate", "");
+		client.post(Api.getUrl(Api.Consultation.getteacherbooking), params,
+				new AsyncHttpResponseHandler() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Log.e(TAG, "获取电话咨询" + content);
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						super.onFailure(error, content);
+						Log.e(TAG, "获取电话咨询" + error.toString());
+					}
+				});
+	}
+
+	/**
+	 * 获取老师更多信息
+	 * 
+	 */
+	public void getTeacherMoreInfo(String userid) {
+		RequestParams params = new RequestParams();
+		params.put("userid", userid);
+		client.post(Api.getUrl(Api.User.GET_USER_LIST), params,
+				new AsyncHttpResponseHandler() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Log.e(TAG, "获取用户更多信息" + content);
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						super.onFailure(error, content);
+						Log.e(TAG, "获取用户更多信息" + error.toString());
 					}
 				});
 

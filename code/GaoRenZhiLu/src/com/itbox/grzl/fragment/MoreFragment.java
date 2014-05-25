@@ -13,6 +13,7 @@ import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.activity.CommentListActivity;
+import com.itbox.grzl.activity.ExamReportActivity;
 import com.itbox.grzl.activity.TeacherIncomingActivity;
 import com.itbox.grzl.activity.TeacherWithdrawalsListActivity;
 import com.itbox.grzl.activity.UserInfoActivity;
@@ -69,6 +70,7 @@ public class MoreFragment extends BaseFragment {
 		case R.id.more_my_consult://免费咨询
 			break;
 		case R.id.more_my_exam://测评报告
+			startActivity(ExamReportActivity.class);
 			break;
 		case R.id.more_my_set://个人设置
 			startActivity(UserSetActivity.class);
