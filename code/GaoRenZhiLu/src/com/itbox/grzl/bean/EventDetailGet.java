@@ -1,84 +1,36 @@
 package com.itbox.grzl.bean;
 
-import java.io.Serializable;
-
-import com.activeandroid.annotation.Column;
-import com.activeandroid.annotation.Table;
 import com.itbox.grzl.enumeration.EventType;
 
 /**
- * 活动信息
+ * 活动详情
  * 
  * @author baoboy
  * @date 2014-5-24下午5:06:52
  */
-@Table(name = "event_list", id = EventGet.ID)
-public class EventGet extends BaseModel implements Serializable {
+public class EventDetailGet {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3409185488908645858L;
-
-	public static final String ID = "_id";
-	public static final String USERID = "el_userid";
-	public static final String TYPEID = "el_typeid";
-	public static final String TITLE = "el_title";
-	public static final String BEGINTIME = "el_begintime";
-	public static final String ENDTIME = "el_endtime";
-	public static final String USERPROVINCE = "el_userprovince";
-	public static final String USERCITY = "el_usercity";
-	public static final String USERDISTRICT = "el_userdistrict";
-	public static final String ADDRESS = "el_address";
-	public static final String LONGITUDE = "el_longitude"; // 经度
-	public static final String LATITUDE = "el_latitude"; // 纬度
-	public static final String ACTIVITYPICTURE = "el_activitypicture";
-	public static final String ACTIVITYDESCRIPTION = "el_activitydescription";
-	public static final String PEOPLECOUNT = "el_peoplecount";
-	public static final String ACTIVITYPHONE = "el_activityphone";
-	public static final String ACTIVITYID = "el_activityId";
-	public static final String COMMENTCOUNT = "el_commentcount";
-	public static final String JOINNUMBER = "el_joinnumber";
-	public static final String CREATETIME = "el_createtime";
-
-	@Column(name = EventGet.USERID)
 	private String userid;
-	@Column(name = EventGet.TYPEID)
 	private String typeid;
-	@Column(name = EventGet.TITLE)
 	private String title;
-	@Column(name = EventGet.BEGINTIME)
 	private String begintime;
-	@Column(name = EventGet.ENDTIME)
 	private String endtime;
-	@Column(name = EventGet.USERPROVINCE)
 	private String userprovince;
-	@Column(name = EventGet.USERCITY)
 	private String usercity;
-	@Column(name = EventGet.USERDISTRICT)
 	private String userdistrict;
-	@Column(name = EventGet.ADDRESS)
 	private String address;
-	@Column(name = EventGet.LONGITUDE)
 	private String longitude; // 经度
-	@Column(name = EventGet.LATITUDE)
 	private String latitude; // 纬度
-	@Column(name = EventGet.ACTIVITYPICTURE)
 	private String activitypicture;
-	@Column(name = EventGet.ACTIVITYDESCRIPTION)
 	private String activitydescription;
-	@Column(name = EventGet.PEOPLECOUNT)
 	private String peoplecount;
-	@Column(name = EventGet.ACTIVITYPHONE)
 	private String activityphone;
-	@Column(name = EventGet.ACTIVITYID)
 	private String activityid;
-	@Column(name = EventGet.COMMENTCOUNT)
 	private String commentcount;
-	@Column(name = EventGet.JOINNUMBER)
 	private String joinnumber;
-	@Column(name = EventGet.CREATETIME)
 	private String createtime;
+	private int isinterest;
+	private int isjoin;
 
 	public String getActivityId() {
 		return activityid;
@@ -236,5 +188,20 @@ public class EventGet extends BaseModel implements Serializable {
 		int type = Integer.parseInt(typeid);
 		return EventType.getName(type);
 	}
-	
+
+	public void setInterest(boolean b) {
+		isinterest = b ? 1 : 2;
+	}
+
+	public void setJoin(boolean b) {
+		isjoin = b ? 1 : 2;
+	}
+
+	public boolean isInterest() {
+		return isinterest == 1;
+	}
+
+	public boolean isJoin() {
+		return isjoin == 1;
+	}
 }

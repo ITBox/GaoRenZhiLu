@@ -3,9 +3,11 @@ package com.itbox.grzl.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -59,6 +61,7 @@ public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
 	private void initView() {
 		mTitleTv.setText("活动搜索");
 		mSearchBar.setOnSearchListener(this);
+		showLeftBackButton();
 
 		mAdapter = new EventListAdapter(this, null);
 		initLoad(mListView, mAdapter, EventSearchGet.class);
@@ -138,5 +141,15 @@ public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
 						saveData(1, null);
 					}
 				});
+	}
+	
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		EventSearchGet bean = new EventSearchGet();
+		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
+		Intent intent = new Intent(this, EventDetialActivity.class);
+		intent.putExtra("activityid", bean.getActivityId());
+		startActivity(intent);
 	}
 }

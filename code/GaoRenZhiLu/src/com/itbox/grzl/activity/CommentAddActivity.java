@@ -3,6 +3,7 @@ package com.itbox.grzl.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
@@ -76,8 +77,7 @@ public class CommentAddActivity extends BaseActivity {
 			break;
 
 		case R.id.bt_add:
-			if (mPhotoUri == null) {
-				showToast("请选择海报");
+			if(!checkParams()){
 				return;
 			}
 			// 发布
@@ -119,6 +119,22 @@ public class CommentAddActivity extends BaseActivity {
 			}
 			break;
 		}
+	}
+
+	private boolean checkParams() {
+		if (mPhotoUri == null) {
+			showToast("请选择海报");
+			return false;
+		}
+		if(TextUtils.isEmpty(mTitleEt.getText().toString())){
+			showToast("请输入标题");
+			return false;
+		}
+		if(TextUtils.isEmpty(mContentEt.getText().toString())){
+			showToast("请输入描述");
+			return false;
+		}
+		return true;
 	}
 
 	private void pushComment(String photo) {
