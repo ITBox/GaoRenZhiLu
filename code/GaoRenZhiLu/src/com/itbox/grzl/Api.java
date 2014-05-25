@@ -180,6 +180,7 @@ public class Api {
 		 * @return
 		 */
 		public static String getAvatarUrl(String path) {
+
 			return String.format(IMAGE_URL, path);
 		}
 	}
@@ -243,6 +244,8 @@ public class Api {
 
 		public static final String searchprobleming = PartName
 				+ "searchprobleming";
+		public static final String getteacherbooking = PartName
+				+ "getteacherbooking";
 
 	}
 

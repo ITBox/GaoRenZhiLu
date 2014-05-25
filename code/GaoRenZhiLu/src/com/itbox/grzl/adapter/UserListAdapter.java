@@ -6,12 +6,13 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.itbox.fx.widget.CircleImageView;
+import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.UserListItem;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -20,12 +21,11 @@ public class UserListAdapter extends CursorAdapter {
 
 	class ViewHolder {
 		public ViewHolder(View v) {
-			// TODO Auto-generated constructor stu
 			ButterKnife.inject(this, v);
 		}
 
 		@InjectView(R.id.iv_avatar)
-		ImageView avatarImageView;
+		CircleImageView avatarImageView;
 		@InjectView(R.id.tv_name)
 		TextView nameTextView;
 		@InjectView(R.id.ratingbar)
@@ -68,6 +68,9 @@ public class UserListAdapter extends CursorAdapter {
 		holder.teacherDescriptionTextView.setText(item.getUserintroduction());
 		holder.buyCountTextView.setText(item.getBuycount());
 		holder.answerCountTextView.setText(item.getAnswercount());
+		mImageLoader.displayImage(
+				Api.User.getAvatarUrl(item.getUseravatarversion()),
+				holder.avatarImageView);
 	}
 
 	@Override

@@ -99,6 +99,15 @@
             android:name="com.itbox.grzl.activity.UserInfoActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.itbox.grzl.activity.UserInfoIntroActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.UserSetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.UserInfoMoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.itbox.grzl.activity.ConsultationSearchActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -124,8 +133,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.ExamReportActivity"
-            android:screenOrientation="portrait" 
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
         <activity
             android:name="com.itbox.grzl.activity.CommentAddActivity"
             android:screenOrientation="portrait" />
@@ -146,6 +155,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.TeacherWithdrawalsInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.TeacherDetialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.PictureConsultationDetialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.PayActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.EventSearchActivity"
