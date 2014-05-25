@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#386B30"
-                android:textSize="18sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <ImageView

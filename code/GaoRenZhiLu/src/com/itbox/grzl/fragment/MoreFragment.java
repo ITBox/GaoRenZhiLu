@@ -16,6 +16,7 @@ import com.itbox.grzl.activity.CommentListActivity;
 import com.itbox.grzl.activity.TeacherIncomingActivity;
 import com.itbox.grzl.activity.TeacherWithdrawalsListActivity;
 import com.itbox.grzl.activity.UserInfoActivity;
+import com.itbox.grzl.activity.UserSetActivity;
 import com.itbox.grzl.bean.Account;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -70,6 +71,7 @@ public class MoreFragment extends BaseFragment {
 		case R.id.more_my_exam://测评报告
 			break;
 		case R.id.more_my_set://个人设置
+			startActivity(UserSetActivity.class);
 			break;
 		default:
 			break;
