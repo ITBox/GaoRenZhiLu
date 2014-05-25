@@ -40,6 +40,7 @@ public class ExamReportActivity extends BaseLoadActivity<ExamReport> {
 
 	private void initView() {
 		mTitleTv.setText("测评报告");
+		showLeftBackButton();
 
 		mAdapter = new ExamReportAdapter(getContext(), null);
 		initLoad(mListView, mAdapter, ExamReport.class);
@@ -65,7 +66,6 @@ public class ExamReportActivity extends BaseLoadActivity<ExamReport> {
 					@Override
 					public void onFailure(Throwable error, String content) {
 						super.onFailure(error, content);
-						showToast(content);
 						// 还原页码
 						restorePage();
 					}

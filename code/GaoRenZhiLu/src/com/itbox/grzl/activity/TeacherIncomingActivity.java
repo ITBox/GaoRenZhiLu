@@ -79,6 +79,7 @@ public class TeacherIncomingActivity extends BaseLoadActivity<TeacherIncoming> {
 
 	private void initView() {
 		mTitleTv.setText("收入明细");
+		showLeftBackButton();
 		mRightTv.setVisibility(View.VISIBLE);
 		mRightTv.setText("申请提现");
 		initMoney();
@@ -130,7 +131,6 @@ public class TeacherIncomingActivity extends BaseLoadActivity<TeacherIncoming> {
 			@Override
 			public void onFailure(Throwable error, String content) {
 				super.onFailure(error, content);
-				showToast(content);
 				// 还原页码
 				restorePage();
 			}

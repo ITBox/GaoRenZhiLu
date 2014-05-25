@@ -33,7 +33,8 @@ import com.activeandroid.query.Delete;
 public abstract class BaseLoadActivity<T extends Model> extends BaseActivity
 		implements LoaderCallbacks<Cursor>, OnItemClickListener {
 
-	protected PullToRefreshListView mListView;
+	protected PullToRefreshListView mRefreshListView;
+	protected ListView mListView;
 
 	private int page = 1;
 	private int oldPage = 1;
@@ -50,13 +51,14 @@ public abstract class BaseLoadActivity<T extends Model> extends BaseActivity
 	/**
 	 * 初始化加载器
 	 * 
-	 * @param listView
+	 * @param refreshListView
 	 * @param adapter
 	 * @param clazz
 	 * @param orderBy
 	 */
-	public void initLoad(PullToRefreshListView listView, CursorAdapter adapter,
+	public void initLoad(ListView listView, PullToRefreshListView refreshListView, CursorAdapter adapter,
 			Class<T> clazz, String selection, String orderBy) {
+		mRefreshListView = refreshListView;
 		mListView = listView;
 		mAdapter = adapter;
 		mClazz = clazz;
@@ -76,7 +78,19 @@ public abstract class BaseLoadActivity<T extends Model> extends BaseActivity
 	 */
 	public void initLoad(PullToRefreshListView listView, CursorAdapter adapter,
 			Class<T> clazz) {
-		initLoad(listView, adapter, clazz, null, null);
+		initLoad(null, listView, adapter, clazz, null, null);
+	}
+	
+	/**
+	 * 初始化加载器
+	 * 
+	 * @param listView
+	 * @param adapter
+	 * @param clazz
+	 */
+	public void initLoad(ListView listView, CursorAdapter adapter,
+			Class<T> clazz) {
+		initLoad(listView, null, adapter, clazz, null, null);
 	}
 
 	/**
@@ -106,24 +120,30 @@ public abstract class BaseLoadActivity<T extends Model> extends BaseActivity
 
 	private void initView() {
 		// 设置刷新监听器
-		mListView.setOnRefreshListener(new OnRefreshListener2<ListView>() {
-
-			@Override
-			public void onPullDownToRefresh(
-					PullToRefreshBase<ListView> refreshView) {
-				loadFirstData();
-			}
-
-			@Override
-			public void onPullUpToRefresh(
-					PullToRefreshBase<ListView> refreshView) {
-				loadNextData();
-			}
-
-		});
-		mListView.setMode(Mode.BOTH);
-		mListView.setAdapter(mAdapter);
-		mListView.setOnItemClickListener(this);
+		if (mRefreshListView != null) {
+			mRefreshListView.setOnRefreshListener(new OnRefreshListener2<ListView>() {
+				
+				@Override
+				public void onPullDownToRefresh(
+						PullToRefreshBase<ListView> refreshView) {
+					loadFirstData();
+				}
+				
+				@Override
+				public void onPullUpToRefresh(
+						PullToRefreshBase<ListView> refreshView) {
+					loadNextData();
+				}
+				
+			});
+			mRefreshListView.setMode(Mode.BOTH);
+			mRefreshListView.setAdapter(mAdapter);
+			mRefreshListView.setOnItemClickListener(this);
+		}
+		if (mListView != null) {
+			mListView.setAdapter(mAdapter);
+			mListView.setOnItemClickListener(this);
+		}
 	}
 
 	/**
@@ -135,7 +155,9 @@ public abstract class BaseLoadActivity<T extends Model> extends BaseActivity
 	 * 数据加载完毕
 	 */
 	protected void loadFinish() {
-		mListView.onRefreshComplete();
+		if (mRefreshListView != null) {
+			mRefreshListView.onRefreshComplete();
+		}
 	}
 
 	/**

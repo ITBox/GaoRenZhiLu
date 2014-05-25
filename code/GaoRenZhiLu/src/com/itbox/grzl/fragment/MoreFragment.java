@@ -1,26 +1,24 @@
 package com.itbox.grzl.fragment;
 
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import butterknife.OnClick;
-
-import com.activeandroid.Model;
-import com.activeandroid.query.Select;
-import com.itbox.fx.widget.CircleImageView;
-import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
-import com.itbox.grzl.activity.CommentListActivity;
-import com.itbox.grzl.activity.TeacherIncomingActivity;
-import com.itbox.grzl.activity.TeacherWithdrawalsListActivity;
-import com.itbox.grzl.activity.UserInfoActivity;
-import com.itbox.grzl.bean.Account;
-import com.itbox.grzl.constants.AccountTable;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import butterknife.OnClick;
+
+import com.itbox.fx.widget.CircleImageView;
+import com.itbox.grzl.AppContext;
+import com.itbox.grzl.R;
+import com.itbox.grzl.activity.CommentListActivity;
+import com.itbox.grzl.activity.ExamReportActivity;
+import com.itbox.grzl.activity.TeacherIncomingActivity;
+import com.itbox.grzl.activity.TeacherWithdrawalsListActivity;
+import com.itbox.grzl.activity.UserInfoActivity;
+import com.itbox.grzl.bean.Account;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
  * 
@@ -36,13 +34,15 @@ public class MoreFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		View layout = inflater.inflate(R.layout.fragment_more, null);
 		ButterKnife.inject(mActThis, layout);
-		mMoreName.setText(AppContext.getInstance().getAccount().getUsername());
+		Account account = AppContext.getInstance().getAccount();
+		loader.displayImage(account.getUseravatarversion(), mMorePhoto, photoOptions);
+		mMoreName.setText(account.getUsername());
 //		Account bean = new Select(AccountTable.COLUMN_USERNAME).from(Account.class).executeSingle();
 //		bean.getUsername();
 		return layout;
 	}
 	
-	@OnClick({R.id.more_my_photo, R.id.more_my_action, R.id.more_my_ask, R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian, R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult, R.id.more_my_set})
+	@OnClick({R.id.more_my_photo, R.id.more_my_action, R.id.more_my_ask, R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian, R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult, R.id.more_my_exam, R.id.more_my_set})
     public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.more_my_photo:
@@ -67,6 +67,9 @@ public class MoreFragment extends BaseFragment {
 			startActivity(CommentListActivity.class);
 			break;
 		case R.id.more_my_consult://免费咨询
+			break;
+		case R.id.more_my_exam://测评报告
+			startActivity(ExamReportActivity.class);
 			break;
 		case R.id.more_my_set://个人设置
 			break;

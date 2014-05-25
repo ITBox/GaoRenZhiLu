@@ -14,6 +14,9 @@
     <handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lv_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:listSelector="@android:color/transparent" />
 
 </LinearLayout>

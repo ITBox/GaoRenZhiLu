@@ -14,8 +14,8 @@ import butterknife.InjectView;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.R;
 import com.itbox.grzl.api.ConsultationApi;
-import com.itbox.grzl.fragment.ActivityFragment;
 import com.itbox.grzl.fragment.ConsultationFragment;
+import com.itbox.grzl.fragment.EventFragment;
 import com.itbox.grzl.fragment.ExamFragment;
 import com.itbox.grzl.fragment.MoreFragment;
 import com.itbox.grzl.fragment.OnlineStudyFragment;
@@ -33,7 +33,7 @@ public class MainActivity extends BaseActivity {
 
 	// 定义数组来存放Fragment界面
 	private Class fragmentArray[] = { ExamFragment.class,
-			ConsultationFragment.class, ActivityFragment.class,
+			ConsultationFragment.class, EventFragment.class,
 			OnlineStudyFragment.class, MoreFragment.class };
 
 	// 定义数组来存放按钮图片

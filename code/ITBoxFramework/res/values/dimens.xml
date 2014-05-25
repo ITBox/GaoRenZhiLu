@@ -5,5 +5,6 @@
     <dimen name="cell_left_width">68dp</dimen>
     <dimen name="image_radius">4dp</dimen>
     <dimen name="stroke_rectangle">1px</dimen>
+    <dimen name="online_study_gird_height">250px</dimen>
 
 </resources>

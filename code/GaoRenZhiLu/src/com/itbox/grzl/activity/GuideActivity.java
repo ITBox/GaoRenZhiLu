@@ -31,10 +31,10 @@ public class GuideActivity  extends BaseActivity{
 	public static final String HAS_SHOW_GUIDE = "hasShowGuide";
 	private static final List<Integer> guideImages = new ArrayList<Integer>();
 	static{
-		guideImages.add(R.drawable.image_guide_0);
-		guideImages.add(R.drawable.image_guide_1);
-		guideImages.add(R.drawable.image_guide_2);
-		guideImages.add(R.drawable.image_guide_3);
+		guideImages.add(R.drawable.guide_0);
+		guideImages.add(R.drawable.guide_1);
+		guideImages.add(R.drawable.guide_2);
+		guideImages.add(R.drawable.guide_3);
 	}
 	
 	@InjectView(R.id.viewpager) ViewPager mViewPager;

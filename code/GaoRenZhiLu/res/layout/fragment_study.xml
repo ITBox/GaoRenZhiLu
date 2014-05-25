@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,49 +6,43 @@
     android:orientation="vertical" >
 
     <include
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         layout="@layout/unit_top_title" />
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/iv_pic"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/online_study_bg" />
 
-        <GridView
-            android:id="@+id/grid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/iv_pic"
-            android:layout_below="@+id/tv_title"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="-20dp"
-            android:background="@drawable/cell_single_selector"
-            android:listSelector="@android:color/transparent"
-            android:numColumns="3"
-            android:padding="10dp"
-            android:paddingTop="20dp" >
-        </GridView>
+    <GridView
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/online_study_gird_height"
+        android:layout_below="@+id/tv_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="-20dp"
+        android:background="@drawable/cell_single_selector"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:padding="8dp"
+        android:paddingTop="25dp" >
+    </GridView>
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/rect_radius_dark"
-            android:padding="12dp"
-            android:text="@string/online_study"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_margin="10dp"
+        android:background="@drawable/rect_radius_dark"
+        android:padding="12dp"
+        android:text="@string/online_study"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
 
-        <ImageView
-            android:id="@+id/iv_pic"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/pic_online_study" />
-    </RelativeLayout>
-
-</LinearLayout>
+</RelativeLayout>

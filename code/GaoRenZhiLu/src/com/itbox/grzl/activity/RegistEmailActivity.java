@@ -11,8 +11,10 @@ import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.CheckAccount;
 import com.itbox.grzl.bean.Register;
+import com.itbox.grzl.common.Contasts;
 import com.itbox.grzl.common.util.DialogMessage;
 import com.loopj.android.http.RequestParams;
+
 
 
 
@@ -143,10 +145,10 @@ public class RegistEmailActivity extends BaseActivity {
 			}
 		});
 	}
-	private static final int REQUEST_SELECT_SEX = 0;
-	private static final int REQUEST_SELECT_BIRTHDAY = 1;
-	private static final int REQUEST_SELECT_AREA = 2;
-	private static final int REQUEST_SELECT_TYPE = 3;
+//	private static final int REQUEST_SELECT_SEX = 0;
+//	private static final int REQUEST_SELECT_BIRTHDAY = 1;
+//	private static final int REQUEST_SELECT_AREA = 2;
+//	private static final int REQUEST_SELECT_TYPE = 3;
 	
 	@OnClick({R.id.regist_email_sex,R.id.regist_email_birthday,R.id.regist_email_area,R.id.regist_email_type,R.id.regist_phone,R.id.regist_email_clause})
 	public void onClick(View v) {
@@ -155,16 +157,16 @@ public class RegistEmailActivity extends BaseActivity {
 			Intent sexIntent = new Intent(this, SelectButton3Activity.class);
 			sexIntent.putExtra(SelectButton3Activity.Extra.Button0_Text, "男");
 			sexIntent.putExtra(SelectButton3Activity.Extra.Button1_Text, "女");
-			startActivityForResult(sexIntent, REQUEST_SELECT_SEX);
+			startActivityForResult(sexIntent, Contasts.REQUEST_SELECT_SEX);
 			break;
 		case R.id.regist_email_birthday:
 			Intent birIntent = new Intent(this, SelectDateActivity.class);
 			birIntent.putExtra(SelectDateActivity.Extra.DefaultTimeMillis, birthdayMils);
-			startActivityForResult(birIntent, REQUEST_SELECT_BIRTHDAY);
+			startActivityForResult(birIntent, Contasts.REQUEST_SELECT_BIRTHDAY);
 			break;
 		case R.id.regist_email_area:
 			Intent intent = new Intent(this, SelectAddrActivity.class);
-			startActivityForResult(intent, REQUEST_SELECT_AREA);
+			startActivityForResult(intent, Contasts.REQUEST_SELECT_AREA);
 			break;
 		case R.id.regist_email_clause:
 			startActivity(LicenceActivity.class);
@@ -177,7 +179,7 @@ public class RegistEmailActivity extends BaseActivity {
 			Intent typeIntent = new Intent(this, SelectButton3Activity.class);
 			typeIntent.putExtra(SelectButton3Activity.Extra.Button0_Text, "导师");
 			typeIntent.putExtra(SelectButton3Activity.Extra.Button1_Text, "学生");
-			startActivityForResult(typeIntent, REQUEST_SELECT_TYPE);
+			startActivityForResult(typeIntent, Contasts.REQUEST_SELECT_TYPE);
 			break;
 		default:
 			break;
@@ -188,7 +190,7 @@ public class RegistEmailActivity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-		case REQUEST_SELECT_SEX:
+		case Contasts.REQUEST_SELECT_SEX:
 			if (RESULT_OK == resultCode && null != data) {
 				int intExtra = data.getIntExtra(SelectButton3Activity.Extra.SelectedItem, SelectButton3Activity.Extra.Selected_cancle);
 				if(intExtra != SelectButton3Activity.Extra.Selected_cancle){
@@ -197,7 +199,7 @@ public class RegistEmailActivity extends BaseActivity {
 				}
 			}
 			break;
-		case REQUEST_SELECT_BIRTHDAY:
+		case Contasts.REQUEST_SELECT_BIRTHDAY:
 			if (RESULT_OK == resultCode && null != data) {
 				birthdayMils = data.getLongExtra(SelectDateActivity.Extra.SelectedTime,0);
 				String birStr = data.getStringExtra(SelectDateActivity.Extra.SelectedTimeStr);
@@ -205,7 +207,7 @@ public class RegistEmailActivity extends BaseActivity {
 				mLLEmailBirthday.setText(birStr.substring(0, 10));
 			}
 			break;
-		case REQUEST_SELECT_AREA:
+		case Contasts.REQUEST_SELECT_AREA:
 			if (RESULT_OK == resultCode && null != data) {
 
 				provinceCode = data.getIntExtra(SelectAddrActivity.Extra.ProvinceCode, 0);
@@ -216,7 +218,7 @@ public class RegistEmailActivity extends BaseActivity {
 				mLLEmailArea.setText(addrName);
 			}
 			break;
-		case REQUEST_SELECT_TYPE:
+		case Contasts.REQUEST_SELECT_TYPE:
 			if (RESULT_OK == resultCode && null != data) {
 				int intExtra = data.getIntExtra(SelectButton3Activity.Extra.SelectedItem, SelectButton3Activity.Extra.Selected_cancle);
 				if(intExtra != SelectButton3Activity.Extra.Selected_cancle){

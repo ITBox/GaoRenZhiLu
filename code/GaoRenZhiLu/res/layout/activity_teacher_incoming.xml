@@ -17,10 +17,9 @@
         android:orientation="horizontal" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="账户收入："
+            android:text="账户收入 "
             android:textColor="@color/dark"
             android:textSize="14sp" />
 
@@ -34,10 +33,9 @@
             android:textSize="16sp"/>
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="账户余额："
+            android:text="账户余额 "
             android:textColor="@color/dark"
             android:textSize="14sp" />
 

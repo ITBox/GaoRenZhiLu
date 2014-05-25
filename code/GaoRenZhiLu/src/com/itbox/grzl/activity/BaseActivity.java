@@ -3,23 +3,37 @@ package com.itbox.grzl.activity;
 import com.itbox.fx.util.DialogUtil;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.R;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Toast;
 
 public class BaseActivity extends FragmentActivity  implements OnClickListener{
     protected FragmentActivity mActThis;
+    protected ImageLoader loader;
+    protected DisplayImageOptions photoOptions;
+    
     
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		this.mActThis = this;
+		loader = ImageLoader.getInstance();
+		photoOptions = new DisplayImageOptions.Builder()
+		.bitmapConfig(Bitmap.Config.RGB_565)
+		.imageScaleType(ImageScaleType.EXACTLY)
+		.showImageForEmptyUri(R.drawable.ic_default_avater)
+		.cacheInMemory(true)
+	    .cacheOnDisc(true)
+		.build();
 	}
 	
 	protected BaseActivity getContext(){
@@ -82,5 +96,19 @@ public class BaseActivity extends FragmentActivity  implements OnClickListener{
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+	
+	public void showLeftBackButton(){
+		View left = findViewById(R.id.text_left);
+		if (left != null) {
+			left.setVisibility(View.VISIBLE);
+			left.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
+		}
 	}
 }

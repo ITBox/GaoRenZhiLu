@@ -45,7 +45,7 @@ public class DateUtil {
 		cal.setTimeInMillis(AppTime.getTimeMillis());
 		return cal;
 	}
-
+    
 	public static Calendar getNewCalendar() {
 		Calendar newCal = Calendar.getInstance();
 		newCal.setTimeInMillis(AppTime.getTimeMillis());

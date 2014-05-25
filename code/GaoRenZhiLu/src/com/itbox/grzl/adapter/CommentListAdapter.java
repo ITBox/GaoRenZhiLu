@@ -10,6 +10,7 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.CommentGet;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -44,7 +45,8 @@ public class CommentListAdapter extends CursorAdapter {
 		holder.tv_name.setText(bean.getUsername());
 		holder.tv_title.setText(bean.getTitle());
 		holder.tv_count.setText("回复数：" + bean.getReplacecount());
-		ImageLoader.getInstance().displayImage(bean.getPhoto(), holder.iv_head);
+		ImageLoader.getInstance().displayImage(
+				Api.User.getAvatarUrl(bean.getPhoto()), holder.iv_head);
 	}
 
 	static class ViewHolder {

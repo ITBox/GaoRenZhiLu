@@ -11,6 +11,7 @@ import com.itbox.fx.net.ResponseHandler;
 import com.itbox.fx.util.DialogUtil;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.TeacherWithdrawals;
+import com.itbox.grzl.common.util.DialogMessage;
 import com.itbox.grzl.engine.TeacherEngine;
 
 /**
@@ -49,6 +50,7 @@ public class TeacherWithdrawalsInfoActivity extends BaseActivity {
 
 	private void initView() {
 		mTitleTv.setText("提现详情");
+		showLeftBackButton();
 		mIdTv.setText(mBean.getTwId());
 		mPriceTv.setText(mBean.getPrice() + "元");
 		mTimeTv.setText(mBean.getCreatetime());
@@ -58,6 +60,10 @@ public class TeacherWithdrawalsInfoActivity extends BaseActivity {
 
 	@OnClick(R.id.bt_cancel)
 	public void onClick(View v) {
+		cancel();
+	}
+
+	private void cancel() {
 		showProgressDialog("正在取消...");
 		TeacherEngine.cancelWithdrawals(mBean.getTwId(), new ResponseHandler() {
 			@Override

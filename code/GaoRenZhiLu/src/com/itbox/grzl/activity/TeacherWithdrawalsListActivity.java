@@ -47,6 +47,7 @@ public class TeacherWithdrawalsListActivity extends
 
 	private void initView() {
 		mTitleTv.setText("提现明细");
+		showLeftBackButton();
 
 		mAdapter = new TeacherWithdrawalsAdapter(getContext(), null);
 		initLoad(mListView, mAdapter, TeacherWithdrawals.class);
@@ -94,7 +95,6 @@ public class TeacherWithdrawalsListActivity extends
 					@Override
 					public void onFailure(Throwable error, String content) {
 						super.onFailure(error, content);
-						showToast(content);
 						// 还原页码
 						restorePage();
 					}

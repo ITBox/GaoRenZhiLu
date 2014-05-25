@@ -42,7 +42,7 @@ public class ExamStartActivity extends BaseActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_start_exam);
+		setContentView(R.layout.activity_exam_start);
 
 		ButterKnife.inject(this);
 
@@ -54,6 +54,7 @@ public class ExamStartActivity extends BaseActivity {
 
 	private void initView() {
 		mTitleTv.setText("单选题");
+		showLeftBackButton();
 
 		// 添加第一题
 		FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

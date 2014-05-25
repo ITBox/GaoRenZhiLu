@@ -11,6 +11,9 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="5dp"
         android:text="返回"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:background="@drawable/top_left_bt_bg"
         android:textColor="@android:color/white"
         android:visibility="gone" />
 
@@ -29,6 +32,11 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="5dp"
+        android:padding="6dp"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:background="@drawable/top_right_bt_bg"
+        android:textColor="@android:color/white"
         android:visibility="gone" />
 
 </RelativeLayout>
