@@ -2,7 +2,6 @@ package com.itbox.grzl.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,28 +11,23 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.itbox.grzl.Api;
-import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
-import com.itbox.grzl.bean.CommentMarkGet;
 import com.itbox.grzl.bean.EventCommentGet;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
+ * 活动交流适配器
  * 
- * 
- * @author Baoyz
- * 
+ * @author baoboy
+ * @date 2014-5-27上午12:13:56
  */
 public class EventCommentAdapter extends CursorAdapter {
 
 	private Context mContext;
-	private int gray;
 
 	public EventCommentAdapter(Context context, Cursor c) {
 		super(context, c, true);
 		mContext = context;
-		gray = AppContext.getInstance().getResources()
-				.getColor(R.color.gray_e8);
 	}
 
 	@Override
@@ -49,12 +43,16 @@ public class EventCommentAdapter extends CursorAdapter {
 		ViewHolder holder = (ViewHolder) view.getTag();
 		EventCommentGet bean = new EventCommentGet();
 		bean.loadFromCursor(cursor);
-		holder.tv_name.setText(bean.getUserid());
+		holder.tv_name.setText(bean.getUsername());
 		holder.tv_content.setText(bean.getCommentcontent());
 		holder.tv_time.setText(bean.getCreateTime());
+		ImageLoader.getInstance().displayImage(
+				Api.User.getAvatarUrl(bean.getUserface()), holder.iv_head);
 	}
 
 	static class ViewHolder {
+		@InjectView(R.id.iv_head)
+		ImageView iv_head;
 		@InjectView(R.id.tv_name)
 		TextView tv_name;
 		@InjectView(R.id.tv_content)

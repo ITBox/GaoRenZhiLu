@@ -11,9 +11,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-import com.itbox.fx.core.L;
 import com.itbox.fx.net.GsonResponseHandler;
-import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.CommentListAdapter;
 import com.itbox.grzl.bean.CommentGet;

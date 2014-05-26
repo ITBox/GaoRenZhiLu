@@ -51,7 +51,7 @@
             android:value="gaorenzhilu.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="10" />
+            android:value="11" />
 
         <activity
             android:name="com.itbox.grzl.activity.SplashActivity"
@@ -184,6 +184,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.EventAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.EventCommentActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.SelectTimeMinuteActivity"

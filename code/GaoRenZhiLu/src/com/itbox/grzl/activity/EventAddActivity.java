@@ -109,8 +109,8 @@ public class EventAddActivity extends BaseActivity {
 						.getSerializableExtra(Const.Extra.AddrModel);
 				mAddressTv.setText(addrInfo.getStrAddr());
 				bean.setAddress(addrInfo.getStrAddr());
-				bean.setLatitude(addrInfo.getLatitudeE6() + "");
-				bean.setLongitude(addrInfo.getLongitudeE6() + "");
+				bean.setLatitude(addrInfo.getLatitude() + "");
+				bean.setLongitude(addrInfo.getLongitude() + "");
 				bean.setUsercity(addrInfo.getCity());
 				bean.setUserdistrict(addrInfo.getDistrict());
 				bean.setUserprovince(addrInfo.getProvince());

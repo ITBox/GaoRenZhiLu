@@ -31,6 +31,23 @@ public class EventDetailGet {
 	private String createtime;
 	private int isinterest;
 	private int isjoin;
+	private int activityinterestcount;
+
+	public String getActivityid() {
+		return activityid;
+	}
+
+	public void setActivityid(String activityid) {
+		this.activityid = activityid;
+	}
+
+	public int getActivityinterestcount() {
+		return activityinterestcount;
+	}
+
+	public void setActivityinterestcount(int activityinterestcount) {
+		this.activityinterestcount = activityinterestcount;
+	}
 
 	public String getActivityId() {
 		return activityid;
