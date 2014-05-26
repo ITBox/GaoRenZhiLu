@@ -119,6 +119,8 @@ public class Api {
 				+ "getconditionsetting";
 		/** 27.意见反馈 */
 		public static final String Feedback = PartName + "addfeedback";
+		public static final String GETUSEREXTENSION = PartName
+				+ "getuserextension";
 		/** 28.修改时空设置 */
 		public static final String UpUserSpacetime = PartName
 				+ "adduserspantime";
@@ -137,7 +139,8 @@ public class Api {
 		 * 用户模块第2部分
 		 */
 		/** 获取用户信息 **/
-		public static final String GET_USER_LIST = PartName + "getuserlist";
+		public static final String GET_USER_LIST = PartName
+				+ "getuserextension";
 		/** 上传图片 **/
 		public static final String UPLOAD_IMAGE = PartName + "uploadimage";
 
@@ -246,6 +249,7 @@ public class Api {
 				+ "searchprobleming";
 		public static final String getteacherbooking = PartName
 				+ "getteacherbooking";
+		public static final String GETUSERMEMBER = PartName + "getusermember";
 
 	}
 
