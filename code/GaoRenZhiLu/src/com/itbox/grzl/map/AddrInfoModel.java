@@ -9,13 +9,12 @@ import com.baidu.mapapi.search.MKPoiInfo;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 
 /**
- * @author hyh 
- * creat_at：2013-12-19-下午2:27:47
+ * @author hyh creat_at：2013-12-19-下午2:27:47
  */
 @SuppressWarnings("serial")
-public class AddrInfoModel implements Serializable{
+public class AddrInfoModel implements Serializable {
 	private static final long serialVersionUID = -4272754992883588345L;
-	
+
 	private String desc;
 
 	private int latitudeE6;
@@ -34,19 +33,21 @@ public class AddrInfoModel implements Serializable{
 
 	private GeoPoint gp;
 
-	public GeoPoint getGeoPoint(){
-		if(gp == null){
+	public GeoPoint getGeoPoint() {
+		if (gp == null) {
 			gp = new GeoPoint(latitudeE6, longitudeE6);
 		}
 		return gp;
 	}
-	public void setGeoPint(GeoPoint gp){
-		if(null != gp){
+
+	public void setGeoPint(GeoPoint gp) {
+		if (null != gp) {
 			latitudeE6 = gp.getLatitudeE6();
 			longitudeE6 = gp.getLongitudeE6();
 		}
 		this.gp = gp;
 	}
+
 	public String getDesc() {
 		return desc;
 	}
@@ -111,7 +112,6 @@ public class AddrInfoModel implements Serializable{
 		this.strBusiness = strBusiness;
 	}
 
-
 	public int getType() {
 		return type;
 	}
@@ -124,30 +124,29 @@ public class AddrInfoModel implements Serializable{
 
 	private String strBusiness;
 
-
 	private int type;
 
 	public AddrInfoModel(MKAddrInfo info) {
 		super();
-		setInfo(info,"");
+		setInfo(info, "");
 	}
-	
-	public void setInfo(MKAddrInfo info,String desc){
+
+	public void setInfo(MKAddrInfo info, String desc) {
 		this.desc = desc;
-		
+
 		setLatitudeE6(info.geoPt.getLatitudeE6());
 		setLongitudeE6(info.geoPt.getLongitudeE6());
 		strAddr = info.strAddr;
 		strBusiness = info.strBusiness;
 		type = info.type;
-		
+
 		MKGeocoderAddressComponent ac = info.addressComponents;
 		province = ac.province;
 		city = ac.city;
 		district = ac.district;
 		street = ac.street;
 		streetNumber = ac.streetNumber;
-		
+
 	}
 
 	public int getLatitudeE6() {
@@ -164,5 +163,13 @@ public class AddrInfoModel implements Serializable{
 
 	public void setLongitudeE6(int longitudeE6) {
 		this.longitudeE6 = longitudeE6;
+	}
+
+	public double getLatitude() {
+		return getLatitudeE6() / 1E6;
+	}
+
+	public double getLongitude() {
+		return getLongitudeE6() / 1E6;
 	}
 }

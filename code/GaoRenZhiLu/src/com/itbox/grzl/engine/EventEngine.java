@@ -11,6 +11,7 @@ import com.itbox.grzl.bean.EventCommentGet;
 import com.itbox.grzl.bean.EventDetailGet;
 import com.itbox.grzl.bean.EventGet;
 import com.itbox.grzl.bean.EventSearchGet;
+import com.itbox.grzl.bean.EventUser;
 import com.itbox.grzl.enumeration.EventState;
 import com.itbox.grzl.enumeration.EventType;
 import com.loopj.android.http.RequestParams;
@@ -88,11 +89,12 @@ public class EventEngine {
 	 * @param handler
 	 *            (BaseResult)
 	 */
-	public static void addInterestEvent(int activityid, ResponseHandler handler) {
+	public static void addInterestEvent(String activityid,
+			ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()
 				.toString());
-		params.put("activityid", Integer.toString(activityid));
+		params.put("activityid", activityid);
 		Net.request(params, Api.getUrl(Api.Event.interestAdd), handler);
 	}
 
@@ -103,12 +105,12 @@ public class EventEngine {
 	 * @param handler
 	 *            (BaseResult)
 	 */
-	public static void addEventComment(int activityid, String commentcontent,
+	public static void addEventComment(String activityid, String commentcontent,
 			ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()
 				.toString());
-		params.put("activityid", Integer.toString(activityid));
+		params.put("activityid", activityid);
 		params.put("commentcontent", commentcontent);
 		Net.request(params, Api.getUrl(Api.Event.commentAdd), handler);
 	}
@@ -219,6 +221,17 @@ public class EventEngine {
 	public static class ActivityDetail {
 
 		private EventDetailGet Activity;
+		private List<EventUser> ActivityUserItem;
+		private List<EventCommentGet> ActivityUserCommentItem;
+
+		public List<EventCommentGet> getActivityUserCommentItem() {
+			return ActivityUserCommentItem;
+		}
+
+		public void setActivityUserCommentItem(
+				List<EventCommentGet> activityUserCommentItem) {
+			ActivityUserCommentItem = activityUserCommentItem;
+		}
 
 		public EventDetailGet getActivity() {
 			return Activity;
@@ -226,6 +239,14 @@ public class EventEngine {
 
 		public void setActivity(EventDetailGet activity) {
 			Activity = activity;
+		}
+
+		public List<EventUser> getActivityUserItem() {
+			return ActivityUserItem;
+		}
+
+		public void setActivityUserItem(List<EventUser> activityUserItem) {
+			ActivityUserItem = activityUserItem;
 		}
 
 	}
