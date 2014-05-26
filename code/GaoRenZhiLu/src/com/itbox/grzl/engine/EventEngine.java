@@ -7,6 +7,8 @@ import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.bean.EventAdd;
+import com.itbox.grzl.bean.EventCommentGet;
+import com.itbox.grzl.bean.EventDetailGet;
 import com.itbox.grzl.bean.EventGet;
 import com.itbox.grzl.bean.EventSearchGet;
 import com.itbox.grzl.enumeration.EventState;
@@ -71,11 +73,11 @@ public class EventEngine {
 	 * @param handler
 	 *            (BaseResult)
 	 */
-	public static void joinEvent(int activityid, ResponseHandler handler) {
+	public static void joinEvent(String activityid, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()
 				.toString());
-		params.put("activityid", Integer.toString(activityid));
+		params.put("activityid", activityid);
 		Net.request(params, Api.getUrl(Api.Event.join), handler);
 	}
 
@@ -116,10 +118,14 @@ public class EventEngine {
 	 * 
 	 * @param activityid
 	 * @param handler
+	 * @param pageNum
 	 */
-	public static void getEventComment(int activityid, ResponseHandler handler) {
+	public static void getEventComment(String activityid, int pageNum,
+			ResponseHandler handler) {
 		RequestParams params = new RequestParams();
-		params.put("activityid", Integer.toString(activityid));
+		params.put("activityid", activityid);
+		params.put("pagesize", Integer.toString(PAGE_NUM));
+		params.put("pageindex", Integer.toString(pageNum));
 		Net.request(params, Api.getUrl(Api.Event.commentList), handler);
 	}
 
@@ -129,11 +135,11 @@ public class EventEngine {
 	 * @param activityid
 	 * @param handler
 	 */
-	public static void getEventDetail(int activityid, ResponseHandler handler) {
+	public static void getEventDetail(String activityid, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()
 				.toString());
-		params.put("activityid", Integer.toString(activityid));
+		params.put("activityid", activityid);
 		Net.request(params, Api.getUrl(Api.Event.detail), handler);
 	}
 
@@ -191,6 +197,35 @@ public class EventEngine {
 
 		public void setActivityIdItem(List<EventSearchGet> activityIdItem) {
 			ActivityIdItem = activityIdItem;
+		}
+
+	}
+
+	public static class ActivityUserCommentItem {
+
+		private List<EventCommentGet> ActivityUserCommentItem;
+
+		public List<EventCommentGet> getActivityUserCommentItem() {
+			return ActivityUserCommentItem;
+		}
+
+		public void setActivityUserCommentItem(
+				List<EventCommentGet> activityUserCommentItem) {
+			ActivityUserCommentItem = activityUserCommentItem;
+		}
+
+	}
+
+	public static class ActivityDetail {
+
+		private EventDetailGet Activity;
+
+		public EventDetailGet getActivity() {
+			return Activity;
+		}
+
+		public void setActivity(EventDetailGet activity) {
+			Activity = activity;
 		}
 
 	}

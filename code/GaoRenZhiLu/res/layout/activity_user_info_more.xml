@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ECF0F1" >
+
+    <include
+        android:id="@+id/top_title"
+        layout="@layout/unit_top_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="姓         名" />
+
+                <EditText
+                    android:id="@+id/more_my_name_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_name_iv"
+                    android:layout_toRightOf="@id/more_my_name"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/more_my_name_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bg_more"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="身份认证"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_shenfenzheng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/more_my_shenfenzheng_iv"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/more_my_shenfenzheng_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_more_arrow" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_bankcard_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="银行卡号"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/more_my_bankcard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_bankcard_iv"
+                    android:layout_toRightOf="@id/more_my_bankcard_tv"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/more_my_bankcard_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_bankcard_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="开户行名称"
+                    android:textSize="15sp" />
+
+               <EditText
+                    android:id="@+id/more_my_bankcard_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_bankcard_name_iv"
+                    android:layout_toRightOf="@id/more_my_bankcard_name_tv"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/more_my_bankcard_name_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="导师类型"
+                    android:textSize="15sp" />
+
+
+<!--                 <ImageView -->
+<!--                     android:id="@+id/more_my_phone_iv" -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_alignParentRight="true" -->
+<!--                     android:layout_centerVertical="true" -->
+<!--                     android:layout_marginLeft="5dp" -->
+<!--                     android:layout_marginRight="10dp" -->
+<!--                     android:padding="2dp" -->
+<!--                     android:src="@drawable/ic_pencil" /> -->
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="职位类型"
+                    android:textSize="15sp" />
+
+
+<!--                 <ImageView -->
+<!--                     android:id="@+id/more_my_email_iv" -->
+<!--                     android:layout_width="wrap_content" -->
+<!--                     android:layout_height="wrap_content" -->
+<!--                     android:layout_alignParentRight="true" -->
+<!--                     android:layout_centerVertical="true" -->
+<!--                     android:layout_marginLeft="5dp" -->
+<!--                     android:layout_marginRight="10dp" -->
+<!--                     android:padding="2dp" -->
+<!--                     android:src="@drawable/ic_pencil" /> -->
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <RelativeLayout
+                android:id="@+id/more_my_intro_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bg_more"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_zixunImg_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="图文咨询"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_zixunImg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_zixunImg_iv"
+                    android:layout_toRightOf="@id/more_my_zixunImg_tv"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="@color/dark" />
+
+                <ImageView
+                    android:id="@+id/more_my_zixunImg_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <RelativeLayout
+                android:id="@+id/more_my_moreinfo_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bg_more"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_zixunPhone_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="电话咨询"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_zixunPhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_zixunPhone_iv"
+                    android:layout_toRightOf="@id/more_my_zixunPhone_tv"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="@color/dark" />
+
+                <ImageView
+                    android:id="@+id/more_my_zixunPhone_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bg_more"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="咨询时段"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_zixunTime_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_zixunTime_iv"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="@color/dark" />
+
+                <ImageView
+                    android:id="@+id/more_my_zixunTime_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="2dp"
+                    android:src="@drawable/ic_pencil" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/bg_more_line" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -19,7 +19,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
+/**
+ * 
+ * @author youzh
+ *
+ */
 public class UserInfoActivity extends BaseActivity {
 	@InjectView(R.id.text_left)
 	TextView mTVTopCancel;
@@ -94,7 +98,6 @@ public class UserInfoActivity extends BaseActivity {
 		mEtUserInfoPhone.setText(account.getUserphone());
 		mEtUserInfoEmail.setText(account.getUseremail());
 		mUserInfoIntro.setText(account.getUserintroduction());
-
 	}
 
 	private String getUserPlace(String place) {
@@ -150,6 +153,14 @@ public class UserInfoActivity extends BaseActivity {
 			Intent intent = new Intent(this, SelectAddrActivity.class);
 			startActivityForResult(intent, Contasts.REQUEST_SELECT_AREA);
 			break;
+		case R.id.more_my_intro_rl:
+			Intent intent2 = new Intent(mActThis, UserInfoIntroActivity.class);
+			intent2.putExtra("intro", account.getUserintroduction());
+			startActivityForResult(intent2, 20);
+			break;
+		case R.id.more_my_moreinfo_rl:
+			startActivity(UserInfoMoreActivity.class);
+			break;
 		default:
 			break;
 		}
@@ -160,6 +171,12 @@ public class UserInfoActivity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
+		case 20:
+			String userIntro = data.getStringExtra("userIntro");
+			if (!TextUtils.isEmpty(userIntro)) {
+				mUserInfoIntro.setText(userIntro);
+			}
+			break;
 		case Contasts.REQUEST_SELECT_SEX:
 			if (RESULT_OK == resultCode && null != data) {
 				int intExtra = data.getIntExtra(SelectButton3Activity.Extra.SelectedItem, SelectButton3Activity.Extra.Selected_cancle);
@@ -179,7 +196,6 @@ public class UserInfoActivity extends BaseActivity {
 			break;
 		case Contasts.REQUEST_SELECT_AREA:
 			if (RESULT_OK == resultCode && null != data) {
-
 				provinceCode = data.getIntExtra(SelectAddrActivity.Extra.ProvinceCode, 0);
 				cityCode = data.getIntExtra(SelectAddrActivity.Extra.CityCode, 0);
 				districtCode = data.getIntExtra(SelectAddrActivity.Extra.DistrictCode, 0);

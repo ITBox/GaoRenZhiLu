@@ -6,6 +6,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/list_item_bg"
         android:padding="10dp" >
@@ -44,8 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/tv_time"
             android:layout_below="@+id/tv_time"
-            android:text="描述信息"
             android:singleLine="true"
+            android:text="描述信息"
             android:textColor="@color/black_80"
             android:textSize="12sp" />
     </RelativeLayout>
