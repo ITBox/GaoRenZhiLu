@@ -5,7 +5,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.itbox.fx.util.DateUtil;
-import com.itbox.fx.util.Utils;
+import com.itbox.fx.util.EditTextUtils;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
@@ -118,21 +118,21 @@ public class UserInfoActivity extends BaseActivity {
 			mActThis.finish();
 			break;
 		case R.id.more_my_name_iv:
-			Utils.showKeyboard(mEtUserInfoName);
+			EditTextUtils.showKeyboard(mEtUserInfoName);
 			String userName = mEtUserInfoName.getText().toString();
 			if (!TextUtils.isEmpty(userName)) {
 				mEtUserInfoName.setSelection(userName.length());
 			}
 			break;
 		case R.id.more_my_phone_iv:
-			Utils.showKeyboard(mEtUserInfoPhone);
+			EditTextUtils.showKeyboard(mEtUserInfoPhone);
 			String userPhone = mEtUserInfoPhone.getText().toString();
 			if (!TextUtils.isEmpty(userPhone)) {
 				mEtUserInfoPhone.setSelection(userPhone.length());
 			}
 			break;
 		case R.id.more_my_email_iv:
-			Utils.showKeyboard(mEtUserInfoEmail);
+			EditTextUtils.showKeyboard(mEtUserInfoEmail);
 			String userEmail = mEtUserInfoEmail.getText().toString();
 			if (!TextUtils.isEmpty(userEmail)) {
 				mEtUserInfoEmail.setSelection(userEmail.length());
