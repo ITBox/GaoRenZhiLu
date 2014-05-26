@@ -13,10 +13,12 @@ import android.widget.GridView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.activity.ConsultationSearchActivity;
+import com.itbox.grzl.activity.PublishConsultationActivity;
 import com.itbox.grzl.bean.Job;
 
 /**
@@ -43,8 +45,14 @@ public class ConsultationFragment extends BaseFragment {
 		jobs = AppContext.getJobs();
 		JobTypeAdapter adapter = new JobTypeAdapter();
 		mGridView.setAdapter(adapter);
-
 		return view;
+	}
+
+	@OnClick(R.id.tv_ask)
+	public void ask() {
+		Intent intent = new Intent(getActivity(),
+				PublishConsultationActivity.class);
+		startActivity(intent);
 	}
 
 	private class JobTypeAdapter extends BaseAdapter {
