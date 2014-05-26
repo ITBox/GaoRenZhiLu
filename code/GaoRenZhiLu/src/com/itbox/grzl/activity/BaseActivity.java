@@ -15,6 +15,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.TextView;
 
 public class BaseActivity extends FragmentActivity  implements OnClickListener{
     protected FragmentActivity mActThis;
@@ -109,6 +110,15 @@ public class BaseActivity extends FragmentActivity  implements OnClickListener{
 					finish();
 				}
 			});
+		}
+	}
+	
+	@Override
+	public void setTitle(CharSequence title) {
+		TextView titleTv = (TextView) findViewById(R.id.text_medium);
+		if (titleTv != null) {
+			titleTv.setVisibility(View.VISIBLE);
+			titleTv.setText(title);
 		}
 	}
 }

@@ -2,10 +2,14 @@ package com.itbox.grzl.api;
 
 import java.util.ArrayList;
 
+import org.apache.http.Header;
+
 import android.util.Log;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Delete;
+import com.itbox.fx.net.Net;
+import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.bean.UserList;
 import com.itbox.grzl.bean.UserListItem;
@@ -67,6 +71,7 @@ public class ConsultationApi extends BaseApi {
 					@Override
 					public void onSuccess(int statusCode, String content) {
 						super.onSuccess(statusCode, content);
+						Log.e(TAG, "资讯搜索接口返回值" + content);
 						new Delete()
 								.from(UserListItem.class)
 								.where(UserListItemTable.COLUMN_JOBTYPE + " = "
@@ -107,19 +112,74 @@ public class ConsultationApi extends BaseApi {
 	public void getPhoneConsultation(String userid) {
 		RequestParams params = new RequestParams();
 		params.put("userid", userid);
-		params.put("placedate", "");
-		client.post(Api.getUrl(Api.Consultation.getteacherbooking), params,
-				new AsyncHttpResponseHandler() {
+		params.put("placedate", "2014-5-25");
+		// client.post(Api.getUrl(Api.Consultation.getteacherbooking), params,
+		// new AsyncHttpResponseHandler() {
+		// @Override
+		// public void onSuccess(int statusCode, String content) {
+		// super.onSuccess(statusCode, content);
+		// Log.e(TAG, "获取电话咨询" + content);
+		// }
+		//
+		// @Override
+		// public void onFailure(Throwable error, String content) {
+		// super.onFailure(error, content);
+		// }
+		// });
+		Net.request(params, Api.getUrl(Api.Consultation.getteacherbooking),
+				new ResponseHandler() {
 					@Override
-					public void onSuccess(int statusCode, String content) {
-						super.onSuccess(statusCode, content);
+					public void onSuccess(int statusCode, Header[] headers,
+							String content) {
+						// TODO Auto-generated method stub
+						super.onSuccess(statusCode, headers, content);
 						Log.e(TAG, "获取电话咨询" + content);
 					}
 
 					@Override
-					public void onFailure(Throwable error, String content) {
-						super.onFailure(error, content);
-						Log.e(TAG, "获取电话咨询" + error.toString());
+					public void onFailure(Throwable e, int statusCode,
+							String content) {
+						// TODO Auto-generated method stub
+						super.onFailure(e, statusCode, content);
+						Log.e(TAG, "获取电话咨询" + content);
+					}
+				});
+	}
+
+	/**
+	 * 获取
+	 */
+	public void getUserLevel(String userid) {
+		RequestParams params = new RequestParams();
+		params.put("userid", userid);
+		params.put("placedate", "2014-5-25");
+		// client.post(Api.getUrl(Api.Consultation.getteacherbooking), params,
+		// new AsyncHttpResponseHandler() {
+		// @Override
+		// public void onSuccess(int statusCode, String content) {
+		// super.onSuccess(statusCode, content);
+		// Log.e(TAG, "获取电话咨询" + content);
+		// }
+		//
+		// @Override
+		// public void onFailure(Throwable error, String content) {
+		// super.onFailure(error, content);
+		// }
+		// });
+		Net.request(params, Api.getUrl(Api.Consultation.GETUSERMEMBER),
+				new ResponseHandler() {
+					@Override
+					public void onSuccess(int statusCode, Header[] headers,
+							String content) {
+						super.onSuccess(statusCode, headers, content);
+						Log.e(TAG, "获取" + content);
+					}
+
+					@Override
+					public void onFailure(Throwable e, int statusCode,
+							String content) {
+						super.onFailure(e, statusCode, content);
+						Log.e(TAG, "获取电话咨询" + content);
 					}
 				});
 	}
@@ -131,7 +191,7 @@ public class ConsultationApi extends BaseApi {
 	public void getTeacherMoreInfo(String userid) {
 		RequestParams params = new RequestParams();
 		params.put("userid", userid);
-		client.post(Api.getUrl(Api.User.GET_USER_LIST), params,
+		client.post(Api.getUrl(Api.User.GETUSEREXTENSION), params,
 				new AsyncHttpResponseHandler() {
 					@Override
 					public void onSuccess(int statusCode, String content) {

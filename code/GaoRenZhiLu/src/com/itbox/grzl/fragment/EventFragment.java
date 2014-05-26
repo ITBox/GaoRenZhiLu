@@ -1,10 +1,13 @@
 package com.itbox.grzl.fragment;
 
 import handmark.pulltorefresh.library.PullToRefreshListView;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -12,6 +15,8 @@ import butterknife.OnClick;
 
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.R;
+import com.itbox.grzl.activity.EventAddActivity;
+import com.itbox.grzl.activity.EventDetialActivity;
 import com.itbox.grzl.activity.EventSearchActivity;
 import com.itbox.grzl.adapter.EventListAdapter;
 import com.itbox.grzl.bean.EventAdd;
@@ -30,6 +35,8 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 	protected TextView mTitleTv;
 	@InjectView(R.id.text_right)
 	protected TextView mRightTv;
+	@InjectView(R.id.text_left)
+	protected TextView mLeftTv;
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
 	private EventListAdapter mAdapter;
@@ -51,13 +58,30 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 
 	private void initView() {
 		mTitleTv.setText("活动首页");
+		mLeftTv.setVisibility(View.VISIBLE);
+		mLeftTv.setText("");
+		mLeftTv.setBackgroundResource(R.drawable.left_search);
 		mRightTv.setVisibility(View.VISIBLE);
-		mRightTv.setBackgroundResource(R.drawable.ic_search);
+		mRightTv.setText("发布活动");
 	}
 
-	@OnClick(R.id.text_right)
+	@OnClick({ R.id.text_right, R.id.text_left })
 	public void onClick(View v) {
-		startActivity(EventSearchActivity.class);
+		switch (v.getId()) {
+		case R.id.text_right:
+			startActivityForResult(EventAddActivity.class, 0);
+			break;
+		case R.id.text_left:
+			startActivity(EventSearchActivity.class);
+			break;
+		}
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == EventAddActivity.RESULT_SUCCESS) {
+			loadFirstData();
+		}
 	}
 
 	private void testAddEvent() {
@@ -87,10 +111,21 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 					public void onSuccess(ActivityIdItem item) {
 						saveData(page, item.getActivityIdItem());
 					}
+
 					@Override
 					public void onFinish() {
 						loadFinish();
 					}
 				});
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+		EventGet bean = new EventGet();
+		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
+		Intent intent = new Intent(getActivity(), EventDetialActivity.class);
+		intent.putExtra("activityid", bean.getActivityId());
+		startActivity(intent);
 	}
 }

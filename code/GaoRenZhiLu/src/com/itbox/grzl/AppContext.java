@@ -3,6 +3,7 @@ package com.itbox.grzl;
 import java.util.ArrayList;
 
 import com.activeandroid.ActiveAndroid;
+import com.baidu.location.BDLocation;
 import com.itbox.fx.R;
 import com.itbox.fx.core.Application;
 import com.itbox.grzl.bean.Account;
@@ -19,6 +20,8 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 public class AppContext extends Application {
 
 	private static AppContext instance;
+
+	public static BDLocation location;
 
 	private Account account;
 

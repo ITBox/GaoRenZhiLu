@@ -55,6 +55,8 @@ public class MainActivity extends BaseActivity {
 
 		// new ConsultationApi().searchFreeConsultation("1", "1", "1", "1");
 		new ConsultationApi().getPhoneConsultation("14");
+		new ConsultationApi().getUserLevel("14");
+		// new ConsultationApi().getPhoneConsultation("14");
 	}
 
 	/**
