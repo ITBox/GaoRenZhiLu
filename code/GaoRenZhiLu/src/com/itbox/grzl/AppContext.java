@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import android.annotation.SuppressLint;
+
 import com.activeandroid.ActiveAndroid;
 import com.baidu.location.BDLocation;
 import com.itbox.fx.R;
@@ -19,6 +21,7 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 /**
  * Created by huiyh on 14-2-24.
  */
+@SuppressLint("UseSparseArrays")
 public class AppContext extends Application {
 
 	private static AppContext instance;
@@ -26,6 +29,10 @@ public class AppContext extends Application {
 	public static BDLocation location;
 
 	private Account account;
+
+	private static ArrayList<Job> jobArrayList;
+
+	private static Map<Integer, String> jobMap;
 
 	public static AppContext getInstance() {
 		return instance;
@@ -39,6 +46,57 @@ public class AppContext extends Application {
 		ActiveAndroid.initialize(this);
 
 		initImageLoader();
+
+		initJobArrayList();
+
+		initJobMap();
+	}
+
+	private void initJobArrayList() {
+		jobArrayList = new ArrayList<Job>();
+		Job job = new Job(1, "IT/通讯");
+		jobArrayList.add(job);
+		job = new Job(2, "电子/互联网");
+		jobArrayList.add(job);
+		job = new Job(3, "金融");
+		jobArrayList.add(job);
+		job = new Job(4, "建筑房地产");
+		jobArrayList.add(job);
+		job = new Job(5, "制造业");
+		jobArrayList.add(job);
+		job = new Job(6, "物流/仓储");
+		jobArrayList.add(job);
+		job = new Job(7, "文化/传媒");
+		jobArrayList.add(job);
+		job = new Job(8, "影视/娱乐");
+		jobArrayList.add(job);
+		job = new Job(9, "教育");
+		jobArrayList.add(job);
+		job = new Job(10, "矿产/能源");
+		jobArrayList.add(job);
+		job = new Job(11, "农林牧渔");
+		jobArrayList.add(job);
+		job = new Job(12, "医药");
+		jobArrayList.add(job);
+		job = new Job(13, "商业服务");
+		jobArrayList.add(job);
+	}
+
+	private void initJobMap() {
+		jobMap = new HashMap<Integer, String>();
+		jobMap.put(1, "IT/通讯");
+		jobMap.put(2, "电子/互联网");
+		jobMap.put(3, "金融");
+		jobMap.put(4, "建筑房地产");
+		jobMap.put(5, "制造业");
+		jobMap.put(6, "物流/仓储");
+		jobMap.put(7, "文化/传媒");
+		jobMap.put(8, "影视/娱乐");
+		jobMap.put(9, "教育");
+		jobMap.put(10, "矿产/能源");
+		jobMap.put(11, "农林牧渔");
+		jobMap.put(12, "医药");
+		jobMap.put(13, "商业服务");
 	}
 
 	/**
@@ -74,52 +132,20 @@ public class AppContext extends Application {
 	}
 
 	public static String getJobName(int jobtype) {
-		Map<Integer, String> jobs = new HashMap<Integer, String>();
-		jobs.put(1, "IT/通讯");
-		jobs.put(2, "电子/互联网");
-		jobs.put(3, "金融");
-		jobs.put(4, "建筑房地产");
-		jobs.put(5, "制造业");
-		jobs.put(6, "物流/仓储");
-		jobs.put(7, "文化/传媒");
-		jobs.put(8, "影视/娱乐");
-		jobs.put(9, "教育");
-		jobs.put(10, "矿产/能源");
-		jobs.put(11, "农林牧渔");
-		jobs.put(12, "医药");
-		jobs.put(13, "商业服务");
-		return jobs.get(jobtype);
+
+		return jobMap.get(jobtype);
 	}
 
 	public static ArrayList<Job> getJobs() {
 
-		ArrayList<Job> jobs = new ArrayList<Job>();
-		Job job = new Job(1, "IT/通讯");
-		jobs.add(job);
-		job = new Job(2, "电子/互联网");
-		jobs.add(job);
-		job = new Job(3, "金融");
-		jobs.add(job);
-		job = new Job(4, "建筑房地产");
-		jobs.add(job);
-		job = new Job(5, "制造业");
-		jobs.add(job);
-		job = new Job(6, "物流/仓储");
-		jobs.add(job);
-		job = new Job(7, "文化/传媒");
-		jobs.add(job);
-		job = new Job(8, "影视/娱乐");
-		jobs.add(job);
-		job = new Job(9, "教育");
-		jobs.add(job);
-		job = new Job(10, "矿产/能源");
-		jobs.add(job);
-		job = new Job(11, "农林牧渔");
-		jobs.add(job);
-		job = new Job(12, "医药");
-		jobs.add(job);
-		job = new Job(13, "商业服务");
-		jobs.add(job);
-		return jobs;
+		return jobArrayList;
+	}
+
+	public static String[] getJobNameArray() {
+		ArrayList<String> jobNameList = new ArrayList<String>();
+		for (Job job : jobArrayList) {
+			jobNameList.add(job.getName());
+		}
+		return jobNameList.toArray(new String[jobNameList.size()]);
 	}
 }

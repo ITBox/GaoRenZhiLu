@@ -64,6 +64,8 @@ public class ConsultationFragment extends BaseFragment {
 		Intent intent = new Intent(getActivity(),
 				ConsultationSearchActivity.class);
 		intent.putExtra("teachertype", "1");
+		intent.putExtra("teachertypename", "专业导师");
+
 		startActivity(intent);
 	}
 
@@ -72,6 +74,7 @@ public class ConsultationFragment extends BaseFragment {
 		Intent intent = new Intent(getActivity(),
 				ConsultationSearchActivity.class);
 		intent.putExtra("teachertype", "2");
+		intent.putExtra("teachertypename", "人力导师");
 		startActivity(intent);
 	}
 
@@ -106,6 +109,7 @@ public class ConsultationFragment extends BaseFragment {
 					Intent intent = new Intent(getActivity(),
 							ConsultationSearchActivity.class);
 					intent.putExtra("jobtype", jobs.get(position).getId() + "");
+					intent.putExtra("jobtypename", jobs.get(position).getName());
 					startActivity(intent);
 				}
 			});

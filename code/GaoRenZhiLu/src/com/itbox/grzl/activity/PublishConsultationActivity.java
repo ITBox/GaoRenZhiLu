@@ -1,7 +1,6 @@
 package com.itbox.grzl.activity;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -31,7 +30,6 @@ import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.api.ConsultationApi;
 import com.itbox.grzl.api.ConsultationApi.AskQuestionListener;
-import com.itbox.grzl.bean.Job;
 
 public class PublishConsultationActivity extends Activity implements
 		AskQuestionListener {
@@ -59,10 +57,6 @@ public class PublishConsultationActivity extends Activity implements
 	@InjectView(R.id.btn_add)
 	Button btnAdd;
 
-	private ArrayList<Job> jobs;
-
-	private ArrayList<String> jobNameList;
-
 	private String[] jobNames;
 
 	private int jobType = -1;
@@ -85,12 +79,8 @@ public class PublishConsultationActivity extends Activity implements
 		ButterKnife.inject(this);
 		mediumTextView.setText("图文咨询");
 		leftTextView.setVisibility(View.VISIBLE);
-		jobs = AppContext.getJobs();
-		jobNameList = new ArrayList<String>();
-		for (Job job : jobs) {
-			jobNameList.add(job.getName());
-		}
-		jobNames = jobNameList.toArray(new String[jobNameList.size()]);
+
+		jobNames = AppContext.getJobNameArray();
 		File file = new File(DIR);
 		file.mkdir();
 		dialog = new ProgressDialog(this);

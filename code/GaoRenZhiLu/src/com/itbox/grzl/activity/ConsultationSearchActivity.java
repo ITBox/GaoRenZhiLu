@@ -1,5 +1,8 @@
 package com.itbox.grzl.activity;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,10 +13,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.activeandroid.content.ContentProvider;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.UserListAdapter;
 import com.itbox.grzl.api.ConsultationApi;
@@ -33,10 +39,16 @@ public class ConsultationSearchActivity extends BaseActivity implements
 
 	@InjectView(R.id.list)
 	protected ListView mListView;
+	@InjectView(R.id.tv_select_teachertype)
+	TextView teacherTypeTextView;
+	@InjectView(R.id.tv_select_jobtype)
+	TextView jobTypeTextView;
 	private ConsultationApi consultationApi;
 	private UserListAdapter adapter;
 	private String jobtype;
 	private String teachertype;
+	private String jobtypeName;
+	private String teachertypeName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +57,16 @@ public class ConsultationSearchActivity extends BaseActivity implements
 		ButterKnife.inject(this);
 		jobtype = getIntent().getStringExtra("jobtype");
 		teachertype = getIntent().getStringExtra("teachertype");
+		jobtypeName = getIntent().getStringExtra("jobtypename");
+		teachertypeName = getIntent().getStringExtra("teachertypename");
+		if (jobtypeName != null) {
+			jobTypeTextView.setText(jobtypeName);
+		}
+
+		if (teachertype != null) {
+			teacherTypeTextView.setText(teachertypeName);
+		}
+
 		consultationApi = new ConsultationApi();
 		adapter = new UserListAdapter(this, null);
 		mListView.setAdapter(adapter);
@@ -61,8 +83,12 @@ public class ConsultationSearchActivity extends BaseActivity implements
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+				UserListItem teacher = new UserListItem();
+				teacher.loadFromCursor(cursor);
 				Intent intent = new Intent(ConsultationSearchActivity.this,
 						TeacherDetialActivity.class);
+				intent.putExtra("teacher", teacher);
 				startActivity(intent);
 			}
 		});
@@ -94,6 +120,40 @@ public class ConsultationSearchActivity extends BaseActivity implements
 					new String[] { jobtype, teachertype }, null);
 		}
 
+	}
+
+	@OnClick(R.id.tv_select_teachertype)
+	public void selectTeacherType() {
+		AlertDialog.Builder builder = new Builder(this);
+		final String[] teacherNames = { "专业导师", "人力导师" };
+		builder.setItems(teacherNames, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				teachertype = (arg1 + 1) + "";
+				teacherTypeTextView.setText(teacherNames[arg1]);
+				consultationApi.searchConsultation(null, jobtype, teachertype);
+				getSupportLoaderManager().restartLoader(0, null,
+						ConsultationSearchActivity.this);
+			}
+		}).show();
+	}
+
+	@OnClick(R.id.tv_select_jobtype)
+	public void selectJobType() {
+		AlertDialog.Builder builder = new Builder(this);
+		final String[] jobNames = AppContext.getJobNameArray();
+		builder.setItems(jobNames, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				jobtype = arg1 + "";
+				jobTypeTextView.setText(jobNames[arg1]);
+				consultationApi.searchConsultation(null, jobtype, teachertype);
+				getSupportLoaderManager().restartLoader(0, null,
+						ConsultationSearchActivity.this);
+			}
+		}).show();
 	}
 
 	@Override
