@@ -39,7 +39,8 @@
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" >
     </uses-permission>
     <uses-permission android:name="android.permission.ACCESS_GPS" />
-<application
+
+    <application
         android:name="com.itbox.grzl.AppContext"
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -69,6 +70,10 @@
         </activity>
         <activity
             android:name="com.itbox.grzl.activity.MainActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.itbox.grzl.activity.PublishConsultationActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -185,18 +190,18 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.SelectTimeMinuteActivity"
-            android:screenOrientation="portrait" 
-            android:theme="@style/Translucent_NoTitleBar"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Translucent_NoTitleBar" />
         <activity
             android:name="com.itbox.grzl.activity.SelectTimeHalfHourActivity"
-            android:screenOrientation="portrait" 
-            android:theme="@style/Translucent_NoTitleBar"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Translucent_NoTitleBar" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"
             android:authorities="com.itbox.grzl"
             android:exported="false" />
-        
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
