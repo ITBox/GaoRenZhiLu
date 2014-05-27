@@ -3,7 +3,6 @@ package com.itbox.grzl.activity;
 import handmark.pulltorefresh.library.PullToRefreshListView;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ActionMode;
 import android.view.View;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -12,7 +11,6 @@ import butterknife.OnClick;
 
 import com.activeandroid.query.Update;
 import com.itbox.fx.net.GsonResponseHandler;
-import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.TeacherIncomingAdapter;
@@ -60,7 +58,8 @@ public class TeacherIncomingActivity extends BaseLoadActivity<TeacherIncoming> {
 			@Override
 			public void onSuccess(Account user) {
 				super.onSuccess(user);
-				if (user != null) {
+				if (user != null && user.getUsertotalamount() != null
+						&& user.getUserbalance() != null) {
 					// 更新用户资金信息
 					Account account = AppContext.getInstance().getAccount();
 					account.setUsertotalamount(user.getUsertotalamount());
