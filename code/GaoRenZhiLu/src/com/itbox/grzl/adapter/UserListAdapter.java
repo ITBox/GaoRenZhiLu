@@ -13,6 +13,7 @@ import butterknife.InjectView;
 
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.UserListItem;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -63,14 +64,25 @@ public class UserListAdapter extends CursorAdapter {
 		UserListItem item = new UserListItem();
 		item.loadFromCursor(cursor);
 		holder.nameTextView.setText(item.getUserrealname());
-		holder.jobTypeTextView.setText(item.getJobtype() + "");
-		holder.teacherTypeTextView.setText(item.getTeachertype());
-		holder.teacherDescriptionTextView.setText(item.getUserintroduction());
-		holder.buyCountTextView.setText(item.getBuycount());
-		holder.answerCountTextView.setText(item.getAnswercount());
+		String jobName = AppContext.getJobName(Integer.valueOf(item
+				.getJobtype()));
+		holder.jobTypeTextView.setText(jobName);
+		String teacherType = item.getTeachertype();
+		if ("1".equals(teacherType)) {
+			holder.teacherTypeTextView.setText("专业导师");
+		} else {
+			holder.teacherTypeTextView.setText("人力导师");
+		}
+
+		holder.teacherDescriptionTextView.setText("简介"
+				+ item.getUserintroduction());
+		holder.buyCountTextView.setText(item.getBuycount() + "人购买");
+		holder.answerCountTextView.setText("回答" + item.getAnswercount() + "次");
 		mImageLoader.displayImage(
 				Api.User.getAvatarUrl(item.getUseravatarversion()),
 				holder.avatarImageView);
+
+		holder.ratingBar.setRating(Float.valueOf(item.getTeacherlevel()));
 	}
 
 	@Override

@@ -37,11 +37,15 @@ public class ConsultationFragment extends BaseFragment {
 	TextView humanResourceTeacherTextView;
 	private ArrayList<Job> jobs;
 
+	@InjectView(R.id.text_medium)
+	TextView mediumTextView;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_consultation, null);
 		ButterKnife.inject(this, view);
+		mediumTextView.setText("咨询");
 		jobs = AppContext.getJobs();
 		JobTypeAdapter adapter = new JobTypeAdapter();
 		mGridView.setAdapter(adapter);
@@ -52,6 +56,22 @@ public class ConsultationFragment extends BaseFragment {
 	public void ask() {
 		Intent intent = new Intent(getActivity(),
 				PublishConsultationActivity.class);
+		startActivity(intent);
+	}
+
+	@OnClick(R.id.tv_professional_teacher)
+	public void professionalTeacher() {
+		Intent intent = new Intent(getActivity(),
+				ConsultationSearchActivity.class);
+		intent.putExtra("teachertype", "1");
+		startActivity(intent);
+	}
+
+	@OnClick(R.id.tv_human_resource_teacher)
+	public void humanREsourceTeacher() {
+		Intent intent = new Intent(getActivity(),
+				ConsultationSearchActivity.class);
+		intent.putExtra("teachertype", "2");
 		startActivity(intent);
 	}
 
