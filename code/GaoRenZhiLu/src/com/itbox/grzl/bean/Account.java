@@ -9,7 +9,7 @@ import com.itbox.grzl.constants.AccountTable;
 
 /**
  * 
- * @author malinkang 2014年5月12日
+ * @author malinkang 2014骞�5鏈�12鏃�
  * 
  */
 @Table(name = AccountTable.TABLE_NAME, id = BaseColumns._ID)
@@ -60,7 +60,7 @@ public class Account extends Model {
 	private Integer memberid;
 	@Column(name = AccountTable.COLUMN_ISMESSAGE)
 	private Integer ismessage;
-	@Column(name = AccountTable.COLUMN_ISMESSAGE)
+	@Column(name = AccountTable.COLUMN_ANSWERCOUNT)
 	private String answercount;
 	@Column(name = AccountTable.COLUMN_TEACHERTYPE)
 	private String teachertype;

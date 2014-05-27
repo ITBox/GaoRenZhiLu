@@ -35,19 +35,27 @@ public class ConsultationSearchActivity extends BaseActivity implements
 	protected ListView mListView;
 	private ConsultationApi consultationApi;
 	private UserListAdapter adapter;
+	private String jobtype;
+	private String teachertype;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_consultation_search);
 		ButterKnife.inject(this);
-		String jobtype = getIntent().getStringExtra("jobtype");
-		String teachertype = getIntent().getStringExtra("teachertype");
+		jobtype = getIntent().getStringExtra("jobtype");
+		teachertype = getIntent().getStringExtra("teachertype");
 		consultationApi = new ConsultationApi();
 		adapter = new UserListAdapter(this, null);
 		mListView.setAdapter(adapter);
-		consultationApi.searchConsultation(null, "0", "0");
-		getSupportLoaderManager().initLoader(0, null, this);
+
+		if (jobtype == null) {
+			jobtype = "0";
+		}
+		if (teachertype == null) {
+			teachertype = "0";
+		}
+		consultationApi.searchConsultation(null, jobtype, teachertype);
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -58,6 +66,7 @@ public class ConsultationSearchActivity extends BaseActivity implements
 				startActivity(intent);
 			}
 		});
+		getSupportLoaderManager().initLoader(0, null, this);
 	}
 
 	@Override
@@ -67,11 +76,24 @@ public class ConsultationSearchActivity extends BaseActivity implements
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		return new CursorLoader(this, ContentProvider.createUri(
-				UserListItem.class, null), null,
-				UserListItemTable.COLUMN_JOBTYPE + "=? and "
-						+ UserListItemTable.COLUMN_TEACHERTYPE + "=?",
-				new String[] { "0", "0" }, null);
+		if (jobtype.equals("0")) {
+			return new CursorLoader(this, ContentProvider.createUri(
+					UserListItem.class, null), null,
+					UserListItemTable.COLUMN_TEACHERTYPE + "=?",
+					new String[] { teachertype }, null);
+		} else if (teachertype.equals("0")) {
+			return new CursorLoader(this, ContentProvider.createUri(
+					UserListItem.class, null), null,
+					UserListItemTable.COLUMN_JOBTYPE + "=?",
+					new String[] { jobtype }, null);
+		} else {
+			return new CursorLoader(this, ContentProvider.createUri(
+					UserListItem.class, null), null,
+					UserListItemTable.COLUMN_JOBTYPE + "=? and "
+							+ UserListItemTable.COLUMN_TEACHERTYPE + "=?",
+					new String[] { jobtype, teachertype }, null);
+		}
+
 	}
 
 	@Override

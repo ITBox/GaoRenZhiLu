@@ -1,8 +1,12 @@
 package com.itbox.grzl.api;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.apache.http.Header;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.util.Log;
 
@@ -13,11 +17,26 @@ import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.bean.UserList;
 import com.itbox.grzl.bean.UserListItem;
-import com.itbox.grzl.constants.UserListItemTable;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 public class ConsultationApi extends BaseApi {
+
+	public interface AskQuestionListener {
+		public void onStartAsk();
+
+		public void onSuccess();
+
+		public void onFail();
+
+	}
+
+	private AskQuestionListener mAskQuestionListener;
+
+	public void setmAskQuestionListener(AskQuestionListener mAskQuestionListener) {
+		this.mAskQuestionListener = mAskQuestionListener;
+	}
+
 	/**
 	 * 
 	 * @param title
@@ -26,12 +45,17 @@ public class ConsultationApi extends BaseApi {
 	 * @param contents
 	 * @param userId
 	 */
-	public void freeAskQuestion(String title, String jobtype, String photo,
+	public void freeAskQuestion(String title, String jobtype, File photo,
 			String contents, String userId) {
+		mAskQuestionListener.onStartAsk();
 		RequestParams params = new RequestParams();
 		params.put("title", title);
 		params.put("jobtype", jobtype);
-		params.put("photo", photo);
+		try {
+			params.put("photo", photo);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
 		params.put("contents", contents);
 		params.put("userId", userId);
 		client.post(Api.getUrl(Api.Consultation.probleming), params,
@@ -39,13 +63,27 @@ public class ConsultationApi extends BaseApi {
 					@Override
 					public void onSuccess(int statusCode, String content) {
 						super.onSuccess(statusCode, content);
-						Log.e(TAG, "");
+						try {
+							JSONObject object = new JSONObject(content);
+							int result = object.optInt("result");
+							if (result == 1) {
+								mAskQuestionListener.onSuccess();
+							} else {
+								mAskQuestionListener.onFail();
+							}
+
+						} catch (JSONException e) {
+							e.printStackTrace();
+							mAskQuestionListener.onFail();
+
+						}
+
 					}
 
 					@Override
 					public void onFailure(Throwable error, String content) {
 						super.onFailure(error, content);
-						Log.e(TAG, "马上提问失败" + error.toString());
+						mAskQuestionListener.onFail();
 					}
 				});
 
@@ -72,12 +110,7 @@ public class ConsultationApi extends BaseApi {
 					public void onSuccess(int statusCode, String content) {
 						super.onSuccess(statusCode, content);
 						Log.e(TAG, "资讯搜索接口返回值" + content);
-						new Delete()
-								.from(UserListItem.class)
-								.where(UserListItemTable.COLUMN_JOBTYPE + " = "
-										+ jobtype + " and "
-										+ UserListItemTable.COLUMN_TEACHERTYPE
-										+ " = " + teachertype).execute();
+						new Delete().from(UserListItem.class).execute();
 						UserList userList = mGson.fromJson(content,
 								UserList.class);
 						if (userList != null) {
@@ -113,19 +146,6 @@ public class ConsultationApi extends BaseApi {
 		RequestParams params = new RequestParams();
 		params.put("userid", userid);
 		params.put("placedate", "2014-5-25");
-		// client.post(Api.getUrl(Api.Consultation.getteacherbooking), params,
-		// new AsyncHttpResponseHandler() {
-		// @Override
-		// public void onSuccess(int statusCode, String content) {
-		// super.onSuccess(statusCode, content);
-		// Log.e(TAG, "获取电话咨询" + content);
-		// }
-		//
-		// @Override
-		// public void onFailure(Throwable error, String content) {
-		// super.onFailure(error, content);
-		// }
-		// });
 		Net.request(params, Api.getUrl(Api.Consultation.getteacherbooking),
 				new ResponseHandler() {
 					@Override

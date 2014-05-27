@@ -1,6 +1,8 @@
 package com.itbox.grzl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.activeandroid.ActiveAndroid;
 import com.baidu.location.BDLocation;
@@ -71,7 +73,26 @@ public class AppContext extends Application {
 		this.account = account;
 	}
 
+	public static String getJobName(int jobtype) {
+		Map<Integer, String> jobs = new HashMap<Integer, String>();
+		jobs.put(1, "IT/通讯");
+		jobs.put(2, "电子/互联网");
+		jobs.put(3, "金融");
+		jobs.put(4, "建筑房地产");
+		jobs.put(5, "制造业");
+		jobs.put(6, "物流/仓储");
+		jobs.put(7, "文化/传媒");
+		jobs.put(8, "影视/娱乐");
+		jobs.put(9, "教育");
+		jobs.put(10, "矿产/能源");
+		jobs.put(11, "农林牧渔");
+		jobs.put(12, "医药");
+		jobs.put(13, "商业服务");
+		return jobs.get(jobtype);
+	}
+
 	public static ArrayList<Job> getJobs() {
+
 		ArrayList<Job> jobs = new ArrayList<Job>();
 		Job job = new Job(1, "IT/通讯");
 		jobs.add(job);
