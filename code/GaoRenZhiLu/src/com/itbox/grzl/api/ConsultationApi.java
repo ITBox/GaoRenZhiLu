@@ -15,6 +15,7 @@ import com.activeandroid.query.Delete;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.bean.TeacherExtension;
 import com.itbox.grzl.bean.UserList;
 import com.itbox.grzl.bean.UserListItem;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -217,6 +218,9 @@ public class ConsultationApi extends BaseApi {
 					public void onSuccess(int statusCode, String content) {
 						super.onSuccess(statusCode, content);
 						Log.e(TAG, "获取用户更多信息" + content);
+						TeacherExtension mTeacherExtension = mGson.fromJson(
+								content, TeacherExtension.class);
+						mTeacherExtension.save();
 					}
 
 					@Override

@@ -147,7 +147,7 @@ public class ConsultationSearchActivity extends BaseActivity implements
 
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
-				jobtype = arg1 + "";
+				jobtype = (arg1 + 1) + "";
 				jobTypeTextView.setText(jobNames[arg1]);
 				consultationApi.searchConsultation(null, jobtype, teachertype);
 				getSupportLoaderManager().restartLoader(0, null,

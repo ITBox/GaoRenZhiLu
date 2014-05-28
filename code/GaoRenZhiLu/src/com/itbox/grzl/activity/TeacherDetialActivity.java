@@ -1,7 +1,10 @@
 package com.itbox.grzl.activity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -17,7 +20,8 @@ import com.itbox.grzl.api.ConsultationApi;
 import com.itbox.grzl.bean.UserListItem;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-public class TeacherDetialActivity extends BaseActivity {
+public class TeacherDetialActivity extends BaseActivity implements
+		LoaderCallbacks<Cursor> {
 	private ConsultationApi api;
 	private UserListItem teacher;
 	@InjectView(R.id.iv_avatar)
@@ -63,14 +67,11 @@ public class TeacherDetialActivity extends BaseActivity {
 		} else {
 			teachertypeTextView.setText("人力导师");
 		}
-
 		teacherDescriptionTextView
 				.setText("简介" + teacher.getUserintroduction());
 		buyCountTextView.setText(teacher.getBuycount() + "人购买");
 		answerCountTextView.setText("回答" + teacher.getAnswercount() + "次");
-
 		mRatingBar.setRating(Float.valueOf(teacher.getTeacherlevel()));
-
 		backTextView.setVisibility(View.VISIBLE);
 	}
 
@@ -88,6 +89,24 @@ public class TeacherDetialActivity extends BaseActivity {
 
 	@OnClick(R.id.ll_phone_consultation)
 	public void enterPhoneConsultationDetial() {
+
+	}
+
+	@Override
+	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> arg0, Cursor arg1) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> arg0) {
+		// TODO Auto-generated method stub
 
 	}
 }
