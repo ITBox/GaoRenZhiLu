@@ -64,7 +64,7 @@ public class EventSearchGet extends BaseModel{
 	@Column(name = EventSearchGet.ACTIVITYPHONE)
 	private String activityphone;
 	@Column(name = EventSearchGet.ACTIVITYID)
-	private String activityId;
+	private String activityid;
 	@Column(name = EventSearchGet.COMMENTCOUNT)
 	private String commentcount;
 	@Column(name = EventSearchGet.JOINNUMBER)
@@ -73,11 +73,11 @@ public class EventSearchGet extends BaseModel{
 	private String createtime;
 
 	public String getActivityId() {
-		return activityId;
+		return activityid;
 	}
 
 	public void setActivityId(String activityId) {
-		this.activityId = activityId;
+		this.activityid = activityId;
 	}
 
 	public String getCommentcount() {

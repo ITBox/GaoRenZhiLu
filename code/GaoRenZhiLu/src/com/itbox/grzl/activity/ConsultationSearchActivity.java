@@ -39,10 +39,15 @@ public class ConsultationSearchActivity extends BaseActivity implements
 
 	@InjectView(R.id.list)
 	protected ListView mListView;
+
 	@InjectView(R.id.tv_select_teachertype)
 	TextView teacherTypeTextView;
 	@InjectView(R.id.tv_select_jobtype)
 	TextView jobTypeTextView;
+
+	@InjectView(R.id.text_medium)
+	TextView mediumTextView;
+
 	private ConsultationApi consultationApi;
 	private UserListAdapter adapter;
 	private String jobtype;
@@ -55,6 +60,7 @@ public class ConsultationSearchActivity extends BaseActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_consultation_search);
 		ButterKnife.inject(this);
+		mediumTextView.setText("咨询搜索");
 		jobtype = getIntent().getStringExtra("jobtype");
 		teachertype = getIntent().getStringExtra("teachertype");
 		jobtypeName = getIntent().getStringExtra("jobtypename");

@@ -141,6 +141,9 @@ public class Api {
 		/** 获取用户信息 **/
 		public static final String GET_USER_LIST = PartName
 				+ "getuserextension";
+		/** 获取老师评价 **/
+		public static final String GET_TEACHER_COMMENT = PartName
+				+ "getteachercomment";
 		/** 上传图片 **/
 		public static final String UPLOAD_IMAGE = PartName + "uploadimage";
 

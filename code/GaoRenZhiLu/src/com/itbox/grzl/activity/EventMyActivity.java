@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -19,20 +20,17 @@ import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.EventListAdapter;
 import com.itbox.grzl.bean.EventSearchGet;
 import com.itbox.grzl.engine.EventEngine;
-import com.itbox.grzl.engine.EventEngine.SearchItem;
+import com.itbox.grzl.engine.EventEngine.MyEventItem;
 import com.itbox.grzl.enumeration.EventState;
 import com.itbox.grzl.enumeration.EventType;
-import com.itbox.grzl.widget.SearchBar;
-import com.itbox.grzl.widget.SearchBar.OnSearchListener;
 
 /**
- * 活动搜索页面
+ * 我的活动页面
  * 
  * @author baoboy
  * @date 2014-5-24下午11:22:30
  */
-public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
-		implements OnSearchListener {
+public class EventMyActivity extends BaseLoadActivity<EventSearchGet> {
 
 	private static final int REQUEST_SELECT_AREA = 1;
 
@@ -40,36 +38,40 @@ public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
 	protected TextView mTitleTv;
 	@InjectView(R.id.lv_list)
 	protected ListView mListView;
-	@InjectView(R.id.searchBar)
-	protected SearchBar mSearchBar;
+	@InjectView(R.id.bt_my)
+	protected Button mMyBt;
+	@InjectView(R.id.bt_join)
+	protected Button mJoinBt;
+	@InjectView(R.id.tv_empty)
+	protected View mEmptyView;
+
 	private CursorAdapter mAdapter;
-	private String mTitle;
 	private String mUserDistrict;
 	private EventType mType;
 	private EventState mState;
-	@InjectView(R.id.tv_empty)
-	protected View mEmptyView;
+	private boolean isMy;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_event_search);
+		setContentView(R.layout.activity_event_my);
 
 		ButterKnife.inject(this);
 
+		isMy = true;
 		initView();
 	}
 
 	private void initView() {
-		mTitleTv.setText("活动搜索");
-		mSearchBar.setOnSearchListener(this);
+		mTitleTv.setText("我的活动");
 		showLeftBackButton();
 		mListView.setEmptyView(mEmptyView);
 		mAdapter = new EventListAdapter(this, null);
 		initLoad(mListView, mAdapter, EventSearchGet.class);
 	}
 
-	@OnClick({ R.id.tv_address, R.id.tv_type, R.id.tv_state })
+	@OnClick({ R.id.tv_address, R.id.tv_type, R.id.tv_state, R.id.bt_my,
+			R.id.bt_join })
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.tv_address:
@@ -99,6 +101,16 @@ public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
 						}
 					}).show();
 			break;
+		case R.id.bt_my:
+			// 我发起的
+			isMy = true;
+			startSearch();
+			break;
+		case R.id.bt_join:
+			// 我参加的
+			isMy = false;
+			startSearch();
+			break;
 		}
 	}
 
@@ -112,13 +124,6 @@ public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
 		}
 	}
 
-	@Override
-	public void onSearch(String keyword) {
-		// 开始搜索
-		mTitle = keyword;
-		startSearch();
-	}
-
 	private void startSearch() {
 		showProgressDialog("正在搜索...");
 		loadFirstData();
@@ -126,10 +131,12 @@ public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
 
 	@Override
 	protected void loadData(final int page) {
-		EventEngine.searchEvent(mUserDistrict, mType, mState, mTitle, page,
-				new GsonResponseHandler<SearchItem>(SearchItem.class) {
+		mMyBt.setSelected(isMy);
+		mJoinBt.setSelected(!isMy);
+		EventEngine.getMyEvent(mUserDistrict, mType, mState, isMy, page,
+				new GsonResponseHandler<MyEventItem>(MyEventItem.class) {
 					@Override
-					public void onSuccess(SearchItem item) {
+					public void onSuccess(MyEventItem item) {
 						saveData(page, item.getActivityIdItem());
 					}
 

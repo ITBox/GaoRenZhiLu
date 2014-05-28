@@ -94,6 +94,18 @@ public class TeacherEngine {
 		Net.request(params, Api.getUrl(Api.User.GET_USER_LIST),
 				handler);
 	}
+	
+	/**
+	 * 获取老师评价
+	 * @param handler
+	 */
+	public static void getCommentList(ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("teacherid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
+		Net.request(params, Api.getUrl(Api.User.GET_TEACHER_COMMENT),
+				handler);
+	}
 
 	public static class UserPayDetailItem {
 		public List<TeacherIncoming> UserPayDetailItem;

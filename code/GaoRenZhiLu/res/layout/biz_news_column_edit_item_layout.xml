@@ -6,8 +6,8 @@
     android:layout_marginLeft="5.0dip"
     android:layout_marginRight="5.0dip"
     android:layout_marginTop="10.0dip"
-    android:background="@drawable/biz_news_column_edit_item_bg"
+    android:background="@drawable/rect_radius_gray"
     android:gravity="center"
     android:paddingBottom="5.0dip"
     android:paddingTop="5.0dip"
-    android:textSize="16sp" />
+    android:textSize="14sp" />

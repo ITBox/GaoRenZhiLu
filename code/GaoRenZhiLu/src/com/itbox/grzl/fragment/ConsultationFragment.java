@@ -45,11 +45,16 @@ public class ConsultationFragment extends BaseFragment {
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_consultation, null);
 		ButterKnife.inject(this, view);
-		mediumTextView.setText("咨询");
+		mediumTextView.setText("高人指路");
 		jobs = AppContext.getJobs();
 		JobTypeAdapter adapter = new JobTypeAdapter();
 		mGridView.setAdapter(adapter);
 		return view;
+	}
+	
+	@OnClick(R.id.searchBar)
+	public void goSearch(){
+		startActivity(ConsultationSearchActivity.class);
 	}
 
 	@OnClick(R.id.tv_ask)

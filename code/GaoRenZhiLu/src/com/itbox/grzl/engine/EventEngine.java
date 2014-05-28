@@ -157,10 +157,10 @@ public class EventEngine {
 	 * @param pageNum
 	 * @param handler
 	 */
-	public static void getMyEvent(int userdistrict, EventType type,
+	public static void getMyEvent(String userdistrict, EventType type,
 			EventState state, boolean isMy, int pageNum, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
-		params.put("userdistrict", Integer.toString(userdistrict));
+		params.put("userdistrict", userdistrict);
 		String typeid = "";
 		if (type != null)
 			typeid = Integer.toString(type.getIndex());
@@ -172,6 +172,8 @@ public class EventEngine {
 		params.put("type", isMy ? "1" : "2");
 		params.put("pagesize", Integer.toString(PAGE_NUM));
 		params.put("pageindex", Integer.toString(pageNum));
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
 		Net.request(params, Api.getUrl(Api.Event.listForUser), handler);
 	}
 
@@ -201,6 +203,20 @@ public class EventEngine {
 			ActivityIdItem = activityIdItem;
 		}
 
+	}
+	
+	public static class MyEventItem {
+		
+		private List<EventSearchGet> ActivityItem;
+		
+		public List<EventSearchGet> getActivityIdItem() {
+			return ActivityItem;
+		}
+		
+		public void setActivityIdItem(List<EventSearchGet> activityIdItem) {
+			ActivityItem = activityIdItem;
+		}
+		
 	}
 
 	public static class ActivityUserCommentItem {
