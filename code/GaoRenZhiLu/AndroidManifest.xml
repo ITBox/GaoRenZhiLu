@@ -189,6 +189,9 @@
             android:name="com.itbox.grzl.activity.EventCommentActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.itbox.grzl.activity.EventMyActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.itbox.grzl.activity.SelectTimeMinuteActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Translucent_NoTitleBar" />

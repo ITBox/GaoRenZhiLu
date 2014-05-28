@@ -39,6 +39,8 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 	protected TextView mLeftTv;
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
+	@InjectView(R.id.rl_empty)
+	protected View mEmptyView;
 	private EventListAdapter mAdapter;
 
 	@Override
@@ -50,9 +52,6 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 
 		initView();
 
-		mAdapter = new EventListAdapter(getActivity(), null);
-		initLoad(mListView, mAdapter, EventGet.class);
-
 		return view;
 	}
 
@@ -63,12 +62,17 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 		mLeftTv.setBackgroundResource(R.drawable.left_search);
 		mRightTv.setVisibility(View.VISIBLE);
 		mRightTv.setText("发布活动");
+
+		mListView.setEmptyView(mEmptyView);
+		mAdapter = new EventListAdapter(getActivity(), null);
+		initLoad(mListView, mAdapter, EventGet.class);
 	}
 
-	@OnClick({ R.id.text_right, R.id.text_left })
+	@OnClick({ R.id.text_right, R.id.text_left , R.id.bt_add})
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.text_right:
+		case R.id.bt_add:
 			startActivityForResult(EventAddActivity.class, 0);
 			break;
 		case R.id.text_left:
