@@ -125,7 +125,7 @@ public class RegistEmailActivity extends BaseActivity {
 		params.put("userdistrict", districtCode+"");
 		params.put("useremail", mLLEmailEmail.getText().toString());
 		params.put("usersex", sex+"");
-//		params.put("userbirthday", birthday);
+		params.put("userbirthday", birthday);
 		params.put("usertype", type+"");
 		Net.request(params, Api.getUrl(Api.User.Register), new GsonResponseHandler<Register>(Register.class){
 			@Override

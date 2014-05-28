@@ -1,25 +1,46 @@
 package com.itbox.grzl.activity;
 
+import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.content.ContentProvider;
+import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.fx.net.Net;
 import com.itbox.fx.util.EditTextUtils;
+import com.itbox.fx.util.ToastUtils;
+import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
-import com.itbox.grzl.bean.Account;
+import com.itbox.grzl.bean.Job;
+import com.itbox.grzl.bean.UpdateUserExtension;
+import com.itbox.grzl.bean.UserExtension;
+import com.itbox.grzl.common.Contasts;
+import com.itbox.grzl.enumeration.TeacherType;
+import com.loopj.android.http.RequestParams;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.Loader;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
 /**
- * 
+ * 更多资料
  * @author youzh
- *
+ * 
  */
-public class UserInfoMoreActivity extends BaseActivity {
+public class UserInfoMoreActivity extends BaseActivity implements LoaderCallbacks<Cursor> {
 	@InjectView(R.id.text_left)
 	TextView mTVTopCancel;
 	@InjectView(R.id.text_medium)
@@ -30,35 +51,68 @@ public class UserInfoMoreActivity extends BaseActivity {
 	EditText mEtUserInfoBankCard;
 	@InjectView(R.id.more_my_bankcard_name)
 	EditText mEtUserInfoBankCardName;
+	@InjectView(R.id.teacher_type)
+	TextView mTeacherType;// 导师类型
+	@InjectView(R.id.position_type)
+	TextView mPositionType;// 职位类型
+	@InjectView(R.id.more_my_zixunPhone_et)
+	EditText mEtUserInfoZixunPhone;// 电话咨询
+	@InjectView(R.id.more_my_zixunImg_et)
+	EditText mEtUserInfoZixunImg;// 图文咨询
+	@InjectView(R.id.more_my_zixunTime_tv)
+	TextView mTVUserInfoZixunTime;// 咨询时段
 
-	private Account account;
+	private UserExtension userExtension;
+	private String time1;
+	private String time2;
+	private String[] jobsNames;
+	private int[] jobsIds;
+	private int teacherId;
+	private int jobId;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_user_info_more);
 		ButterKnife.inject(mActThis);
-		account = AppContext.getInstance().getAccount();
 		initViews();
-		initDatas();
+       
+		ArrayList<Job> jobList = AppContext.getJobs();
+		jobsNames = new String[jobList.size()];
+		jobsIds = new int[jobList.size()];
+		for (int i = 0; i < jobsNames.length; i++) {
+			jobsNames[i] = jobList.get(i).getName();
+			jobsIds[i] = jobList.get(i).getId();
+		}
 	}
 
 	private void initViews() {
 		mTVTopCancel.setVisibility(View.VISIBLE);
 		mTVTopCancel.setText("个人资料");
 		mTVTopMedium.setText("更多资料");
+		mEtUserInfoName.setText(AppContext.getInstance().getAccount().getUsername());
 	}
 
 	private void initDatas() {
+		if (TextUtils.isEmpty(userExtension.getTeachertype())) {
+			mTeacherType.setText(TeacherType.getTeacherName(0));
+		} else {
+			mTeacherType.setText(TeacherType.getTeacherName(Integer.parseInt(userExtension.getTeachertype())));
+		}
+		if (TextUtils.isEmpty(userExtension.getJobtype())) {
+			mPositionType.setText(jobsNames[0]);
+		} else {
+			mPositionType.setText(jobsNames[Integer.parseInt(userExtension.getJobtype())]);
+		}
 	}
-	
-    @Override
-    protected boolean onBack() {
-    	// TODO Auto-generated method stub
-    	return true;
-    }
-    
-	@OnClick({ R.id.text_left, R.id.more_my_name_iv, R.id.more_my_shenfenzheng_iv, R.id.more_my_bankcard_iv, R.id.more_my_bankcard_name_iv})
+
+	@Override
+	protected boolean onBack() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@OnClick({ R.id.text_left, R.id.more_my_name_iv, R.id.more_my_shenfenzheng_rl, R.id.more_my_bankcard_iv, R.id.more_my_bankcard_name_iv, R.id.teacher_type, R.id.position_type, R.id.more_my_zixunImg_iv, R.id.more_my_zixunPhone_iv, R.id.more_my_zixunTime_iv })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -69,18 +123,53 @@ public class UserInfoMoreActivity extends BaseActivity {
 			EditTextUtils.showKeyboard(mEtUserInfoName);
 			EditTextUtils.setSelection(mEtUserInfoName);
 			break;
-		
-		case R.id.more_my_shenfenzheng_iv:
+		case R.id.more_my_shenfenzheng_rl:
+			startActivity(UserIDCardActivity.class);
 			break;
 		case R.id.more_my_bankcard_iv:// 银行卡号
 			EditTextUtils.showKeyboard(mEtUserInfoBankCard);
-		    EditTextUtils.setSelection(mEtUserInfoBankCard);
+			EditTextUtils.setSelection(mEtUserInfoBankCard);
 			break;
 		case R.id.more_my_bankcard_name_iv:// 开户行名称
 			EditTextUtils.showKeyboard(mEtUserInfoBankCardName);
 			EditTextUtils.setSelection(mEtUserInfoBankCardName);
 			break;
-	
+		case R.id.teacher_type:
+			new AlertDialog.Builder(mActThis).setItems(TeacherType.getAllTeacherName(), new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					teacherId = TeacherType.getTeacherId(which);
+					teacherId = teacherId + 1;
+					Log.i("youzh", "teacher:" + teacherId + "--" + which);
+					mTeacherType.setText(TeacherType.getTeacherName(which +1));
+				}
+			}).show();
+			break;
+		case R.id.position_type:
+			new AlertDialog.Builder(mActThis).setItems(jobsNames, new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					jobId = jobsIds[which];
+					Log.i("youzh", "job:" +jobId + "--" + which);
+					mPositionType.setText(jobsNames[which]);
+				}
+			}).show();
+			break;
+		case R.id.more_my_zixunImg_iv:// 图文咨询
+			EditTextUtils.showKeyboard(mEtUserInfoZixunImg);
+			EditTextUtils.setSelection(mEtUserInfoZixunImg);
+			break;
+		case R.id.more_my_zixunPhone_iv:// 电话咨询
+			EditTextUtils.showKeyboard(mEtUserInfoZixunPhone);
+			EditTextUtils.setSelection(mEtUserInfoZixunPhone);
+			break;
+		case R.id.more_my_zixunTime_iv:// 咨询时段
+			Intent intent = new Intent(mActThis, SelectDoubleHourActivity.class);
+			intent.putExtra("type", "workTime");
+			mActThis.startActivityForResult(intent, Contasts.REQUEST_SELECT_ZIXUN_TIME);
+			break;
 		default:
 			break;
 		}
@@ -91,9 +180,92 @@ public class UserInfoMoreActivity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
-		case 20:
+		case Contasts.REQUEST_SELECT_ZIXUN_TIME:
+			if (resultCode == RESULT_OK && data != null) {
+				time1 = data.getStringExtra(SelectDoubleHourActivity.Extra.Time_EarliestStr);
+				time2 = data.getStringExtra(SelectDoubleHourActivity.Extra.Time_LatestStr);
+				// String time3 =
+				// data.getStringExtra(SelectDoubleHourActivity.Extra.Time_Earliest);
+				// String time4 =
+				// data.getStringExtra(SelectDoubleHourActivity.Extra.Time_Latest);
+				// Log.i("youzh", time1 + "-"+time2 +"-"+ time3 + "-"+time4);
+				mTVUserInfoZixunTime.setText(time1 + "-" + time2);
+			}
 			break;
 		}
 	}
 
+	/**
+	 * 获取用户更多资料
+	 */
+	private void getData() {
+		Net.request("userid", AppContext.getInstance().getAccount().getUserid() + "", Api.getUrl(Api.User.GET_USER_LIST), new GsonResponseHandler<UserExtension>(UserExtension.class) {
+			@Override
+			public void onSuccess(UserExtension object) {
+				super.onSuccess(object);
+				object.save();
+				userExtension  = new UserExtension();
+				initDatas();
+			}
+		});
+	}
+
+	/**
+	 * 更改用户更多资料
+	 */
+	private void postDataMethod() {
+		showProgressDialog("更新中...");
+		RequestParams params = new RequestParams();
+		params.put("userid", userExtension.getUserid());
+		params.put("userbank", EditTextUtils.getText(mEtUserInfoBankCard));
+		params.put("bankaddress", EditTextUtils.getText(mEtUserInfoBankCardName));
+		params.put("teachertype", teacherId+"");
+		params.put("jobtype", jobId+"");
+		params.put("pictureprice", EditTextUtils.getText(mEtUserInfoZixunImg));
+		params.put("phoneprice", EditTextUtils.getText(mEtUserInfoZixunPhone));
+		params.put("starttime", time1);
+		params.put("endtime", time2);
+		
+		Net.request(params, Api.getUrl(Api.User.UP_USER_MORE), new GsonResponseHandler<UpdateUserExtension>(UpdateUserExtension.class) {
+			@Override
+			public void onSuccess(UpdateUserExtension object) {
+				super.onSuccess(object);
+				int result = object.getResult();
+				switch (result) {
+				case Contasts.RESULT_SUCCES:
+					dismissProgressDialog();
+					UserInfoMoreActivity.this.finish();
+					break;
+				case Contasts.RESULT_FAIL:
+					dismissProgressDialog();
+					ToastUtils.showToast(mActThis, "更新失败，请重试");
+					break;
+				default:
+					break;
+				}
+			}
+		});
+	}
+
+	@Override
+	public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
+		return new android.support.v4.content.CursorLoader(mActThis, ContentProvider.createUri(UserExtension.class, null), null, null, null, null);
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
+		if (cursor != null && cursor.moveToNext()) {
+			userExtension  = new UserExtension();
+			userExtension.loadFromCursor(cursor);
+			initDatas();
+		} else {
+			getData();//获取网络数据
+		}
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> loader) {
+		// TODO Auto-generated method stub
+
+	}
 }

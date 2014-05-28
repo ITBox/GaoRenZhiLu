@@ -52,7 +52,7 @@ public enum EventState {
 		}
 		return all;
 	}
-
+	
 	public static EventState getByIndex(int index) {
 		for (EventState c : EventState.values()) {
 			if (c.ordinal() == index) {

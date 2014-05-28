@@ -1,17 +1,24 @@
 package com.itbox.grzl.activity;
 
+import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.fx.net.Net;
 import com.itbox.fx.util.DateUtil;
 import com.itbox.fx.util.EditTextUtils;
 import com.itbox.fx.widget.CircleImageView;
+import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.Account;
+import com.itbox.grzl.bean.UpdateUserList;
 import com.itbox.grzl.common.Contasts;
 import com.itbox.grzl.common.db.AreaListDB;
+import com.loopj.android.http.RequestParams;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +27,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 /**
- * 
+ * 个人资料
  * @author youzh
  *
  */
@@ -63,13 +70,16 @@ public class UserInfoActivity extends BaseActivity {
 	private int provinceCode = 100000;
 	private int cityCode = 110000;
 	private int districtCode = 110101;
-
+    private ArrayList<Account> beforeAccount = new ArrayList<Account>();
+    private ArrayList<Account> afterAccount = new ArrayList<Account>();
+    
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_user_info);
 		ButterKnife.inject(mActThis);
 		account = AppContext.getInstance().getAccount();
+		beforeAccount.add(account);
 		initViews();
 		initDatas();
 	}
@@ -83,18 +93,25 @@ public class UserInfoActivity extends BaseActivity {
 		loader.displayImage(account.getUseravatarversion(), mUserInfoPhoto, photoOptions);
 		mUserInfoName.setText(account.getUsername());
 		mUserInfoYearOld.setText(DateUtil.getAge(account.getUserbirthday()) + "岁");
-		mUserInfoPlace.setText(new AreaListDB().getAreaByCode(Integer.parseInt(account.getUsercity())).getAreaName());
+		mUserInfoPlace.setText(getUserPlace(account.getUsercity()));
 		mUserInfoXingzuo.setText(DateUtil.getConstellation(account.getUserbirthday()));
 		mUserInfoYuE.setText(account.getBuycount() + "购买");
 
 		mEtUserInfoName.setText(account.getUsername());
 		mUserInfoCity.setText(getUserPlace(account.getUserprovince()) + getUserPlace(account.getUsercity()) + getUserPlace(account.getUserdistrict()));
 		if (!TextUtils.isEmpty(account.getUserbirthday())) {
+			birthday = account.getUserbirthday();
 			mUserInfoBirthday.setText(account.getUserbirthday().substring(0, 10));
 		} else {
 			mUserInfoBirthday.setText(account.getUserbirthday());
 		}
-		mUserInfoSex.setText(account.getUsersex());
+		if (account.getUsersex().equals("1")) {
+			sex = 1;
+			mUserInfoSex.setText("男");
+		} else {
+			sex = 0;
+			mUserInfoSex.setText("女");
+		}
 		mEtUserInfoPhone.setText(account.getUserphone());
 		mEtUserInfoEmail.setText(account.getUseremail());
 		mUserInfoIntro.setText(account.getUserintroduction());
@@ -205,5 +222,40 @@ public class UserInfoActivity extends BaseActivity {
 			break;
 		}
 	}
+	
+	/**
+	 * 修改个人资料
+	 */
+    private void postUserInfoMethod() {
+    	RequestParams params = new RequestParams();
+    	params.put("userid", account.getUserid()+"");
+    	params.put("username", EditTextUtils.getText(mEtUserInfoName));
+    	params.put("userphone", EditTextUtils.getText(mEtUserInfoPhone));
+    	params.put("useremail", EditTextUtils.getText(mEtUserInfoEmail));
+    	params.put("useravatarversion", "");
+    	params.put("usersex", sex+"");
+    	params.put("userprovince", provinceCode+"");
+    	params.put("usercity", cityCode+"");
+    	params.put("userdistrict", districtCode+"");
+    	params.put("userintroduction", mUserInfoIntro.getText().toString());
+    	params.put("userbirthday", birthday);
+    	
+    	Net.request(params, Api.getUrl(Api.User.UP_USER_INFO), new GsonResponseHandler<UpdateUserList>(UpdateUserList.class) {
+    		@Override
+    		public void onSuccess(UpdateUserList object) {
+    			super.onSuccess(object);
+    			switch (object.getResult()) {
+				case Contasts.RESULT_SUCCES:
+					
+					break;
+				case Contasts.RESULT_FAIL:
+					
+					break;
 
+				default:
+					break;
+				}
+    		}
+    	});
+    }
 }

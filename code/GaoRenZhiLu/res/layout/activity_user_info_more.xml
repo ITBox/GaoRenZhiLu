@@ -40,6 +40,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true"
                     android:layout_toLeftOf="@+id/more_my_name_iv"
                     android:layout_toRightOf="@id/more_my_name"
                     android:background="@android:color/transparent"
@@ -58,7 +60,8 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
                     android:padding="2dp"
-                    android:src="@drawable/ic_pencil" />
+                    android:src="@drawable/ic_pencil"
+                    android:visibility="gone" />
             </RelativeLayout>
 
             <ImageView
@@ -67,6 +70,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
+                android:id="@+id/more_my_shenfenzheng_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_bg_more"
@@ -169,7 +173,7 @@
                     android:text="开户行名称"
                     android:textSize="15sp" />
 
-               <EditText
+                <EditText
                     android:id="@+id/more_my_bankcard_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -209,24 +213,21 @@
                 android:paddingTop="12dp" >
 
                 <TextView
-                    android:id="@+id/more_my_phone"
+                    android:id="@+id/more_my_teacher"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="导师类型"
                     android:textSize="15sp" />
 
-
-<!--                 <ImageView -->
-<!--                     android:id="@+id/more_my_phone_iv" -->
-<!--                     android:layout_width="wrap_content" -->
-<!--                     android:layout_height="wrap_content" -->
-<!--                     android:layout_alignParentRight="true" -->
-<!--                     android:layout_centerVertical="true" -->
-<!--                     android:layout_marginLeft="5dp" -->
-<!--                     android:layout_marginRight="10dp" -->
-<!--                     android:padding="2dp" -->
-<!--                     android:src="@drawable/ic_pencil" /> -->
+                <TextView
+                    android:id="@+id/teacher_type"
+                    style="@style/text_view_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="类 型" />
             </RelativeLayout>
 
             <ImageView
@@ -242,24 +243,21 @@
                 android:paddingTop="12dp" >
 
                 <TextView
-                    android:id="@+id/more_my_email"
+                    android:id="@+id/more_my_position"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="职位类型"
                     android:textSize="15sp" />
 
-
-<!--                 <ImageView -->
-<!--                     android:id="@+id/more_my_email_iv" -->
-<!--                     android:layout_width="wrap_content" -->
-<!--                     android:layout_height="wrap_content" -->
-<!--                     android:layout_alignParentRight="true" -->
-<!--                     android:layout_centerVertical="true" -->
-<!--                     android:layout_marginLeft="5dp" -->
-<!--                     android:layout_marginRight="10dp" -->
-<!--                     android:padding="2dp" -->
-<!--                     android:src="@drawable/ic_pencil" /> -->
+                 <TextView
+                    android:id="@+id/position_type"
+                    style="@style/text_view_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="类 型" />
             </RelativeLayout>
 
             <ImageView
@@ -284,16 +282,31 @@
                     android:text="图文咨询"
                     android:textSize="15sp" />
 
+                <EditText
+                    android:id="@+id/more_my_zixunImg_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_zixunImg"
+                    android:layout_toRightOf="@id/more_my_zixunImg_tv"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+
                 <TextView
                     android:id="@+id/more_my_zixunImg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_toLeftOf="@+id/more_my_zixunImg_iv"
-                    android:layout_toRightOf="@id/more_my_zixunImg_tv"
                     android:gravity="right"
                     android:singleLine="true"
+                    android:text="元"
                     android:textColor="@color/dark" />
 
                 <ImageView
@@ -324,22 +337,37 @@
 
                 <TextView
                     android:id="@+id/more_my_zixunPhone_tv"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="电话咨询"
                     android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/more_my_zixunPhone_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_zixunPhone"
+                    android:layout_toRightOf="@id/more_my_zixunPhone_tv"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/more_my_zixunPhone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_toLeftOf="@+id/more_my_zixunPhone_iv"
-                    android:layout_toRightOf="@id/more_my_zixunPhone_tv"
                     android:gravity="right"
                     android:singleLine="true"
+                    android:text="元"
                     android:textColor="@color/dark" />
 
                 <ImageView
@@ -368,7 +396,7 @@
                 android:paddingTop="12dp" >
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:text="咨询时段"

@@ -141,6 +141,18 @@ public class Api {
 		/** 获取用户信息 **/
 		public static final String GET_USER_LIST = PartName
 				+ "getuserextension";
+		/**
+		 * 修改导师更多资料接口
+		 */
+		public static final String UP_USER_MORE = PartName + "updateuserextension";
+		/**
+		 * 修改个人资料
+		 */
+		public static final String UP_USER_INFO = PartName + "updateuserlist";
+        /**
+         * 添加身份验证接口
+         */
+		public static final String ADD_USER_IDCARD = PartName + "adduserauthentication";
 		/** 上传图片 **/
 		public static final String UPLOAD_IMAGE = PartName + "uploadimage";
 
