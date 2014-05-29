@@ -105,8 +105,8 @@ public class EventEngine {
 	 * @param handler
 	 *            (BaseResult)
 	 */
-	public static void addEventComment(String activityid, String commentcontent,
-			ResponseHandler handler) {
+	public static void addEventComment(String activityid,
+			String commentcontent, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()
 				.toString());
@@ -159,6 +159,26 @@ public class EventEngine {
 	 */
 	public static void getMyEvent(String userdistrict, EventType type,
 			EventState state, boolean isMy, int pageNum, ResponseHandler handler) {
+		getUserEvent(AppContext.getInstance().getAccount().getUserid()
+				.toString(), userdistrict, type, state, isMy, pageNum, handler);
+	}
+
+	/**
+	 * 获取用户的活动
+	 * 
+	 * @param userid
+	 * @param userdistrict
+	 * @param typeid
+	 * @param isFinish
+	 *            是不是结束的
+	 * @param isMy
+	 *            是不是我发起的
+	 * @param pageNum
+	 * @param handler
+	 */
+	public static void getUserEvent(String userid, String userdistrict,
+			EventType type, EventState state, boolean isMy, int pageNum,
+			ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("userdistrict", userdistrict);
 		String typeid = "";
@@ -172,8 +192,7 @@ public class EventEngine {
 		params.put("type", isMy ? "1" : "2");
 		params.put("pagesize", Integer.toString(PAGE_NUM));
 		params.put("pageindex", Integer.toString(pageNum));
-		params.put("userid", AppContext.getInstance().getAccount().getUserid()
-				.toString());
+		params.put("userid", userid);
 		Net.request(params, Api.getUrl(Api.Event.listForUser), handler);
 	}
 
@@ -204,19 +223,19 @@ public class EventEngine {
 		}
 
 	}
-	
+
 	public static class MyEventItem {
-		
+
 		private List<EventSearchGet> ActivityItem;
-		
+
 		public List<EventSearchGet> getActivityIdItem() {
 			return ActivityItem;
 		}
-		
+
 		public void setActivityIdItem(List<EventSearchGet> activityIdItem) {
 			ActivityItem = activityIdItem;
 		}
-		
+
 	}
 
 	public static class ActivityUserCommentItem {

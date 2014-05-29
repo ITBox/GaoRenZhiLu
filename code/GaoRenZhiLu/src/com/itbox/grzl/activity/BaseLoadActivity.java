@@ -68,6 +68,31 @@ public abstract class BaseLoadActivity<T extends Model> extends BaseActivity
 		getSupportLoaderManager().initLoader(0, null, this);
 		loadFirstData();
 	}
+	
+	/**
+	 * 初始化加载器
+	 * 
+	 * @param refreshListView
+	 * @param adapter
+	 * @param clazz
+	 * @param orderBy
+	 */
+	public void initLoad(PullToRefreshListView refreshListView, CursorAdapter adapter,
+			Class<T> clazz, String selection) {
+		initLoad(null, refreshListView, adapter, clazz, selection, null);
+	}
+	/**
+	 * 初始化加载器
+	 * 
+	 * @param ListView
+	 * @param adapter
+	 * @param clazz
+	 * @param orderBy
+	 */
+	public void initLoad(ListView ListView, CursorAdapter adapter,
+			Class<T> clazz, String selection) {
+		initLoad(ListView, null, adapter, clazz, selection, null);
+	}
 
 	/**
 	 * 初始化加载器

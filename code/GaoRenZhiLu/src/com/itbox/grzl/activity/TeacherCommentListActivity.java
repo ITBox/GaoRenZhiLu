@@ -2,20 +2,17 @@ package com.itbox.grzl.activity;
 
 import handmark.pulltorefresh.library.PullToRefreshListView;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.R;
-import com.itbox.grzl.adapter.TeacherWithdrawalsAdapter;
-import com.itbox.grzl.bean.TeacherWithdrawals;
+import com.itbox.grzl.adapter.TeacherCommentAdapter;
+import com.itbox.grzl.bean.TeacherCommentGet;
 import com.itbox.grzl.engine.TeacherEngine;
-import com.itbox.grzl.engine.TeacherEngine.UserWithdrawalsItem;
+import com.itbox.grzl.engine.TeacherEngine.TeacherCommentItem;
 
 /**
  * 我得评论页面
@@ -24,19 +21,19 @@ import com.itbox.grzl.engine.TeacherEngine.UserWithdrawalsItem;
  * @date 2014-5-28下午11:20:05
  */
 public class TeacherCommentListActivity extends
-		BaseLoadActivity<TeacherWithdrawals> {
+		BaseLoadActivity<TeacherCommentGet> {
 
 	@InjectView(R.id.text_medium)
 	protected TextView mTitleTv;
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
 
-	private TeacherWithdrawalsAdapter mAdapter;
+	private TeacherCommentAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_teacher_withdrawals);
+		setContentView(R.layout.activity_teacher_comment);
 
 		ButterKnife.inject(this);
 
@@ -47,19 +44,11 @@ public class TeacherCommentListActivity extends
 	private void initView() {
 		mTitleTv.setText("我的评价");
 		showLeftBackButton();
+		
+		startActivity(EventTeacherActivity.class);
 
-		mAdapter = new TeacherWithdrawalsAdapter(getContext(), null);
-		initLoad(mListView, mAdapter, TeacherWithdrawals.class);
-	}
-
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		Intent intent = new Intent(this, TeacherWithdrawalsInfoActivity.class);
-		TeacherWithdrawals bean = new TeacherWithdrawals();
-		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
-		intent.putExtra("bean", bean);
-		startActivityForResult(intent, 0);
+		mAdapter = new TeacherCommentAdapter(getContext(), null);
+		initLoad(mListView, mAdapter, TeacherCommentGet.class);
 	}
 
 	@Override
@@ -74,13 +63,13 @@ public class TeacherCommentListActivity extends
 	@Override
 	protected void loadData(final int page) {
 		TeacherEngine
-				.getCommentList(new GsonResponseHandler<UserWithdrawalsItem>(
-						UserWithdrawalsItem.class) {
+				.getCommentList(new GsonResponseHandler<TeacherCommentItem>(
+						TeacherCommentItem.class) {
 					@Override
-					public void onSuccess(UserWithdrawalsItem bean) {
+					public void onSuccess(TeacherCommentItem bean) {
 						// 保存到数据库
 						if (bean != null) {
-							saveData(page, bean.getUserWithdrawalsItem());
+							saveData(page, bean.getTeacherCommentItem());
 						}
 					}
 
