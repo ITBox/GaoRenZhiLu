@@ -217,7 +217,6 @@ public class ConsultationApi extends BaseApi {
 					@Override
 					public void onSuccess(int statusCode, String content) {
 						super.onSuccess(statusCode, content);
-						Log.e(TAG, "获取用户更多信息" + content);
 						TeacherExtension mTeacherExtension = mGson.fromJson(
 								content, TeacherExtension.class);
 						mTeacherExtension.save();
