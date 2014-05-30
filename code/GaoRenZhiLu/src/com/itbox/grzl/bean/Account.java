@@ -1,10 +1,12 @@
 package com.itbox.grzl.bean;
 
 import android.provider.BaseColumns;
+import android.text.TextUtils;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.itbox.grzl.Api;
 import com.itbox.grzl.constants.AccountTable;
 
 /**
@@ -112,7 +114,10 @@ public class Account extends Model {
 	}
 
 	public String getUseravatarversion() {
-		return useravatarversion;
+		if (TextUtils.isEmpty(useravatarversion)) {
+			return null;
+		}
+		return Api.User.getAvatarUrl(useravatarversion);
 	}
 
 	public void setUseravatarversion(String useravatarversion) {
