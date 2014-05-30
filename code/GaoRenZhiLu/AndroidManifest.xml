@@ -51,11 +51,7 @@
             android:value="gaorenzhilu.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-<<<<<<< HEAD
-            android:value="11" />
-=======
             android:value="12" />
->>>>>>> bb8bbb241b3acca13996a9d1d2111812959de461
 
         <activity
             android:name="com.itbox.grzl.activity.SplashActivity"
@@ -210,7 +206,6 @@
             android:theme="@style/Translucent_NoTitleBar" />
         <activity
             android:name="com.itbox.grzl.activity.SelectTimeHalfHourActivity"
-<<<<<<< HEAD
             android:screenOrientation="portrait" 
             android:theme="@style/Translucent_NoTitleBar"/>
         <activity
@@ -218,11 +213,6 @@
             android:screenOrientation="portrait" 
             android:theme="@style/Translucent_NoTitleBar"/>
        
-=======
-            android:screenOrientation="portrait"
-            android:theme="@style/Translucent_NoTitleBar" />
-
->>>>>>> bb8bbb241b3acca13996a9d1d2111812959de461
         <provider
             android:name="com.activeandroid.content.ContentProvider"
             android:authorities="com.itbox.grzl"
