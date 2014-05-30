@@ -21,7 +21,6 @@ import com.itbox.grzl.bean.EventSearchGet;
 import com.itbox.grzl.bean.UserListItem;
 import com.itbox.grzl.engine.EventEngine;
 import com.itbox.grzl.engine.EventEngine.MyEventItem;
-import com.itbox.grzl.engine.EventEngine.SearchItem;
 import com.itbox.grzl.enumeration.EventState;
 import com.itbox.grzl.enumeration.EventType;
 import com.itbox.grzl.widget.SearchBar;

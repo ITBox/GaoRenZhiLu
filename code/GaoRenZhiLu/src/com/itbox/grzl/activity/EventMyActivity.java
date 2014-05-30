@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.util.SQLiteUtils;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.EventListAdapter;

@@ -15,7 +15,7 @@ import com.itbox.grzl.constants.AccountTable;
  * 
  */
 @Table(name = AccountTable.TABLE_NAME, id = BaseColumns._ID)
-public class Account extends Model {
+public class Account extends BaseModel {
 	@Column(name = AccountTable.COLUMN_USERID)
 	private Integer userid;
 	@Column(name = AccountTable.COLUMN_USERNAME)
