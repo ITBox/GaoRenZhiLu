@@ -38,7 +38,7 @@
             android:layout_alignLeft="@+id/tv_name"
             android:layout_alignTop="@+id/iv_head"
             android:text="我是标题"
-            android:textColor="@color/red_text"
+            android:textColor="@color/black_t"
             android:textSize="18sp" />
 
         <TextView

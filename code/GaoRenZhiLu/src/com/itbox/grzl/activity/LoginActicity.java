@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -102,7 +103,7 @@ public class LoginActicity extends BaseActivity implements
 		if (cursor != null && cursor.moveToNext()) {
 			Account account = new Account();
 			account.loadFromCursor(cursor);
-			account.setId(cursor.getLong(0));
+			account.setId(cursor.getLong(cursor.getColumnIndex(BaseColumns._ID)));
 			AppContext.getInstance().setAccount(account);
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);

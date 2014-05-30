@@ -24,7 +24,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/list_item_bg"
+                android:background="@drawable/list_item_bg2"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp" >
 
@@ -79,7 +79,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="[校园招聘]"
-                    android:textColor="@color/red_text"
+                    android:textColor="@color/black_t"
                     android:textSize="18sp" />
 
                 <TextView
@@ -88,7 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tv_type"
                     android:text="我是标题"
-                    android:textColor="@color/red_text"
+                    android:textColor="@color/black_t"
                     android:textSize="18sp" />
 
                 <View
@@ -115,7 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/list_item_bg"
+                android:background="@drawable/list_item_bg2"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp" >
 
@@ -125,7 +125,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="活动介绍"
-                    android:textColor="@color/red_text"
+                    android:textColor="@color/black_t"
                     android:textSize="18sp" />
 
                 <TextView
@@ -144,9 +144,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/list_item_bg_bottom"
+                android:background="@drawable/list_item_bg2"
                 android:orientation="vertical"
-                android:paddingTop="10dp" >
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp" >
 
                 <TextView
                     android:id="@+id/tv_join_person_count"
@@ -154,7 +155,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:text="参与人员(7/8人)"
-                    android:textColor="@color/red_text"
+                    android:textColor="@color/black_t"
                     android:textSize="18sp" />
 
                 <com.itbox.fx.widget.HorizontalListView
@@ -178,7 +179,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:text="交流活动"
-                    android:textColor="@color/red_text"
+                    android:textColor="@color/black_t"
                     android:textSize="18sp" />
             </LinearLayout>
         </LinearLayout>
