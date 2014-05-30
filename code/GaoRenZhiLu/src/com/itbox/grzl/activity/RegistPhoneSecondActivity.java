@@ -54,7 +54,7 @@ public class RegistPhoneSecondActivity extends BaseActivity {
 		mTVTopCancel.setVisibility(View.VISIBLE);
 		mTVTopMedium.setText("手机注册");
 	}
-	@OnClick(R.id.regist_next_bt)
+	@OnClick({R.id.regist_next_bt, R.id.text_left})
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
