@@ -15,7 +15,7 @@ import butterknife.InjectView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
-import com.itbox.grzl.bean.TeacherCommentGet;
+import com.itbox.grzl.bean.TeacherComment;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 /**
@@ -47,7 +47,7 @@ public class TeacherCommentAdapter extends CursorAdapter {
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
 		ViewHolder holder = (ViewHolder) view.getTag();
-		TeacherCommentGet bean = new TeacherCommentGet();
+		TeacherComment bean = new TeacherComment();
 		bean.loadFromCursor(cursor);
 		holder.tv_name.setText(bean.getUsername());
 		holder.tv_time.setText(bean.getCreatetime());
@@ -55,7 +55,8 @@ public class TeacherCommentAdapter extends CursorAdapter {
 		ImageLoader.getInstance().displayImage(
 				Api.User.getAvatarUrl(bean.getUseravatarversion()),
 				holder.iv_head);
-		holder.rb_rating.setProgress((int) bean.getScore());
+		// holder.rb_rating.setProgress();
+		holder.rb_rating.setRating(Float.valueOf(bean.getScore()));
 		if ((cursor.getPosition() % 2) == 0) {
 			// 偶数，白色背景
 			view.setBackgroundColor(Color.WHITE);

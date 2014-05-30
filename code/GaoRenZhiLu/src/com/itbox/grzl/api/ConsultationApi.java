@@ -15,9 +15,12 @@ import com.activeandroid.query.Delete;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.bean.TeacherComment;
+import com.itbox.grzl.bean.TeacherCommentList;
 import com.itbox.grzl.bean.TeacherExtension;
 import com.itbox.grzl.bean.UserList;
 import com.itbox.grzl.bean.UserListItem;
+import com.itbox.grzl.constants.TeacherCommentTable;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -152,7 +155,6 @@ public class ConsultationApi extends BaseApi {
 					@Override
 					public void onSuccess(int statusCode, Header[] headers,
 							String content) {
-						// TODO Auto-generated method stub
 						super.onSuccess(statusCode, headers, content);
 						Log.e(TAG, "获取电话咨询" + content);
 					}
@@ -160,7 +162,6 @@ public class ConsultationApi extends BaseApi {
 					@Override
 					public void onFailure(Throwable e, int statusCode,
 							String content) {
-						// TODO Auto-generated method stub
 						super.onFailure(e, statusCode, content);
 						Log.e(TAG, "获取电话咨询" + content);
 					}
@@ -174,19 +175,6 @@ public class ConsultationApi extends BaseApi {
 		RequestParams params = new RequestParams();
 		params.put("userid", userid);
 		params.put("placedate", "2014-5-25");
-		// client.post(Api.getUrl(Api.Consultation.getteacherbooking), params,
-		// new AsyncHttpResponseHandler() {
-		// @Override
-		// public void onSuccess(int statusCode, String content) {
-		// super.onSuccess(statusCode, content);
-		// Log.e(TAG, "获取电话咨询" + content);
-		// }
-		//
-		// @Override
-		// public void onFailure(Throwable error, String content) {
-		// super.onFailure(error, content);
-		// }
-		// });
 		Net.request(params, Api.getUrl(Api.Consultation.GETUSERMEMBER),
 				new ResponseHandler() {
 					@Override
@@ -232,7 +220,7 @@ public class ConsultationApi extends BaseApi {
 	}
 
 	/**
-	 * 搜索免费咨询
+	 * 搜索免费咨询 ...
 	 * 
 	 */
 	public void searchFreeConsultation(String orderby, String pagesize,
@@ -242,7 +230,78 @@ public class ConsultationApi extends BaseApi {
 		params.put("pagesize", pagesize);
 		params.put("pageindex", pageindex);
 		params.put("jobtype", jobtype);
-		client.post(Api.getUrl(Api.Consultation.searchprobleming), params,
+		client.post(Api.getUrl(Api.User.GET_TEACHER_COMMENT), params,
+				new AsyncHttpResponseHandler() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						Log.e(TAG, "免费资讯搜索接口" + content);
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						super.onFailure(error, content);
+						Log.e(TAG, "免费资讯搜索接口" + error.toString());
+					}
+				});
+
+	}
+
+	/**
+	 * 获取导师评论接口
+	 * 
+	 */
+	public void getTeacherComment(String teacherid) {
+		RequestParams params = new RequestParams();
+		params.put("teacherid", teacherid);
+		client.post(Api.getUrl(Api.User.GET_TEACHER_COMMENT), params,
+				new AsyncHttpResponseHandler() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						TeacherCommentList mTeacherCommentList = mGson
+								.fromJson(content, TeacherCommentList.class);
+						new Delete()
+								.from(TeacherComment.class)
+								.where(TeacherCommentTable.COLUMN_TEACHERUSERID
+										+ "=?", "14").execute();
+						if (mTeacherCommentList != null
+								&& mTeacherCommentList.getTeacherCommentItem() != null) {
+							ActiveAndroid.beginTransaction();
+							try {
+								for (TeacherComment comment : mTeacherCommentList
+										.getTeacherCommentItem()) {
+									comment.save();
+								}
+								ActiveAndroid.setTransactionSuccessful();
+							} finally {
+								ActiveAndroid.endTransaction();
+							}
+						}
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						super.onFailure(error, content);
+						Log.e(TAG, "获取老师评论接口" + error.toString());
+					}
+				});
+
+	}
+
+	/**
+	 * 获取导师评论
+	 * 
+	 */
+	public void addTeacherComment(String teacheruserid, String userid,
+			String commentcontent, String score, String id) {
+		RequestParams params = new RequestParams();
+		params.put("teacheruserid", teacheruserid);
+		params.put("userid", userid);
+		params.put("commentcontent", commentcontent);
+		params.put("score", score);
+		params.put("id", id);
+		client.post(Api.getUrl(Api.User.ADD_TEACHER_COMMENT), params,
 				new AsyncHttpResponseHandler() {
 					@Override
 					public void onSuccess(int statusCode, String content) {

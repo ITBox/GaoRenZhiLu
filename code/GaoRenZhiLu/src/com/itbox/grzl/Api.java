@@ -144,6 +144,8 @@ public class Api {
 		/** 获取老师评价 **/
 		public static final String GET_TEACHER_COMMENT = PartName
 				+ "getteachercomment";
+		public static final String ADD_TEACHER_COMMENT = PartName
+				+ "addteachercomment";
 		/** 上传图片 **/
 		public static final String UPLOAD_IMAGE = PartName + "uploadimage";
 
