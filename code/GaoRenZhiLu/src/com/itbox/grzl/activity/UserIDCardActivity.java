@@ -2,9 +2,11 @@ package com.itbox.grzl.activity;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
+import com.itbox.fx.util.EditTextUtils;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
@@ -14,6 +16,7 @@ import com.loopj.android.http.RequestParams;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 /**
  * 身份证
@@ -25,6 +28,12 @@ public class UserIDCardActivity extends BaseActivity {
 	TextView mTVTopCancel;
 	@InjectView(R.id.text_medium)
 	TextView mTVTopMedium;
+	@InjectView(R.id.idcard_name_et)
+	EditText mIDCardName;
+	@InjectView(R.id.idcard_birthday_et)
+	EditText mIDCardBirthday;
+	@InjectView(R.id.idcard_num_et)
+	EditText mIDCardNum;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -36,10 +45,27 @@ public class UserIDCardActivity extends BaseActivity {
 	
 	private void initViews() {
 		mTVTopCancel.setVisibility(View.VISIBLE);
-		mTVTopCancel.setText("个人资料");
-		mTVTopMedium.setText("更多资料");
+		mTVTopCancel.setText("更多资料");
+		mTVTopMedium.setText("身份认证");
 	}
 	
+	@OnClick({R.id.idcard_img, R.id.idcard_save})
+	@Override
+	public void onClick(View v) {
+		super.onClick(v);
+		switch (v.getId()) {
+		case R.id.idcard_img:
+			
+			break;
+		case R.id.idcard_save:
+			String name = EditTextUtils.getText(mIDCardName);
+			String birthday = EditTextUtils.getText(mIDCardBirthday);
+			String num = EditTextUtils.getText(mIDCardNum);
+			break;
+		default:
+			break;
+		}
+	}
 	private void postIDCard() {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()+"");

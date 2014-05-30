@@ -6,16 +6,21 @@ import butterknife.OnClick;
 
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
+import com.itbox.fx.net.ResponseHandler;
 import com.itbox.fx.util.StringUtil;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.CheckAccount;
 import com.itbox.grzl.bean.Register;
+import com.itbox.grzl.engine.RegistResetEngine;
 import com.loopj.android.http.RequestParams;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -119,10 +124,7 @@ public class ResetPassPhoneActivity extends BaseActivity {
     
 	private void sendAuthCode(final String mPhone) {
 		// TODO Auto-generated method stub
-		RequestParams params = new RequestParams();
-		params.put("userphone", mPhone);
-		params.put("type", String.valueOf(2));
-		Net.request(params, Api.getUrl(Api.User.SendVerifyCode), new GsonResponseHandler<Register>(Register.class) {
+		RegistResetEngine.sendAuthCode(mPhone, 2, new GsonResponseHandler<Register>(Register.class) {
 			@Override
 			public void onSuccess(Register object) {
 				super.onSuccess(object);
@@ -138,4 +140,37 @@ public class ResetPassPhoneActivity extends BaseActivity {
 			}
 		});
 	};
+	
+	private void getAuthCode(String phone) {
+//		String authCode = mETRegistAuthCode.getText().toString();
+//		if (StringUtil.isBlank(authCode)){
+//			ToastUtils.showToast(mActThis, "验证码不为空");
+//		} else {
+		    RegistResetEngine.getAuthCode(phone, "", 2, new GsonResponseHandler<Register>(Register.class){
+				@Override
+				public void onSuccess(Register object) {
+					super.onSuccess(object);
+					int result = object.getResult();
+					if (result == 0) {
+						ToastUtils.showToast(mActThis, "验证码错误");
+//						mBTRegistNext.setEnabled(false);
+					} else if (result == 1) {
+						initRest(2);
+					}
+				}
+			});
+//		}
+	}
+	
+	private void resetPSW () {
+		RegistResetEngine.resetPass(AppContext.getInstance().getAccount().getUserid()+"", "", new ResponseHandler() {
+			@Override
+			public void onSuccess(String content) {
+				super.onSuccess(content);
+				Log.i("youzh", content);
+			}
+		});
+	}
+	
+	
 }

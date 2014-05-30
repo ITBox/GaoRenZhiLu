@@ -14,6 +14,7 @@ import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.Register;
+import com.itbox.grzl.engine.RegistResetEngine;
 import com.loopj.android.http.RequestParams;
 
 import android.content.Intent;
@@ -101,10 +102,7 @@ public class RegistPhoneSecondActivity extends BaseActivity {
 	}
 	private void sendAuthCode(final String mPhone) {
 		// TODO Auto-generated method stub
-		RequestParams params = new RequestParams();
-		params.put("userphone", mPhone);
-		params.put("type", String.valueOf(1));
-		Net.request(params, Api.getUrl(Api.User.SendVerifyCode), new GsonResponseHandler<Register>(Register.class) {
+		RegistResetEngine.sendAuthCode(mPhone, 1, new GsonResponseHandler<Register>(Register.class) {
 			@Override
 			public void onSuccess(Register object) {
 				super.onSuccess(object);
@@ -117,6 +115,7 @@ public class RegistPhoneSecondActivity extends BaseActivity {
 			}
 		});
 	};
+	
 	 private class MyTimerTask extends TimerTask {
 
 			@Override

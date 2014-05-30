@@ -26,6 +26,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.Loader;
@@ -47,6 +48,8 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 	TextView mTVTopMedium;
 	@InjectView(R.id.more_my_name_et)
 	EditText mEtUserInfoName;
+	@InjectView(R.id.more_my_shenfenzheng)
+	TextView mTVShenfenzheng;
 	@InjectView(R.id.more_my_bankcard)
 	EditText mEtUserInfoBankCard;
 	@InjectView(R.id.more_my_bankcard_name)
@@ -94,6 +97,14 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 	}
 
 	private void initDatas() {
+		if (TextUtils.isEmpty(userExtension.getUsercode())) {
+			mTVShenfenzheng.setTextColor(Color.rgb(235, 81, 77));// 红
+			mTVShenfenzheng.setText("未认证");
+//			mTVShenfenzheng.setTextColor(Color.rgb(121, 185, 104));// 绿
+//			mTVShenfenzheng.setText("已认证");
+//			mTVShenfenzheng.setTextColor(Color.rgb(253, 108, 23));// 橘
+//			mTVShenfenzheng.setText("审核中");
+		}
 		if (TextUtils.isEmpty(userExtension.getTeachertype())) {
 			mTeacherType.setText(TeacherType.getTeacherName(0));
 		} else {

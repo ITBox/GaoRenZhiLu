@@ -96,7 +96,7 @@ public class Api {
 		/** 17.发闲人预告 */
 		public static final String AddMyFree = PartName + "addmyfree";
 		/** 18.修改密码 */
-		public static final String ChangePassword = PartName + "uppassword";
+		public static final String ChangePassword = PartName + "updatepwd";
 		/** 19.标签换一换 */
 		public static final String GetNextTags = PartName + "nexttags";
 		/** 20.添加标签 */

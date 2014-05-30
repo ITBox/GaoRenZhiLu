@@ -10,6 +10,7 @@ import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.util.DateUtil;
 import com.itbox.fx.util.EditTextUtils;
+import com.itbox.fx.util.ToastUtils;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
@@ -124,6 +125,7 @@ public class UserInfoActivity extends BaseActivity {
     @Override
     protected boolean onBack() {
     	// TODO Auto-generated method stub
+    	postUserInfoMethod();
     	return true;
     }
     
@@ -227,6 +229,7 @@ public class UserInfoActivity extends BaseActivity {
 	 * 修改个人资料
 	 */
     private void postUserInfoMethod() {
+    	showProgressDialog("保存中...");
     	RequestParams params = new RequestParams();
     	params.put("userid", account.getUserid()+"");
     	params.put("username", EditTextUtils.getText(mEtUserInfoName));
@@ -246,10 +249,23 @@ public class UserInfoActivity extends BaseActivity {
     			super.onSuccess(object);
     			switch (object.getResult()) {
 				case Contasts.RESULT_SUCCES:
-					
+					dismissProgressDialog();
+					account.setUsername(EditTextUtils.getText(mEtUserInfoName));
+					account.setUserphone(EditTextUtils.getText(mEtUserInfoPhone));
+					account.setUseremail(EditTextUtils.getText(mEtUserInfoEmail));
+					account.setUseravatarversion("");
+					account.setUsersex(sex+"");
+					account.setUserprovince(provinceCode+"");
+					account.setUsercity(cityCode+"");
+					account.setUserdistrict(districtCode+"");
+					account.setUserintroduction(mUserInfoIntro.getText().toString());
+					account.setUserbirthday(birthday);
+					account.save();
+					mActThis.finish();
 					break;
 				case Contasts.RESULT_FAIL:
-					
+					dismissProgressDialog();
+					ToastUtils.showToast(mActThis, "修改失败");
 					break;
 
 				default:

@@ -111,6 +111,9 @@
             android:name="com.itbox.grzl.activity.UserIDCardActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.itbox.grzl.activity.UserIDCardImgActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.itbox.grzl.activity.ConsultationSearchActivity"
             android:screenOrientation="portrait" />
         <activity
