@@ -47,6 +47,8 @@ public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
 	private String mUserDistrict;
 	private EventType mType;
 	private EventState mState;
+	@InjectView(R.id.tv_empty)
+	protected View mEmptyView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
 		mTitleTv.setText("活动搜索");
 		mSearchBar.setOnSearchListener(this);
 		showLeftBackButton();
-
+		mListView.setEmptyView(mEmptyView);
 		mAdapter = new EventListAdapter(this, null);
 		initLoad(mListView, mAdapter, EventSearchGet.class);
 	}
@@ -142,12 +144,12 @@ public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
 					}
 				});
 	}
-	
+
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 		EventSearchGet bean = new EventSearchGet();
-		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
+		bean.loadFromCursor((Cursor) mAdapter.getItem(position));
 		Intent intent = new Intent(this, EventDetialActivity.class);
 		intent.putExtra("activityid", bean.getActivityId());
 		startActivity(intent);

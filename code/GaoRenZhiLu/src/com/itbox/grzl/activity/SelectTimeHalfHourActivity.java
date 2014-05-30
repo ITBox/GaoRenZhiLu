@@ -158,7 +158,7 @@ public class SelectTimeHalfHourActivity extends SelectAbstractActivity implement
 		if(1 == months.length && 1 == days.length){//如果只有一个月,且这个月只有1天
 			firstHours = lastHours = DateUtil.getBeginHalfHourArray(earlyCal.get(Calendar.HOUR_OF_DAY), earlyCal.get(Calendar.MINUTE));
 		}else{
-			firstHours = DateUtil.getBeginHalfHourArray(earlyCal.get(Calendar.HOUR_OF_DAY), earlyCal.get(Calendar.MINUTE));
+			firstHours = DateUtil.getBeginHalfHourArray(earlyCal.get(Calendar.HOUR_OF_DAY) - 1, earlyCal.get(Calendar.MINUTE));
 			lastHours = DateUtil.getEndHalfHourArray(lastCal.get(Calendar.HOUR_OF_DAY), lastCal.get(Calendar.MINUTE));
 		}
 		hours = firstHours;

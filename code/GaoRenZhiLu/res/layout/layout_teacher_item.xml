@@ -16,7 +16,7 @@
         android:layout_weight="1"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
@@ -36,8 +36,10 @@
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dip" />
-        </LinearLayout>
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/tv_name"
+                android:layout_marginRight="10dip" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"

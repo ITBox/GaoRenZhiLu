@@ -13,7 +13,9 @@ import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.activity.CommentListActivity;
+import com.itbox.grzl.activity.EventMyActivity;
 import com.itbox.grzl.activity.ExamReportActivity;
+import com.itbox.grzl.activity.TeacherCommentListActivity;
 import com.itbox.grzl.activity.TeacherIncomingActivity;
 import com.itbox.grzl.activity.TeacherWithdrawalsListActivity;
 import com.itbox.grzl.activity.UserInfoActivity;
@@ -50,11 +52,12 @@ public class MoreFragment extends BaseFragment {
 			startActivity(UserInfoActivity.class);
 			break;
 		case R.id.more_my_action://我的活动
-			
+			startActivity(EventMyActivity.class);
 			break;
 		case R.id.more_my_ask://我的咨询
 			break;
 		case R.id.more_my_evaluate://我的评价
+			startActivity(TeacherCommentListActivity.class);
 			break;
 		case R.id.more_my_message://我的消息
 			break;

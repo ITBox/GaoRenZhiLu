@@ -6,6 +6,7 @@ import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
+import com.itbox.grzl.bean.TeacherCommentGet;
 import com.itbox.grzl.bean.TeacherIncoming;
 import com.itbox.grzl.bean.TeacherWithdrawals;
 import com.loopj.android.http.RequestParams;
@@ -91,8 +92,20 @@ public class TeacherEngine {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()
 				.toString());
-		Net.request(params, Api.getUrl(Api.User.GET_USER_LIST),
-				handler);
+		Net.request(params, Api.getUrl(Api.User.GET_USER_LIST), handler);
+	}
+
+	/**
+	 * 获取老师评价
+	 * 
+	 * @param handler
+	 */
+	public static void getCommentList(ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("teacherid", AppContext.getInstance().getAccount()
+				.getUserid().toString());
+		// params.put("teacherid", "14");
+		Net.request(params, Api.getUrl(Api.User.GET_TEACHER_COMMENT), handler);
 	}
 
 	public static class UserPayDetailItem {
@@ -118,6 +131,20 @@ public class TeacherEngine {
 		public void setUserWithdrawalsItem(
 				List<TeacherWithdrawals> userWithdrawalsItem) {
 			UserWithdrawalsItem = userWithdrawalsItem;
+		}
+
+	}
+
+	public static class TeacherCommentItem {
+		public List<TeacherCommentGet> TeacherCommentItem;
+
+		public List<TeacherCommentGet> getTeacherCommentItem() {
+			return TeacherCommentItem;
+		}
+
+		public void setTeacherCommentItem(
+				List<TeacherCommentGet> teacherCommentItem) {
+			TeacherCommentItem = teacherCommentItem;
 		}
 
 	}

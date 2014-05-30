@@ -141,6 +141,7 @@ public class Api {
 		/** 获取用户信息 **/
 		public static final String GET_USER_LIST = PartName
 				+ "getuserextension";
+<<<<<<< HEAD
 		/**
 		 * 修改导师更多资料接口
 		 */
@@ -153,6 +154,13 @@ public class Api {
          * 添加身份验证接口
          */
 		public static final String ADD_USER_IDCARD = PartName + "adduserauthentication";
+=======
+		/** 获取老师评价 **/
+		public static final String GET_TEACHER_COMMENT = PartName
+				+ "getteachercomment";
+		public static final String ADD_TEACHER_COMMENT = PartName
+				+ "addteachercomment";
+>>>>>>> bb8bbb241b3acca13996a9d1d2111812959de461
 		/** 上传图片 **/
 		public static final String UPLOAD_IMAGE = PartName + "uploadimage";
 

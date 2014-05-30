@@ -102,6 +102,7 @@ public class LoginActicity extends BaseActivity implements
 		if (cursor != null && cursor.moveToNext()) {
 			Account account = new Account();
 			account.loadFromCursor(cursor);
+			account.setId(cursor.getLong(0));
 			AppContext.getInstance().setAccount(account);
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);

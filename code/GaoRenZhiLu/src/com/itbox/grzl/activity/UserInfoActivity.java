@@ -6,6 +6,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.query.Update;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.util.DateUtil;
@@ -19,6 +20,7 @@ import com.itbox.grzl.bean.Account;
 import com.itbox.grzl.bean.UpdateUserList;
 import com.itbox.grzl.common.Contasts;
 import com.itbox.grzl.common.db.AreaListDB;
+import com.itbox.grzl.constants.AccountTable;
 import com.loopj.android.http.RequestParams;
 
 import android.content.Intent;
@@ -250,6 +252,8 @@ public class UserInfoActivity extends BaseActivity {
     			switch (object.getResult()) {
 				case Contasts.RESULT_SUCCES:
 					dismissProgressDialog();
+//					new Update(Account.class).set(EditTextUtils.getText(mEtUserInfoName))
+//					.where("AccountTable.COLUMN_USERNAME = ?").execute();
 					account.setUsername(EditTextUtils.getText(mEtUserInfoName));
 					account.setUserphone(EditTextUtils.getText(mEtUserInfoPhone));
 					account.setUseremail(EditTextUtils.getText(mEtUserInfoEmail));

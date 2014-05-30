@@ -10,14 +10,179 @@
         android:layout_height="wrap_content"
         layout="@layout/unit_top_title" />
 
-    <handmark.pulltorefresh.library.PullToRefreshListView
-        android:id="@+id/lv_list"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="5dp"
-        android:layout_weight="1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" />
+        android:layout_weight="1" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_item_bg"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <ImageView
+                    android:id="@+id/iv_head"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_below="@+id/tv_type"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/icon" />
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_title"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/iv_head"
+                    android:text="5-25 12:00 - 5-26: 13:00"
+                    android:textColor="@color/black_80"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_person_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_time"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/iv_head"
+                    android:text="5-8人"
+                    android:textColor="@color/black_80"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_time"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_toRightOf="@+id/tv_person_count"
+                    android:text="北京市海淀区"
+                    android:textColor="@color/black_80"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="[校园招聘]"
+                    android:textColor="@color/red_text"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_type"
+                    android:text="我是标题"
+                    android:textColor="@color/red_text"
+                    android:textSize="18sp" />
+
+                <View
+                    android:id="@+id/line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_below="@+id/iv_head"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/gray_e8" />
+
+                <TextView
+                    android:id="@+id/tv_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/line"
+                    android:drawableLeft="@drawable/ic_location"
+                    android:padding="10dp"
+                    android:text="北京市海淀区"
+                    android:textColor="@color/black_80"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/list_item_bg"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:id="@+id/tv_introduction_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="活动介绍"
+                    android:textColor="@color/red_text"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_introduction_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_introduction_title"
+                    android:padding="10dp"
+                    android:text="介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息介绍信息"
+                    android:textColor="@color/black_80"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/list_item_bg_bottom"
+                android:orientation="vertical"
+                android:paddingTop="10dp" >
+
+                <TextView
+                    android:id="@+id/tv_join_person_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="参与人员(7/8人)"
+                    android:textColor="@color/red_text"
+                    android:textSize="18sp" />
+
+                <com.itbox.fx.widget.HorizontalListView
+                    android:id="@+id/hlv_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="65dp"
+                   	android:paddingTop="5dp"
+                   	android:paddingBottom="5dp"/>
+
+                <View
+                    android:id="@+id/line2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/gray_e8" />
+
+                <TextView
+                    android:id="@+id/tv_comment_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:text="交流活动"
+                    android:textColor="@color/red_text"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"

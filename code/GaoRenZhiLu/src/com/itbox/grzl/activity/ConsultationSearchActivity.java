@@ -1,5 +1,8 @@
 package com.itbox.grzl.activity;
 
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,10 +13,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.activeandroid.content.ContentProvider;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.adapter.UserListAdapter;
 import com.itbox.grzl.api.ConsultationApi;
@@ -33,31 +39,66 @@ public class ConsultationSearchActivity extends BaseActivity implements
 
 	@InjectView(R.id.list)
 	protected ListView mListView;
+
+	@InjectView(R.id.tv_select_teachertype)
+	TextView teacherTypeTextView;
+	@InjectView(R.id.tv_select_jobtype)
+	TextView jobTypeTextView;
+
+	@InjectView(R.id.text_medium)
+	TextView mediumTextView;
+
 	private ConsultationApi consultationApi;
 	private UserListAdapter adapter;
+	private String jobtype;
+	private String teachertype;
+	private String jobtypeName;
+	private String teachertypeName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_consultation_search);
 		ButterKnife.inject(this);
-		String jobtype = getIntent().getStringExtra("jobtype");
-		String teachertype = getIntent().getStringExtra("teachertype");
+		mediumTextView.setText("咨询搜索");
+		jobtype = getIntent().getStringExtra("jobtype");
+		teachertype = getIntent().getStringExtra("teachertype");
+		jobtypeName = getIntent().getStringExtra("jobtypename");
+		teachertypeName = getIntent().getStringExtra("teachertypename");
+		if (jobtypeName != null) {
+			jobTypeTextView.setText(jobtypeName);
+		}
+
+		if (teachertype != null) {
+			teacherTypeTextView.setText(teachertypeName);
+		}
+
 		consultationApi = new ConsultationApi();
 		adapter = new UserListAdapter(this, null);
 		mListView.setAdapter(adapter);
-		consultationApi.searchConsultation(null, "0", "0");
-		getSupportLoaderManager().initLoader(0, null, this);
+
+		if (jobtype == null) {
+			jobtype = "0";
+		}
+		if (teachertype == null) {
+			teachertype = "0";
+		}
+		consultationApi.searchConsultation(null, jobtype, teachertype);
 		mListView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				Cursor cursor = (Cursor) parent.getItemAtPosition(position);
+				UserListItem teacher = new UserListItem();
+				teacher.loadFromCursor(cursor);
 				Intent intent = new Intent(ConsultationSearchActivity.this,
 						TeacherDetialActivity.class);
+				intent.putExtra("teacher", teacher);
 				startActivity(intent);
 			}
 		});
+		getSupportLoaderManager().initLoader(0, null, this);
 	}
 
 	@Override
@@ -67,11 +108,58 @@ public class ConsultationSearchActivity extends BaseActivity implements
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
-		return new CursorLoader(this, ContentProvider.createUri(
-				UserListItem.class, null), null,
-				UserListItemTable.COLUMN_JOBTYPE + "=? and "
-						+ UserListItemTable.COLUMN_TEACHERTYPE + "=?",
-				new String[] { "0", "0" }, null);
+		if (jobtype.equals("0")) {
+			return new CursorLoader(this, ContentProvider.createUri(
+					UserListItem.class, null), null,
+					UserListItemTable.COLUMN_TEACHERTYPE + "=?",
+					new String[] { teachertype }, null);
+		} else if (teachertype.equals("0")) {
+			return new CursorLoader(this, ContentProvider.createUri(
+					UserListItem.class, null), null,
+					UserListItemTable.COLUMN_JOBTYPE + "=?",
+					new String[] { jobtype }, null);
+		} else {
+			return new CursorLoader(this, ContentProvider.createUri(
+					UserListItem.class, null), null,
+					UserListItemTable.COLUMN_JOBTYPE + "=? and "
+							+ UserListItemTable.COLUMN_TEACHERTYPE + "=?",
+					new String[] { jobtype, teachertype }, null);
+		}
+
+	}
+
+	@OnClick(R.id.tv_select_teachertype)
+	public void selectTeacherType() {
+		AlertDialog.Builder builder = new Builder(this);
+		final String[] teacherNames = { "专业导师", "人力导师" };
+		builder.setItems(teacherNames, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				teachertype = (arg1 + 1) + "";
+				teacherTypeTextView.setText(teacherNames[arg1]);
+				consultationApi.searchConsultation(null, jobtype, teachertype);
+				getSupportLoaderManager().restartLoader(0, null,
+						ConsultationSearchActivity.this);
+			}
+		}).show();
+	}
+
+	@OnClick(R.id.tv_select_jobtype)
+	public void selectJobType() {
+		AlertDialog.Builder builder = new Builder(this);
+		final String[] jobNames = AppContext.getJobNameArray();
+		builder.setItems(jobNames, new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				jobtype = (arg1 + 1) + "";
+				jobTypeTextView.setText(jobNames[arg1]);
+				consultationApi.searchConsultation(null, jobtype, teachertype);
+				getSupportLoaderManager().restartLoader(0, null,
+						ConsultationSearchActivity.this);
+			}
+		}).show();
 	}
 
 	@Override

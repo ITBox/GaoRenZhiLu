@@ -39,7 +39,8 @@
     <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" >
     </uses-permission>
     <uses-permission android:name="android.permission.ACCESS_GPS" />
-<application
+
+    <application
         android:name="com.itbox.grzl.AppContext"
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -50,7 +51,11 @@
             android:value="gaorenzhilu.db" />
         <meta-data
             android:name="AA_DB_VERSION"
+<<<<<<< HEAD
             android:value="11" />
+=======
+            android:value="12" />
+>>>>>>> bb8bbb241b3acca13996a9d1d2111812959de461
 
         <activity
             android:name="com.itbox.grzl.activity.SplashActivity"
@@ -69,6 +74,10 @@
         </activity>
         <activity
             android:name="com.itbox.grzl.activity.MainActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.itbox.grzl.activity.PublishConsultationActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity
@@ -187,11 +196,21 @@
             android:name="com.itbox.grzl.activity.EventAddActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.itbox.grzl.activity.EventCommentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.EventMyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.EventTeacherActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.itbox.grzl.activity.SelectTimeMinuteActivity"
-            android:screenOrientation="portrait" 
-            android:theme="@style/Translucent_NoTitleBar"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Translucent_NoTitleBar" />
         <activity
             android:name="com.itbox.grzl.activity.SelectTimeHalfHourActivity"
+<<<<<<< HEAD
             android:screenOrientation="portrait" 
             android:theme="@style/Translucent_NoTitleBar"/>
         <activity
@@ -199,11 +218,19 @@
             android:screenOrientation="portrait" 
             android:theme="@style/Translucent_NoTitleBar"/>
        
+=======
+            android:screenOrientation="portrait"
+            android:theme="@style/Translucent_NoTitleBar" />
+
+>>>>>>> bb8bbb241b3acca13996a9d1d2111812959de461
         <provider
             android:name="com.activeandroid.content.ContentProvider"
             android:authorities="com.itbox.grzl"
             android:exported="false" />
-        
+        <activity
+            android:name="com.itbox.grzl.activity.TeacherCommentListActivity"
+            android:screenOrientation="portrait" />
+
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"

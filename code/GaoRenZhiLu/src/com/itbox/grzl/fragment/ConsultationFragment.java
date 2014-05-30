@@ -13,10 +13,12 @@ import android.widget.GridView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.activity.ConsultationSearchActivity;
+import com.itbox.grzl.activity.PublishConsultationActivity;
 import com.itbox.grzl.bean.Job;
 
 /**
@@ -35,16 +37,50 @@ public class ConsultationFragment extends BaseFragment {
 	TextView humanResourceTeacherTextView;
 	private ArrayList<Job> jobs;
 
+	@InjectView(R.id.text_medium)
+	TextView mediumTextView;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.fragment_consultation, null);
 		ButterKnife.inject(this, view);
+		mediumTextView.setText("高人指路");
 		jobs = AppContext.getJobs();
 		JobTypeAdapter adapter = new JobTypeAdapter();
 		mGridView.setAdapter(adapter);
-
 		return view;
+	}
+	
+	@OnClick(R.id.searchBar)
+	public void goSearch(){
+		startActivity(ConsultationSearchActivity.class);
+	}
+
+	@OnClick(R.id.tv_ask)
+	public void ask() {
+		Intent intent = new Intent(getActivity(),
+				PublishConsultationActivity.class);
+		startActivity(intent);
+	}
+
+	@OnClick(R.id.tv_professional_teacher)
+	public void professionalTeacher() {
+		Intent intent = new Intent(getActivity(),
+				ConsultationSearchActivity.class);
+		intent.putExtra("teachertype", "1");
+		intent.putExtra("teachertypename", "专业导师");
+
+		startActivity(intent);
+	}
+
+	@OnClick(R.id.tv_human_resource_teacher)
+	public void humanREsourceTeacher() {
+		Intent intent = new Intent(getActivity(),
+				ConsultationSearchActivity.class);
+		intent.putExtra("teachertype", "2");
+		intent.putExtra("teachertypename", "人力导师");
+		startActivity(intent);
 	}
 
 	private class JobTypeAdapter extends BaseAdapter {
@@ -78,6 +114,7 @@ public class ConsultationFragment extends BaseFragment {
 					Intent intent = new Intent(getActivity(),
 							ConsultationSearchActivity.class);
 					intent.putExtra("jobtype", jobs.get(position).getId() + "");
+					intent.putExtra("jobtypename", jobs.get(position).getName());
 					startActivity(intent);
 				}
 			});

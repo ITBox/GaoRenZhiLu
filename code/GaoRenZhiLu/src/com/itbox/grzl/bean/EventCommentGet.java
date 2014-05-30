@@ -18,6 +18,8 @@ public class EventCommentGet extends BaseModel {
 	public static final String COMMENTCONTENT = "ec_commentcontent";
 	public static final String COMMENTID = "ec_commentid";
 	public static final String CREATETIME = "ec_createtime";
+	public static final String USERNAME = "ec_username";
+	public static final String USERFACE = "ec_userface";
 
 	@Column(name = EventCommentGet.USERID)
 	private String userid;
@@ -26,9 +28,29 @@ public class EventCommentGet extends BaseModel {
 	@Column(name = EventCommentGet.COMMENTCONTENT)
 	private String commentcontent;
 	@Column(name = EventCommentGet.COMMENTID)
-	private int CommentId;
+	private int commentid;
 	@Column(name = EventCommentGet.CREATETIME)
-	private String CreateTime;
+	private String createtime;
+	@Column(name = EventCommentGet.USERNAME)
+	private String username;
+	@Column(name = EventCommentGet.USERFACE)
+	private String userface;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getUserface() {
+		return userface;
+	}
+
+	public void setUserface(String userface) {
+		this.userface = userface;
+	}
 
 	public String getUserid() {
 		return userid;
@@ -55,19 +77,19 @@ public class EventCommentGet extends BaseModel {
 	}
 
 	public int getCommentId() {
-		return CommentId;
+		return commentid;
 	}
 
 	public void setCommentId(int commentId) {
-		CommentId = commentId;
+		commentid = commentId;
 	}
 
 	public String getCreateTime() {
-		return CreateTime;
+		return createtime;
 	}
 
 	public void setCreateTime(String createTime) {
-		CreateTime = createTime;
+		createtime = createTime;
 	}
 
 }

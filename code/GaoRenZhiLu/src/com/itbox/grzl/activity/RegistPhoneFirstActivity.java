@@ -51,20 +51,27 @@ public class RegistPhoneFirstActivity extends BaseActivity {
     	startActivity(LicenceActivity.class);
     }
     
-	@OnClick(R.id.regist_get_authCode)
+	@OnClick({R.id.text_left, R.id.regist_get_authCode})
 	@Override
 	public void onClick(View v) {
 		super.onClick(v);
-		String mPhone = mETRegistPhone.getText().toString();
-        if(StringUtil.isBlank(mPhone)) {
-        	ToastUtils.showToast(mActThis, "手机号不为空");
-        } else{
-        	if (StringUtil.checkPhone(mPhone)){
-        		checkIsRegistServer(mPhone);
-        	} else {
-        		ToastUtils.showToast(mActThis, "手机号不符合规定");
-        	}
-        }
+		switch (v.getId()) {
+		case R.id.text_left:
+			finish();
+			break;
+		case R.id.regist_get_authCode:
+			String mPhone = mETRegistPhone.getText().toString();
+			if (StringUtil.isBlank(mPhone)) {
+				ToastUtils.showToast(mActThis, "手机号不为空");
+			} else {
+				if (StringUtil.checkPhone(mPhone)) {
+					checkIsRegistServer(mPhone);
+				} else {
+					ToastUtils.showToast(mActThis, "手机号不符合规定");
+				}
+			}
+			break;
+		}
 	}
 
 	private void checkIsRegistServer(final String mPhone) {

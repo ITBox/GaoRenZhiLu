@@ -1,19 +1,21 @@
 package com.itbox.grzl.bean;
 
 import android.provider.BaseColumns;
+import android.text.TextUtils;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.itbox.grzl.Api;
 import com.itbox.grzl.constants.AccountTable;
 
 /**
  * 
- * @author malinkang 2014年5月12日
+ * @author malinkang 2014骞�5鏈�12鏃�
  * 
  */
 @Table(name = AccountTable.TABLE_NAME, id = BaseColumns._ID)
-public class Account extends Model {
+public class Account extends BaseModel {
 	@Column(name = AccountTable.COLUMN_USERID)
 	private Integer userid;
 	@Column(name = AccountTable.COLUMN_USERNAME)
@@ -60,7 +62,7 @@ public class Account extends Model {
 	private Integer memberid;
 	@Column(name = AccountTable.COLUMN_ISMESSAGE)
 	private Integer ismessage;
-	@Column(name = AccountTable.COLUMN_ISMESSAGE)
+	@Column(name = AccountTable.COLUMN_ANSWERCOUNT)
 	private String answercount;
 	@Column(name = AccountTable.COLUMN_TEACHERTYPE)
 	private String teachertype;
@@ -112,7 +114,10 @@ public class Account extends Model {
 	}
 
 	public String getUseravatarversion() {
-		return useravatarversion;
+		if (TextUtils.isEmpty(useravatarversion)) {
+			return null;
+		}
+		return Api.User.getAvatarUrl(useravatarversion);
 	}
 
 	public void setUseravatarversion(String useravatarversion) {

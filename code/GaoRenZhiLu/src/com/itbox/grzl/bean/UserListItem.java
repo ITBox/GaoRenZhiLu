@@ -1,5 +1,7 @@
 package com.itbox.grzl.bean;
 
+import java.io.Serializable;
+
 import android.provider.BaseColumns;
 
 import com.activeandroid.Model;
@@ -15,7 +17,8 @@ import com.itbox.grzl.constants.UserListItemTable;
  * 
  */
 @Table(name = UserListItemTable.TABLE_NAME, id = BaseColumns._ID)
-public class UserListItem extends Model {
+public class UserListItem extends Model implements Serializable {
+
 	@Column(name = UserListItemTable.COLUMN_USERID)
 	private String userid;
 	@Column(name = UserListItemTable.COLUMN_USERAVATARVERSION)
