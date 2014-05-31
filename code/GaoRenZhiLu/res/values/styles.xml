@@ -51,7 +51,8 @@
         <item name="android:button">@drawable/checkbox_selector</item>
     </style>
     <style name="SwitchCheckBOX" parent="@android:style/Widget.CompoundButton.CheckBox">
-        <item name="android:button">@drawable/selector_switch_bg</item>
+        <item name="android:button">@drawable/transparent</item>
+        <item name="android:background">@drawable/selector_switch_bg</item>
     </style>
 
     <style name="exam_list_text" parent="android:Widget.TextView">
