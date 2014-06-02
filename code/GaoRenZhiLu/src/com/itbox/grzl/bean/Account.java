@@ -252,4 +252,189 @@ public class Account extends BaseModel {
 		this.userblood = userblood;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((answercount == null) ? 0 : answercount.hashCode());
+		result = prime * result + ((buycount == null) ? 0 : buycount.hashCode());
+		result = prime * result + ((ismessage == null) ? 0 : ismessage.hashCode());
+		result = prime * result + ((jobtype == null) ? 0 : jobtype.hashCode());
+		result = prime * result + ((memberid == null) ? 0 : memberid.hashCode());
+		result = prime * result + ((remarkcount == null) ? 0 : remarkcount.hashCode());
+		result = prime * result + ((teacherlevel == null) ? 0 : teacherlevel.hashCode());
+		result = prime * result + ((teachertype == null) ? 0 : teachertype.hashCode());
+		result = prime * result + ((useravatarversion == null) ? 0 : useravatarversion.hashCode());
+		result = prime * result + ((userbalance == null) ? 0 : userbalance.hashCode());
+		result = prime * result + ((userbirthday == null) ? 0 : userbirthday.hashCode());
+		result = prime * result + ((userblood == null) ? 0 : userblood.hashCode());
+		result = prime * result + ((usercity == null) ? 0 : usercity.hashCode());
+		result = prime * result + ((usercodestate == null) ? 0 : usercodestate.hashCode());
+		result = prime * result + ((userdistrict == null) ? 0 : userdistrict.hashCode());
+		result = prime * result + ((useremail == null) ? 0 : useremail.hashCode());
+		result = prime * result + ((userheight == null) ? 0 : userheight.hashCode());
+		result = prime * result + ((userid == null) ? 0 : userid.hashCode());
+		result = prime * result + ((userintroduction == null) ? 0 : userintroduction.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((userphone == null) ? 0 : userphone.hashCode());
+		result = prime * result + ((userprovince == null) ? 0 : userprovince.hashCode());
+		result = prime * result + ((userrealname == null) ? 0 : userrealname.hashCode());
+		result = prime * result + ((usersex == null) ? 0 : usersex.hashCode());
+		result = prime * result + ((userstate == null) ? 0 : userstate.hashCode());
+		result = prime * result + ((usertotalamount == null) ? 0 : usertotalamount.hashCode());
+		result = prime * result + ((usertype == null) ? 0 : usertype.hashCode());
+		result = prime * result + ((userweight == null) ? 0 : userweight.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (getClass() != obj.getClass())
+			return false;
+		Account other = (Account) obj;
+		if (answercount == null) {
+			if (other.answercount != null)
+				return false;
+		} else if (!answercount.equals(other.answercount))
+			return false;
+		if (buycount == null) {
+			if (other.buycount != null)
+				return false;
+		} else if (!buycount.equals(other.buycount))
+			return false;
+		if (ismessage == null) {
+			if (other.ismessage != null)
+				return false;
+		} else if (!ismessage.equals(other.ismessage))
+			return false;
+		if (jobtype == null) {
+			if (other.jobtype != null)
+				return false;
+		} else if (!jobtype.equals(other.jobtype))
+			return false;
+		if (memberid == null) {
+			if (other.memberid != null)
+				return false;
+		} else if (!memberid.equals(other.memberid))
+			return false;
+		if (remarkcount == null) {
+			if (other.remarkcount != null)
+				return false;
+		} else if (!remarkcount.equals(other.remarkcount))
+			return false;
+		if (teacherlevel == null) {
+			if (other.teacherlevel != null)
+				return false;
+		} else if (!teacherlevel.equals(other.teacherlevel))
+			return false;
+		if (teachertype == null) {
+			if (other.teachertype != null)
+				return false;
+		} else if (!teachertype.equals(other.teachertype))
+			return false;
+		if (useravatarversion == null) {
+			if (other.useravatarversion != null)
+				return false;
+		} else if (!useravatarversion.equals(other.useravatarversion))
+			return false;
+		if (userbalance == null) {
+			if (other.userbalance != null)
+				return false;
+		} else if (!userbalance.equals(other.userbalance))
+			return false;
+		if (userbirthday == null) {
+			if (other.userbirthday != null)
+				return false;
+		} else if (!userbirthday.equals(other.userbirthday))
+			return false;
+		if (userblood == null) {
+			if (other.userblood != null)
+				return false;
+		} else if (!userblood.equals(other.userblood))
+			return false;
+		if (usercity == null) {
+			if (other.usercity != null)
+				return false;
+		} else if (!usercity.equals(other.usercity))
+			return false;
+		if (usercodestate == null) {
+			if (other.usercodestate != null)
+				return false;
+		} else if (!usercodestate.equals(other.usercodestate))
+			return false;
+		if (userdistrict == null) {
+			if (other.userdistrict != null)
+				return false;
+		} else if (!userdistrict.equals(other.userdistrict))
+			return false;
+		if (useremail == null) {
+			if (other.useremail != null)
+				return false;
+		} else if (!useremail.equals(other.useremail))
+			return false;
+		if (userheight == null) {
+			if (other.userheight != null)
+				return false;
+		} else if (!userheight.equals(other.userheight))
+			return false;
+		if (userid == null) {
+			if (other.userid != null)
+				return false;
+		} else if (!userid.equals(other.userid))
+			return false;
+		if (userintroduction == null) {
+			if (other.userintroduction != null)
+				return false;
+		} else if (!userintroduction.equals(other.userintroduction))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
+			return false;
+		if (userphone == null) {
+			if (other.userphone != null)
+				return false;
+		} else if (!userphone.equals(other.userphone))
+			return false;
+		if (userprovince == null) {
+			if (other.userprovince != null)
+				return false;
+		} else if (!userprovince.equals(other.userprovince))
+			return false;
+		if (userrealname == null) {
+			if (other.userrealname != null)
+				return false;
+		} else if (!userrealname.equals(other.userrealname))
+			return false;
+		if (usersex == null) {
+			if (other.usersex != null)
+				return false;
+		} else if (!usersex.equals(other.usersex))
+			return false;
+		if (userstate == null) {
+			if (other.userstate != null)
+				return false;
+		} else if (!userstate.equals(other.userstate))
+			return false;
+		if (usertotalamount == null) {
+			if (other.usertotalamount != null)
+				return false;
+		} else if (!usertotalamount.equals(other.usertotalamount))
+			return false;
+		if (usertype == null) {
+			if (other.usertype != null)
+				return false;
+		} else if (!usertype.equals(other.usertype))
+			return false;
+		if (userweight == null) {
+			if (other.userweight != null)
+				return false;
+		} else if (!userweight.equals(other.userweight))
+			return false;
+		return true;
+	}
+
 }

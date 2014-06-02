@@ -32,7 +32,7 @@ public class Utils {
 	 * @return
 	 */
 	public static <T> boolean compareContent(ArrayList<T> beforeList, ArrayList<T> afterList){
-		boolean result = false ;
+		boolean result = false;
 		if (beforeList != null && beforeList.size() > 0 ) {
 			for (int i = 0; i < beforeList.size(); i++) {
 				result = beforeList.get(i).equals(afterList.get(i));

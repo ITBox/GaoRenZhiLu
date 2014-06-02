@@ -46,6 +46,8 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 	TextView mTVTopCancel;
 	@InjectView(R.id.text_medium)
 	TextView mTVTopMedium;
+	@InjectView(R.id.text_right)
+	TextView mTVTopSave;
 	@InjectView(R.id.more_my_name_et)
 	EditText mEtUserInfoName;
 	@InjectView(R.id.more_my_shenfenzheng)
@@ -72,7 +74,8 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 	private int[] jobsIds;
 	private int teacherId;
 	private int jobId;
-
+//    private UserExtension newUserExtension = new UserExtension();
+    
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -87,24 +90,33 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 			jobsNames[i] = jobList.get(i).getName();
 			jobsIds[i] = jobList.get(i).getId();
 		}
+		
+		getSupportLoaderManager().initLoader(0, null, this);
 	}
 
 	private void initViews() {
 		mTVTopCancel.setVisibility(View.VISIBLE);
+		mTVTopSave.setVisibility(View.VISIBLE);
 		mTVTopCancel.setText("个人资料");
 		mTVTopMedium.setText("更多资料");
+		mTVTopSave.setText("保存");
 		mEtUserInfoName.setText(AppContext.getInstance().getAccount().getUsername());
 	}
 
 	private void initDatas() {
-		if (TextUtils.isEmpty(userExtension.getUsercode())) {
+		if (userExtension.getUsercode().equals("0")) {
 			mTVShenfenzheng.setTextColor(Color.rgb(235, 81, 77));// 红
 			mTVShenfenzheng.setText("未认证");
-//			mTVShenfenzheng.setTextColor(Color.rgb(121, 185, 104));// 绿
-//			mTVShenfenzheng.setText("已认证");
-//			mTVShenfenzheng.setTextColor(Color.rgb(253, 108, 23));// 橘
-//			mTVShenfenzheng.setText("审核中");
-		}
+		} else if (userExtension.getUsercode().equals("1")) {
+			mTVShenfenzheng.setTextColor(Color.rgb(121, 185, 104));// 绿
+			mTVShenfenzheng.setText("已认证");
+		} else if (userExtension.getUsercode().equals("2")) {
+			mTVShenfenzheng.setTextColor(Color.rgb(253, 108, 23));// 橘
+			mTVShenfenzheng.setText("审核中");
+		} else if (userExtension.getUsercode().equals("3")) {
+			mTVShenfenzheng.setTextColor(Color.rgb(253, 108, 23));// 橘
+			mTVShenfenzheng.setText("审核失败");
+		} 
 		if (TextUtils.isEmpty(userExtension.getTeachertype())) {
 			mTeacherType.setText(TeacherType.getTeacherName(0));
 		} else {
@@ -115,20 +127,28 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 		} else {
 			mPositionType.setText(jobsNames[Integer.parseInt(userExtension.getJobtype())]);
 		}
+		mEtUserInfoBankCard.setText(userExtension.getUserbank());
+		mEtUserInfoBankCardName.setText(userExtension.getBankaddress());
+		mEtUserInfoZixunPhone.setText(userExtension.getPhoneprice());
+		mEtUserInfoZixunImg.setText(userExtension.getPictureprice());
+		mTVUserInfoZixunTime.setText(userExtension.getStarttime() + "-" + userExtension.getEndtime());
 	}
 
-	@Override
-	protected boolean onBack() {
-		// TODO Auto-generated method stub
-		return true;
-	}
+//	@Override
+//	protected boolean onBack() {
+//		userExtension.equals(obj);
+//		return true;
+//	}
 
-	@OnClick({ R.id.text_left, R.id.more_my_name_iv, R.id.more_my_shenfenzheng_rl, R.id.more_my_bankcard_iv, R.id.more_my_bankcard_name_iv, R.id.teacher_type, R.id.position_type, R.id.more_my_zixunImg_iv, R.id.more_my_zixunPhone_iv, R.id.more_my_zixunTime_iv })
+	@OnClick({ R.id.text_left, R.id.text_right, R.id.more_my_name_iv, R.id.more_my_shenfenzheng_rl, R.id.more_my_bankcard_iv, R.id.more_my_bankcard_name_iv, R.id.teacher_type, R.id.position_type, R.id.more_my_zixunImg_iv, R.id.more_my_zixunPhone_iv, R.id.more_my_zixunTime_iv })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.text_left:
 			mActThis.finish();
+			break;
+		case R.id.text_right:
+			postDataMethod();
 			break;
 		case R.id.more_my_name_iv:
 			EditTextUtils.showKeyboard(mEtUserInfoName);
@@ -215,8 +235,6 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 			public void onSuccess(UserExtension object) {
 				super.onSuccess(object);
 				object.save();
-				userExtension  = new UserExtension();
-				initDatas();
 			}
 		});
 	}
@@ -244,6 +262,7 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 				int result = object.getResult();
 				switch (result) {
 				case Contasts.RESULT_SUCCES:
+					userExtension.save();
 					dismissProgressDialog();
 					UserInfoMoreActivity.this.finish();
 					break;

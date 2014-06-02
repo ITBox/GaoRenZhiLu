@@ -1,6 +1,5 @@
 package com.itbox.grzl.bean;
 
-import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 
@@ -11,7 +10,7 @@ import com.activeandroid.annotation.Table;
  * 
  */
 @Table(name = "userextension", id = UserExtension.ID)
-public class UserExtension extends Model {
+public class UserExtension extends BaseModel {
 
 	public static final String ID = "_id";
 	public static final String USERID = "ue_userid";
@@ -148,4 +147,93 @@ public class UserExtension extends Model {
 		this.remarkcount = remarkcount;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((bankaddress == null) ? 0 : bankaddress.hashCode());
+		result = prime * result + ((endtime == null) ? 0 : endtime.hashCode());
+		result = prime * result + ((jobtype == null) ? 0 : jobtype.hashCode());
+		result = prime * result + ((phoneprice == null) ? 0 : phoneprice.hashCode());
+		result = prime * result + ((pictureprice == null) ? 0 : pictureprice.hashCode());
+		result = prime * result + ((remarkcount == null) ? 0 : remarkcount.hashCode());
+		result = prime * result + ((starttime == null) ? 0 : starttime.hashCode());
+		result = prime * result + ((teacherlevel == null) ? 0 : teacherlevel.hashCode());
+		result = prime * result + ((teachertype == null) ? 0 : teachertype.hashCode());
+		result = prime * result + ((userbank == null) ? 0 : userbank.hashCode());
+		result = prime * result + ((usercode == null) ? 0 : usercode.hashCode());
+		result = prime * result + ((userid == null) ? 0 : userid.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (getClass() != obj.getClass())
+			return false;
+		UserExtension other = (UserExtension) obj;
+		if (bankaddress == null) {
+			if (other.bankaddress != null)
+				return false;
+		} else if (!bankaddress.equals(other.bankaddress))
+			return false;
+		if (endtime == null) {
+			if (other.endtime != null)
+				return false;
+		} else if (!endtime.equals(other.endtime))
+			return false;
+		if (jobtype == null) {
+			if (other.jobtype != null)
+				return false;
+		} else if (!jobtype.equals(other.jobtype))
+			return false;
+		if (phoneprice == null) {
+			if (other.phoneprice != null)
+				return false;
+		} else if (!phoneprice.equals(other.phoneprice))
+			return false;
+		if (pictureprice == null) {
+			if (other.pictureprice != null)
+				return false;
+		} else if (!pictureprice.equals(other.pictureprice))
+			return false;
+		if (remarkcount == null) {
+			if (other.remarkcount != null)
+				return false;
+		} else if (!remarkcount.equals(other.remarkcount))
+			return false;
+		if (starttime == null) {
+			if (other.starttime != null)
+				return false;
+		} else if (!starttime.equals(other.starttime))
+			return false;
+		if (teacherlevel == null) {
+			if (other.teacherlevel != null)
+				return false;
+		} else if (!teacherlevel.equals(other.teacherlevel))
+			return false;
+		if (teachertype == null) {
+			if (other.teachertype != null)
+				return false;
+		} else if (!teachertype.equals(other.teachertype))
+			return false;
+		if (userbank == null) {
+			if (other.userbank != null)
+				return false;
+		} else if (!userbank.equals(other.userbank))
+			return false;
+		if (usercode == null) {
+			if (other.usercode != null)
+				return false;
+		} else if (!usercode.equals(other.usercode))
+			return false;
+		if (userid == null) {
+			if (other.userid != null)
+				return false;
+		} else if (!userid.equals(other.userid))
+			return false;
+		return true;
+	}
+    
 }

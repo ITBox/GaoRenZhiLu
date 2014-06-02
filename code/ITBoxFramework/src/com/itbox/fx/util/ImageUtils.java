@@ -119,5 +119,33 @@ public class ImageUtils {
 			}
 		}
 	}
+    
+	public static Bitmap getUriBitmap(Context context, Uri uri) {
+		BitmapFactory.Options newOpts = new BitmapFactory.Options();
+		newOpts.inJustDecodeBounds = true;
+		Bitmap bitmap = decodeUriAsBitmap(context, uri, newOpts);
+		newOpts.inJustDecodeBounds = false;
+		newOpts.inSampleSize = calculateInSampleSize(newOpts, 640, 400);
+		bitmap = decodeUriAsBitmap(context, uri, newOpts);
+		return bitmap;
+	}
+	
+	public static Bitmap decodeUriAsBitmap(Context context, Uri uri, BitmapFactory.Options options) {
 
+		Bitmap result = null;
+
+		 if (uri != null) {
+			ContentResolver cr = context.getContentResolver();
+			InputStream inputStream = null;
+			try {
+				inputStream = cr.openInputStream(uri);
+				result = BitmapFactory.decodeStream(inputStream, null, options);
+				inputStream.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
+	}
 }

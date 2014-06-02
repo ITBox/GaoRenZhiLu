@@ -12,4 +12,9 @@ public class Contasts {
 	public static final int REQUEST_SELECT_AREA           = 1002;
 	public static final int REQUEST_SELECT_TYPE           = 1003;
 	public static final int REQUEST_SELECT_ZIXUN_TIME     = 1004;
+	
+	public static final int TAKE_PICTURE_FROM_GALLERY     = 2000;
+	public static final int TAKE_PICTURE_FROM_CAMERA      = 2050;
+	
+	public static final int UPLOAD_IDCARD                 = 2100;
 }

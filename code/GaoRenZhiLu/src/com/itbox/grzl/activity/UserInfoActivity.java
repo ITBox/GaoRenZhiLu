@@ -1,12 +1,9 @@
 package com.itbox.grzl.activity;
 
-import java.util.ArrayList;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-import com.activeandroid.query.Update;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.util.DateUtil;
@@ -20,7 +17,6 @@ import com.itbox.grzl.bean.Account;
 import com.itbox.grzl.bean.UpdateUserList;
 import com.itbox.grzl.common.Contasts;
 import com.itbox.grzl.common.db.AreaListDB;
-import com.itbox.grzl.constants.AccountTable;
 import com.loopj.android.http.RequestParams;
 
 import android.content.Intent;
@@ -39,6 +35,8 @@ public class UserInfoActivity extends BaseActivity {
 	TextView mTVTopCancel;
 	@InjectView(R.id.text_medium)
 	TextView mTVTopMedium;
+	@InjectView(R.id.text_right)
+	TextView mTVTopSave;
 	@InjectView(R.id.userinfo_photo)
 	CircleImageView mUserInfoPhoto;
 	@InjectView(R.id.userinfo_name)
@@ -73,8 +71,8 @@ public class UserInfoActivity extends BaseActivity {
 	private int provinceCode = 100000;
 	private int cityCode = 110000;
 	private int districtCode = 110101;
-    private ArrayList<Account> beforeAccount = new ArrayList<Account>();
-    private ArrayList<Account> afterAccount = new ArrayList<Account>();
+//    private ArrayList<Account> beforeAccount = new ArrayList<Account>();
+//    private ArrayList<Account> afterAccount = new ArrayList<Account>();
     
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -82,14 +80,16 @@ public class UserInfoActivity extends BaseActivity {
 		setContentView(R.layout.activity_user_info);
 		ButterKnife.inject(mActThis);
 		account = AppContext.getInstance().getAccount();
-		beforeAccount.add(account);
+//		beforeAccount.add(account);
 		initViews();
 		initDatas();
 	}
 
 	private void initViews() {
 		mTVTopCancel.setVisibility(View.VISIBLE);
+		mTVTopSave.setVisibility(View.VISIBLE);
 		mTVTopMedium.setText("个人资料");
+		mTVTopSave.setText("保存");
 	}
 
 	private void initDatas() {
@@ -124,19 +124,21 @@ public class UserInfoActivity extends BaseActivity {
 		return new AreaListDB().getAreaByCode(Integer.parseInt(place)).getAreaName();
 	}
 	
-    @Override
-    protected boolean onBack() {
-    	// TODO Auto-generated method stub
-    	postUserInfoMethod();
-    	return true;
-    }
+//    @Override
+//    protected boolean onBack() {
+//    	// TODO Auto-generated method stub
+//    	return true;
+//    }
     
-	@OnClick({ R.id.text_left, R.id.more_my_name_iv, R.id.more_my_city_iv, R.id.more_my_birthday_iv, R.id.more_my_sex_iv, R.id.more_my_phone_iv, R.id.more_my_email_iv, R.id.more_my_intro_rl, R.id.more_my_moreinfo_rl })
+	@OnClick({ R.id.text_left, R.id.text_right, R.id.more_my_name_iv, R.id.more_my_city_iv, R.id.more_my_birthday_iv, R.id.more_my_sex_iv, R.id.more_my_phone_iv, R.id.more_my_email_iv, R.id.more_my_intro_rl, R.id.more_my_moreinfo_rl })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.text_left:
 			mActThis.finish();
+			break;
+		case R.id.text_right:
+			postUserInfoMethod();
 			break;
 		case R.id.more_my_name_iv:
 			EditTextUtils.showKeyboard(mEtUserInfoName);
