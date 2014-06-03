@@ -123,7 +123,7 @@
             android:background="#E7E7E7"
             android:paddingBottom="5dip"
             android:paddingTop="5dip"
-            android:text="资讯服务"
+            android:text="咨询服务"
             android:textColor="#838383"
             android:textSize="16sp" />
 

@@ -27,6 +27,7 @@ import com.itbox.grzl.bean.Job;
  * 
  */
 public class ConsultationFragment extends BaseFragment {
+
 	@InjectView(R.id.tv_ask)
 	TextView askTextView;
 	@InjectView(R.id.gv_jobtype)
@@ -51,9 +52,9 @@ public class ConsultationFragment extends BaseFragment {
 		mGridView.setAdapter(adapter);
 		return view;
 	}
-	
+
 	@OnClick(R.id.searchBar)
-	public void goSearch(){
+	public void goSearch() {
 		startActivity(ConsultationSearchActivity.class);
 	}
 

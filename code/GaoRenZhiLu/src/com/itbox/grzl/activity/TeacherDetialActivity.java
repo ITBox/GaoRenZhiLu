@@ -51,6 +51,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 	TextView pictureConsultationTextView;
 	@InjectView(R.id.tv_phone_consultation)
 	TextView phoneConsultationTextView;
+	private TeacherExtension teacherExtension;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -58,6 +59,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 		setContentView(R.layout.activity_teacher_detial);
 		ButterKnife.inject(this);
 		teacher = (UserListItem) getIntent().getSerializableExtra("teacher");
+		teacherExtension = new TeacherExtension();
 		api = new ConsultationApi();
 		api.getTeacherMoreInfo("14");
 		mImageLoader = ImageLoader.getInstance();
@@ -90,14 +92,20 @@ public class TeacherDetialActivity extends BaseActivity implements
 
 	@OnClick(R.id.ll_picture_consultation)
 	public void enterPictureConsultationDetial() {
-		Intent intent = new Intent(this,
-				PictureConsultationDetialActivity.class);
+		Intent intent = new Intent(this, ConsultationDetialActivity.class);
+		intent.putExtra("teacher", teacher);
+		intent.putExtra("consultation_name",
+				"图文咨询 ￥" + teacherExtension.getPicturepice());
 		startActivity(intent);
 	}
 
 	@OnClick(R.id.ll_phone_consultation)
 	public void enterPhoneConsultationDetial() {
-
+		Intent intent = new Intent(this, ConsultationDetialActivity.class);
+		intent.putExtra("teacher", teacher);
+		intent.putExtra("consultation_name",
+				"电话资讯 ￥" + teacherExtension.getPhoneprice());
+		startActivity(intent);
 	}
 
 	@Override
@@ -111,7 +119,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 	@Override
 	public void onLoadFinished(Loader<Cursor> arg0, Cursor cursor) {
 		if (cursor != null && cursor.moveToNext()) {
-			TeacherExtension teacherExtension = new TeacherExtension();
+
 			teacherExtension.loadFromCursor(cursor);
 			pictureConsultationTextView.setText("图文咨询 ￥"
 					+ teacherExtension.getPicturepice());

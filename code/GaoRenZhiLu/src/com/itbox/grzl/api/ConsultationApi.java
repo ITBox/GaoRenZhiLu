@@ -18,9 +18,12 @@ import com.itbox.grzl.Api;
 import com.itbox.grzl.bean.TeacherComment;
 import com.itbox.grzl.bean.TeacherCommentList;
 import com.itbox.grzl.bean.TeacherExtension;
+import com.itbox.grzl.bean.UserLevel;
+import com.itbox.grzl.bean.UserLevelList;
 import com.itbox.grzl.bean.UserList;
 import com.itbox.grzl.bean.UserListItem;
 import com.itbox.grzl.constants.TeacherCommentTable;
+import com.itbox.grzl.constants.UserLevelTable;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -171,7 +174,7 @@ public class ConsultationApi extends BaseApi {
 	/**
 	 * 获取
 	 */
-	public void getUserLevel(String userid) {
+	public void getUserLevel(final String userid) {
 		RequestParams params = new RequestParams();
 		params.put("userid", userid);
 		params.put("placedate", "2014-5-25");
@@ -181,14 +184,39 @@ public class ConsultationApi extends BaseApi {
 					public void onSuccess(int statusCode, Header[] headers,
 							String content) {
 						super.onSuccess(statusCode, headers, content);
-						Log.e(TAG, "获取" + content);
+
+						new Delete()
+								.from(UserLevel.class)
+								.where(UserLevelTable.COLUMN_USER_ID + "=?",
+										userid).execute();
+						UserLevelList userLevelList = mGson.fromJson(content,
+								UserLevelList.class);
+						if (userLevelList != null
+								&& userLevelList.getUserMemberItem() != null) {
+
+							ActiveAndroid.beginTransaction();
+							ArrayList<UserLevel> userLevels = userLevelList
+									.getUserMemberItem();
+							if (userLevels != null) {
+								try {
+									for (UserLevel item : userLevels) {
+										item.setUserid(userid);
+										item.save();
+									}
+									ActiveAndroid.setTransactionSuccessful();
+								} finally {
+									ActiveAndroid.endTransaction();
+								}
+							}
+
+						}
 					}
 
 					@Override
 					public void onFailure(Throwable e, int statusCode,
 							String content) {
 						super.onFailure(e, statusCode, content);
-						Log.e(TAG, "获取电话咨询" + content);
+
 					}
 				});
 	}

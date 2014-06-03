@@ -31,6 +31,7 @@ import com.itbox.grzl.engine.EventEngine.ActivityIdItem;
  * @date 2014-5-24下午5:59:58
  */
 public class EventFragment extends BaseLoadFragment<EventGet> {
+
 	@InjectView(R.id.text_medium)
 	protected TextView mTitleTv;
 	@InjectView(R.id.text_right)
@@ -68,7 +69,7 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 		initLoad(mListView, mAdapter, EventGet.class);
 	}
 
-	@OnClick({ R.id.text_right, R.id.text_left , R.id.bt_add})
+	@OnClick({ R.id.text_right, R.id.text_left, R.id.bt_add })
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.text_right:

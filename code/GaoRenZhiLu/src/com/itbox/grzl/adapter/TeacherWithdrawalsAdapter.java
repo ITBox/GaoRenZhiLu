@@ -2,7 +2,6 @@ package com.itbox.grzl.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +9,6 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.TeacherWithdrawals;
 

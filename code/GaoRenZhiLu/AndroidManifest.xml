@@ -171,7 +171,7 @@
             android:name="com.itbox.grzl.activity.TeacherDetialActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.itbox.grzl.activity.PictureConsultationDetialActivity"
+            android:name="com.itbox.grzl.activity.ConsultationDetialActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.PayActivity"
@@ -206,19 +206,23 @@
             android:theme="@style/Translucent_NoTitleBar" />
         <activity
             android:name="com.itbox.grzl.activity.SelectTimeHalfHourActivity"
-            android:screenOrientation="portrait" 
-            android:theme="@style/Translucent_NoTitleBar"/>
+            android:screenOrientation="portrait"
+            android:theme="@style/Translucent_NoTitleBar" />
         <activity
             android:name="com.itbox.grzl.activity.SelectDoubleHourActivity"
-            android:screenOrientation="portrait" 
-            android:theme="@style/Translucent_NoTitleBar"/>
-       
+            android:screenOrientation="portrait"
+            android:theme="@style/Translucent_NoTitleBar" />
+
         <provider
             android:name="com.activeandroid.content.ContentProvider"
             android:authorities="com.itbox.grzl"
             android:exported="false" />
+
         <activity
             android:name="com.itbox.grzl.activity.TeacherCommentListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.BuyVipActivity"
             android:screenOrientation="portrait" />
 
         <service
