@@ -134,6 +134,7 @@ public class RegistEmailActivity extends BaseActivity {
 				if (object.getResult() > 0){
 					// 注册成功
 					ToastUtils.showToast(mActThis, "注册成功");
+					finish();
 				} else {
 					// 
 				}

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -32,27 +33,53 @@ public class MoreFragment extends BaseFragment {
 	CircleImageView mMorePhoto;
 	@InjectView(R.id.more_my_name)
 	TextView mMoreName;
+	@InjectView(R.id.more_my_evaluate)
+	TextView mMoreEvaluate;
+	@InjectView(R.id.more_my_tixian)
+	TextView mMoreTixian;
+	@InjectView(R.id.more_my_shouru)
+	TextView mMoreShouru;
+	@InjectView(R.id.more_my_consult)
+	TextView mMoreConsult;
+	@InjectView(R.id.more_my_evaluate_line)
+	ImageView mMoreEvaluateLine;
+	@InjectView(R.id.more_my_tixian_line)
+	ImageView mMoreTixianLine;
+	@InjectView(R.id.more_my_shouru_line)
+	ImageView mMoreShouruLine;
+	@InjectView(R.id.more_my_consult_line)
+	ImageView mMoreConsultLine;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View layout = inflater.inflate(R.layout.fragment_more, null);
 		ButterKnife.inject(mActThis, layout);
 		Account account = AppContext.getInstance().getAccount();
-		loader.displayImage(account.getUseravatarversion(), mMorePhoto,
-				photoOptions);
+		loader.displayImage(account.getUseravatarversion(), mMorePhoto, photoOptions);
 		mMoreName.setText(account.getUsername());
 		// Account bean = new
 		// Select(AccountTable.COLUMN_USERNAME).from(Account.class).executeSingle();
 		// bean.getUsername();
+		showViews(account);
 		return layout;
 	}
 
-	@OnClick({ R.id.more_my_photo, R.id.more_my_action, R.id.more_my_ask,
-			R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian,
-			R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult,
-			R.id.more_my_exam, R.id.more_my_set })
+	private void showViews(Account account) {
+		// TODO Auto-generated method stub
+		if (account.getUsertype() == 2) {
+			mMoreEvaluate.setVisibility(View.GONE);
+			mMoreTixian.setVisibility(View.GONE);
+			mMoreShouru.setVisibility(View.GONE);
+			mMoreConsult.setVisibility(View.GONE);
+			mMoreEvaluateLine.setVisibility(View.GONE);
+			mMoreTixianLine.setVisibility(View.GONE);
+			mMoreShouruLine.setVisibility(View.GONE);
+			mMoreConsultLine.setVisibility(View.GONE);
+		}
+	}
+
+	@OnClick({ R.id.more_my_photo, R.id.more_my_action, R.id.more_my_ask, R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian, R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult, R.id.more_my_exam, R.id.more_my_set })
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.more_my_photo:

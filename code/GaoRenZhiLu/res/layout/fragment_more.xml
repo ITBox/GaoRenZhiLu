@@ -90,6 +90,7 @@
             android:text="我的评价" />
 
         <ImageView
+            android:id="@+id/more_my_evaluate_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/bg_more_line" />
@@ -126,6 +127,7 @@
             android:text="提现明细" />
 
         <ImageView
+            android:id="@+id/more_my_tixian_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/bg_more_line" />
@@ -144,6 +146,7 @@
             android:text="收入明细" />
 
         <ImageView
+            android:id="@+id/more_my_shouru_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/bg_more_line" />
@@ -180,6 +183,7 @@
             android:text="免费咨询" />
 
         <ImageView
+            android:id="@+id/more_my_consult_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/bg_more_line" />
