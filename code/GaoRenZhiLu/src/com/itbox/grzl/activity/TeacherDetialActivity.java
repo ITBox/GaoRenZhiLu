@@ -94,8 +94,8 @@ public class TeacherDetialActivity extends BaseActivity implements
 	public void enterPictureConsultationDetial() {
 		Intent intent = new Intent(this, ConsultationDetialActivity.class);
 		intent.putExtra("teacher", teacher);
-		intent.putExtra("consultation_name",
-				"图文咨询 ￥" + teacherExtension.getPicturepice());
+		intent.putExtra("consultation_name", "图文咨询 ￥0.00");
+		intent.putExtra("type", "picture");
 		startActivity(intent);
 	}
 
@@ -105,6 +105,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 		intent.putExtra("teacher", teacher);
 		intent.putExtra("consultation_name",
 				"电话资讯 ￥" + teacherExtension.getPhoneprice());
+		intent.putExtra("type", "phone");
 		startActivity(intent);
 	}
 
@@ -121,8 +122,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 		if (cursor != null && cursor.moveToNext()) {
 
 			teacherExtension.loadFromCursor(cursor);
-			pictureConsultationTextView.setText("图文咨询 ￥"
-					+ teacherExtension.getPicturepice());
+			pictureConsultationTextView.setText("图文咨询 ￥0.00");
 			phoneConsultationTextView.setText("电话咨询 ￥"
 					+ teacherExtension.getPhoneprice());
 		}

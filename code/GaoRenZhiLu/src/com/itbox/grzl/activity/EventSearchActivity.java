@@ -54,9 +54,7 @@ public class EventSearchActivity extends BaseLoadActivity<EventSearchGet>
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_search);
-
 		ButterKnife.inject(this);
-
 		initView();
 	}
 

@@ -57,6 +57,8 @@ public class ConsultationDetialActivity extends BaseActivity implements
 	private ImageLoader mImageLoader;
 	private ImageView avatarImageView;
 	private TextView consultationNameTextView;
+	private ImageView iconImageView;
+	private String type;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -66,6 +68,7 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		teacher = (UserListItem) getIntent().getSerializableExtra("teacher");
 		String consultation_name = getIntent().getStringExtra(
 				"consultation_name");
+		type = getIntent().getStringExtra("type");
 		mHeaderView = View.inflate(this, R.layout.layout_comment_list_header,
 				null);
 		avatarImageView = (ImageView) mHeaderView.findViewById(R.id.iv_avatar);
@@ -82,6 +85,12 @@ public class ConsultationDetialActivity extends BaseActivity implements
 				.findViewById(R.id.tv_answer_count);
 		consultationNameTextView = (TextView) mHeaderView
 				.findViewById(R.id.tv_consultation_name);
+		iconImageView = (ImageView) mHeaderView.findViewById(R.id.iv_icon);
+		if ("phone".equals(type)) {
+			iconImageView.setImageResource(R.drawable.phone_consultation);
+		} else {
+			iconImageView.setImageResource(R.drawable.pic_consultation);
+		}
 		mImageLoader = ImageLoader.getInstance();
 		mImageLoader.displayImage(
 				Api.User.getAvatarUrl(teacher.getUseravatarversion()),
@@ -119,7 +128,6 @@ public class ConsultationDetialActivity extends BaseActivity implements
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
 						Intent intent = new Intent(
 								ConsultationDetialActivity.this,
 								BuyVipActivity.class);
@@ -130,7 +138,6 @@ public class ConsultationDetialActivity extends BaseActivity implements
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						// TODO Auto-generated method stub
 						Intent intent = new Intent(
 								ConsultationDetialActivity.this,
 								PayActivity.class);

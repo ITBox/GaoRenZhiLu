@@ -63,7 +63,6 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 		mLeftTv.setBackgroundResource(R.drawable.left_search);
 		mRightTv.setVisibility(View.VISIBLE);
 		mRightTv.setText("发布活动");
-
 		mListView.setEmptyView(mEmptyView);
 		mAdapter = new EventListAdapter(getActivity(), null);
 		initLoad(mListView, mAdapter, EventGet.class);

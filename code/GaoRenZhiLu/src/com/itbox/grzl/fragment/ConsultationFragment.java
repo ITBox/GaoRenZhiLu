@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,13 +21,16 @@ import com.itbox.grzl.R;
 import com.itbox.grzl.activity.ConsultationSearchActivity;
 import com.itbox.grzl.activity.PublishConsultationActivity;
 import com.itbox.grzl.bean.Job;
+import com.itbox.grzl.widget.SearchBar;
+import com.itbox.grzl.widget.SearchBar.OnSearchListener;
 
 /**
  * 
  * @author malinkang 2014年5月19日
  * 
  */
-public class ConsultationFragment extends BaseFragment {
+public class ConsultationFragment extends BaseFragment implements
+		OnSearchListener {
 
 	@InjectView(R.id.tv_ask)
 	TextView askTextView;
@@ -41,6 +45,9 @@ public class ConsultationFragment extends BaseFragment {
 	@InjectView(R.id.text_medium)
 	TextView mediumTextView;
 
+	@InjectView(R.id.searchBar)
+	SearchBar searchBar;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -50,12 +57,8 @@ public class ConsultationFragment extends BaseFragment {
 		jobs = AppContext.getJobs();
 		JobTypeAdapter adapter = new JobTypeAdapter();
 		mGridView.setAdapter(adapter);
+		searchBar.setOnSearchListener(this);
 		return view;
-	}
-
-	@OnClick(R.id.searchBar)
-	public void goSearch() {
-		startActivity(ConsultationSearchActivity.class);
 	}
 
 	@OnClick(R.id.tv_ask)
@@ -71,7 +74,6 @@ public class ConsultationFragment extends BaseFragment {
 				ConsultationSearchActivity.class);
 		intent.putExtra("teachertype", "1");
 		intent.putExtra("teachertypename", "专业导师");
-
 		startActivity(intent);
 	}
 
@@ -121,5 +123,13 @@ public class ConsultationFragment extends BaseFragment {
 			});
 			return view;
 		}
+	}
+
+	@Override
+	public void onSearch(String keyword) {
+		Log.e(ConsultationFragment.class.getSimpleName(), "keyword" + keyword);
+		showProgressDialog("正在搜索...");
+		startActivity(ConsultationSearchActivity.class);
+		dismissProgressDialog();
 	}
 }
