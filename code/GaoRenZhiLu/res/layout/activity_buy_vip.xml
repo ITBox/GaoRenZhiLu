@@ -12,21 +12,7 @@
     <ListView
         android:id="@+id/list"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1" >
+        android:layout_height="match_parent" >
     </ListView>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="36dip"
-        android:layout_marginBottom="5dip"
-        android:layout_marginLeft="10dip"
-        android:layout_marginRight="10dip"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/bt_red_bg"
-        android:gravity="center"
-        android:text="立即购买"
-        android:textColor="#ffffffff"
-        android:textSize="16sp" />
 
 </LinearLayout>
