@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" 
+    android:layout_height="wrap_content"
     android:paddingLeft="5dp"
-    android:paddingRight="5dp">
+    android:paddingRight="5dp" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,6 +37,17 @@
             android:layout_marginTop="5dp"
             android:layout_toRightOf="@+id/iv_head"
             android:text="测试测试测试"
+            android:textColor="@color/black_80"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_job"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tv_content"
+            android:text="适合从事的职业："
             android:textColor="@color/black_80"
             android:textSize="14sp" />
 

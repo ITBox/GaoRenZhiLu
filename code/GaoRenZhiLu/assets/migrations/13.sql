@@ -1,0 +1,1 @@
+ALTER TABLE exam_report ADD COLUMN er_job TEXT;

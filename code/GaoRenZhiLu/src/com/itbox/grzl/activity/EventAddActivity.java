@@ -34,6 +34,7 @@ import com.loopj.android.http.RequestParams;
 
 /**
  * 添加活动页面
+ * 
  * @author baoboy
  * @date 2014-5-26上午12:28:25
  */
@@ -127,9 +128,9 @@ public class EventAddActivity extends BaseActivity {
 		switch (v.getId()) {
 		case R.id.tv_photo:
 			// 选择图片
-			Intent intent = new Intent();
-			intent.setType("image/*");
-			intent.setAction(Intent.ACTION_GET_CONTENT);
+			Intent intent = new Intent(
+					Intent.ACTION_PICK,
+					android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 			startActivityForResult(intent, REQ_PICTURE);
 			break;
 		case R.id.bt_add:
@@ -206,7 +207,7 @@ public class EventAddActivity extends BaseActivity {
 					.openInputStream(mPhotoUri));
 			params.put("id", AppContext.getInstance().getAccount().getUserid()
 					.toString());
-			params.put("imagetype", "3"); // 论坛图片
+			params.put("imagetype", "2"); // 论坛图片
 			Net.request(params, Api.getUrl(Api.User.UPLOAD_IMAGE),
 					new GsonResponseHandler<UploadImageResult>(
 							UploadImageResult.class) {

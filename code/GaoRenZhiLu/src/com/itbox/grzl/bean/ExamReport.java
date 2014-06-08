@@ -22,6 +22,7 @@ public class ExamReport extends Model {
 	public static final String USERNAME = "er_username";
 	public static final String USERAVATARVERSION = "er_useravatarversion";
 	public static final String CREATETIME = "er_createtime";
+	public static final String JOB = "er_job";
 
 	@Column(name = ExamReport.TYPE)
 	private String type;
@@ -35,6 +36,8 @@ public class ExamReport extends Model {
 	private String useravatarversion;
 	@Column(name = ExamReport.CREATETIME)
 	private String createtime;
+	@Column(name = ExamReport.JOB)
+	private String job;
 
 	public String getType() {
 		return type;
@@ -82,6 +85,17 @@ public class ExamReport extends Model {
 
 	public void setCreatetime(String createtime) {
 		this.createtime = createtime;
+	}
+
+	public String getJob() {
+		if (job == null) {
+			job = "无";
+		}
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
 	}
 
 	@Override

@@ -11,6 +11,7 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.content.ContentProvider;
 import com.activeandroid.query.Delete;
+import com.itbox.fx.core.L;
 
 import android.database.Cursor;
 import android.os.Bundle;
@@ -51,8 +52,12 @@ public abstract class BaseLoadFragment<T extends Model> extends BaseFragment
 		mSelection = selection;
 		mOrderBy = orderBy;
 		initView();
-		getActivity().getSupportLoaderManager().initLoader(0, null, this);
+		getActivity().getSupportLoaderManager().initLoader(getLoaderId(), null, this);
 		loadFirstData();
+	}
+
+	protected int getLoaderId() {
+		return 0;
 	}
 
 	/**
@@ -158,7 +163,8 @@ public abstract class BaseLoadFragment<T extends Model> extends BaseFragment
 	}
 
 	@Override
-	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+	public Loader<Cursor> onCreateLoader(int id, Bundle arg1) {
+		L.i("create loader = " + mClazz.getCanonicalName());
 		return new CursorLoader(getActivity(), ContentProvider.createUri(
 				mClazz, null), null, mSelection, null, mOrderBy);
 	}
