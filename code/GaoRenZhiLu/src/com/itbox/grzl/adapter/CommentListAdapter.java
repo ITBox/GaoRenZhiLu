@@ -10,6 +10,7 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.itbox.fx.core.L;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
 import com.itbox.grzl.bean.CommentGet;
@@ -42,6 +43,10 @@ public class CommentListAdapter extends CursorAdapter {
 		ViewHolder holder = (ViewHolder) view.getTag();
 		CommentGet bean = new CommentGet();
 		bean.loadFromCursor(cursor);
+		String[] columnNames = cursor.getColumnNames();
+		for (String string : columnNames) {
+			L.i(".................column = " + string);
+		}
 		holder.tv_name.setText(bean.getUsername());
 		holder.tv_title.setText(bean.getTitle());
 		holder.tv_count.setText("回复数：" + bean.getReplacecount());

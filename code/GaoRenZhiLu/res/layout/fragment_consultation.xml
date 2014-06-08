@@ -89,7 +89,7 @@
                         android:layout_marginTop="5dp"
                         android:background="@drawable/bt_red_bg"
                         android:gravity="center"
-                        android:text="马上提问"
+                        android:text="免费提问"
                         android:textColor="#ffffffff"
                         android:textSize="16sp" />
                 </RelativeLayout>
@@ -102,7 +102,7 @@
                 android:paddingBottom="8dp"
                 android:paddingLeft="12dp"
                 android:paddingTop="8dp"
-                android:text="指全高人咨询"
+                android:text="指定高人咨询"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
 

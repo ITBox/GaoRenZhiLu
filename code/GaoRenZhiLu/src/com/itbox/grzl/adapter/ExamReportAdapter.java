@@ -60,6 +60,8 @@ public class ExamReportAdapter extends CursorAdapter {
 		TextView tv_content;
 		@InjectView(R.id.tv_time)
 		TextView tv_time;
+		@InjectView(R.id.tv_job)
+		TextView tv_job;
 
 		public ViewHolder(View view) {
 			ButterKnife.inject(this, view);

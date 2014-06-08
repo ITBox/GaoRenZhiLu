@@ -42,7 +42,7 @@ public class CommentFragment extends BaseLoadFragment<CommentGet> {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_event, null);
+		View view = inflater.inflate(R.layout.fragment_comment, null);
 
 		ButterKnife.inject(this, view);
 
@@ -59,6 +59,11 @@ public class CommentFragment extends BaseLoadFragment<CommentGet> {
 
 		mAdapter = new CommentListAdapter(getActivity(), null);
 		initLoad(mListView, mAdapter, CommentGet.class);
+	}
+
+	@Override
+	protected int getLoaderId() {
+		return super.getLoaderId() + 1;
 	}
 
 	@OnClick(R.id.text_right)
