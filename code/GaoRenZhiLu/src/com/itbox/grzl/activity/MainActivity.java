@@ -13,6 +13,7 @@ import butterknife.InjectView;
 
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.R;
+import com.itbox.grzl.fragment.CommentFragment;
 import com.itbox.grzl.fragment.ConsultationFragment;
 import com.itbox.grzl.fragment.EventFragment;
 import com.itbox.grzl.fragment.ExamFragment;
@@ -31,19 +32,19 @@ public class MainActivity extends BaseActivity {
 	private LayoutInflater layoutInflater;
 
 	// 定义数组来存放Fragment界面
-	private Class fragmentArray[] = { ExamFragment.class,
-			ConsultationFragment.class, EventFragment.class,
-			OnlineStudyFragment.class, MoreFragment.class };
+	private Class fragmentArray[] = { ConsultationFragment.class,
+			EventFragment.class, CommentFragment.class, ExamFragment.class,
+			MoreFragment.class };
 
 	// 定义数组来存放按钮图片
-	private int mImageViewArray[] = { R.drawable.selector_tab_item_exam,
-			R.drawable.selector_tab_item_consulation,
+	private int mImageViewArray[] = { R.drawable.selector_tab_item_consulation,
 			R.drawable.selector_tab_item_event,
 			R.drawable.selector_tab_item_study,
+			R.drawable.selector_tab_item_exam,
 			R.drawable.selector_tab_item_more };
 
 	// Tab选项卡的文字
-	private String mTextviewArray[] = { "测评", "咨询", "活动", "学习", "更多" };
+	private String mTextviewArray[] = { "咨询", "活动", "论坛", "测评", "更多" };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
