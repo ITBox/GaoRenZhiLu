@@ -174,7 +174,7 @@ public class ResetPassPhoneActivity extends BaseActivity {
 					} else if (result == 1) {
 						initRest(2);
 						mETResetPhone.setText("");
-						mETResetPhone.setHint("请输入新密码");
+						mETResetPhone.setHint("请输入六位新密码");
 						mBTResetGet.setText("保  存");
 						isSavePsw = true;
 					}
@@ -187,20 +187,24 @@ public class ResetPassPhoneActivity extends BaseActivity {
 		if (StringUtil.isBlank(psw)) {
 			showToast("新密码不为空");
 		} else {
-			showProgressDialog("保存中...");
-			RegistResetEngine.resetPass(AppContext.getInstance().getAccount().getUserid()+"", psw, new ResponseHandler() {
-				@Override
-				public void onSuccess(String content) {
-					super.onSuccess(content);
-					Log.i("youzh", content);
-					if (content.equals("200")) {
-						showToast("重置密码成功");
-						mActThis.finish();
-					} else {
-						showToast("重置密码失败");
+			if (psw.length() > 6) {
+				showToast("密码为六位");
+			} else {
+				showProgressDialog("保存中...");
+				RegistResetEngine.resetPass(AppContext.getInstance().getAccount().getUserid()+"", psw, new ResponseHandler() {
+					@Override
+					public void onSuccess(String content) {
+						super.onSuccess(content);
+						Log.i("youzh", content);
+						if (content.equals("200")) {
+							showToast("重置密码成功");
+							mActThis.finish();
+						} else {
+							showToast("重置密码失败");
+						}
 					}
-				}
-			});
+				});
+			}
 		}
 	}
 	

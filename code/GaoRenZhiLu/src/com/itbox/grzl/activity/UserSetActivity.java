@@ -49,10 +49,10 @@ public class UserSetActivity extends BaseActivity {
 			
 			break;
 		case R.id.userset_help:
-			
+			startActivity(UserSetHelpActivity.class);
 			break;
 		case R.id.userset_about:
-			
+			startActivity(UserSetAboutActivity.class);
 			break;
 		case R.id.userset_logout:
 			new Delete().from(Account.class).execute();

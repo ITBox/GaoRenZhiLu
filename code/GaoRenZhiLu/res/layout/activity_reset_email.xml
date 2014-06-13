@@ -55,7 +55,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/rect_radius_white"
-        android:hint="请输入密码"
+        android:hint="请输入六位新密码"
         android:minHeight="@dimen/cell_height"
         android:paddingLeft="5dp"
         android:textColor="@color/light_blue"

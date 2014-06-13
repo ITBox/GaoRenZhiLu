@@ -6,6 +6,7 @@ import butterknife.OnClick;
 
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
+import com.itbox.fx.util.StringUtil;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.R;
@@ -14,6 +15,9 @@ import com.itbox.grzl.bean.Register;
 import com.itbox.grzl.common.Contasts;
 import com.itbox.grzl.common.util.DialogMessage;
 import com.loopj.android.http.RequestParams;
+
+
+
 
 
 
@@ -92,8 +96,13 @@ public class RegistEmailActivity extends BaseActivity {
 	@OnClick(R.id.regist_email_regist)
 	public void registEmailAccount() {
 		// 验证邮箱是否注册过
+		String email= mLLEmailEmail.getText().toString();
+		if (StringUtil.isBlank(email)) {
+			showToast("邮箱不为空");
+			return;
+		} 
 		showProgressDialog("注册中...");
-		Net.request("useremail", mLLEmailEmail.getText().toString(), Api.getUrl(Api.User.CheckAccount), new GsonResponseHandler<CheckAccount>(CheckAccount.class) {
+		Net.request("useremail", email, Api.getUrl(Api.User.CheckAccount), new GsonResponseHandler<CheckAccount>(CheckAccount.class) {
 			@Override
 			public void onSuccess(CheckAccount object) {
 				super.onSuccess(object);
@@ -116,10 +125,20 @@ public class RegistEmailActivity extends BaseActivity {
 	/**
 	 * 邮箱注册
 	 */
-	private void registEmailAll() {
+	private void registEmailAll() { 
+		String email = mLLEmailName.getText().toString();
+		String pass = mLLEmailPass.getText().toString();
+		if (StringUtil.isBlank(pass)) {
+			showToast("密码不为空");
+			return;
+		} 
+		if (pass.length() > 6) {
+			showToast("密码为六位数");
+			return;
+		} 
 		RequestParams params = new RequestParams();
-		params.put("username", mLLEmailName.getText().toString());
-		params.put("userpassword", mLLEmailPass.getText().toString());
+		params.put("username", email);
+		params.put("userpassword", pass);
 		params.put("userprovince", provinceCode+"");
 		params.put("usercity", cityCode+"");
 		params.put("userdistrict", districtCode+"");

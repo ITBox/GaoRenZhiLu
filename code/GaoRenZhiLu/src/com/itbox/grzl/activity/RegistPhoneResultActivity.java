@@ -86,10 +86,15 @@ public class RegistPhoneResultActivity extends BaseActivity {
 		super.onClick(v);
 		switch (v.getId()) {
 		case R.id.regist_phone:
-			if (StringUtil.isBlank(mETRegistPhonePass.getText().toString())) {
+			String string = mETRegistPhonePass.getText().toString();
+			if (StringUtil.isBlank(string)) {
 				ToastUtils.showToast(mActThis, "密码不为空");
-			} else {
-				registPhoneAll();
+			} else { 
+				if (string.length() > 6) {
+					showToast("密码为六位数");
+				} else {
+					registPhoneAll();
+				}
 			}
 			break;
 		case R.id.regist_phone_sex_et:
