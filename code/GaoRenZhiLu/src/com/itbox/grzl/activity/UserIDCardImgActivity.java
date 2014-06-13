@@ -15,12 +15,14 @@ import com.itbox.grzl.R;
 import com.itbox.grzl.bean.AddUserAuthEntication;
 import com.itbox.grzl.bean.UploadImageResult;
 import com.itbox.grzl.common.Contasts;
+import com.itbox.grzl.common.util.FileUtils;
 import com.loopj.android.http.RequestParams;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -53,9 +55,12 @@ public class UserIDCardImgActivity extends BaseActivity {
 		setContentView(R.layout.activity_user_idcard_img);
 		ButterKnife.inject(mActThis);
 		initViews();
-		uri = getIntent().getData();
-		Bitmap uriBitmap = ImageUtils.getUriBitmap(mActThis, uri);
-		mIVIDcard.setImageBitmap(uriBitmap);
+//		uri = getIntent().getData();
+//		Bitmap uriBitmap = ImageUtils.getUriBitmap(mActThis, uri);
+		String imgPath = getIntent().getStringExtra("imgPath");
+		Log.d("youzh", "传过来的值： "+imgPath);
+		Bitmap bitmap = FileUtils.getImageFromLocal(imgPath);
+		mIVIDcard.setImageBitmap(bitmap);
 	}
 
 	private void initViews() {
