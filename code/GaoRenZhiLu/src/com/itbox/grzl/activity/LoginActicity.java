@@ -21,7 +21,6 @@ import com.itbox.grzl.AppContext;
 import com.itbox.grzl.R;
 import com.itbox.grzl.api.LoginAndRegisterApi;
 import com.itbox.grzl.bean.Account;
-import com.itbox.grzl.constants.AccountTable;
 
 /**
  * 
@@ -37,7 +36,8 @@ public class LoginActicity extends BaseActivity implements
 	TextView registerTextView;
 	@InjectView(R.id.login_find_pass_tv)
 	TextView forgetPasswordTextView;
-
+    private boolean isLogin = false;
+    
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -54,6 +54,8 @@ public class LoginActicity extends BaseActivity implements
 			if (TextUtils.isEmpty(password)) {
 				showToast("用户名不能为空");
 			} else {
+				showProgressDialog("登陆中...");
+				isLogin = true;
 				new LoginAndRegisterApi().login(username, password);
 			}
 		}
@@ -114,6 +116,9 @@ public class LoginActicity extends BaseActivity implements
 			account.loadFromCursor(cursor);
 			account.setId(cursor.getLong(cursor.getColumnIndex(BaseColumns._ID)));
 			AppContext.getInstance().setAccount(account);
+			if (isLogin) {
+				dismissProgressDialog();
+			}
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 			finish();

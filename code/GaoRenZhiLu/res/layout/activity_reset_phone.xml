@@ -9,13 +9,13 @@
 
     <LinearLayout
         android:id="@+id/top_remind"
-        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/top_title"
-        android:orientation="horizontal" 
-        android:padding="5dp"
-        android:background="#19222B">
+        android:background="#19222B"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="5dp" >
 
         <TextView
             android:id="@+id/reset_1"
@@ -25,11 +25,21 @@
             android:textColor="@android:color/white" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/arrow" />
+
+        <TextView
             android:id="@+id/reset_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="手机验证"
             android:textColor="@android:color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/arrow" />
 
         <TextView
             android:id="@+id/reset_3"
@@ -53,6 +63,22 @@
         android:paddingLeft="5dp"
         android:textColor="@color/light_blue"
         android:textSize="14sp" />
+    
+    <EditText
+        android:id="@+id/reset_code_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_remind"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/rect_radius_white"
+        android:hint="请输入验证码"
+        android:minHeight="@dimen/cell_height"
+        android:paddingLeft="5dp"
+        android:textColor="@color/light_blue"
+        android:textSize="14sp"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/reset_get_authCode"
