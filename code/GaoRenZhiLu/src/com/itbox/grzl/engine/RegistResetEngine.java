@@ -1,8 +1,10 @@
 package com.itbox.grzl.engine;
 
+import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.bean.CheckAccount;
 import com.loopj.android.http.RequestParams;
 /**
  * 
@@ -21,6 +23,15 @@ public class RegistResetEngine {
 		params.put("userid", userId);
 		params.put("password", password);
 		Net.request(params, Api.getUrl(Api.User.ChangePassword), handler);
+	}
+	
+	/**
+	 * 验证帐号是否注册过
+	 * @param text
+	 * @param handler
+	 */
+	public static void checkAccount(String text, ResponseHandler handler) {
+		Net.request("useremail", text, Api.getUrl(Api.User.CheckAccount), handler);
 	}
 	
 	/**

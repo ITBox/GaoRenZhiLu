@@ -4,7 +4,9 @@ import org.apache.http.Header;
 
 import android.util.Log;
 
+import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.bean.Account;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -29,6 +31,7 @@ public class LoginAndRegisterApi extends BaseApi {
 					public void onFailure(Throwable error, String content) {
 						super.onFailure(error, content);
 						Log.e(TAG, "login" + error.toString());
+						ToastUtils.showToast(AppContext.getInstance(), "用户名或密码错误");
 					}
 				});
 	}

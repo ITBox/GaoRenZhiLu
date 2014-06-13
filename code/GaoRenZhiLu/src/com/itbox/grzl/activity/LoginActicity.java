@@ -9,6 +9,7 @@ import android.provider.BaseColumns;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -47,7 +48,15 @@ public class LoginActicity extends BaseActivity implements
 	public void userLogin() {
 		String username = usernameEditText.getText().toString();
 		String password = passwordEditText.getText().toString();
-		new LoginAndRegisterApi().login(username, password);
+		if (TextUtils.isEmpty(username)) {
+			showToast("用户名不能为空");
+		} else {
+			if (TextUtils.isEmpty(password)) {
+				showToast("用户名不能为空");
+			} else {
+				new LoginAndRegisterApi().login(username, password);
+			}
+		}
 	}
 
 	@OnClick(R.id.login_regist_pass_tv)
