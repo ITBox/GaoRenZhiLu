@@ -32,7 +32,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 public class PullToRefreshListView extends PullToRefreshAdapterViewBase<ListView> {
 
 	private LoadingLayout mHeaderLoadingView;

@@ -17,7 +17,7 @@ import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.widget.HorizontalListView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.Const;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.JoinUserAdapter;
 import com.itbox.grzl.bean.EventCommentGet;
 import com.itbox.grzl.bean.EventDetailGet;

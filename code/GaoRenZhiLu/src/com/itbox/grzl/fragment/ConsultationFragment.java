@@ -17,7 +17,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.activity.ConsultationSearchActivity;
 import com.itbox.grzl.activity.PublishConsultationActivity;
 import com.itbox.grzl.bean.Job;
@@ -58,6 +58,11 @@ public class ConsultationFragment extends BaseFragment implements
 		JobTypeAdapter adapter = new JobTypeAdapter();
 		mGridView.setAdapter(adapter);
 		searchBar.setOnSearchListener(this);
+		
+		// 让scrollview滚到最顶部，让tvevent获取焦点
+		askTextView.setFocusable(true);
+		askTextView.setFocusableInTouchMode(true);
+		askTextView.requestFocus();
 		return view;
 	}
 

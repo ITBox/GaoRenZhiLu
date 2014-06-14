@@ -1,7 +1,7 @@
 package com.itbox.grzl.activity;
 
 import com.itbox.fx.core.AppException;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import android.content.Intent;
 import android.os.Bundle;

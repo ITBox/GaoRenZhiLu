@@ -10,7 +10,7 @@ import butterknife.OnClick;
 
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.util.ToastUtils;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.engine.ConsultationEngine;
 import com.itbox.grzl.engine.ConsultationEngine.ConsultationInfo;
 import com.itbox.grzl.engine.ConsultationEngine.Result;

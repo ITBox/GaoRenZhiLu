@@ -8,7 +8,7 @@ import butterknife.InjectView;
 
 import com.itbox.fx.core.Application;
 import com.itbox.fx.widget.adapter.ViewPagerAdapter;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import android.app.Activity;
 import android.content.Context;

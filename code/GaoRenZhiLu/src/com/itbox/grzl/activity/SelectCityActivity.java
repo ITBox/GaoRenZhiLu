@@ -12,7 +12,7 @@ import com.itbox.fx.core.AppException;
 import com.itbox.fx.location.LocManager;
 import com.itbox.fx.location.LocReceiver;
 import com.itbox.fx.widget.LoadingDialog;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.AreaData;
 import com.itbox.grzl.common.db.AreaListDB;
 import com.itbox.grzl.widget.LetterListView;

@@ -13,7 +13,7 @@ import butterknife.InjectView;
 
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.CommentMarkGet;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

@@ -13,7 +13,7 @@ import butterknife.InjectView;
 
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.TeacherWithdrawalsAdapter;
 import com.itbox.grzl.bean.TeacherWithdrawals;
 import com.itbox.grzl.engine.TeacherEngine;

@@ -1,5 +1,8 @@
 package com.itbox.grzl.activity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,13 +21,14 @@ import android.widget.TextView.OnEditorActionListener;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 import com.activeandroid.content.ContentProvider;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
 import com.itbox.grzl.api.LoginAndRegisterApi;
 import com.itbox.grzl.bean.Account;
+import com.zhaoliewang.grzl.R;
 
 /**
  * 
@@ -62,6 +66,7 @@ public class LoginActicity extends BaseActivity implements
 					@Override
 					public void onSuccess(Account account) {
 						super.onSuccess(account);
+		                initJPush(account);
 						account.save();
 					}
 					@Override
@@ -130,6 +135,7 @@ public class LoginActicity extends BaseActivity implements
 			account.loadFromCursor(cursor);
 			account.setId(cursor.getLong(cursor.getColumnIndex(BaseColumns._ID)));
 			AppContext.getInstance().setAccount(account);
+			initJPush(account);
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 			finish();
@@ -147,6 +153,12 @@ public class LoginActicity extends BaseActivity implements
 				}
 			});
 		}
+	}
+
+	private void initJPush(Account account) {
+		Set<String> set = new HashSet<String>();
+		set.add(account.getUsertype() + "");
+		JPushInterface.setAliasAndTags(getApplicationContext(), account.getConnectkey(), set, null);
 	}
 
 	@Override

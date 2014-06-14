@@ -7,7 +7,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 public class PayActivity extends BaseActivity {
 	@InjectView(R.id.text_left)

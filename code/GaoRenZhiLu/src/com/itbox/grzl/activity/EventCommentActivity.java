@@ -12,7 +12,7 @@ import butterknife.OnClick;
 
 import com.activeandroid.query.Delete;
 import com.itbox.fx.net.GsonResponseHandler;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.EventCommentAdapter;
 import com.itbox.grzl.bean.EventCommentGet;
 import com.itbox.grzl.bean.RespResult;

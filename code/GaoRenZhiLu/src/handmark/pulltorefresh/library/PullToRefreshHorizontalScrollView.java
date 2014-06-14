@@ -15,7 +15,7 @@
  *******************************************************************************/
 package handmark.pulltorefresh.library;
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import android.annotation.TargetApi;
 import android.content.Context;

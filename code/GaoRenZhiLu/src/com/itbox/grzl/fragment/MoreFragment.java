@@ -12,7 +12,7 @@ import butterknife.OnClick;
 
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.activity.CommentListActivity;
 import com.itbox.grzl.activity.EventMyActivity;
 import com.itbox.grzl.activity.ExamReportActivity;

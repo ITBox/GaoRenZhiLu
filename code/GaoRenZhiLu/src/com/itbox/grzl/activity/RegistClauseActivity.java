@@ -3,7 +3,7 @@ package com.itbox.grzl.activity;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import android.os.Bundle;
 import android.view.View;

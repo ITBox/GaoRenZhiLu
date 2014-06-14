@@ -12,7 +12,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.itbox.fx.util.ToastUtils;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.fragment.CommentFragment;
 import com.itbox.grzl.fragment.ConsultationFragment;
 import com.itbox.grzl.fragment.EventFragment;

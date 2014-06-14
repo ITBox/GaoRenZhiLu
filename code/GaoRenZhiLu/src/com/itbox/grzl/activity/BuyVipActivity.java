@@ -13,7 +13,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.activeandroid.content.ContentProvider;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.UserLevelAdapter;
 import com.itbox.grzl.api.ConsultationApi;
 import com.itbox.grzl.bean.UserLevel;

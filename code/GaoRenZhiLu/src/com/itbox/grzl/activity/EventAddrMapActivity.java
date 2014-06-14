@@ -17,7 +17,7 @@ import com.baidu.mapapi.map.PopupOverlay;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.itbox.fx.core.L;
 import com.itbox.grzl.Const;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.map.BMapUtil;
 import com.itbox.grzl.map.MapManager;
 

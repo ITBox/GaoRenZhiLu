@@ -5,7 +5,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.activeandroid.query.Delete;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.Account;
 
 import android.os.Bundle;

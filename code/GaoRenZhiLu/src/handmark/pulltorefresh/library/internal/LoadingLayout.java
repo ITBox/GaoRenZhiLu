@@ -39,7 +39,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 @SuppressLint("ViewConstructor")
 public abstract class LoadingLayout extends FrameLayout implements ILoadingLayout {

@@ -72,6 +72,16 @@ public class Account extends BaseModel {
 	private String teacherlevel;
 	@Column(name = AccountTable.COLUMN_REMARKCOUNT)
 	private String remarkcount;
+	@Column(name = AccountTable.COLUMN_CONNECTKEY)
+	private String connectkey;
+
+	public String getConnectkey() {
+		return connectkey;
+	}
+
+	public void setConnectkey(String connectkey) {
+		this.connectkey = connectkey;
+	}
 
 	public Integer getUserid() {
 		return userid;

@@ -38,7 +38,7 @@ import com.itbox.fx.util.NetUtil;
 import com.itbox.fx.util.Utils;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.Const.Extra;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.common.util.AddressUtil;
 import com.itbox.grzl.map.AddrInfoModel;
 import com.itbox.grzl.map.DistanceUtils;

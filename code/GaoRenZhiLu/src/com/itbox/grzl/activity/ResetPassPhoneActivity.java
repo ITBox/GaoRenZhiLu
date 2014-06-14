@@ -11,7 +11,7 @@ import com.itbox.fx.util.StringUtil;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.CheckAccount;
 import com.itbox.grzl.bean.Register;
 import com.itbox.grzl.engine.RegistResetEngine;

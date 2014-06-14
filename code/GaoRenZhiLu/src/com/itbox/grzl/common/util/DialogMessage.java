@@ -1,7 +1,7 @@
 package com.itbox.grzl.common.util;
 
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import android.app.Dialog;
 import android.os.Bundle;

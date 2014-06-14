@@ -26,7 +26,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView.ScaleType;
 
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 public class RotateLoadingLayout extends LoadingLayout {
 

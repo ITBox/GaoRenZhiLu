@@ -40,7 +40,8 @@ public class AppState {
 		if(STATE == 0){
 			initAppState();
 		}
-		return STATE;
+//		return STATE;
+		return STATUS_DEVELOP;
 	}
 
 	/**
@@ -69,26 +70,28 @@ public class AppState {
 	 * 初始化App状态:开发or发布or被篡改
 	 * */
 	private static void initAppState() {
-		try {
-			Context context = getAppContext();
-			PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
-			Signature sigs = packageInfo.signatures[0];
-            L.e(sigs.hashCode() + "  hashCode");
-			switch (sigs.hashCode()) {
-			case SHA1_DEBUG:
-				STATE = STATUS_DEVELOP;
-				break;
-			case SHA1_RELEASE:
-				STATE = STATUS_RELEASE;
-				break;
-			default:
-				STATE = STATUS_TAMPER;
-//				System.exit(0);
-				return;
-			}
-		} catch (Exception e) {
-			handleException(e);
-		}
+		STATE = STATUS_DEVELOP;
+//		try {
+//			Context context = getAppContext();
+//			PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+//			Signature sigs = packageInfo.signatures[0];
+//            L.e(sigs.hashCode() + "  hashCode");
+            
+//			switch (sigs.hashCode()) {
+//			case SHA1_DEBUG:
+//				STATE = STATUS_DEVELOP;
+//				break;
+//			case SHA1_RELEASE:
+//				STATE = STATUS_RELEASE;
+//				break;
+//			default:
+//				STATE = STATUS_TAMPER;
+////				System.exit(0);
+//				return;
+//			}
+//		} catch (Exception e) {
+//			handleException(e);
+//		}
 	}
 	
 	/**

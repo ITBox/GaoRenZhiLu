@@ -12,7 +12,7 @@ import butterknife.OnClick;
 import com.activeandroid.query.Update;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.TeacherIncomingAdapter;
 import com.itbox.grzl.bean.Account;
 import com.itbox.grzl.bean.TeacherIncoming;

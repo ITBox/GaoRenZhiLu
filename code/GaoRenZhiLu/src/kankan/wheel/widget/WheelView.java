@@ -24,7 +24,7 @@ import java.util.List;
 
 
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import kankan.wheel.widget.adapters.WheelViewAdapter;
 import android.content.Context;

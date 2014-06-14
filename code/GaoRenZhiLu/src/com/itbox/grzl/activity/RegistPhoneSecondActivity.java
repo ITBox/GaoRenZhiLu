@@ -12,7 +12,7 @@ import com.itbox.fx.net.Net;
 import com.itbox.fx.util.StringUtil;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.Api;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.Register;
 import com.itbox.grzl.engine.RegistResetEngine;
 import com.loopj.android.http.RequestParams;

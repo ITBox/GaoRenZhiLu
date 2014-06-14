@@ -14,7 +14,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.itbox.fx.net.GsonResponseHandler;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.activity.EventAddActivity;
 import com.itbox.grzl.activity.EventDetialActivity;
 import com.itbox.grzl.activity.EventSearchActivity;

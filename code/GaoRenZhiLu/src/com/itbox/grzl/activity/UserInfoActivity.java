@@ -12,8 +12,9 @@ import com.itbox.fx.util.ToastUtils;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.Account;
+import com.itbox.grzl.bean.AreaData;
 import com.itbox.grzl.bean.UpdateUserList;
 import com.itbox.grzl.common.Contasts;
 import com.itbox.grzl.common.db.AreaListDB;
@@ -121,7 +122,11 @@ public class UserInfoActivity extends BaseActivity {
 	}
 
 	private String getUserPlace(String place) {
-		return new AreaListDB().getAreaByCode(Integer.parseInt(place)).getAreaName();
+		AreaData area = new AreaListDB().getAreaByCode(Integer.parseInt(place));
+		if (area != null) {
+			return area.getAreaName();
+		}
+		return "暂无";
 	}
 	
 //    @Override

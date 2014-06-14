@@ -13,7 +13,7 @@ import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 public class ClearEditText extends EditText implements  
         OnFocusChangeListener, TextWatcher { 

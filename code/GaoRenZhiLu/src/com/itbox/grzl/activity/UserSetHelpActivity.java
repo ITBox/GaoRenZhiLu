@@ -4,7 +4,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import android.os.Bundle;
 import android.view.View;
