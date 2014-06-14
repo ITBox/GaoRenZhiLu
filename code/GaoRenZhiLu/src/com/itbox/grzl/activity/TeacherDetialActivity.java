@@ -108,6 +108,13 @@ public class TeacherDetialActivity extends BaseActivity implements
 		intent.putExtra("type", "phone");
 		startActivity(intent);
 	}
+	
+	@OnClick(R.id.ll_my_course)
+	public void enterMyCourse() {
+		Intent intent = new Intent(this, EventTeacherActivity.class);
+		intent.putExtra("teacher", teacher);
+		startActivity(intent);
+	}
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {

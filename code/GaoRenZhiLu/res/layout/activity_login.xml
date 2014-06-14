@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_gravity="center_horizontal"
-    android:background="@drawable/image_splash" >
+    android:background="@drawable/bg_login" >
 
 
     <LinearLayout

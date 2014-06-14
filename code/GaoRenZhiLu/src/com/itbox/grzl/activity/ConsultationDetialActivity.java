@@ -141,6 +141,7 @@ public class ConsultationDetialActivity extends BaseActivity implements
 						Intent intent = new Intent(
 								ConsultationDetialActivity.this,
 								PayActivity.class);
+						intent.putExtra("type", type);
 						startActivity(intent);
 					}
 				}).show();
