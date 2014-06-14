@@ -5,7 +5,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.activeandroid.query.Delete;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.Account;
 
 import android.os.Bundle;
@@ -49,10 +49,10 @@ public class UserSetActivity extends BaseActivity {
 			
 			break;
 		case R.id.userset_help:
-			
+			startActivity(UserSetHelpActivity.class);
 			break;
 		case R.id.userset_about:
-			
+			startActivity(UserSetAboutActivity.class);
 			break;
 		case R.id.userset_logout:
 			new Delete().from(Account.class).execute();

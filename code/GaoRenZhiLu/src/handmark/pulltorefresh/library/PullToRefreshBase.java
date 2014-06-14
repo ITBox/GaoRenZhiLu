@@ -16,7 +16,7 @@
 package handmark.pulltorefresh.library;
 
 import com.itbox.fx.core.AppTime;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import handmark.pulltorefresh.library.internal.FlipLoadingLayout;
 import handmark.pulltorefresh.library.internal.LoadingLayout;

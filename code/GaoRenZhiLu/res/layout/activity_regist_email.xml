@@ -65,6 +65,7 @@
                     android:layout_height="35dp"
                     android:background="@drawable/rect_radius_white"
                     android:paddingLeft="5dp"
+                    android:hint="六位数"
                     android:textColor="@color/light_blue"
                     android:textSize="14sp" />
             </LinearLayout>

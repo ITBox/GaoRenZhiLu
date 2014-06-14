@@ -13,7 +13,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import butterknife.OnFocusChange;
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 /**
  * 搜索条

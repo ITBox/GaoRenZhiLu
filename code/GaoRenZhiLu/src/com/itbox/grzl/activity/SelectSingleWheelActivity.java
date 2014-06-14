@@ -1,6 +1,6 @@
 package com.itbox.grzl.activity;
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.ArrayWheelAdapter;

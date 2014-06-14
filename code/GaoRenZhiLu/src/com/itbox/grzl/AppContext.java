@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
+import cn.jpush.android.api.JPushInterface;
 
 import com.activeandroid.ActiveAndroid;
 import com.baidu.location.BDLocation;
-import com.itbox.fx.R;
 import com.itbox.fx.core.Application;
 import com.itbox.grzl.bean.Account;
 import com.itbox.grzl.bean.Job;
@@ -17,6 +17,7 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.zhaoliewang.grzl.R;
 
 /**
  * Created by huiyh on 14-2-24.
@@ -50,6 +51,9 @@ public class AppContext extends Application {
 		initJobArrayList();
 
 		initJobMap();
+		
+		 JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+         JPushInterface.init(this);     		// 初始化 JPush
 	}
 
 	private void initJobArrayList() {

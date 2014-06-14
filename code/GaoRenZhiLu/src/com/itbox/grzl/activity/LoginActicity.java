@@ -1,5 +1,8 @@
 package com.itbox.grzl.activity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,18 +12,23 @@ import android.provider.BaseColumns;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
+import android.view.KeyEvent;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import cn.jpush.android.api.JPushInterface;
 
 import com.activeandroid.content.ContentProvider;
+import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
 import com.itbox.grzl.api.LoginAndRegisterApi;
 import com.itbox.grzl.bean.Account;
-import com.itbox.grzl.constants.AccountTable;
+import com.zhaoliewang.grzl.R;
 
 /**
  * 
@@ -36,7 +44,7 @@ public class LoginActicity extends BaseActivity implements
 	TextView registerTextView;
 	@InjectView(R.id.login_find_pass_tv)
 	TextView forgetPasswordTextView;
-
+    
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
@@ -47,7 +55,29 @@ public class LoginActicity extends BaseActivity implements
 	public void userLogin() {
 		String username = usernameEditText.getText().toString();
 		String password = passwordEditText.getText().toString();
-		new LoginAndRegisterApi().login(username, password);
+		if (TextUtils.isEmpty(username)) {
+			showToast("用户名不能为空");
+		} else {
+			if (TextUtils.isEmpty(password)) {
+				showToast("用户名不能为空");
+			} else {
+				showProgressDialog("登陆中...");
+				new LoginAndRegisterApi().login(username, password, new GsonResponseHandler<Account>(Account.class){
+					@Override
+					public void onSuccess(Account account) {
+						super.onSuccess(account);
+		                initJPush(account);
+						account.save();
+					}
+					@Override
+					public void onFailure(Throwable e, int statusCode, String content) {
+						super.onFailure(e, statusCode, content);
+						dismissProgressDialog();
+						showToast("用户名或密码错误");
+					}
+				});
+			}
+		}
 	}
 
 	@OnClick(R.id.login_regist_pass_tv)
@@ -105,13 +135,30 @@ public class LoginActicity extends BaseActivity implements
 			account.loadFromCursor(cursor);
 			account.setId(cursor.getLong(cursor.getColumnIndex(BaseColumns._ID)));
 			AppContext.getInstance().setAccount(account);
+			initJPush(account);
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 			finish();
 		} else {
 			setContentView(R.layout.activity_login);
 			ButterKnife.inject(this);
+			passwordEditText.setOnEditorActionListener(new OnEditorActionListener() {
+				
+				@Override
+				public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+					if (actionId == EditorInfo.IME_ACTION_DONE) {
+						userLogin();
+					}
+					return false;
+				}
+			});
 		}
+	}
+
+	private void initJPush(Account account) {
+		Set<String> set = new HashSet<String>();
+		set.add(account.getUsertype() + "");
+		JPushInterface.setAliasAndTags(getApplicationContext(), account.getConnectkey(), set, null);
 	}
 
 	@Override

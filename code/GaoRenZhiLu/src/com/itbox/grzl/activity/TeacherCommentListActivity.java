@@ -8,7 +8,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.itbox.fx.net.GsonResponseHandler;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.TeacherCommentAdapter;
 import com.itbox.grzl.bean.TeacherCommentGet;
 import com.itbox.grzl.engine.TeacherEngine;

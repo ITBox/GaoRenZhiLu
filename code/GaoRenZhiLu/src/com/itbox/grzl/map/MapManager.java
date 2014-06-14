@@ -6,7 +6,7 @@ import com.baidu.mapapi.map.MKEvent;
 import com.itbox.fx.core.AppException;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.BuildConfig;
+import com.zhaoliewang.grzl.BuildConfig;
 import com.itbox.grzl.Const;
 
 public class MapManager extends BMapManager {

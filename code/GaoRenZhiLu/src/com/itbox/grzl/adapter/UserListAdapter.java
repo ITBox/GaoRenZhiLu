@@ -14,7 +14,7 @@ import butterknife.InjectView;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.UserListItem;
 import com.nostra13.universalimageloader.core.ImageLoader;
 

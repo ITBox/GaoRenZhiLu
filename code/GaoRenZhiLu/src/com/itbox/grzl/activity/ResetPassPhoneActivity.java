@@ -11,13 +11,11 @@ import com.itbox.fx.util.StringUtil;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.CheckAccount;
 import com.itbox.grzl.bean.Register;
 import com.itbox.grzl.engine.RegistResetEngine;
-import com.loopj.android.http.RequestParams;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,6 +31,8 @@ public class ResetPassPhoneActivity extends BaseActivity {
 	TextView mTVTopMedium;
 	@InjectView(R.id.reset_phone_et)
 	EditText mETResetPhone;
+	@InjectView(R.id.reset_code_et)
+	EditText mETResetCode;
 	@InjectView(R.id.reset_1)
 	TextView mReset1;
 	@InjectView(R.id.reset_2)
@@ -41,6 +41,11 @@ public class ResetPassPhoneActivity extends BaseActivity {
 	TextView mReset3;
 	@InjectView(R.id.reset_email)
 	Button mBTResetEmail;
+	@InjectView(R.id.reset_get_authCode)
+	Button mBTResetGet;
+	private String phoneNum = "";
+	private boolean isCode = false;
+	private boolean isSavePsw = false;
 	
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -92,15 +97,23 @@ public class ResetPassPhoneActivity extends BaseActivity {
 			break;
 		case R.id.reset_get_authCode:
 			String mPhone = mETResetPhone.getText().toString();
-	        if(StringUtil.isBlank(mPhone)) {
-	        	ToastUtils.showToast(mActThis, "手机号不为空");
-	        } else{
-	        	if (StringUtil.checkPhone(mPhone)){
-	        		checkIsRegistServer(mPhone);
-	        	} else {
-	        		ToastUtils.showToast(mActThis, "手机号不符合规定");
-	        	}
-	        }
+			if (isSavePsw) {
+				resetPSW(mPhone);
+			} else {
+				if (isCode) {
+					getAuthCode(mPhone);
+				} else {
+					if(StringUtil.isBlank(mPhone)) {
+						showToast( "手机号不为空");
+					} else{
+						if (StringUtil.checkPhone(mPhone)){
+							checkIsRegistServer(mPhone);
+						} else {
+							showToast("手机号不符合规定");
+						}
+					}
+				}
+			}
 			break;
 		default:
 			break;
@@ -124,6 +137,7 @@ public class ResetPassPhoneActivity extends BaseActivity {
     
 	private void sendAuthCode(final String mPhone) {
 		// TODO Auto-generated method stub
+		
 		RegistResetEngine.sendAuthCode(mPhone, 2, new GsonResponseHandler<Register>(Register.class) {
 			@Override
 			public void onSuccess(Register object) {
@@ -131,45 +145,67 @@ public class ResetPassPhoneActivity extends BaseActivity {
 				int result = object.getResult();
 				if(result == 1) {
 					initRest(1);
-					
+					phoneNum = mPhone;
+					mETResetPhone.setText("");
+					mETResetPhone.setHint("请输入验证码");
+					mBTResetGet.setText("下一步");
+					isCode = true;
 				} else if (result == 2) {
-					ToastUtils.showToast(mActThis, "当前用户不存在");
-				} else if (result == 5){
-					ToastUtils.showToast(mActThis, "此号码操作频繁");
+					showToast("当前用户不存在");
+				} else if (result == 5) {
+					showToast("此号码操作频繁");
 				}
 			}
 		});
 	};
 	
-	private void getAuthCode(String phone) {
-//		String authCode = mETRegistAuthCode.getText().toString();
-//		if (StringUtil.isBlank(authCode)){
-//			ToastUtils.showToast(mActThis, "验证码不为空");
-//		} else {
-		    RegistResetEngine.getAuthCode(phone, "", 2, new GsonResponseHandler<Register>(Register.class){
+	private void getAuthCode(String code) {
+		if (StringUtil.isBlank(code)){
+			showToast("验证码不为空");
+		} else {
+		    RegistResetEngine.getAuthCode(phoneNum, code, 2, new GsonResponseHandler<Register>(Register.class){
 				@Override
 				public void onSuccess(Register object) {
 					super.onSuccess(object);
 					int result = object.getResult();
 					if (result == 0) {
-						ToastUtils.showToast(mActThis, "验证码错误");
+						showToast("验证码错误");
 //						mBTRegistNext.setEnabled(false);
 					} else if (result == 1) {
 						initRest(2);
+						mETResetPhone.setText("");
+						mETResetPhone.setHint("请输入六位新密码");
+						mBTResetGet.setText("保  存");
+						isSavePsw = true;
 					}
 				}
 			});
-//		}
+		}
 	}
 	
-	private void resetPSW () {
-		RegistResetEngine.resetPass(AppContext.getInstance().getAccount().getUserid()+"", "", new ResponseHandler() {
-			@Override
-			public void onSuccess(String content) {
-				super.onSuccess(content);
-				Log.i("youzh", content);
+	private void resetPSW (String psw) {
+		if (StringUtil.isBlank(psw)) {
+			showToast("新密码不为空");
+		} else {
+			if (psw.length() > 6) {
+				showToast("密码为六位");
+			} else {
+				showProgressDialog("保存中...");
+				RegistResetEngine.resetPass(AppContext.getInstance().getAccount().getUserid()+"", psw, new ResponseHandler() {
+					@Override
+					public void onSuccess(String content) {
+						super.onSuccess(content);
+						Log.i("youzh", content);
+						if (content.equals("200")) {
+							showToast("重置密码成功");
+							mActThis.finish();
+						} else {
+							showToast("重置密码失败");
+						}
+					}
+				});
 			}
-		});
+		}
 	}
 	
 	

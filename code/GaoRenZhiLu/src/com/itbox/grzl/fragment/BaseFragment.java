@@ -10,7 +10,7 @@ import android.view.View.OnClickListener;
 
 import com.itbox.fx.util.DialogUtil;
 import com.itbox.fx.util.ToastUtils;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;

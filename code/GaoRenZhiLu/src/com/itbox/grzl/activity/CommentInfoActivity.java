@@ -17,7 +17,7 @@ import com.activeandroid.query.Delete;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.CommentMarkAdapter;
 import com.itbox.grzl.bean.CommentGet;
 import com.itbox.grzl.bean.CommentMarkAdd;

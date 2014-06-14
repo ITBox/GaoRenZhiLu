@@ -31,7 +31,7 @@ public class L {
 		}
 		switch (AppState.getState()) {
 		case AppState.STATUS_DEVELOP:{
-			android.util.Log.v(TAG, msg);
+			android.util.Log.d(TAG, msg);
 			break;
 		}
 		case AppState.STATUS_RELEASE:
@@ -49,7 +49,7 @@ public class L {
 		}
 		switch (AppState.getState()) {
 		case AppState.STATUS_DEVELOP:{
-			android.util.Log.v(TAG, msg);
+			android.util.Log.i(TAG, msg);
 			break;
 		}
 		case AppState.STATUS_RELEASE:
@@ -67,7 +67,7 @@ public class L {
 		}
 		switch (AppState.getState()) {
 		case AppState.STATUS_DEVELOP:{
-			android.util.Log.v(TAG, msg);
+			android.util.Log.w(TAG, msg);
 			break;
 		}
 		case AppState.STATUS_RELEASE:
@@ -85,7 +85,7 @@ public class L {
 		}
 		switch (AppState.getState()) {
 		case AppState.STATUS_DEVELOP:{
-			android.util.Log.v(TAG, msg);
+			android.util.Log.e(TAG, msg);
 			break;
 		}
 		case AppState.STATUS_RELEASE:

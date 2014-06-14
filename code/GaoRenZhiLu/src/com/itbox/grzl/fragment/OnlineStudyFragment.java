@@ -19,7 +19,7 @@ import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.util.IntentUtil;
 import com.itbox.grzl.Api;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.OnLineItem;
 import com.itbox.grzl.bean.OnLineItem.Item;
 

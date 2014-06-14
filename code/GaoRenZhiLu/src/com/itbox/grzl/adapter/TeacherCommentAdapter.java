@@ -14,9 +14,9 @@ import butterknife.InjectView;
 
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
-import com.itbox.grzl.bean.TeacherComment;
+import com.itbox.grzl.bean.TeacherCommentGet;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhaoliewang.grzl.R;
 
 /**
  * 我的评论列表适配器
@@ -47,7 +47,7 @@ public class TeacherCommentAdapter extends CursorAdapter {
 	@Override
 	public void bindView(View view, Context context, Cursor cursor) {
 		ViewHolder holder = (ViewHolder) view.getTag();
-		TeacherComment bean = new TeacherComment();
+		TeacherCommentGet bean = new TeacherCommentGet();
 		bean.loadFromCursor(cursor);
 		holder.tv_name.setText(bean.getUsername());
 		holder.tv_time.setText(bean.getCreatetime());

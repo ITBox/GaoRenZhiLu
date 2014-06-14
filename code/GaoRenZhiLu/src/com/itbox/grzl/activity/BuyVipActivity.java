@@ -13,7 +13,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.activeandroid.content.ContentProvider;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.UserLevelAdapter;
 import com.itbox.grzl.api.ConsultationApi;
 import com.itbox.grzl.bean.UserLevel;
@@ -28,6 +28,8 @@ public class BuyVipActivity extends BaseActivity implements
 	ListView listView;
 	private ConsultationApi consultationApi;
 	private UserLevelAdapter adapter;
+	private View mFooterView;
+	private View mHeaderView;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -39,7 +41,11 @@ public class BuyVipActivity extends BaseActivity implements
 		consultationApi.getUserLevel("14");
 		adapter = new UserLevelAdapter(this, null);
 		listView.setAdapter(adapter);
+		mHeaderView = View.inflate(this, R.layout.layout_buy_vip_header, null);
 		getSupportLoaderManager().initLoader(0, null, this);
+		mFooterView = View.inflate(this, R.layout.layout_buy_vip_footer, null);
+		listView.addHeaderView(mHeaderView);
+		listView.addFooterView(mFooterView);
 	}
 
 	@OnClick(R.id.text_left)

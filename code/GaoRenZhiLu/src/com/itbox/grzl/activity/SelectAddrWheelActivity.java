@@ -3,7 +3,7 @@ package com.itbox.grzl.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.AreaData;
 import com.itbox.grzl.common.db.AreaListDB;
 

@@ -2,7 +2,7 @@ package com.itbox.grzl.widget;
 
 
 import com.itbox.fx.core.Application;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import android.content.Context;
 import android.graphics.Canvas;

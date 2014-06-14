@@ -9,7 +9,7 @@ import butterknife.OnClick;
 
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.fx.util.DialogUtil;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.TeacherWithdrawals;
 import com.itbox.grzl.common.util.DialogMessage;
 import com.itbox.grzl.engine.TeacherEngine;

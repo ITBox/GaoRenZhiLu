@@ -18,7 +18,7 @@ package kankan.wheel.widget.adapters;
 
 import com.itbox.fx.core.Application;
 import com.itbox.fx.core.AppException;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import android.content.Context;
 import android.graphics.Typeface;

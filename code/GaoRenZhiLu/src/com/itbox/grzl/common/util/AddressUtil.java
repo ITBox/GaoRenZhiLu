@@ -37,7 +37,10 @@ public class AddressUtil {
 			return "";
 		AreaListDB db = new AreaListDB();
 		AreaData area = db.getAreaByCode(Code);
-		return area.getAreaName();
+		if (area != null) {
+			return area.getAreaName();
+		}
+		return "北京市";
 	}
 	@Deprecated
 	private static String getCityName(int provinceCode ,int citycode){

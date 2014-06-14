@@ -37,5 +37,6 @@ public class AccountTable {
 	public static final String COLUMN_JOBTYPE = "jobtype";
 	public static final String COLUMN_TEACHERLEVEL = "teacherlevel";
 	public static final String COLUMN_REMARKCOUNT = "remarkcount";
+	public static final String COLUMN_CONNECTKEY = "connectkey";
 
 }

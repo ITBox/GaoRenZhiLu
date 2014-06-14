@@ -7,7 +7,7 @@ import com.baidu.mapapi.map.MapView;
 import com.baidu.mapapi.map.OverlayItem;
 import com.baidu.platform.comapi.basestruct.GeoPoint;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 /**
  * @author hyh 

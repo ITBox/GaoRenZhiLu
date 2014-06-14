@@ -15,7 +15,7 @@
  *******************************************************************************/
 package handmark.pulltorefresh.library;
 
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 
 import handmark.pulltorefresh.library.internal.EmptyViewMethodAccessor;
 import android.annotation.TargetApi;

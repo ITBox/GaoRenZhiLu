@@ -17,7 +17,7 @@ import com.activeandroid.content.ContentProvider;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.api.ConsultationApi;
 import com.itbox.grzl.bean.TeacherExtension;
 import com.itbox.grzl.bean.UserListItem;

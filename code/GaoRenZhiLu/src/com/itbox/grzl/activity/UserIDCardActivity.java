@@ -7,15 +7,19 @@ import butterknife.OnClick;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.util.EditTextUtils;
+import com.itbox.fx.util.ImageUtils;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.R;
+import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.AddUserAuthEntication;
 import com.itbox.grzl.common.Contasts;
+import com.itbox.grzl.common.util.FileUtils;
 import com.loopj.android.http.RequestParams;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -77,12 +81,16 @@ public class UserIDCardActivity extends BaseActivity {
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK ) {
+		if (resultCode == RESULT_OK) {
 			switch (requestCode) {
 			case Contasts.TAKE_PICTURE_FROM_GALLERY:
 				Intent intent = new Intent(mActThis, UserIDCardImgActivity.class);
-				intent.setDataAndType(data.getData(), "image/jpeg");
-				startActivityForResult(intent, Contasts.UPLOAD_IDCARD);
+//				intent.setDataAndType(data.getData(), "image/jpeg");
+				Bitmap uriBitmap = ImageUtils.getUriBitmap(mActThis, data.getData());
+				String saveBitToSD = FileUtils.saveBitToSD(uriBitmap, System.currentTimeMillis()+"");
+				intent.putExtra("imgPath", saveBitToSD);
+				Log.i("youzh", saveBitToSD);
+				mActThis.startActivityForResult(intent, Contasts.UPLOAD_IDCARD);
 				break;
 			case Contasts.UPLOAD_IDCARD:
 				idcardPath = data.getStringExtra("idcardPath");
