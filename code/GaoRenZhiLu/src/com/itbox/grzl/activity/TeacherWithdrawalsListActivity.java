@@ -4,7 +4,6 @@ import handmark.pulltorefresh.library.PullToRefreshListView;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -13,11 +12,11 @@ import butterknife.InjectView;
 
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.AppContext;
-import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.TeacherWithdrawalsAdapter;
 import com.itbox.grzl.bean.TeacherWithdrawals;
 import com.itbox.grzl.engine.TeacherEngine;
 import com.itbox.grzl.engine.TeacherEngine.UserWithdrawalsItem;
+import com.zhaoliewang.grzl.R;
 
 /**
  * 提现记录界面

@@ -787,4 +787,16 @@ public class DateUtil {
 			return giveTime.substring(0,11).replace("-", ".");
 		}
 	}
+	/**
+	 * 今天经过的分钟数
+	 * 
+	 * @return
+	 */
+	public static int getTodayMin() {
+		Date date = new Date();
+		int hours = date.getHours();
+		int minutes = date.getMinutes();
+		return hours * 60 + minutes;
+	}
+
 }

@@ -45,8 +45,6 @@ public class TeacherDetialActivity extends BaseActivity implements
 	@InjectView(R.id.tv_answer_count)
 	TextView answerCountTextView;
 	private ImageLoader mImageLoader;
-	@InjectView(R.id.text_left)
-	TextView backTextView;
 	@InjectView(R.id.tv_picture_consultation)
 	TextView pictureConsultationTextView;
 	@InjectView(R.id.tv_phone_consultation)
@@ -56,12 +54,20 @@ public class TeacherDetialActivity extends BaseActivity implements
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
+		teacher = (UserListItem) getIntent().getSerializableExtra("teacher");
+		if (teacher == null) {
+			return;
+		}
+
 		setContentView(R.layout.activity_teacher_detial);
 		ButterKnife.inject(this);
-		teacher = (UserListItem) getIntent().getSerializableExtra("teacher");
+
+		showLeftBackButton();
+		setTitle(teacher.getUserrealname() + "咨询详情");
+
 		teacherExtension = new TeacherExtension();
 		api = new ConsultationApi();
-		api.getTeacherMoreInfo("14");
+		api.getTeacherMoreInfo(teacher.getUserid());
 		mImageLoader = ImageLoader.getInstance();
 		mImageLoader.displayImage(
 				Api.User.getAvatarUrl(teacher.getUseravatarversion()),
@@ -81,20 +87,16 @@ public class TeacherDetialActivity extends BaseActivity implements
 		buyCountTextView.setText(teacher.getBuycount() + "人购买");
 		answerCountTextView.setText("回答" + teacher.getAnswercount() + "次");
 		mRatingBar.setRating(Float.valueOf(teacher.getTeacherlevel()));
-		backTextView.setVisibility(View.VISIBLE);
 		getSupportLoaderManager().initLoader(0, null, this);
-	}
-
-	@OnClick(R.id.text_left)
-	public void back() {
-		finish();
 	}
 
 	@OnClick(R.id.ll_picture_consultation)
 	public void enterPictureConsultationDetial() {
 		Intent intent = new Intent(this, ConsultationDetialActivity.class);
+		intent.putExtra("teacherExtension", teacherExtension);
 		intent.putExtra("teacher", teacher);
-		intent.putExtra("consultation_name", "图文咨询 ￥0.00");
+		intent.putExtra("consultation_name",
+				"图文咨询 ￥" + teacherExtension.getPicturepice());
 		intent.putExtra("type", "picture");
 		startActivity(intent);
 	}
@@ -103,17 +105,19 @@ public class TeacherDetialActivity extends BaseActivity implements
 	public void enterPhoneConsultationDetial() {
 		Intent intent = new Intent(this, ConsultationDetialActivity.class);
 		intent.putExtra("teacher", teacher);
+		intent.putExtra("teacherExtension", teacherExtension);
 		intent.putExtra("consultation_name",
 				"电话资讯 ￥" + teacherExtension.getPhoneprice());
 		intent.putExtra("type", "phone");
 		startActivity(intent);
 	}
-	
+
 	@OnClick(R.id.ll_my_course)
 	public void enterMyCourse() {
 		Intent intent = new Intent(this, EventTeacherActivity.class);
 		intent.putExtra("teacher", teacher);
 		startActivity(intent);
+		showToast("course");
 	}
 
 	@Override
@@ -121,7 +125,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 		return new CursorLoader(this, ContentProvider.createUri(
 				TeacherExtension.class, null), null,
 				TeacherExtensionTable.COLUMN_USERID + "=?",
-				new String[] { "14" }, null);
+				new String[] { teacher.getUserid() }, null);
 	}
 
 	@Override
@@ -129,7 +133,8 @@ public class TeacherDetialActivity extends BaseActivity implements
 		if (cursor != null && cursor.moveToNext()) {
 
 			teacherExtension.loadFromCursor(cursor);
-			pictureConsultationTextView.setText("图文咨询 ￥0.00");
+			pictureConsultationTextView.setText("图文咨询 ￥"
+					+ teacherExtension.getPicturepice());
 			phoneConsultationTextView.setText("电话咨询 ￥"
 					+ teacherExtension.getPhoneprice());
 		}

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class TeacherCommentList {
 
-	private ArrayList<TeacherComment> TeacherCommentItem;
+	private ArrayList<TeacherCommentGet> TeacherCommentItem;
 
-	public ArrayList<TeacherComment> getTeacherCommentItem() {
+	public ArrayList<TeacherCommentGet> getTeacherCommentItem() {
 		return TeacherCommentItem;
 	}
 
 	public void setTeacherCommentItem(
-			ArrayList<TeacherComment> teacherCommentItem) {
+			ArrayList<TeacherCommentGet> teacherCommentItem) {
 		TeacherCommentItem = teacherCommentItem;
 	}
 

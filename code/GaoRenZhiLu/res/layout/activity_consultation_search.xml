@@ -35,10 +35,9 @@
             android:text="工作类型" />
     </LinearLayout>
 
-    <ListView
+    <handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-    </ListView>
-
-</LinearLayout>
+    </handmark.pulltorefresh.library.PullToRefreshListView>
+</LinearLayout>

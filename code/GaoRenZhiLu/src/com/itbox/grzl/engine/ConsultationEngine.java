@@ -1,8 +1,14 @@
 package com.itbox.grzl.engine;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.AppContext;
+import com.itbox.grzl.bean.UserProblem;
 import com.loopj.android.http.RequestParams;
 
 /**
@@ -19,6 +25,7 @@ public class ConsultationEngine {
 	public static final String[] JOB_TYPES = { "IT/互联网", "电子/互联网", "金融",
 			"建筑房地产", "制造业", "物流/仓储", "文化/传媒", "影视/娱乐", "教育", "矿产/能源", "农林牧渔",
 			"医药", "商业服务" };
+	public static final String[] TEACHER_TYPES = { "专业导师", "人力导师" };
 
 	/**
 	 * 咨询搜索
@@ -39,13 +46,92 @@ public class ConsultationEngine {
 		Net.request(info, Api.getUrl(Api.Consultation.probleming), handler);
 	}
 
+	public static void getTeacherBooking(String teacherid,
+			ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("userid", teacherid);
+		params.put("placedate", getToday());
+		Net.request(params, Api.getUrl(Api.Consultation.getteacherbooking),
+				handler);
+	}
+
+	public static void buyPhone(String teacherid, String discountprice,
+			String price, String paydate, String hour, String min,
+			String phone, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
+		params.put("teacheruserid", teacherid);
+		params.put("paydate", paydate);
+		params.put("placetime", hour);
+		params.put("placetimedetail", min);
+		params.put("userphone", phone);
+		params.put("price", price);
+		params.put("discountprice", discountprice);
+		Net.request(params, Api.getUrl(Api.Alipay.Buy_Phone_Client), handler);
+	}
+
+	public static void buyPicture(String teacherid, String discountprice,
+			String price, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
+		params.put("teacheruserid", teacherid);
+		params.put("price", price);
+		params.put("discountprice", discountprice);
+		Net.request(params, Api.getUrl(Api.Alipay.Buy_Picture_Client), handler);
+	}
+
+	public static void buyMember(String teacherid, String discountprice,
+			String price, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
+		params.put("teacheruserid", teacherid);
+		params.put("price", price);
+		params.put("discountprice", discountprice);
+		Net.request(params, Api.getUrl(Api.Alipay.Buy_Member_Web), handler);
+	}
+
+	public static String getToday() {
+		return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+	}
+
+	/**
+	 * 我的咨询
+	 * 
+	 * @param handler
+	 * @param info
+	 */
+	public static void getMyConsultation(GetTeacher info,
+			ResponseHandler handler) {
+		Net.request(info, Api.getUrl(Api.Consultation.getteacher), handler);
+	}
+
+	/**
+	 * 搜索免费咨询
+	 * 
+	 * @param handler
+	 * @param info
+	 */
+	public static void searchFree(String orderby, String jobtype, int page,
+			ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("orderby", orderby);
+		params.put("pagesize", "20");
+		params.put("pageindex", page + "");
+		params.put("jobtype", jobtype);
+		Net.request(params, Api.getUrl(Api.Consultation.searchprobleming),
+				handler);
+	}
+
 	public static class GetTeacher {
 		private int orderby;
 		private String realname;
-		private int pagesize;
-		private int pageindex;
-		private int jobtype;
-		private int teachertype;
+		private String pagesize = "20";
+		private String pageindex;
+		private String jobtype;
+		private String teachertype;
 
 		public int getOrderby() {
 			return orderby;
@@ -63,35 +149,35 @@ public class ConsultationEngine {
 			this.realname = realname;
 		}
 
-		public int getPagesize() {
+		public String getPagesize() {
 			return pagesize;
 		}
 
-		public void setPagesize(int pagesize) {
+		public void setPagesize(String pagesize) {
 			this.pagesize = pagesize;
 		}
 
-		public int getPageindex() {
+		public String getPageindex() {
 			return pageindex;
 		}
 
-		public void setPageindex(int pageindex) {
+		public void setPageindex(String pageindex) {
 			this.pageindex = pageindex;
 		}
 
-		public int getJobtype() {
+		public String getJobtype() {
 			return jobtype;
 		}
 
-		public void setJobtype(int jobtype) {
+		public void setJobtype(String jobtype) {
 			this.jobtype = jobtype;
 		}
 
-		public int getTeachertype() {
+		public String getTeachertype() {
 			return teachertype;
 		}
 
-		public void setTeachertype(int teachertype) {
+		public void setTeachertype(String teachertype) {
 			this.teachertype = teachertype;
 		}
 
@@ -167,6 +253,44 @@ public class ConsultationEngine {
 
 		public boolean isSuccess() {
 			return result == 1;
+		}
+
+	}
+
+	/**
+	 * 获取会员级别
+	 * 
+	 * @param hanlder
+	 */
+	public static void getUserMember(ResponseHandler hanlder) {
+		Net.request(null, Api.getUrl(Api.Consultation.GETUSERMEMBER), hanlder);
+	}
+
+	public static CharSequence getTeacherType(String teachertype) {
+		try {
+			return TEACHER_TYPES[Integer.parseInt(teachertype) - 1];
+		} catch (Exception e) {
+		}
+		return "";
+	}
+
+	public static CharSequence getJobType(String jobType) {
+		try {
+			return JOB_TYPES[Integer.parseInt(jobType) - 1];
+		} catch (Exception e) {
+		}
+		return "";
+	}
+
+	public static class UserProblemItem {
+		private List<UserProblem> UserProblemItem;
+
+		public List<UserProblem> getUserProblemItem() {
+			return UserProblemItem;
+		}
+
+		public void setUserProblemItem(List<UserProblem> userProblemItem) {
+			UserProblemItem = userProblemItem;
 		}
 
 	}

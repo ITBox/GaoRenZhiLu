@@ -104,7 +104,6 @@ public class TeacherEngine {
 		RequestParams params = new RequestParams();
 		params.put("teacherid", AppContext.getInstance().getAccount()
 				.getUserid().toString());
-		// params.put("teacherid", "14");
 		Net.request(params, Api.getUrl(Api.User.GET_TEACHER_COMMENT), handler);
 	}
 

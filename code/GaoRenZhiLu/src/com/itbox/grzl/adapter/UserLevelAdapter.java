@@ -48,7 +48,8 @@ public class UserLevelAdapter extends CursorAdapter {
 		holder.teacherName.setText(bean.getTitle());
 		holder.levelDescription.setText("加入" + bean.getTitle() + "折扣为"
 				+ bean.getDiscount() * 10 + "折");
-
+		ImageLoader.getInstance().displayImage(
+				Api.User.getAvatarUrl(bean.getPhoto()), holder.levelIcon);
 	}
 
 	@Override

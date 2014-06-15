@@ -132,9 +132,11 @@ public class ConsultationFragment extends BaseFragment implements
 
 	@Override
 	public void onSearch(String keyword) {
-		Log.e(ConsultationFragment.class.getSimpleName(), "keyword" + keyword);
 		showProgressDialog("正在搜索...");
-		startActivity(ConsultationSearchActivity.class);
-		dismissProgressDialog();
+
+		Intent intent = new Intent(getActivity(),
+				ConsultationSearchActivity.class);
+		intent.putExtra("realname", keyword);
+		startActivity(intent);
 	}
 }

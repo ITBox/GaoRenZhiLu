@@ -14,6 +14,7 @@ import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.AppContext;
 import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.activity.CommentListActivity;
+import com.itbox.grzl.activity.ConsultationFreeActivity;
 import com.itbox.grzl.activity.EventMyActivity;
 import com.itbox.grzl.activity.ExamReportActivity;
 import com.itbox.grzl.activity.TeacherCommentListActivity;
@@ -51,12 +52,14 @@ public class MoreFragment extends BaseFragment {
 	ImageView mMoreConsultLine;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View layout = inflater.inflate(R.layout.fragment_more, null);
 		ButterKnife.inject(mActThis, layout);
 		Account account = AppContext.getInstance().getAccount();
-		loader.displayImage(account.getUseravatarversion(), mMorePhoto, photoOptions);
+		loader.displayImage(account.getUseravatarversion(), mMorePhoto,
+				photoOptions);
 		mMoreName.setText(account.getUsername());
 		// Account bean = new
 		// Select(AccountTable.COLUMN_USERNAME).from(Account.class).executeSingle();
@@ -79,7 +82,10 @@ public class MoreFragment extends BaseFragment {
 		}
 	}
 
-	@OnClick({ R.id.more_my_photo, R.id.more_my_action, R.id.more_my_ask, R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian, R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult, R.id.more_my_exam, R.id.more_my_set })
+	@OnClick({ R.id.more_my_photo, R.id.more_my_action, R.id.more_my_ask,
+			R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian,
+			R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult,
+			R.id.more_my_exam, R.id.more_my_set })
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.more_my_photo:
@@ -105,6 +111,7 @@ public class MoreFragment extends BaseFragment {
 			startActivity(CommentListActivity.class);
 			break;
 		case R.id.more_my_consult:// 免费咨询
+			startActivity(ConsultationFreeActivity.class);
 			break;
 		case R.id.more_my_exam:// 测评报告
 			startActivity(ExamReportActivity.class);

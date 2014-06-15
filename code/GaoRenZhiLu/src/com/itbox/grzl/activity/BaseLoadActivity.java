@@ -7,6 +7,8 @@ import handmark.pulltorefresh.library.PullToRefreshListView;
 
 import java.util.List;
 
+import javax.crypto.Mac;
+
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -22,6 +24,7 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.activeandroid.content.ContentProvider;
 import com.activeandroid.query.Delete;
+import com.itbox.fx.net.GsonResponseHandler;
 
 /**
  * Load页面基类
@@ -239,5 +242,32 @@ public abstract class BaseLoadActivity<T extends Model> extends BaseActivity
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
 
+	}
+	
+	public static class LoadResponseHandler<T> extends GsonResponseHandler<T>{
+		
+		private BaseLoadActivity<? extends Model> mActivity;
+
+		public LoadResponseHandler(BaseLoadActivity<? extends Model> activity, Class<T> clazz) {
+			super(clazz);
+			mActivity = activity;
+		}
+		
+		@Override
+		public void onFinish() {
+			super.onFinish();
+			mActivity.dismissProgressDialog();
+			mActivity.loadFinish();
+		}
+		
+		@Override
+		public void onFailure(Throwable e, int statusCode, String content) {
+			super.onFailure(e, statusCode, content);
+			mActivity.restorePage();
+			if (statusCode == 400) {
+				return;
+			}
+			mActivity.showToast(content);
+		}
 	}
 }

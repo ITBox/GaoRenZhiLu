@@ -1,5 +1,9 @@
 package com.itbox.grzl.activity;
 
+import java.util.ArrayList;
+
+import org.apache.http.Header;
+
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -18,16 +22,29 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.ActiveAndroid;
 import com.activeandroid.content.ContentProvider;
+import com.activeandroid.query.Delete;
+import com.activeandroid.query.Update;
+import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.fx.net.ResponseHandler;
+import com.itbox.fx.util.GSON;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
-import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.TeacherCommentAdapter;
 import com.itbox.grzl.api.ConsultationApi;
-import com.itbox.grzl.bean.TeacherComment;
+import com.itbox.grzl.bean.Account;
+import com.itbox.grzl.bean.TeacherCommentGet;
+import com.itbox.grzl.bean.TeacherExtension;
+import com.itbox.grzl.bean.UserLevel;
+import com.itbox.grzl.bean.UserLevelList;
 import com.itbox.grzl.bean.UserListItem;
-import com.itbox.grzl.constants.TeacherCommentTable;
+import com.itbox.grzl.constants.AccountTable;
+import com.itbox.grzl.constants.UserLevelTable;
+import com.itbox.grzl.engine.ConsultationEngine;
+import com.itbox.grzl.engine.TeacherEngine;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhaoliewang.grzl.R;
 
 /**
  * 咨询详情页
@@ -40,8 +57,6 @@ public class ConsultationDetialActivity extends BaseActivity implements
 
 	@InjectView(R.id.list)
 	ListView mListView;
-	@InjectView(R.id.text_left)
-	TextView backTextView;
 	private View mHeaderView;
 
 	private ConsultationApi consultationApi;
@@ -59,6 +74,7 @@ public class ConsultationDetialActivity extends BaseActivity implements
 	private TextView consultationNameTextView;
 	private ImageView iconImageView;
 	private String type;
+	private TeacherExtension teacherExtension;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -66,9 +82,19 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		setContentView(R.layout.activity_picture_consultation_detial);
 		ButterKnife.inject(this);
 		teacher = (UserListItem) getIntent().getSerializableExtra("teacher");
+		teacherExtension = (TeacherExtension) getIntent().getSerializableExtra(
+				"teacherExtension");
+		type = getIntent().getStringExtra("type");
 		String consultation_name = getIntent().getStringExtra(
 				"consultation_name");
-		type = getIntent().getStringExtra("type");
+
+		if ("picture".equals(type)) {
+			setTitle("图文咨询详情");
+		} else {
+			setTitle("电话咨询详情");
+		}
+		showLeftBackButton();
+
 		mHeaderView = View.inflate(this, R.layout.layout_comment_list_header,
 				null);
 		avatarImageView = (ImageView) mHeaderView.findViewById(R.id.iv_avatar);
@@ -111,53 +137,116 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		answerCountTextView.setText("回答" + teacher.getAnswercount() + "次");
 		mRatingBar.setRating(Float.valueOf(teacher.getTeacherlevel()));
 		mListView.addHeaderView(mHeaderView);
+
 		adapter = new TeacherCommentAdapter(this, null);
 		mListView.setAdapter(adapter);
 		consultationApi = new ConsultationApi();
-		consultationApi.getTeacherComment("14");
-		backTextView.setVisibility(View.VISIBLE);
+		consultationApi.getTeacherComment(teacher.getUserid());
 		consultationNameTextView.setText(consultation_name);
 		getSupportLoaderManager().initLoader(0, null, this);
 	}
 
 	@OnClick(R.id.tv_buy)
 	public void buy() {
-		AlertDialog.Builder builder = new Builder(this);
-		builder.setMessage("购买会员更便宜,是否加入会员")
-				.setPositiveButton("是", new DialogInterface.OnClickListener() {
+		// 判断会员
+		showLoadProgressDialog();
+		TeacherEngine.getUserList(new GsonResponseHandler<Account>(
+				Account.class) {
+			@Override
+			public void onSuccess(Account user) {
+				super.onSuccess(user);
+				if (user != null && user.getMemberid() > 0) {
+					goPay(user.getMemberid());
+				} else {
+					AlertDialog.Builder builder = new Builder(mActThis);
+					builder.setMessage("购买会员更便宜,是否加入会员")
+							.setPositiveButton("是",
+									new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(
-								ConsultationDetialActivity.this,
-								BuyVipActivity.class);
-						startActivity(intent);
-					}
-				})
-				.setNegativeButton("否", new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											Intent intent = new Intent(
+													ConsultationDetialActivity.this,
+													BuyVipActivity.class);
+											startActivity(intent);
+										}
+									})
+							.setNegativeButton("否",
+									new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(
-								ConsultationDetialActivity.this,
-								PayActivity.class);
-						intent.putExtra("type", type);
-						startActivity(intent);
-					}
-				}).show();
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											goPay(0);
+										}
+
+									}).show();
+				}
+			}
+
+			@Override
+			public void onFinish() {
+				dismissProgressDialog();
+			}
+		});
 	}
 
-	@OnClick(R.id.text_left)
-	public void back() {
-		finish();
+	private void goPay(final int memberid) {
+		if (memberid > 0) {
+			// 计算会员折扣价
+			showLoadProgressDialog();
+			ConsultationEngine.getUserMember(new ResponseHandler() {
+				@Override
+				public void onSuccess(int statusCode, Header[] headers,
+						String content) {
+					super.onSuccess(statusCode, headers, content);
+					UserLevelList userLevelList = GSON.getObject(content,
+							UserLevelList.class);
+					if (userLevelList != null
+							&& userLevelList.getUserMemberItem() != null) {
+						for (UserLevel level : userLevelList
+								.getUserMemberItem()) {
+							if (level != null
+									&& (memberid == level.getMemberid())) {
+								// 计算折扣
+								goPayActivity(level.getDiscount());
+							}
+						}
+					}
+				}
+
+				public void onFinish() {
+					dismissProgressDialog();
+				};
+			});
+		} else {
+			// 不是会员按原价计算
+			goPayActivity(1.0f);
+		}
+	}
+
+	private void goPayActivity(float dis) {
+		teacherExtension.setFinalPhoneprice(Double.parseDouble(teacherExtension
+				.getPhoneprice()) * dis);
+		teacherExtension.setFinalPictureprice(Double
+				.parseDouble(teacherExtension.getPicturepice()) * dis);
+		Intent intent = new Intent(ConsultationDetialActivity.this,
+				PayActivity.class);
+		intent.putExtra("teacher", teacher);
+		intent.putExtra("type", type);
+		intent.putExtra("teacherExtension", teacherExtension);
+		startActivity(intent);
 	}
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
 		return new CursorLoader(this, ContentProvider.createUri(
-				TeacherComment.class, null), null,
-				TeacherCommentTable.COLUMN_USERID + "=?",
-				new String[] { "14" }, null);
+				TeacherCommentGet.class, null), null,
+				TeacherCommentGet.TEACHERUSERID + "=?",
+				new String[] { teacher.getUserid() }, null);
 	}
 
 	@Override

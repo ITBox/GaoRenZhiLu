@@ -15,14 +15,13 @@ import com.activeandroid.query.Delete;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
-import com.itbox.grzl.bean.TeacherComment;
+import com.itbox.grzl.bean.TeacherCommentGet;
 import com.itbox.grzl.bean.TeacherCommentList;
 import com.itbox.grzl.bean.TeacherExtension;
 import com.itbox.grzl.bean.UserLevel;
 import com.itbox.grzl.bean.UserLevelList;
 import com.itbox.grzl.bean.UserList;
 import com.itbox.grzl.bean.UserListItem;
-import com.itbox.grzl.constants.TeacherCommentTable;
 import com.itbox.grzl.constants.UserLevelTable;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -106,7 +105,7 @@ public class ConsultationApi extends BaseApi {
 			final String teachertype) {
 		RequestParams params = new RequestParams();
 		params.put("orderby", "1");
-		params.put("realname", "");
+		params.put("realname", realname);
 		params.put("pagesize", "20");
 		params.put("pageindex", "1");
 		params.put("jobtype", jobtype);
@@ -279,25 +278,25 @@ public class ConsultationApi extends BaseApi {
 	 * 获取导师评论接口
 	 * 
 	 */
-	public void getTeacherComment(String teacherid) {
+	public void getTeacherComment(final String teacherid) {
 		RequestParams params = new RequestParams();
 		params.put("teacherid", teacherid);
-		client.post(Api.getUrl(Api.User.GET_TEACHER_COMMENT), params,
-				new AsyncHttpResponseHandler() {
+		Net.request(params, Api.getUrl(Api.User.GET_TEACHER_COMMENT),
+				new ResponseHandler() {
 					@Override
 					public void onSuccess(int statusCode, String content) {
 						super.onSuccess(statusCode, content);
 						TeacherCommentList mTeacherCommentList = mGson
 								.fromJson(content, TeacherCommentList.class);
 						new Delete()
-								.from(TeacherComment.class)
-								.where(TeacherCommentTable.COLUMN_TEACHERUSERID
-										+ "=?", "14").execute();
+								.from(TeacherCommentGet.class)
+								.where(TeacherCommentGet.TEACHERUSERID
+										+ "=?", teacherid).execute();
 						if (mTeacherCommentList != null
 								&& mTeacherCommentList.getTeacherCommentItem() != null) {
 							ActiveAndroid.beginTransaction();
 							try {
-								for (TeacherComment comment : mTeacherCommentList
+								for (TeacherCommentGet comment : mTeacherCommentList
 										.getTeacherCommentItem()) {
 									comment.save();
 								}

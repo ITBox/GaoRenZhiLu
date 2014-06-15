@@ -1,5 +1,8 @@
 package com.itbox.grzl.bean;
 
+import java.io.Serializable;
+import java.text.DecimalFormat;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -15,8 +18,12 @@ import com.itbox.grzl.constants.TeacherExtensionTable;
  * 
  */
 @Table(name = TeacherExtensionTable.TABLE_NAME)
-public class TeacherExtension extends Model {
+public class TeacherExtension extends Model implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7065479262403661229L;
 	@Column(name = TeacherExtensionTable.COLUMN_USERID)
 	private Integer userid;
 	@Column(name = TeacherExtensionTable.COLUMN_USERCODE)
@@ -41,6 +48,25 @@ public class TeacherExtension extends Model {
 	private String teacherlevel;
 	@Column(name = TeacherExtensionTable.COLUMN_REMARKCOUNT)
 	private String remarkcount;
+
+	private double finalPhoneprice;
+	private double finalPictureprice;
+
+	public double getFinalPhoneprice() {
+		return (double)Math.round(finalPhoneprice*100)/100;
+	}
+
+	public void setFinalPhoneprice(double finalPhoneprice) {
+		this.finalPhoneprice = finalPhoneprice;
+	}
+
+	public double getFinalPictureprice() {
+		return (double)Math.round(finalPictureprice*100)/100;
+	}
+
+	public void setFinalPictureprice(double finalPictureprice) {
+		this.finalPictureprice = finalPictureprice;
+	}
 
 	public Integer getUserid() {
 		return userid;
@@ -91,7 +117,7 @@ public class TeacherExtension extends Model {
 	}
 
 	public String getPicturepice() {
-		return picturepice;
+		return picturepice != null ? picturepice : "0.00";
 	}
 
 	public void setPicturepice(String picturepice) {
@@ -99,7 +125,7 @@ public class TeacherExtension extends Model {
 	}
 
 	public String getPhoneprice() {
-		return phoneprice;
+		return phoneprice != null ? phoneprice : "0.00";
 	}
 
 	public void setPhoneprice(String phoneprice) {

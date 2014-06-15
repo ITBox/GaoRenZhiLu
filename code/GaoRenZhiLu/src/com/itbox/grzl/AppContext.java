@@ -8,6 +8,7 @@ import android.annotation.SuppressLint;
 import cn.jpush.android.api.JPushInterface;
 
 import com.activeandroid.ActiveAndroid;
+import com.activeandroid.query.Select;
 import com.baidu.location.BDLocation;
 import com.itbox.fx.core.Application;
 import com.itbox.grzl.bean.Account;
@@ -128,6 +129,9 @@ public class AppContext extends Application {
 	}
 
 	public Account getAccount() {
+		if (account == null) {
+			account = new Select().from(Account.class).executeSingle();
+		}
 		return account;
 	}
 

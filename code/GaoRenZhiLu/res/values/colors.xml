@@ -10,4 +10,7 @@
     <color name="black">#000000</color>
     <color name="activity_bg">#ECF0F1</color>
     <color name="search_bar_bg">#C9C9CE</color>
+    <color name="time_span_red">#CA2100</color>
+    <color name="time_span_blue">#027BC6</color>
+    <color name="time_span_green">#8CC901</color>
 </resources>

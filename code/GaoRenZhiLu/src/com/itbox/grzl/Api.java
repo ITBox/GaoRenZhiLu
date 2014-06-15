@@ -139,20 +139,23 @@ public class Api {
 		 * 用户模块第2部分
 		 */
 		/** 获取用户信息 **/
-		public static final String GET_USER_LIST = PartName
+		public static final String GET_USER_LIST = PartName + "getuserlist";
+		public static final String GET_USER_EXTENSION = PartName
 				+ "getuserextension";
 		/**
 		 * 修改导师更多资料接口
 		 */
-		public static final String UP_USER_MORE = PartName + "updateuserextension";
+		public static final String UP_USER_MORE = PartName
+				+ "updateuserextension";
 		/**
 		 * 修改个人资料
 		 */
 		public static final String UP_USER_INFO = PartName + "updateuserlist";
-        /**
-         * 添加身份验证接口
-         */
-		public static final String ADD_USER_IDCARD = PartName + "adduserauthentication";
+		/**
+		 * 添加身份验证接口
+		 */
+		public static final String ADD_USER_IDCARD = PartName
+				+ "adduserauthentication";
 		/** 获取老师评价 **/
 		public static final String GET_TEACHER_COMMENT = PartName
 				+ "getteachercomment";
@@ -267,6 +270,22 @@ public class Api {
 		public static final String getteacherbooking = PartName
 				+ "getteacherbooking";
 		public static final String GETUSERMEMBER = PartName + "getusermember";
+
+	}
+
+	/** 支付模块 */
+	public static final class Alipay {
+		private static final String PartName = "Alipay/";
+		public static final String Buy_Member_Web = PartName + "memberwebstart";
+		public static final String Buy_Member_Clinet = PartName
+				+ "memberclientstart";
+		public static final String Buy_Picture_Web = PartName
+				+ "picturewebstart";
+		public static final String Buy_Picture_Client = PartName
+				+ "pictureclientstart";
+		public static final String Buy_Phone_Web = PartName + "phonewebstart";
+		public static final String Buy_Phone_Client = PartName
+				+ "phoneclientstart";
 
 	}
 

@@ -230,7 +230,7 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 	 * 获取用户更多资料
 	 */
 	private void getData() {
-		Net.request("userid", AppContext.getInstance().getAccount().getUserid() + "", Api.getUrl(Api.User.GET_USER_LIST), new GsonResponseHandler<UserExtension>(UserExtension.class) {
+		Net.request("userid", AppContext.getInstance().getAccount().getUserid() + "", Api.getUrl(Api.User.GET_USER_EXTENSION), new GsonResponseHandler<UserExtension>(UserExtension.class) {
 			@Override
 			public void onSuccess(UserExtension object) {
 				super.onSuccess(object);
