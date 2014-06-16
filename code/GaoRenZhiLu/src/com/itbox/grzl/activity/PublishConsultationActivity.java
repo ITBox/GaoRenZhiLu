@@ -140,7 +140,7 @@ public class PublishConsultationActivity extends Activity implements
 				imageFileUri = data.getData();
 			}
 			Bitmap bitmap = ImageUtils
-					.getBitmap(this, null, null, imageFileUri);
+					.getBitmap(this, null, null, imageFileUri, 800, 600);
 			mImageView.setVisibility(View.VISIBLE);
 			mImageView.setImageBitmap(bitmap);
 			ImageUtils.Bitmap2File(bitmap, TEMP_FEED_IMAGE_PATH);

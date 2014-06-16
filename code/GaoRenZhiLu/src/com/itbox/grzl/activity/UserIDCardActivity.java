@@ -86,7 +86,7 @@ public class UserIDCardActivity extends BaseActivity {
 			case Contasts.TAKE_PICTURE_FROM_GALLERY:
 				Intent intent = new Intent(mActThis, UserIDCardImgActivity.class);
 //				intent.setDataAndType(data.getData(), "image/jpeg");
-				Bitmap uriBitmap = ImageUtils.getUriBitmap(mActThis, data.getData());
+				Bitmap uriBitmap = ImageUtils.getUriBitmap(mActThis, data.getData(), 640, 400);
 				String saveBitToSD = FileUtils.saveBitToSD(uriBitmap, System.currentTimeMillis()+"");
 				intent.putExtra("imgPath", saveBitToSD);
 				Log.i("youzh", saveBitToSD);

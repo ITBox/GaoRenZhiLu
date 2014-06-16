@@ -146,6 +146,9 @@
             android:name="com.itbox.grzl.activity.UserSetHelpActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.itbox.grzl.activity.CropImgActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.itbox.grzl.activity.ConsultationSearchActivity"
             android:screenOrientation="portrait" />
         <activity

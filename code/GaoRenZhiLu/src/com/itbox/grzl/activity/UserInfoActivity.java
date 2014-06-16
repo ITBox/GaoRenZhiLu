@@ -18,18 +18,26 @@ import com.itbox.grzl.bean.AreaData;
 import com.itbox.grzl.bean.UpdateUserList;
 import com.itbox.grzl.common.Contasts;
 import com.itbox.grzl.common.db.AreaListDB;
+import com.itbox.grzl.common.util.FileUtils;
 import com.loopj.android.http.RequestParams;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
 /**
  * 个人资料
+ * 
  * @author youzh
- *
+ * 
  */
 public class UserInfoActivity extends BaseActivity {
 	@InjectView(R.id.text_left)
@@ -64,7 +72,8 @@ public class UserInfoActivity extends BaseActivity {
 	EditText mEtUserInfoEmail;
 	@InjectView(R.id.more_my_intro_tv)
 	TextView mUserInfoIntro;
-
+	
+	private Uri photoUri;
 	private Account account;
 	private long birthdayMils;
 	private String birthday;
@@ -72,16 +81,18 @@ public class UserInfoActivity extends BaseActivity {
 	private int provinceCode = 100000;
 	private int cityCode = 110000;
 	private int districtCode = 110101;
-//    private ArrayList<Account> beforeAccount = new ArrayList<Account>();
-//    private ArrayList<Account> afterAccount = new ArrayList<Account>();
-    
+	private Bitmap photoBit;
+
+	// private ArrayList<Account> beforeAccount = new ArrayList<Account>();
+	// private ArrayList<Account> afterAccount = new ArrayList<Account>();
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_user_info);
 		ButterKnife.inject(mActThis);
 		account = AppContext.getInstance().getAccount();
-//		beforeAccount.add(account);
+		// beforeAccount.add(account);
 		initViews();
 		initDatas();
 	}
@@ -128,14 +139,14 @@ public class UserInfoActivity extends BaseActivity {
 		}
 		return "暂无";
 	}
-	
-//    @Override
-//    protected boolean onBack() {
-//    	// TODO Auto-generated method stub
-//    	return true;
-//    }
-    
-	@OnClick({ R.id.text_left, R.id.text_right, R.id.more_my_name_iv, R.id.more_my_city_iv, R.id.more_my_birthday_iv, R.id.more_my_sex_iv, R.id.more_my_phone_iv, R.id.more_my_email_iv, R.id.more_my_intro_rl, R.id.more_my_moreinfo_rl })
+
+	// @Override
+	// protected boolean onBack() {
+	// // TODO Auto-generated method stub
+	// return true;
+	// }
+
+	@OnClick({ R.id.userinfo_photo, R.id.text_left, R.id.text_right, R.id.more_my_name_iv, R.id.more_my_city_iv, R.id.more_my_birthday_iv, R.id.more_my_sex_iv, R.id.more_my_phone_iv, R.id.more_my_email_iv, R.id.more_my_intro_rl, R.id.more_my_moreinfo_rl })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -144,6 +155,32 @@ public class UserInfoActivity extends BaseActivity {
 			break;
 		case R.id.text_right:
 			postUserInfoMethod();
+			break;
+		case R.id.userinfo_photo:
+			new AlertDialog.Builder(mActThis).setItems(new String[] { "拍照", "从图库选择" }, new OnClickListener() {
+
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					switch (which) {
+					case 0:
+						Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+						photoUri = Contasts.photoUri(mActThis);
+						intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri);
+						// 开启系统拍照的Activity
+						mActThis.startActivityForResult(intent, Contasts.TAKE_PICTURE_FROM_CAMERA);
+						break;
+					case 1:
+						Intent intent2 = new Intent("android.intent.action.PICK");
+						intent2.setType("image/*");
+						mActThis.startActivityForResult(intent2, Contasts.TAKE_PICTURE_FROM_GALLERY);
+						break;
+
+					default:
+						break;
+					}
+				}
+			}).show();
 			break;
 		case R.id.more_my_name_iv:
 			EditTextUtils.showKeyboard(mEtUserInfoName);
@@ -198,7 +235,36 @@ public class UserInfoActivity extends BaseActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+//		Intent intent = null;
 		switch (requestCode) {
+		case Contasts.TAKE_PICTURE_FROM_CAMERA:
+			Intent intent = new Intent(mActThis, CropImgActivity.class);
+//			intent.setDataAndType(photoUri, "image/jpeg");
+//			intent.putExtra("imgUri", photoUri);
+			intent.setData(photoUri);
+			mActThis.startActivityForResult(intent, Contasts.CROP_CAMERA_PICTURE);
+			break;
+		case Contasts.TAKE_PICTURE_FROM_GALLERY:
+			Intent intent2 = new Intent(mActThis, CropImgActivity.class);
+//			intent2.setDataAndType(data.getData(), "image/jpeg");
+//			intent2.putExtra("imgUri", photoUri);
+			intent2.setData(data.getData());
+			mActThis.startActivityForResult(intent2, Contasts.CROP_GALLERY_PICTURE);
+			break;
+		case Contasts.CROP_CAMERA_PICTURE:
+			if (data != null) {
+				String path = data.getStringExtra("cropPath");
+				photoBit = FileUtils.getImageFromLocal(path);
+				mUserInfoPhoto.setImageBitmap(photoBit);
+			}
+			break;
+		case Contasts.CROP_GALLERY_PICTURE:
+			if (data != null) {
+				String path = data.getStringExtra("cropPath");
+				photoBit = FileUtils.getImageFromLocal(path);
+				mUserInfoPhoto.setImageBitmap(photoBit);
+			}
+			break;
 		case 20:
 			String userIntro = data.getStringExtra("userIntro");
 			if (!TextUtils.isEmpty(userIntro)) {
@@ -233,42 +299,43 @@ public class UserInfoActivity extends BaseActivity {
 			break;
 		}
 	}
-	
+
 	/**
 	 * 修改个人资料
 	 */
-    private void postUserInfoMethod() {
-    	showProgressDialog("保存中...");
-    	RequestParams params = new RequestParams();
-    	params.put("userid", account.getUserid()+"");
-    	params.put("username", EditTextUtils.getText(mEtUserInfoName));
-    	params.put("userphone", EditTextUtils.getText(mEtUserInfoPhone));
-    	params.put("useremail", EditTextUtils.getText(mEtUserInfoEmail));
-    	params.put("useravatarversion", "");
-    	params.put("usersex", sex+"");
-    	params.put("userprovince", provinceCode+"");
-    	params.put("usercity", cityCode+"");
-    	params.put("userdistrict", districtCode+"");
-    	params.put("userintroduction", mUserInfoIntro.getText().toString());
-    	params.put("userbirthday", birthday);
-    	
-    	Net.request(params, Api.getUrl(Api.User.UP_USER_INFO), new GsonResponseHandler<UpdateUserList>(UpdateUserList.class) {
-    		@Override
-    		public void onSuccess(UpdateUserList object) {
-    			super.onSuccess(object);
-    			switch (object.getResult()) {
+	private void postUserInfoMethod() {
+		showProgressDialog("保存中...");
+		RequestParams params = new RequestParams();
+		params.put("userid", account.getUserid() + "");
+		params.put("username", EditTextUtils.getText(mEtUserInfoName));
+		params.put("userphone", EditTextUtils.getText(mEtUserInfoPhone));
+		params.put("useremail", EditTextUtils.getText(mEtUserInfoEmail));
+		params.put("useravatarversion", "");
+		params.put("usersex", sex + "");
+		params.put("userprovince", provinceCode + "");
+		params.put("usercity", cityCode + "");
+		params.put("userdistrict", districtCode + "");
+		params.put("userintroduction", mUserInfoIntro.getText().toString());
+		params.put("userbirthday", birthday);
+
+		Net.request(params, Api.getUrl(Api.User.UP_USER_INFO), new GsonResponseHandler<UpdateUserList>(UpdateUserList.class) {
+			@Override
+			public void onSuccess(UpdateUserList object) {
+				super.onSuccess(object);
+				switch (object.getResult()) {
 				case Contasts.RESULT_SUCCES:
 					dismissProgressDialog();
-//					new Update(Account.class).set(EditTextUtils.getText(mEtUserInfoName))
-//					.where("AccountTable.COLUMN_USERNAME = ?").execute();
+					// new
+					// Update(Account.class).set(EditTextUtils.getText(mEtUserInfoName))
+					// .where("AccountTable.COLUMN_USERNAME = ?").execute();
 					account.setUsername(EditTextUtils.getText(mEtUserInfoName));
 					account.setUserphone(EditTextUtils.getText(mEtUserInfoPhone));
 					account.setUseremail(EditTextUtils.getText(mEtUserInfoEmail));
 					account.setUseravatarversion("");
-					account.setUsersex(sex+"");
-					account.setUserprovince(provinceCode+"");
-					account.setUsercity(cityCode+"");
-					account.setUserdistrict(districtCode+"");
+					account.setUsersex(sex + "");
+					account.setUserprovince(provinceCode + "");
+					account.setUsercity(cityCode + "");
+					account.setUserdistrict(districtCode + "");
 					account.setUserintroduction(mUserInfoIntro.getText().toString());
 					account.setUserbirthday(birthday);
 					account.save();
@@ -282,7 +349,7 @@ public class UserInfoActivity extends BaseActivity {
 				default:
 					break;
 				}
-    		}
-    	});
-    }
+			}
+		});
+	}
 }

@@ -16,12 +16,12 @@ import android.provider.MediaStore;
 public class ImageUtils {
 
 	public static Bitmap getBitmap(Context context, String path, byte[] data,
-			Uri uri) {
+			Uri uri, int reqWidth, int reqHeight) {
 		BitmapFactory.Options newOpts = new BitmapFactory.Options();
 		newOpts.inJustDecodeBounds = true;
 		Bitmap bitmap = decode(context, path, data, uri, newOpts);
 		newOpts.inJustDecodeBounds = false;
-		newOpts.inSampleSize = calculateInSampleSize(newOpts, 800, 600);
+		newOpts.inSampleSize = calculateInSampleSize(newOpts, reqWidth, reqHeight);
 		bitmap = decode(context, path, data, uri, newOpts);
 		return bitmap;
 	}
@@ -120,12 +120,12 @@ public class ImageUtils {
 		}
 	}
     
-	public static Bitmap getUriBitmap(Context context, Uri uri) {
+	public static Bitmap getUriBitmap(Context context, Uri uri, int reqWidth, int reqHeight) {
 		BitmapFactory.Options newOpts = new BitmapFactory.Options();
 		newOpts.inJustDecodeBounds = true;
 		Bitmap bitmap = decodeUriAsBitmap(context, uri, newOpts);
 		newOpts.inJustDecodeBounds = false;
-		newOpts.inSampleSize = calculateInSampleSize(newOpts, 640, 400);
+		newOpts.inSampleSize = calculateInSampleSize(newOpts, reqWidth, reqHeight);
 		bitmap = decodeUriAsBitmap(context, uri, newOpts);
 		return bitmap;
 	}

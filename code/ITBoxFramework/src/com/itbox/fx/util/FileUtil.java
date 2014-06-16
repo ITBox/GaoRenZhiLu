@@ -12,6 +12,13 @@ import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 public class FileUtil {
+	
+	/**
+	 * SD卡是否可用
+	 */
+	public static boolean isSDCardAvailable() {
+		return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
+	}
 
 	/**
 	 * 保存图片到指定的目录
@@ -85,4 +92,5 @@ public class FileUtil {
 			return null;
 		}
 	}
+	
 }

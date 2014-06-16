@@ -1,4 +1,14 @@
 package com.itbox.grzl.common;
+
+import java.io.File;
+
+import com.itbox.fx.util.FileUtil;
+
+import android.content.Context;
+import android.net.Uri;
+import android.os.Environment;
+
+
 /**
  * 
  * @author youzh
@@ -21,7 +31,8 @@ public class Contasts {
 	public static final int TAKE_PICTURE_FROM_CAMERA      = 2050;
 	
 	public static final int UPLOAD_IDCARD                 = 2100;
-	
+	public static final int CROP_CAMERA_PICTURE           = 2150;
+	public static final int CROP_GALLERY_PICTURE          = 2200;
 	
 	public static final class State {
 		private static final int SUCCES            = 200;  // 请求的操作处理成功
@@ -51,5 +62,12 @@ public class Contasts {
 	    	
 	    }
 			
+	}
+	public static Uri photoUri(Context ctx) {
+		if (FileUtil.isSDCardAvailable()) { // 有外置存储卡
+			return Uri.parse("file://" + Environment.getExternalStorageDirectory().getAbsolutePath() + "/temp.jpg");
+		} else { // 没有，存到内置的
+			return Uri.parse("file://" + new File(ctx.getFilesDir(), "tmp.jpg").getAbsolutePath());
+		}
 	}
 }
