@@ -18,6 +18,7 @@ public class UserProblem extends BaseModel {
 	public static final String UP_ID = "up_id";
 	public static final String TITLE = "up_title";
 	public static final String USERID = "up_userid";
+	public static final String USERNAME = "up_username";
 	public static final String PHOTO = "up_photo";
 	public static final String CONTENTS = "up_contents";
 	public static final String TEACHERUSERID = "up_replacecount";
@@ -43,6 +44,16 @@ public class UserProblem extends BaseModel {
 	private int consultationType;
 	@Column(name = UserProblem.CREATETIME)
 	private String createtime;
+	@Column(name = UserProblem.USERNAME)
+	private String username;
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	public int getProblemId() {
 		return id;

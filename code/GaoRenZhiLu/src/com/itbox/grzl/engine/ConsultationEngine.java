@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
@@ -91,6 +92,22 @@ public class ConsultationEngine {
 		params.put("price", price);
 		params.put("discountprice", discountprice);
 		Net.request(params, Api.getUrl(Api.Alipay.Buy_Member_Web), handler);
+	}
+
+	public static void issolve(String teacherid, String problemId,
+			ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("teacheruserid", teacherid);
+		params.put("id", problemId);
+		Net.request(params, Api.getUrl(Api.Consultation.ISSOLVE), handler);
+	}
+	
+	public static void getProblemDetail(String problemId, ResponseHandler handler){
+		RequestParams params = new RequestParams();
+		params.put("id", problemId);
+		params.put("pagesize", "20");
+		params.put("pageindex", "1");
+		Net.request(params , Api.getUrl(Api.Consultation.GETUSERPROBLEMDETAIL), handler);
 	}
 
 	public static String getToday() {

@@ -1,0 +1,1 @@
+ALTER TABLE user_problem ADD COLUMN up_username TEXT;
