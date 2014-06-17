@@ -1,5 +1,6 @@
 package com.itbox.fx.util;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -147,5 +148,18 @@ public class ImageUtils {
 		}
 
 		return result;
+	}
+	
+	/**
+	 * 将Bitmap转换成InputStream
+	 * 
+	 * @param bm
+	 * @return
+	 */
+	public static InputStream bitmap2InputStream(Bitmap bm) {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+		InputStream is = new ByteArrayInputStream(baos.toByteArray());
+		return is;
 	}
 }
