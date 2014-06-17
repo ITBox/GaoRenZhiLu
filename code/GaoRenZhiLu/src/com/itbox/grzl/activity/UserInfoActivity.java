@@ -29,6 +29,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -249,6 +250,7 @@ public class UserInfoActivity extends BaseActivity {
 //			intent2.setDataAndType(data.getData(), "image/jpeg");
 //			intent2.putExtra("imgUri", photoUri);
 			intent2.setData(data.getData());
+			Log.i("youzh", "URI : "+data.getData());
 			mActThis.startActivityForResult(intent2, Contasts.CROP_GALLERY_PICTURE);
 			break;
 		case Contasts.CROP_CAMERA_PICTURE:
@@ -296,6 +298,8 @@ public class UserInfoActivity extends BaseActivity {
 				String addrName = data.getStringExtra(SelectAddrActivity.Extra.ProvinceName) + " " + data.getStringExtra(SelectAddrActivity.Extra.CityName) + " " + data.getStringExtra(SelectAddrActivity.Extra.DistrictName);
 				mUserInfoCity.setText(addrName);
 			}
+			break;
+		default:
 			break;
 		}
 	}
