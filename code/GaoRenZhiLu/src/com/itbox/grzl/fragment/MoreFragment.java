@@ -15,6 +15,7 @@ import com.itbox.grzl.AppContext;
 import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.activity.CommentListActivity;
 import com.itbox.grzl.activity.ConsultationFreeActivity;
+import com.itbox.grzl.activity.ConsultationMyActivity;
 import com.itbox.grzl.activity.EventMyActivity;
 import com.itbox.grzl.activity.ExamReportActivity;
 import com.itbox.grzl.activity.TeacherCommentListActivity;
@@ -95,6 +96,7 @@ public class MoreFragment extends BaseFragment {
 			startActivity(EventMyActivity.class);
 			break;
 		case R.id.more_my_ask:// 我的咨询
+			startActivity(ConsultationMyActivity.class);
 			break;
 		case R.id.more_my_evaluate:// 我的评价
 			startActivity(TeacherCommentListActivity.class);

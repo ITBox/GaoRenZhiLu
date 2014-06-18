@@ -238,6 +238,9 @@
             android:name="com.itbox.grzl.activity.ConsultationFreeDetailActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name="com.itbox.grzl.activity.ConsultationMyActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.itbox.grzl.activity.SelectTimeMinuteActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Translucent_NoTitleBar" />

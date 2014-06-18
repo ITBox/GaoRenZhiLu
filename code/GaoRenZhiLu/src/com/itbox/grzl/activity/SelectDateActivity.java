@@ -104,7 +104,7 @@ public class SelectDateActivity extends SelectAbstractActivity implements OnClic
 		monthWheel.addChangingListener(this);
 		dayWheel.addChangingListener(this);
 		yearWheel.addScrollingListener(this);
-		yearWheel.setCurrentItem(20);
+		yearWheel.setCurrentItem(0);
 		monthWheel.setCurrentItem(currentMonth);
 		dayWheel.setCurrentItem(currentDay - 1);
 		yearWheel.setVisibleItems(VISIBLE_ITEMS);
@@ -145,14 +145,14 @@ public class SelectDateActivity extends SelectAbstractActivity implements OnClic
 		currentMonth = cal.get(Calendar.MONTH);
 		currentYear = cal.get(Calendar.YEAR);
 
-		years = new int[currentYear - 1900 +1];
-		int lastYear = currentYear;
+		int lastYear = 2050;
+		years = new int[lastYear - currentYear + 1];
 		for (int i = 0; i < years.length; i++) {
-			years[i] = lastYear--;
+			years[i] = currentYear++;
 		}
 		months = getRiseArray(1, 12);
 		currentMonths = getRiseArray(1, currentMonth + 1);
-		currentdays = getRiseArray(1, currentDay);
+		currentdays = getDayOfMonth();
 	}
 
 	
@@ -268,7 +268,7 @@ public class SelectDateActivity extends SelectAbstractActivity implements OnClic
 		}else{
 			dayStr = ""+days[currentDayIndex];
 		}
-		return years[currentYearIndex] + "-" + monthStr + "-" + dayStr + " 00:00:00";
+		return years[currentYearIndex] + "-" + monthStr + "-" + dayStr;
 		//return years[currentYearIndex] + "年" + months[currentMonthIndex] + "月" + days[currentDayIndex] + "日";
 	}
 //

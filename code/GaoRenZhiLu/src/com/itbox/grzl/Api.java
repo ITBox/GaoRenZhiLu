@@ -272,6 +272,7 @@ public class Api {
 		public static final String GETUSERMEMBER = PartName + "getusermember";
 		public static final String ISSOLVE = PartName + "issolve";
 		public static final String GETUSERPROBLEMDETAIL = PartName + "getuserproblemdetail";
+		public static final String GETMYPROBLEM = PartName + "getmyproblem";
 
 	}
 

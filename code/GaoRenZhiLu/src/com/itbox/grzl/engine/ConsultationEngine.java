@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
@@ -58,7 +57,7 @@ public class ConsultationEngine {
 
 	public static void buyPhone(String teacherid, String discountprice,
 			String price, String paydate, String hour, String min,
-			String phone, ResponseHandler handler) {
+			String phone, boolean isClient, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()
 				.toString());
@@ -69,18 +68,20 @@ public class ConsultationEngine {
 		params.put("userphone", phone);
 		params.put("price", price);
 		params.put("discountprice", discountprice);
-		Net.request(params, Api.getUrl(Api.Alipay.Buy_Phone_Client), handler);
+		Net.request(params, Api.getUrl(isClient ? Api.Alipay.Buy_Phone_Client
+				: Api.Alipay.Buy_Phone_Web), handler);
 	}
 
 	public static void buyPicture(String teacherid, String discountprice,
-			String price, ResponseHandler handler) {
+			String price, boolean isClient, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()
 				.toString());
 		params.put("teacheruserid", teacherid);
 		params.put("price", price);
 		params.put("discountprice", discountprice);
-		Net.request(params, Api.getUrl(Api.Alipay.Buy_Picture_Client), handler);
+		Net.request(params, Api.getUrl(isClient ? Api.Alipay.Buy_Picture_Client
+				: Api.Alipay.Buy_Picture_Web), handler);
 	}
 
 	public static void buyMember(String teacherid, String discountprice,
@@ -101,13 +102,15 @@ public class ConsultationEngine {
 		params.put("id", problemId);
 		Net.request(params, Api.getUrl(Api.Consultation.ISSOLVE), handler);
 	}
-	
-	public static void getProblemDetail(String problemId, ResponseHandler handler){
+
+	public static void getProblemDetail(String problemId,
+			ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("id", problemId);
 		params.put("pagesize", "20");
 		params.put("pageindex", "1");
-		Net.request(params , Api.getUrl(Api.Consultation.GETUSERPROBLEMDETAIL), handler);
+		Net.request(params, Api.getUrl(Api.Consultation.GETUSERPROBLEMDETAIL),
+				handler);
 	}
 
 	public static String getToday() {
@@ -120,9 +123,17 @@ public class ConsultationEngine {
 	 * @param handler
 	 * @param info
 	 */
-	public static void getMyConsultation(GetTeacher info,
+	public static void getMyConsultation(String userid, String teacheruserid,
+			String consultationtype, String orderby, int page,
 			ResponseHandler handler) {
-		Net.request(info, Api.getUrl(Api.Consultation.getteacher), handler);
+		RequestParams params = new RequestParams();
+		params.put("orderby", orderby);
+		params.put("pagesize", "20");
+		params.put("pageindex", page + "");
+		params.put("consultationtype", consultationtype);
+		params.put("userid", userid);
+		params.put("teacheruserid", teacheruserid);
+		Net.request(params, Api.getUrl(Api.Consultation.GETMYPROBLEM), handler);
 	}
 
 	/**

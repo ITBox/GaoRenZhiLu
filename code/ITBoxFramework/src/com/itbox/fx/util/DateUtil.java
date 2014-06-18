@@ -799,4 +799,8 @@ public class DateUtil {
 		return hours * 60 + minutes;
 	}
 
+	public static String getTodayString(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(new Date());
+	}
 }

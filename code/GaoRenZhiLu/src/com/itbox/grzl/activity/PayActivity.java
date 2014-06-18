@@ -3,18 +3,23 @@ package com.itbox.grzl.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 import com.itbox.fx.util.DateUtil;
@@ -55,6 +60,12 @@ public class PayActivity extends BaseActivity {
 	protected EditText et_phone;
 	@InjectView(R.id.tv_select_time)
 	protected TextView tv_select_time;
+	@InjectView(R.id.tv_date)
+	protected TextView tv_date;
+	@InjectView(R.id.cb_client)
+	protected CheckBox cb_client;
+	@InjectView(R.id.cb_web)
+	protected CheckBox cb_web;
 
 	private TeacherExtension teacherExtension;
 	private UserListItem teacher;
@@ -63,6 +74,7 @@ public class PayActivity extends BaseActivity {
 	private int mTimeSelected;
 
 	private boolean isPicture;
+	private boolean isClient;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -77,6 +89,9 @@ public class PayActivity extends BaseActivity {
 
 		showLeftBackButton();
 		setTitle("购买咨询");
+		initTeacherInfo();
+
+		tv_date.setText(DateUtil.getTodayString());
 
 		if ("picture".equals(getIntent().getStringExtra("type"))) {
 			ll_select_time.setVisibility(View.GONE);
@@ -87,7 +102,23 @@ public class PayActivity extends BaseActivity {
 			tv_price.setText("￥" + teacherExtension.getFinalPhoneprice());
 		}
 
-		initTeacherInfo();
+		isClient = true;
+	}
+
+	@OnCheckedChanged({ R.id.cb_client, R.id.cb_web })
+	public void payCheck(CompoundButton cb, boolean isCheck) {
+		if (isCheck == true) {
+			switch (cb.getId()) {
+			case R.id.cb_client:
+				cb_web.setChecked(false);
+				isClient = true;
+				break;
+			case R.id.cb_web:
+				cb_client.setChecked(false);
+				isClient = false;
+				break;
+			}
+		}
 	}
 
 	@OnClick(R.id.tv_buy)
@@ -96,7 +127,32 @@ public class PayActivity extends BaseActivity {
 		if (isPicture) {
 			buyPicture();
 		} else {
+			String phone = et_phone.getText().toString();
+			if (TextUtils.isEmpty(phone)) {
+				showToast("请输入接听电话");
+				return;
+			}
+			String time = tv_select_time.getText().toString();
+			if ("未选择".equals(time)) {
+				showToast("请选择时间");
+				return;
+			}
 			buyPhone();
+		}
+	}
+
+	@OnClick(R.id.tv_date)
+	public void selectDate() {
+		Intent intent = new Intent(this, SelectDateActivity.class);
+		startActivityForResult(intent, 0);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK && data != null) {
+			tv_date.setText(data
+					.getStringExtra(SelectDateActivity.Extra.SelectedTimeStr));
+			initTime();
 		}
 	}
 
@@ -106,10 +162,11 @@ public class PayActivity extends BaseActivity {
 	private void buyPhone() {
 		TimeSpan bean = mAdapter.getItem(mTimeSelected);
 		String phone = et_phone.getText().toString();
-		String date = "2014-6-15";
+		String date = tv_date.getText().toString();
 		ConsultationEngine.buyPhone(teacher.getUserid(),
 				teacherExtension.getFinalPhoneprice() + "",
-				teacherExtension.getPhoneprice(), date, bean.getHour() + "", bean.getMin() + "", phone, null);
+				teacherExtension.getPhoneprice(), date, bean.getHour() + "",
+				bean.getMin() + "", phone, isClient, null);
 	}
 
 	/**
@@ -118,7 +175,7 @@ public class PayActivity extends BaseActivity {
 	private void buyPicture() {
 		ConsultationEngine.buyPicture(teacher.getUserid(),
 				teacherExtension.getFinalPictureprice() + "",
-				teacherExtension.getPicturepice(), null);
+				teacherExtension.getPicturepice(), isClient, null);
 	}
 
 	private void initTeacherInfo() {
@@ -142,9 +199,11 @@ public class PayActivity extends BaseActivity {
 		int startTime = Integer.parseInt(teacherExtension.getStarttime());
 		int endTime = Integer.parseInt(teacherExtension.getEndtime());
 		mTimeList = new ArrayList<TimeSpan>();
+		boolean isToday = DateUtil.getTodayString().equals(
+				tv_date.getText().toString());
 		for (int i = startTime; i <= endTime; i++) {
 			for (int j = 0; j < 60; j += 30) {
-				if ((i * 60 + j) < DateUtil.getTodayMin()) {
+				if (isToday && (i * 60 + j) < DateUtil.getTodayMin()) {
 					continue;
 				}
 				TimeSpan bean = new TimeSpan();
@@ -161,7 +220,8 @@ public class PayActivity extends BaseActivity {
 					int position, long id) {
 				mTimeSelected = position;
 				mAdapter.notifyDataSetChanged();
-				tv_select_time.setText(mAdapter.getItem(position).getText());
+				tv_select_time.setText(tv_date.getText() + " "
+						+ mAdapter.getItem(position).getText());
 			}
 		});
 	}
@@ -231,8 +291,8 @@ public class PayActivity extends BaseActivity {
 		public String getText() {
 			if (text == null) {
 				text = new StringBuilder()
-						.append(hour > 10 ? hour : "0" + hour).append(":")
-						.append(min > 10 ? min : "0" + min).toString();
+						.append(hour >= 10 ? hour : "0" + hour).append(":")
+						.append(min >= 10 ? min : "0" + min).toString();
 			}
 			return text;
 		}
