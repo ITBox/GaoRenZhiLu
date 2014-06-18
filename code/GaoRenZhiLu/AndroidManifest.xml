@@ -99,6 +99,7 @@
         </activity>
         <activity
             android:name="com.itbox.grzl.activity.LoginActicity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.itbox.grzl.activity.RegistPhoneFirstActivity"

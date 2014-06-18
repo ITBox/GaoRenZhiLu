@@ -8,6 +8,7 @@ import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.util.DateUtil;
 import com.itbox.fx.util.EditTextUtils;
+import com.itbox.fx.util.ImageUtils;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.Api;
@@ -16,9 +17,11 @@ import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.bean.Account;
 import com.itbox.grzl.bean.AreaData;
 import com.itbox.grzl.bean.UpdateUserList;
+import com.itbox.grzl.bean.UploadImageResult;
 import com.itbox.grzl.common.Contasts;
 import com.itbox.grzl.common.db.AreaListDB;
 import com.itbox.grzl.common.util.FileUtils;
+import com.itbox.grzl.engine.UserEngine;
 import com.loopj.android.http.RequestParams;
 
 import android.app.AlertDialog;
@@ -257,14 +260,14 @@ public class UserInfoActivity extends BaseActivity {
 			if (data != null) {
 				String path = data.getStringExtra("cropPath");
 				photoBit = FileUtils.getImageFromLocal(path);
-				mUserInfoPhoto.setImageBitmap(photoBit);
+				uplaodUserPhoto();
 			}
 			break;
 		case Contasts.CROP_GALLERY_PICTURE:
 			if (data != null) {
 				String path = data.getStringExtra("cropPath");
 				photoBit = FileUtils.getImageFromLocal(path);
-				mUserInfoPhoto.setImageBitmap(photoBit);
+				uplaodUserPhoto();
 			}
 			break;
 		case 20:
@@ -329,19 +332,7 @@ public class UserInfoActivity extends BaseActivity {
 				switch (object.getResult()) {
 				case Contasts.RESULT_SUCCES:
 					dismissProgressDialog();
-					// new
-					// Update(Account.class).set(EditTextUtils.getText(mEtUserInfoName))
-					// .where("AccountTable.COLUMN_USERNAME = ?").execute();
-					account.setUsername(EditTextUtils.getText(mEtUserInfoName));
-					account.setUserphone(EditTextUtils.getText(mEtUserInfoPhone));
-					account.setUseremail(EditTextUtils.getText(mEtUserInfoEmail));
-					account.setUseravatarversion("");
-					account.setUsersex(sex + "");
-					account.setUserprovince(provinceCode + "");
-					account.setUsercity(cityCode + "");
-					account.setUserdistrict(districtCode + "");
-					account.setUserintroduction(mUserInfoIntro.getText().toString());
-					account.setUserbirthday(birthday);
+					userinfo();
 					account.save();
 					mActThis.finish();
 					break;
@@ -354,6 +345,49 @@ public class UserInfoActivity extends BaseActivity {
 					break;
 				}
 			}
+
 		});
+	}
+	/**
+	 * 上传头像
+	 */
+	private void uplaodUserPhoto() {
+		showProgressDialog("头像上传中...");
+		UserEngine.uploadImg(account.getUserid() + "", ImageUtils.bitmap2InputStream(photoBit), 1, new GsonResponseHandler<UploadImageResult>(UploadImageResult.class) {
+			@Override
+			public void onSuccess(UploadImageResult result) {
+				super.onSuccess(result);
+				if (result != null) {
+					mUserInfoPhoto.setImageBitmap(photoBit);
+					userinfo();
+					account.setUseravatarversion(result.getReturnUrl());
+					account.save();
+					showToast("头像上传成功");
+				} else {
+					dismissProgressDialog();
+					showToast("头像上传失败");
+				}
+			}
+			
+			@Override
+			public void onFailure(Throwable e, int statusCode, String content) {
+				super.onFailure(e, statusCode, content);
+				dismissProgressDialog();
+				showToast(content);
+			}
+		});
+	}
+	
+	private void userinfo() {
+		account.setUsername(EditTextUtils.getText(mEtUserInfoName));
+		account.setUserphone(EditTextUtils.getText(mEtUserInfoPhone));
+		account.setUseremail(EditTextUtils.getText(mEtUserInfoEmail));
+		account.setUseravatarversion("");
+		account.setUsersex(sex + "");
+		account.setUserprovince(provinceCode + "");
+		account.setUsercity(cityCode + "");
+		account.setUserdistrict(districtCode + "");
+		account.setUserintroduction(mUserInfoIntro.getText().toString());
+		account.setUserbirthday(birthday);
 	}
 }
