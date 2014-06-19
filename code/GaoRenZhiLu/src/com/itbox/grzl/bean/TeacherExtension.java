@@ -37,7 +37,7 @@ public class TeacherExtension extends Model implements Serializable {
 	@Column(name = TeacherExtensionTable.COLUMN_JOBTYPE)
 	private String jobtype;
 	@Column(name = TeacherExtensionTable.COLUMN_PICTUREPICE)
-	private String picturepice;
+	private String pictureprice;
 	@Column(name = TeacherExtensionTable.COLUMN_PHONEPRICE)
 	private String phoneprice;
 	@Column(name = TeacherExtensionTable.COLUMN_STARTTIME)
@@ -53,7 +53,7 @@ public class TeacherExtension extends Model implements Serializable {
 	private double finalPictureprice;
 
 	public double getFinalPhoneprice() {
-		return (double)Math.round(finalPhoneprice*100)/100;
+		return (double) Math.round(finalPhoneprice * 100) / 100;
 	}
 
 	public void setFinalPhoneprice(double finalPhoneprice) {
@@ -61,7 +61,7 @@ public class TeacherExtension extends Model implements Serializable {
 	}
 
 	public double getFinalPictureprice() {
-		return (double)Math.round(finalPictureprice*100)/100;
+		return (double) Math.round(finalPictureprice * 100) / 100;
 	}
 
 	public void setFinalPictureprice(double finalPictureprice) {
@@ -116,12 +116,12 @@ public class TeacherExtension extends Model implements Serializable {
 		this.jobtype = jobtype;
 	}
 
-	public String getPicturepice() {
-		return picturepice != null ? picturepice : "0.00";
+	public String getPictureprice() {
+		return pictureprice != null ? pictureprice : "0.00";
 	}
 
-	public void setPicturepice(String picturepice) {
-		this.picturepice = picturepice;
+	public void setPictureprice(String pictureprice) {
+		this.pictureprice = pictureprice;
 	}
 
 	public String getPhoneprice() {
@@ -162,6 +162,18 @@ public class TeacherExtension extends Model implements Serializable {
 
 	public void setRemarkcount(String remarkcount) {
 		this.remarkcount = remarkcount;
+	}
+
+	@Override
+	public String toString() {
+		return "TeacherExtension [userid=" + userid + ", usercode=" + usercode
+				+ ", userbank=" + userbank + ", bankaddress=" + bankaddress
+				+ ", teachertype=" + teachertype + ", jobtype=" + jobtype
+				+ ", pictureprice=" + pictureprice + ", phoneprice="
+				+ phoneprice + ", starttime=" + starttime + ", endtime="
+				+ endtime + ", teacherlevel=" + teacherlevel + ", remarkcount="
+				+ remarkcount + ", finalPhoneprice=" + finalPhoneprice
+				+ ", finalPictureprice=" + finalPictureprice + "]";
 	}
 
 }

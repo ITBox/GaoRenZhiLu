@@ -1,7 +1,5 @@
 package com.itbox.grzl.activity;
 
-import java.util.ArrayList;
-
 import org.apache.http.Header;
 
 import android.app.AlertDialog;
@@ -22,10 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-import com.activeandroid.ActiveAndroid;
 import com.activeandroid.content.ContentProvider;
-import com.activeandroid.query.Delete;
-import com.activeandroid.query.Update;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.fx.util.GSON;
@@ -39,8 +34,6 @@ import com.itbox.grzl.bean.TeacherExtension;
 import com.itbox.grzl.bean.UserLevel;
 import com.itbox.grzl.bean.UserLevelList;
 import com.itbox.grzl.bean.UserListItem;
-import com.itbox.grzl.constants.AccountTable;
-import com.itbox.grzl.constants.UserLevelTable;
 import com.itbox.grzl.engine.ConsultationEngine;
 import com.itbox.grzl.engine.TeacherEngine;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -87,16 +80,19 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		type = getIntent().getStringExtra("type");
 		String consultation_name = getIntent().getStringExtra(
 				"consultation_name");
+		
+		mHeaderView = View.inflate(this, R.layout.layout_comment_list_header,
+				null);
 
 		if ("picture".equals(type)) {
 			setTitle("图文咨询详情");
 		} else {
 			setTitle("电话咨询详情");
+			TextView tv_description = (TextView) mHeaderView.findViewById(R.id.tv_description);
+			tv_description.setText("通过电话进行咨询专业导师");
 		}
 		showLeftBackButton();
 
-		mHeaderView = View.inflate(this, R.layout.layout_comment_list_header,
-				null);
 		avatarImageView = (ImageView) mHeaderView.findViewById(R.id.iv_avatar);
 		teacherName = (TextView) mHeaderView.findViewById(R.id.tv_name);
 		mRatingBar = (RatingBar) mHeaderView.findViewById(R.id.ratingbar);
@@ -232,7 +228,7 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		teacherExtension.setFinalPhoneprice(Double.parseDouble(teacherExtension
 				.getPhoneprice()) * dis);
 		teacherExtension.setFinalPictureprice(Double
-				.parseDouble(teacherExtension.getPicturepice()) * dis);
+				.parseDouble(teacherExtension.getPictureprice()) * dis);
 		Intent intent = new Intent(ConsultationDetialActivity.this,
 				PayActivity.class);
 		intent.putExtra("teacher", teacher);

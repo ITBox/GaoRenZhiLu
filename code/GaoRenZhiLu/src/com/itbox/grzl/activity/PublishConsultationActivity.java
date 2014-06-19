@@ -1,8 +1,9 @@
 package com.itbox.grzl.activity;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
@@ -25,13 +26,16 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.util.ImageUtils;
 import com.itbox.grzl.AppContext;
-import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.api.ConsultationApi;
 import com.itbox.grzl.api.ConsultationApi.AskQuestionListener;
+import com.itbox.grzl.bean.UploadImageResult;
+import com.itbox.grzl.engine.UserEngine;
+import com.zhaoliewang.grzl.R;
 
-public class PublishConsultationActivity extends Activity implements
+public class PublishConsultationActivity extends BaseActivity implements
 		AskQuestionListener {
 
 	private final String DIR = Environment.getExternalStorageDirectory()
@@ -89,8 +93,8 @@ public class PublishConsultationActivity extends Activity implements
 
 	@OnClick(R.id.btn_add)
 	public void addConsultation() {
-		String title = titleEditText.getText().toString();
-		String content = contentEditText.getText().toString();
+		final String title = titleEditText.getText().toString();
+		final String content = contentEditText.getText().toString();
 		file = new File(TEMP_FEED_IMAGE_PATH);
 		if (TextUtils.isEmpty(title)) {
 			Toast.makeText(this, "标题不能为空", Toast.LENGTH_SHORT).show();
@@ -110,7 +114,36 @@ public class PublishConsultationActivity extends Activity implements
 		}
 		api = new ConsultationApi();
 		api.setmAskQuestionListener(this);
-		api.freeAskQuestion(title, jobType + "", file, content, "14");
+		// 上传图片
+		FileInputStream in;
+		try {
+			in = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			return;
+		}
+		UserEngine.uploadImg(AppContext.getInstance().getAccount().getUserid()
+				.toString(), in, 2,
+				new GsonResponseHandler<UploadImageResult>(
+						UploadImageResult.class) {
+					@Override
+					public void onSuccess(UploadImageResult result) {
+						super.onSuccess(result);
+						if (result != null && result.getReturnUrl() != null) {
+							api.freeAskQuestion(title, jobType + "",
+									result.getReturnUrl(), content, "14");
+						} else {
+							dismissProgressDialog();
+							showToast("图片上传失败");
+						}
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						super.onFailure(error, content);
+						dismissProgressDialog();
+						showToast(content);
+					}
+				});
 	}
 
 	@OnClick(R.id.text_left)
@@ -139,8 +172,8 @@ public class PublishConsultationActivity extends Activity implements
 			if (requestCode == 1) {
 				imageFileUri = data.getData();
 			}
-			Bitmap bitmap = ImageUtils
-					.getBitmap(this, null, null, imageFileUri, 800, 600);
+			Bitmap bitmap = ImageUtils.getBitmap(this, null, null,
+					imageFileUri, 800, 600);
 			mImageView.setVisibility(View.VISIBLE);
 			mImageView.setImageBitmap(bitmap);
 			ImageUtils.Bitmap2File(bitmap, TEMP_FEED_IMAGE_PATH);

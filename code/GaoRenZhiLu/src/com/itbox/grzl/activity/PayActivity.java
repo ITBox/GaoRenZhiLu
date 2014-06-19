@@ -175,7 +175,7 @@ public class PayActivity extends BaseActivity {
 	private void buyPicture() {
 		ConsultationEngine.buyPicture(teacher.getUserid(),
 				teacherExtension.getFinalPictureprice() + "",
-				teacherExtension.getPicturepice(), isClient, null);
+				teacherExtension.getPictureprice(), isClient, null);
 	}
 
 	private void initTeacherInfo() {

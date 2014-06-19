@@ -52,7 +52,7 @@ public class ConsultationSearchActivity extends BaseLoadActivity<UserListItem> {
 		ButterKnife.inject(this);
 		setTitle("咨询搜索");
 		showLeftBackButton();
-		
+
 		info = new GetTeacher();
 		info.setJobtype(getIntent().getStringExtra("jobtype"));
 		info.setTeachertype(getIntent().getStringExtra("teachertype"));
@@ -69,9 +69,9 @@ public class ConsultationSearchActivity extends BaseLoadActivity<UserListItem> {
 
 		adapter = new UserListAdapter(this, null);
 		mListView.setAdapter(adapter);
-		
+
 		new Delete().from(UserListItem.class).execute();
-		
+
 		initLoad(mListView, adapter, UserListItem.class);
 		mListView.setMode(Mode.PULL_FROM_END);
 
@@ -133,6 +133,14 @@ public class ConsultationSearchActivity extends BaseLoadActivity<UserListItem> {
 			@Override
 			public void onSuccess(UserList object) {
 				saveData(page, object.getUserListItem());
+			}
+
+			@Override
+			public void onFailure(Throwable e, int statusCode, String content) {
+				super.onFailure(e, statusCode, content);
+				if (statusCode == 400) {
+					new Delete().from(UserListItem.class).execute();
+				}
 			}
 		});
 	}

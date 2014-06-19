@@ -1,7 +1,5 @@
 package com.itbox.grzl.api;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import org.apache.http.Header;
@@ -22,6 +20,7 @@ import com.itbox.grzl.bean.UserLevel;
 import com.itbox.grzl.bean.UserLevelList;
 import com.itbox.grzl.bean.UserList;
 import com.itbox.grzl.bean.UserListItem;
+import com.itbox.grzl.constants.TeacherExtensionTable;
 import com.itbox.grzl.constants.UserLevelTable;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -51,17 +50,13 @@ public class ConsultationApi extends BaseApi {
 	 * @param contents
 	 * @param userId
 	 */
-	public void freeAskQuestion(String title, String jobtype, File photo,
+	public void freeAskQuestion(String title, String jobtype, String photo,
 			String contents, String userId) {
 		mAskQuestionListener.onStartAsk();
 		RequestParams params = new RequestParams();
 		params.put("title", title);
 		params.put("jobtype", jobtype);
-		try {
-			params.put("photo", photo);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		params.put("photo", photo);
 		params.put("contents", contents);
 		params.put("userId", userId);
 		client.post(Api.getUrl(Api.Consultation.probleming), params,
@@ -227,13 +222,18 @@ public class ConsultationApi extends BaseApi {
 	public void getTeacherMoreInfo(String userid) {
 		RequestParams params = new RequestParams();
 		params.put("userid", userid);
-		client.post(Api.getUrl(Api.User.GETUSEREXTENSION), params,
-				new AsyncHttpResponseHandler() {
+		Net.request(params, Api.getUrl(Api.User.GETUSEREXTENSION),
+				new ResponseHandler() {
 					@Override
 					public void onSuccess(int statusCode, String content) {
 						super.onSuccess(statusCode, content);
 						TeacherExtension mTeacherExtension = mGson.fromJson(
 								content, TeacherExtension.class);
+						new Delete()
+								.from(TeacherExtension.class)
+								.where(TeacherExtensionTable.COLUMN_USERID
+										+ "=" + mTeacherExtension.getUserid())
+								.execute();
 						mTeacherExtension.save();
 					}
 
@@ -290,8 +290,8 @@ public class ConsultationApi extends BaseApi {
 								.fromJson(content, TeacherCommentList.class);
 						new Delete()
 								.from(TeacherCommentGet.class)
-								.where(TeacherCommentGet.TEACHERUSERID
-										+ "=?", teacherid).execute();
+								.where(TeacherCommentGet.TEACHERUSERID + "=?",
+										teacherid).execute();
 						if (mTeacherCommentList != null
 								&& mTeacherCommentList.getTeacherCommentItem() != null) {
 							ActiveAndroid.beginTransaction();

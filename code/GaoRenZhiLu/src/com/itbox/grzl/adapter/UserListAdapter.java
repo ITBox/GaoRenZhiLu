@@ -74,7 +74,7 @@ public class UserListAdapter extends CursorAdapter {
 			holder.teacherTypeTextView.setText("人力导师");
 		}
 
-		holder.teacherDescriptionTextView.setText("简介"
+		holder.teacherDescriptionTextView.setText("简介 "
 				+ item.getUserintroduction());
 		holder.buyCountTextView.setText(item.getBuycount() + "人购买");
 		holder.answerCountTextView.setText("回答" + item.getAnswercount() + "次");

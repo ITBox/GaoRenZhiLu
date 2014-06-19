@@ -96,7 +96,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 		intent.putExtra("teacherExtension", teacherExtension);
 		intent.putExtra("teacher", teacher);
 		intent.putExtra("consultation_name",
-				"图文咨询 ￥" + teacherExtension.getPicturepice());
+				"图文咨询 ￥" + teacherExtension.getPictureprice());
 		intent.putExtra("type", "picture");
 		startActivity(intent);
 	}
@@ -117,7 +117,6 @@ public class TeacherDetialActivity extends BaseActivity implements
 		Intent intent = new Intent(this, EventTeacherActivity.class);
 		intent.putExtra("teacher", teacher);
 		startActivity(intent);
-		showToast("course");
 	}
 
 	@Override
@@ -134,7 +133,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 
 			teacherExtension.loadFromCursor(cursor);
 			pictureConsultationTextView.setText("图文咨询 ￥"
-					+ teacherExtension.getPicturepice());
+					+ teacherExtension.getPictureprice());
 			phoneConsultationTextView.setText("电话咨询 ￥"
 					+ teacherExtension.getPhoneprice());
 		}

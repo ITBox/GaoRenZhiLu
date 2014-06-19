@@ -78,19 +78,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="150dp"
                 android:layout_margin="5dp"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1"
                 android:background="@drawable/bg_white_radius"
                 android:orientation="vertical"
                 android:padding="5dp" >
-
-                <ImageView
-                    android:id="@+id/iv"
-                    android:layout_width="128dip"
-                    android:layout_height="128dip"
-                    android:visibility="gone" />
 
                 <EditText
                     android:id="@+id/et_content"
@@ -102,6 +95,11 @@
                     android:textColor="@color/dark"
                     android:textSize="14sp" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -127,6 +125,13 @@
                     android:layout_weight="1"
                     android:text="类型" />
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_add"

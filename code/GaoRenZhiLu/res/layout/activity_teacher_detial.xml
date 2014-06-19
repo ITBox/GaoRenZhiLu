@@ -135,13 +135,14 @@
             <LinearLayout
                 android:id="@+id/ll_picture_consultation"
                 android:layout_width="match_parent"
-                android:layout_height="128dip"
-                android:orientation="horizontal" >
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp" >
 
                 <ImageView
                     android:layout_width="96dip"
                     android:layout_height="96dip"
-                    android:layout_margin="10dip"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/pic_consultation" />
 
                 <LinearLayout
@@ -160,37 +161,14 @@
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="0dip"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/gray_e4"
                         android:gravity="center_vertical"
+                        android:padding="5dp"
                         android:text="通过文字、图片、语音进行咨询专业导师"
                         android:textColor="#A3A7AA"
                         android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dip"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:id="@+id/tv_buy_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="3000人购买"
-                            android:textColor="#A3A7AA"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/tv_answer_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dip"
-                            android:text="用户评分四级"
-                            android:textColor="#A3A7AA"
-                            android:textSize="14sp" />
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -202,13 +180,14 @@
             <LinearLayout
                 android:id="@+id/ll_phone_consultation"
                 android:layout_width="match_parent"
-                android:layout_height="128dip"
-                android:orientation="horizontal" >
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp" >
 
                 <ImageView
                     android:layout_width="96dip"
                     android:layout_height="96dip"
-                    android:layout_margin="10dip"
+                    android:layout_marginRight="10dip"
                     android:src="@drawable/phone_consultation" />
 
                 <LinearLayout
@@ -226,39 +205,15 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/tv_teacher_description"
                         android:layout_width="wrap_content"
-                        android:layout_height="0dip"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/gray_e4"
                         android:gravity="center_vertical"
-                        android:text="通过文字、图片、语音进行咨询专业导师"
+                        android:padding="5dp"
+                        android:text="通过电话进行咨询专业导师"
                         android:textColor="#A3A7AA"
                         android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dip"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:id="@+id/tv_buy_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="3000人购买"
-                            android:textColor="#A3A7AA"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/tv_answer_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dip"
-                            android:text="用户评分四级"
-                            android:textColor="#A3A7AA"
-                            android:textSize="14sp" />
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -270,13 +225,14 @@
             <LinearLayout
                 android:id="@+id/ll_my_course"
                 android:layout_width="match_parent"
-                android:layout_height="128dip"
-                android:orientation="horizontal" >
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp" >
 
                 <ImageView
                     android:layout_width="96dip"
                     android:layout_height="96dip"
-                    android:layout_margin="10dip"
+                    android:layout_marginRight="10dip"
                     android:src="@drawable/my_course" />
 
                 <LinearLayout
@@ -294,39 +250,15 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/tv_teacher_description"
                         android:layout_width="wrap_content"
-                        android:layout_height="0dip"
-                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:background="@color/gray_e4"
                         android:gravity="center_vertical"
-                        android:text="通过文字、图片、语音进行咨询专业导师"
+                        android:padding="5dp"
+                        android:text="查看导师发起的课程"
                         android:textColor="#A3A7AA"
                         android:textSize="14sp" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dip"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:id="@+id/tv_buy_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="3000人购买"
-                            android:textColor="#A3A7AA"
-                            android:textSize="14sp" />
-
-                        <TextView
-                            android:id="@+id/tv_answer_count"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dip"
-                            android:text="用户评分四级"
-                            android:textColor="#A3A7AA"
-                            android:textSize="14sp" />
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 

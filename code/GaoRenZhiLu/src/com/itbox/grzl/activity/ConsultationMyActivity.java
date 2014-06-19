@@ -131,8 +131,18 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 			long id) {
 		UserProblem bean = new UserProblem();
 		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
-		Intent intent = new Intent(this, ConsultationFreeDetailActivity.class);
-		intent.putExtra("bean", PG.convertParcelable(bean));
-		startActivity(intent);
+		if (UserProblem.TYPE_FREE.equals(bean.getConsultationType())) {
+			// 免费咨询
+			Intent intent = new Intent(this,
+					ConsultationFreeDetailActivity.class);
+			intent.putExtra("bean", PG.convertParcelable(bean));
+			startActivity(intent);
+		} else if (UserProblem.TYPE_PHOTO.equals(bean.getConsultationType())) {
+			// 图文咨询
+			Intent intent = new Intent(this,
+					ConsultationPhotoDetailActivity.class);
+			intent.putExtra("bean", PG.convertParcelable(bean));
+			startActivity(intent);
+		}
 	}
 }
