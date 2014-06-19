@@ -14,6 +14,10 @@ import com.baoyz.pg.Parcelable;
 @Table(name = "user_problem", id = UserProblem.ID)
 public class UserProblem extends BaseModel {
 
+	public static final String TYPE_FREE = "3";
+	public static final String TYPE_PHOTO = "2";
+	public static final String TYPE_PHONE = "1";
+
 	public static final String ID = "_id";
 	public static final String UP_ID = "up_id";
 	public static final String TITLE = "up_title";

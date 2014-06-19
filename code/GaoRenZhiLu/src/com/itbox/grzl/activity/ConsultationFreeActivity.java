@@ -14,13 +14,13 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.query.Delete;
 import com.baoyz.pg.PG;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.adapter.UserProblemAdapter;
 import com.itbox.grzl.bean.UserProblem;
 import com.itbox.grzl.engine.ConsultationEngine;
 import com.itbox.grzl.engine.ConsultationEngine.UserProblemItem;
-import com.itbox.grzl.enumeration.EventType;
 import com.zhaoliewang.grzl.R;
 
 /**
@@ -54,6 +54,9 @@ public class ConsultationFreeActivity extends BaseLoadActivity<UserProblem> {
 		setTitle("免费咨询");
 		showLeftBackButton();
 		mAdapter = new UserProblemAdapter(this, null);
+		
+		new Delete().from(UserProblem.class).execute();
+		
 		initLoad(mListView, mAdapter, UserProblem.class);
 	}
 
@@ -62,7 +65,8 @@ public class ConsultationFreeActivity extends BaseLoadActivity<UserProblem> {
 		switch (v.getId()) {
 		case R.id.tv_order:
 			// 选择排序
-			new AlertDialog.Builder(this).setItems(new String[]{"时间正序", "时间倒序"},
+			new AlertDialog.Builder(this).setItems(
+					new String[] { "时间正序", "时间倒序" },
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
@@ -109,8 +113,18 @@ public class ConsultationFreeActivity extends BaseLoadActivity<UserProblem> {
 			long id) {
 		UserProblem bean = new UserProblem();
 		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
-		Intent intent = new Intent(this, ConsultationFreeDetailActivity.class);
-		intent.putExtra("bean", PG.convertParcelable(bean));
-		startActivity(intent);
+		if (UserProblem.TYPE_FREE.equals(bean.getConsultationType())) {
+			// 免费咨询
+			Intent intent = new Intent(this,
+					ConsultationFreeDetailActivity.class);
+			intent.putExtra("bean", PG.convertParcelable(bean));
+			startActivity(intent);
+		} else if (UserProblem.TYPE_PHOTO.equals(bean.getConsultationType())) {
+			// 图文咨询
+			Intent intent = new Intent(this,
+					ConsultationPhotoDetailActivity.class);
+			intent.putExtra("bean", PG.convertParcelable(bean));
+			startActivity(intent);
+		}
 	}
 }

@@ -15,6 +15,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.query.Delete;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.adapter.UserListAdapter;
 import com.itbox.grzl.bean.UserList;
@@ -68,6 +69,9 @@ public class ConsultationSearchActivity extends BaseLoadActivity<UserListItem> {
 
 		adapter = new UserListAdapter(this, null);
 		mListView.setAdapter(adapter);
+		
+		new Delete().from(UserListItem.class).execute();
+		
 		initLoad(mListView, adapter, UserListItem.class);
 		mListView.setMode(Mode.PULL_FROM_END);
 

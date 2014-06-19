@@ -11,22 +11,42 @@
         android:layout_height="wrap_content"
         layout="@layout/unit_top_title" />
 
-    <ListView
+    <LinearLayout
+        android:id="@+id/ll_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:background="@color/search_bar_bg"
+        android:paddingBottom="3dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp" >
+
+        <TextView
+            android:id="@+id/tv_type"
+            style="@style/text_view_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="类  型" />
+
+        <TextView
+            android:id="@+id/tv_order"
+            style="@style/text_view_filter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="排  序" />
+    </LinearLayout>
+
+    <handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/ll_filter"
         android:listSelector="@android:color/transparent" />
-
-    <TextView
-        android:id="@+id/tv_empty"
-        android:layout_width="260dp"
-        android:layout_height="120dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/list_item_bg"
-        android:gravity="center"
-        android:text="您还没有咨询哦"
-        android:textColor="@color/red_text"
-        android:textSize="16sp" />
 
 </RelativeLayout>
