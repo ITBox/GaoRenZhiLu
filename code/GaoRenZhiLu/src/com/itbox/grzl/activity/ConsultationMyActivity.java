@@ -1,5 +1,7 @@
 package com.itbox.grzl.activity;
 
+import java.util.List;
+
 import handmark.pulltorefresh.library.PullToRefreshListView;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -16,6 +18,7 @@ import butterknife.OnClick;
 
 import com.activeandroid.query.Delete;
 import com.baoyz.pg.PG;
+import com.itbox.fx.core.L;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.adapter.UserProblemAdapter;
 import com.itbox.grzl.bean.Account;
@@ -55,9 +58,9 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 		setTitle("免费咨询");
 		showLeftBackButton();
 		mAdapter = new UserProblemAdapter(this, null);
-		
+
 		new Delete().from(UserProblem.class).execute();
-		
+
 		initLoad(mListView, mAdapter, UserProblem.class);
 	}
 
@@ -131,13 +134,13 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 			long id) {
 		UserProblem bean = new UserProblem();
 		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
-		if (UserProblem.TYPE_FREE.equals(bean.getConsultationType())) {
+		if (UserProblem.TYPE_FREE == bean.getConsultationtype()) {
 			// 免费咨询
 			Intent intent = new Intent(this,
 					ConsultationFreeDetailActivity.class);
 			intent.putExtra("bean", PG.convertParcelable(bean));
 			startActivity(intent);
-		} else if (UserProblem.TYPE_PHOTO.equals(bean.getConsultationType())) {
+		} else if (UserProblem.TYPE_PHOTO == bean.getConsultationtype()) {
 			// 图文咨询
 			Intent intent = new Intent(this,
 					ConsultationPhotoDetailActivity.class);

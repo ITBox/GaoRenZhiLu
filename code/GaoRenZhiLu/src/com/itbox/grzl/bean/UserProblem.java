@@ -14,9 +14,9 @@ import com.baoyz.pg.Parcelable;
 @Table(name = "user_problem", id = UserProblem.ID)
 public class UserProblem extends BaseModel {
 
-	public static final String TYPE_FREE = "3";
-	public static final String TYPE_PHOTO = "2";
-	public static final String TYPE_PHONE = "1";
+	public static final int TYPE_FREE = 3;
+	public static final int TYPE_PHOTO = 2;
+	public static final int TYPE_PHONE = 1;
 
 	public static final String ID = "_id";
 	public static final String UP_ID = "up_id";
@@ -45,7 +45,7 @@ public class UserProblem extends BaseModel {
 	@Column(name = UserProblem.JOBTYPE)
 	private int jobType;
 	@Column(name = UserProblem.CONSULTATIONTYPE)
-	private int consultationType;
+	private int consultationtype;
 	@Column(name = UserProblem.CREATETIME)
 	private String createtime;
 	@Column(name = UserProblem.USERNAME)
@@ -111,12 +111,12 @@ public class UserProblem extends BaseModel {
 		this.jobType = jobType;
 	}
 
-	public int getConsultationType() {
-		return consultationType;
+	public int getConsultationtype() {
+		return consultationtype;
 	}
 
-	public void setConsultationType(int consultationType) {
-		this.consultationType = consultationType;
+	public void setConsultationtype(int consultationtype) {
+		this.consultationtype = consultationtype;
 	}
 
 	public String getCreatetime() {

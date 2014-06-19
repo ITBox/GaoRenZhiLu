@@ -9,6 +9,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.bean.RespResult;
 import com.itbox.grzl.bean.UserProblem;
@@ -56,8 +57,9 @@ public class ConsultationFreeDetailActivity extends BaseActivity {
 		tv_name.setText(mBean.getUsername());
 		tv_time.setText(mBean.getCreatetime());
 		tv_title.setText(mBean.getTitle());
-		ImageLoader.getInstance().displayImage(mBean.getPhoto(), iv_head);
-		
+		ImageLoader.getInstance().displayImage(
+				Api.User.getAvatarUrl(mBean.getPhoto()), iv_head);
+
 		ConsultationEngine.getProblemDetail(mBean.getProblemId() + "", null);
 	}
 
@@ -73,12 +75,13 @@ public class ConsultationFreeDetailActivity extends BaseActivity {
 						if (resp.isSuccess()) {
 							showToast("解答成功");
 							finish();
-						}else if(resp.getResult() == 2){
+						} else if (resp.getResult() == 2) {
 							showToast("别人已经解答");
-						}else{
+						} else {
 							showToast("解答失败");
 						}
 					}
+
 					@Override
 					public void onFinish() {
 						dismissProgressDialog();
