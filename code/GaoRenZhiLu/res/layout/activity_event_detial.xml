@@ -146,8 +146,8 @@
                 android:layout_marginTop="5dp"
                 android:background="@drawable/list_item_bg2"
                 android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp" >
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
 
                 <TextView
                     android:id="@+id/tv_join_person_count"
@@ -162,8 +162,8 @@
                     android:id="@+id/hlv_user"
                     android:layout_width="match_parent"
                     android:layout_height="65dp"
-                   	android:paddingTop="5dp"
-                   	android:paddingBottom="5dp"/>
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" />
 
                 <View
                     android:id="@+id/line2"
@@ -185,41 +185,29 @@
         </LinearLayout>
     </ScrollView>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@color/black_t" >
 
         <Button
             android:id="@+id/bt_join"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:background="@drawable/bt_blue_bg"
+            style="@style/event_detial_bottom_button"
             android:text="我要报名"
-            android:textColor="@android:color/white"
+            android:drawableTop="@drawable/joinit"
             android:textSize="14sp" />
 
         <Button
             android:id="@+id/bt_like"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/bt_red_bg"
-            android:text="感兴趣(10)"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
+            android:drawableTop="@drawable/loveit"
+            style="@style/event_detial_bottom_button"
+            android:text="感兴趣(10)"/>
 
         <Button
             android:id="@+id/bt_comment"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/bt_join"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/bt_orange_bg"
+            style="@style/event_detial_bottom_button"
             android:text="活动交流"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-    </RelativeLayout>
+            android:drawableTop="@drawable/criticism"/>
+    </LinearLayout>
 
 </LinearLayout>
