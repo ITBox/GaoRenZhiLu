@@ -362,6 +362,7 @@ public class UserInfoActivity extends BaseActivity {
 					userinfo();
 					account.setUseravatarversion(result.getReturnUrl());
 					account.save();
+					dismissProgressDialog();
 					showToast("头像上传成功");
 				} else {
 					dismissProgressDialog();
