@@ -210,8 +210,36 @@ public class EventDetialActivity extends BaseActivity {
 							if (result.isSuccess()) {
 								showToast("报名成功");
 								bt_join.setText("已报名");
+								mBean.setJoin(true);
 							} else {
 								showToast("报名失败");
+							}
+						}
+
+						@Override
+						public void onFailure(Throwable e, int statusCode,
+								String content) {
+							showToast(content);
+						}
+					});
+		} else {
+			// 取消
+			showProgressDialog("正在取消...");
+			EventEngine.cancelEvent(mBean.getActivityId(),
+					new GsonResponseHandler<RespResult>(RespResult.class) {
+						@Override
+						public void onFinish() {
+							dismissProgressDialog();
+						}
+
+						@Override
+						public void onSuccess(RespResult result) {
+							if (result.isSuccess()) {
+								showToast("取消成功");
+								bt_join.setText("我要报名");
+								mBean.setJoin(false);
+							} else {
+								showToast("取消失败");
 							}
 						}
 

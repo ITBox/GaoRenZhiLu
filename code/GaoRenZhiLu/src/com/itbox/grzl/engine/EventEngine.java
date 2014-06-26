@@ -36,7 +36,7 @@ public class EventEngine {
 	public static void addEvent(EventAdd bean, ResponseHandler handler) {
 		Net.request(bean, Api.getUrl(Api.Event.add), handler);
 	}
-
+	
 	/**
 	 * 搜索活动
 	 * 
@@ -80,6 +80,21 @@ public class EventEngine {
 				.toString());
 		params.put("activityid", activityid);
 		Net.request(params, Api.getUrl(Api.Event.join), handler);
+	}
+	
+	/**
+	 * 取消加入活动
+	 * 
+	 * @param activityid
+	 * @param handler
+	 *            (BaseResult)
+	 */
+	public static void cancelEvent(String activityid, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
+		params.put("activityid", activityid);
+		Net.request(params, Api.getUrl(Api.Event.cancelactivity), handler);
 	}
 
 	/**

@@ -228,6 +228,7 @@ public class Api {
 		public static final String search = PartName + "searchactivity";
 		/** 3:参加活动接口 */
 		public static final String join = PartName + "joinactivityuser";
+		public static final String cancelactivity = PartName + "cancelactivity";
 		/** 4:添加感兴趣接口 */
 		public static final String interestAdd = PartName
 				+ "addactivityuserinterest";
