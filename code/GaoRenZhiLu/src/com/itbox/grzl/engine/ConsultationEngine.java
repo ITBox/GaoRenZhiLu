@@ -84,15 +84,14 @@ public class ConsultationEngine {
 				: Api.Alipay.Buy_Picture_Web), handler);
 	}
 
-	public static void buyMember(String teacherid, String discountprice,
-			String price, ResponseHandler handler) {
+	public static void buyMember(String memberid, boolean isClient,
+			ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("userid", AppContext.getInstance().getAccount().getUserid()
 				.toString());
-		params.put("teacheruserid", teacherid);
-		params.put("price", price);
-		params.put("discountprice", discountprice);
-		Net.request(params, Api.getUrl(Api.Alipay.Buy_Member_Web), handler);
+		params.put("memberid", memberid);
+		Net.request(params, Api.getUrl(isClient ? Api.Alipay.Buy_Member_Clinet
+				: Api.Alipay.Buy_Member_Web), handler);
 	}
 
 	public static void issolve(String teacherid, String problemId,

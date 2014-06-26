@@ -138,7 +138,7 @@ public class ConsultationSearchActivity extends BaseLoadActivity<UserListItem> {
 			@Override
 			public void onFailure(Throwable e, int statusCode, String content) {
 				super.onFailure(e, statusCode, content);
-				if (statusCode == 400) {
+				if (page == 1 && statusCode == 400) {
 					new Delete().from(UserListItem.class).execute();
 				}
 			}

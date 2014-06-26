@@ -14,14 +14,17 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.activeandroid.content.ContentProvider;
+import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.api.ConsultationApi;
+import com.itbox.grzl.bean.RespResult;
 import com.itbox.grzl.bean.TeacherExtension;
 import com.itbox.grzl.bean.UserListItem;
 import com.itbox.grzl.constants.TeacherExtensionTable;
+import com.itbox.grzl.engine.UserEngine;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class TeacherDetialActivity extends BaseActivity implements
@@ -49,7 +52,11 @@ public class TeacherDetialActivity extends BaseActivity implements
 	TextView pictureConsultationTextView;
 	@InjectView(R.id.tv_phone_consultation)
 	TextView phoneConsultationTextView;
+	@InjectView(R.id.tv_attention)
+	TextView tv_attention;
 	private TeacherExtension teacherExtension;
+
+	private boolean isAttention;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -88,6 +95,59 @@ public class TeacherDetialActivity extends BaseActivity implements
 		answerCountTextView.setText("回答" + teacher.getAnswercount() + "次");
 		mRatingBar.setRating(Float.valueOf(teacher.getTeacherlevel()));
 		getSupportLoaderManager().initLoader(0, null, this);
+
+		// 检查关注
+		UserEngine.checkAttention(teacher.getUserid(),
+				new GsonResponseHandler<RespResult>(RespResult.class) {
+					@Override
+					public void onSuccess(RespResult resp) {
+						if (resp.isSuccess()) {
+							tv_attention.setText("已关注");
+							isAttention = true;
+						}
+					}
+				});
+	}
+
+	@OnClick(R.id.tv_attention)
+	public void addAttention(View v) {
+		if (isAttention) {
+			showProgressDialog("取消关注...");
+			// 取消关注
+			UserEngine.deleteAttention(teacher.getUserid(),
+					new GsonResponseHandler<RespResult>(RespResult.class) {
+						@Override
+						public void onFinish() {
+							dismissProgressDialog();
+						}
+
+						@Override
+						public void onSuccess(RespResult resp) {
+							if (resp.isSuccess()) {
+								tv_attention.setText("加关注");
+								isAttention = false;
+							}
+						}
+					});
+		} else {
+			// 加关注
+			showProgressDialog("添加关注...");
+			UserEngine.addAttention(teacher.getUserid(),
+					new GsonResponseHandler<RespResult>(RespResult.class) {
+						@Override
+						public void onFinish() {
+							dismissProgressDialog();
+						}
+
+						@Override
+						public void onSuccess(RespResult resp) {
+							if (resp.isSuccess()) {
+								tv_attention.setText("已关注");
+								isAttention = true;
+							}
+						}
+					});
+		}
 	}
 
 	@OnClick(R.id.ll_picture_consultation)

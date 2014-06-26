@@ -12,6 +12,7 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.query.Delete;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
+import com.itbox.fx.util.DateUtil;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.bean.TeacherCommentGet;
 import com.itbox.grzl.bean.TeacherCommentList;
@@ -171,7 +172,7 @@ public class ConsultationApi extends BaseApi {
 	public void getUserLevel(final String userid) {
 		RequestParams params = new RequestParams();
 		params.put("userid", userid);
-		params.put("placedate", "2014-5-25");
+		params.put("placedate", DateUtil.getTodayString());
 		Net.request(params, Api.getUrl(Api.Consultation.GETUSERMEMBER),
 				new ResponseHandler() {
 					@Override
@@ -180,9 +181,7 @@ public class ConsultationApi extends BaseApi {
 						super.onSuccess(statusCode, headers, content);
 
 						new Delete()
-								.from(UserLevel.class)
-								.where(UserLevelTable.COLUMN_USER_ID + "=?",
-										userid).execute();
+								.from(UserLevel.class).execute();
 						UserLevelList userLevelList = mGson.fromJson(content,
 								UserLevelList.class);
 						if (userLevelList != null

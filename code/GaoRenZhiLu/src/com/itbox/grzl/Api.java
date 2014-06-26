@@ -196,6 +196,15 @@ public class Api {
 		public static final String CANCEL_USER_WITHDRAWALS = PartName
 				+ "canceluserwithdrawals";
 
+		/** 检查关注 */
+		public static final String checkattention = PartName + "checkattention";
+		/** 删除关注 */
+		public static final String deleteattention = PartName + "deleteattention";
+		/** 添加关注 */
+		public static final String addattention = PartName + "addattention";
+		/** 获取关注 */
+		public static final String getattentionbyuserid = PartName + "getattentionbyuserid";
+
 		/**
 		 * 获取用户头像地址
 		 * 
@@ -271,7 +280,8 @@ public class Api {
 				+ "getteacherbooking";
 		public static final String GETUSERMEMBER = PartName + "getusermember";
 		public static final String ISSOLVE = PartName + "issolve";
-		public static final String GETUSERPROBLEMDETAIL = PartName + "getuserproblemdetail";
+		public static final String GETUSERPROBLEMDETAIL = PartName
+				+ "getuserproblemdetail";
 		public static final String GETMYPROBLEM = PartName + "getmyproblem";
 
 	}
