@@ -63,6 +63,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 	private TeacherExtension teacherExtension;
 
 	private boolean isAttention;
+	private int attentioncount;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -116,11 +117,13 @@ public class TeacherDetialActivity extends BaseActivity implements
 		// 获取关注数量
 		TeacherEngine.getUserList(new GsonResponseHandler<Account>(
 				Account.class) {
+
 			@Override
 			public void onSuccess(Account user) {
 				super.onSuccess(user);
 				if (user != null) {
-					tv_attention_count.setText("粉丝 " + user.getAttentioncount());
+					attentioncount = Integer.parseInt(user.getAttentioncount());
+					tv_attention_count.setText("粉丝 " + attentioncount);
 				}
 			}
 		});
@@ -160,6 +163,8 @@ public class TeacherDetialActivity extends BaseActivity implements
 						public void onSuccess(RespResult resp) {
 							if (resp.isSuccess()) {
 								tv_attention.setText("已关注");
+								attentioncount ++;
+								tv_attention_count.setText("粉丝 " + attentioncount);
 								isAttention = true;
 							}
 						}

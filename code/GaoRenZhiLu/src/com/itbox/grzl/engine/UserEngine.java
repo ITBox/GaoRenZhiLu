@@ -1,11 +1,13 @@
 package com.itbox.grzl.engine;
 
 import java.io.InputStream;
+import java.util.List;
 
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
+import com.itbox.grzl.bean.Attention;
 import com.loopj.android.http.RequestParams;
 
 /**
@@ -91,54 +93,17 @@ public class UserEngine {
 		params.put("pageindex", Integer.toString(pageNum));
 		Net.request(params, Api.getUrl(Api.User.getattentionbyuserid), handler);
 	}
-	
-	public static class Attention{
-		private String userid;
-		private String usersex;
-		private String userbirthday;
-		private String username;
-		private String useravatarversion;
 
-		public String getUserid() {
-			return userid;
+	public static class UserAttention {
+		private List<Attention> UserAttention;
+
+		public List<Attention> getUserAttention() {
+			return UserAttention;
 		}
 
-		public void setUserid(String userid) {
-			this.userid = userid;
+		public void setUserAttention(List<Attention> userAttention) {
+			UserAttention = userAttention;
 		}
 
-		public String getUsersex() {
-			return usersex;
-		}
-
-		public void setUsersex(String usersex) {
-			this.usersex = usersex;
-		}
-
-		public String getUserbirthday() {
-			return userbirthday;
-		}
-
-		public void setUserbirthday(String userbirthday) {
-			this.userbirthday = userbirthday;
-		}
-
-		public String getUsername() {
-			return username;
-		}
-
-		public void setUsername(String username) {
-			this.username = username;
-		}
-
-		public String getUseravatarversion() {
-			return useravatarversion;
-		}
-
-		public void setUseravatarversion(String useravatarversion) {
-			this.useravatarversion = useravatarversion;
-		}
-		
-		
 	}
 }

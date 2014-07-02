@@ -2,22 +2,16 @@ package com.itbox.grzl.activity;
 
 import handmark.pulltorefresh.library.PullToRefreshListView;
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
-import com.itbox.fx.net.GsonResponseHandler;
-import com.zhaoliewang.grzl.R;
+import com.itbox.grzl.adapter.AttentionListAdapter;
 import com.itbox.grzl.adapter.CommentListAdapter;
-import com.itbox.grzl.bean.CommentGet;
-import com.itbox.grzl.engine.CommentEngine;
+import com.itbox.grzl.bean.Attention;
 import com.itbox.grzl.engine.UserEngine;
-import com.itbox.grzl.engine.CommentEngine.CommentItem;
+import com.itbox.grzl.engine.UserEngine.UserAttention;
+import com.zhaoliewang.grzl.R;
 
 /**
  * 我的关注
@@ -26,12 +20,12 @@ import com.itbox.grzl.engine.CommentEngine.CommentItem;
  * 
  * @date 2014-7-1 下午6:50:35
  */
-public class AttentionMyActivity extends BaseLoadActivity<CommentGet> {
+public class AttentionMyActivity extends BaseLoadActivity<Attention> {
 
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
 
-	private CommentListAdapter mAdapter;
+	private AttentionListAdapter mAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +38,11 @@ public class AttentionMyActivity extends BaseLoadActivity<CommentGet> {
 	}
 
 	private void initView() {
-		setTitle("行业论坛");
+		setTitle("我的关注");
 		showLeftBackButton();
 
-		mAdapter = new CommentListAdapter(getContext(), null);
-		initLoad(mListView, mAdapter, CommentGet.class);
+		mAdapter = new AttentionListAdapter(getContext(), null);
+		initLoad(mListView, mAdapter, Attention.class);
 	}
 
 	@Override
@@ -58,22 +52,17 @@ public class AttentionMyActivity extends BaseLoadActivity<CommentGet> {
 		loadFirstData();
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position,
-			long id) {
-		// 进入论坛详情页面
-		Intent intent = new Intent(this, CommentInfoActivity.class);
-		CommentGet bean = new CommentGet();
-		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
-		intent.putExtra("bean", bean);
-		startActivity(intent);
-	}
-
 	/**
 	 * 从网络加载数据
 	 */
 	@Override
 	protected void loadData(final int page) {
-		UserEngine.getAttention(page, null);
+		UserEngine.getAttention(page, new LoadResponseHandler<UserAttention>(
+				this, UserAttention.class) {
+			@Override
+			public void onSuccess(UserAttention object) {
+				saveData(page, object.getUserAttention());
+			}
+		});
 	}
 }

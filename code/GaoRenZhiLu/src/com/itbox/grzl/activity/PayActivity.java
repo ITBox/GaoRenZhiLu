@@ -143,7 +143,7 @@ public class PayActivity extends BaseActivity {
 
 	@OnClick(R.id.tv_date)
 	public void selectDate() {
-		Intent intent = new Intent(this, SelectDateActivity.class);
+		Intent intent = new Intent(this, SelectAfterDateActivity.class);
 		startActivityForResult(intent, 0);
 	}
 
