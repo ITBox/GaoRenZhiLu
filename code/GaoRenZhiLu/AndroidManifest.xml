@@ -264,6 +264,9 @@
         <activity
             android:name="com.itbox.grzl.activity.BuyVipActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.AttentionMyActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"

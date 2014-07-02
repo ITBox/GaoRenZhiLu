@@ -30,8 +30,19 @@
                     android:layout_margin="10dip" />
 
                 <TextView
+                    android:id="@+id/tv_attention_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_avatar"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="粉丝 0"
+                    android:padding="5dp" />
+                
+                <TextView
                     android:id="@+id/tv_attention"
                     android:layout_width="76dp"
+                    android:layout_toRightOf="@+id/tv_attention_count"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/iv_avatar"
                     android:layout_marginLeft="10dp"
@@ -111,6 +122,7 @@
                         android:layout_height="0dip"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
+                        android:paddingLeft="80dp"
                         android:orientation="horizontal" >
 
                         <TextView

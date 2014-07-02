@@ -174,7 +174,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
-                android:background="@color/gray_c8"
+                android:background="@drawable/bg_white_radius"
                 android:padding="5dp"
                 android:text="提款备注提款备注提款备注提款备注提款备注提款备注提款备注提款备注"
                 android:textColor="@color/gray_text"

@@ -87,6 +87,10 @@
             android:padding="5dp"
             android:textColor="@color/dark" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp" />
+
         <Button
             android:id="@+id/bt_add"
             style="@style/bottom_red_button"

@@ -1,5 +1,6 @@
 package com.itbox.grzl.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import butterknife.OnClick;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.AppContext;
 import com.zhaoliewang.grzl.R;
+import com.itbox.grzl.activity.AttentionMyActivity;
 import com.itbox.grzl.activity.CommentListActivity;
 import com.itbox.grzl.activity.ConsultationFreeActivity;
 import com.itbox.grzl.activity.ConsultationMyActivity;
@@ -58,15 +60,20 @@ public class MoreFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		View layout = inflater.inflate(R.layout.fragment_more, null);
 		ButterKnife.inject(mActThis, layout);
-		Account account = AppContext.getInstance().getAccount();
-		loader.displayImage(account.getUseravatarversion(), mMorePhoto,
-				photoOptions);
-		mMoreName.setText(account.getUsername());
+		Account account = initView();
 		// Account bean = new
 		// Select(AccountTable.COLUMN_USERNAME).from(Account.class).executeSingle();
 		// bean.getUsername();
 		showViews(account);
 		return layout;
+	}
+
+	public Account initView() {
+		Account account = AppContext.getInstance().getAccount();
+		loader.displayImage(account.getUseravatarversion(), mMorePhoto,
+				photoOptions);
+		mMoreName.setText(account.getUsername());
+		return account;
 	}
 
 	private void showViews(Account account) {
@@ -90,7 +97,7 @@ public class MoreFragment extends BaseFragment {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.more_my_photo:
-			startActivity(UserInfoActivity.class);
+			startActivityForResult(UserInfoActivity.class, 0);
 			break;
 		case R.id.more_my_action:// 我的活动
 			startActivity(EventMyActivity.class);
@@ -110,7 +117,7 @@ public class MoreFragment extends BaseFragment {
 			startActivity(TeacherIncomingActivity.class);
 			break;
 		case R.id.more_my_forum:// 行业论坛
-			startActivity(CommentListActivity.class);
+			startActivity(AttentionMyActivity.class);
 			break;
 		case R.id.more_my_consult:// 免费咨询
 			startActivity(ConsultationFreeActivity.class);
@@ -125,5 +132,10 @@ public class MoreFragment extends BaseFragment {
 			break;
 		}
 		super.onClick(v);
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		initView();
 	}
 }

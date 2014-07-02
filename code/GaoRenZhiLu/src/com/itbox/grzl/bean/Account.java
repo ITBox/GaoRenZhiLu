@@ -74,6 +74,15 @@ public class Account extends BaseModel {
 	private String remarkcount;
 	@Column(name = AccountTable.COLUMN_CONNECTKEY)
 	private String connectkey;
+	private String attentioncount;
+
+	public String getAttentioncount() {
+		return attentioncount;
+	}
+
+	public void setAttentioncount(String attentioncount) {
+		this.attentioncount = attentioncount;
+	}
 
 	public String getConnectkey() {
 		return connectkey;
@@ -266,34 +275,62 @@ public class Account extends BaseModel {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((answercount == null) ? 0 : answercount.hashCode());
-		result = prime * result + ((buycount == null) ? 0 : buycount.hashCode());
-		result = prime * result + ((ismessage == null) ? 0 : ismessage.hashCode());
+		result = prime * result
+				+ ((answercount == null) ? 0 : answercount.hashCode());
+		result = prime * result
+				+ ((buycount == null) ? 0 : buycount.hashCode());
+		result = prime * result
+				+ ((ismessage == null) ? 0 : ismessage.hashCode());
 		result = prime * result + ((jobtype == null) ? 0 : jobtype.hashCode());
-		result = prime * result + ((memberid == null) ? 0 : memberid.hashCode());
-		result = prime * result + ((remarkcount == null) ? 0 : remarkcount.hashCode());
-		result = prime * result + ((teacherlevel == null) ? 0 : teacherlevel.hashCode());
-		result = prime * result + ((teachertype == null) ? 0 : teachertype.hashCode());
-		result = prime * result + ((useravatarversion == null) ? 0 : useravatarversion.hashCode());
-		result = prime * result + ((userbalance == null) ? 0 : userbalance.hashCode());
-		result = prime * result + ((userbirthday == null) ? 0 : userbirthday.hashCode());
-		result = prime * result + ((userblood == null) ? 0 : userblood.hashCode());
-		result = prime * result + ((usercity == null) ? 0 : usercity.hashCode());
-		result = prime * result + ((usercodestate == null) ? 0 : usercodestate.hashCode());
-		result = prime * result + ((userdistrict == null) ? 0 : userdistrict.hashCode());
-		result = prime * result + ((useremail == null) ? 0 : useremail.hashCode());
-		result = prime * result + ((userheight == null) ? 0 : userheight.hashCode());
+		result = prime * result
+				+ ((memberid == null) ? 0 : memberid.hashCode());
+		result = prime * result
+				+ ((remarkcount == null) ? 0 : remarkcount.hashCode());
+		result = prime * result
+				+ ((teacherlevel == null) ? 0 : teacherlevel.hashCode());
+		result = prime * result
+				+ ((teachertype == null) ? 0 : teachertype.hashCode());
+		result = prime
+				* result
+				+ ((useravatarversion == null) ? 0 : useravatarversion
+						.hashCode());
+		result = prime * result
+				+ ((userbalance == null) ? 0 : userbalance.hashCode());
+		result = prime * result
+				+ ((userbirthday == null) ? 0 : userbirthday.hashCode());
+		result = prime * result
+				+ ((userblood == null) ? 0 : userblood.hashCode());
+		result = prime * result
+				+ ((usercity == null) ? 0 : usercity.hashCode());
+		result = prime * result
+				+ ((usercodestate == null) ? 0 : usercodestate.hashCode());
+		result = prime * result
+				+ ((userdistrict == null) ? 0 : userdistrict.hashCode());
+		result = prime * result
+				+ ((useremail == null) ? 0 : useremail.hashCode());
+		result = prime * result
+				+ ((userheight == null) ? 0 : userheight.hashCode());
 		result = prime * result + ((userid == null) ? 0 : userid.hashCode());
-		result = prime * result + ((userintroduction == null) ? 0 : userintroduction.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		result = prime * result + ((userphone == null) ? 0 : userphone.hashCode());
-		result = prime * result + ((userprovince == null) ? 0 : userprovince.hashCode());
-		result = prime * result + ((userrealname == null) ? 0 : userrealname.hashCode());
+		result = prime
+				* result
+				+ ((userintroduction == null) ? 0 : userintroduction.hashCode());
+		result = prime * result
+				+ ((username == null) ? 0 : username.hashCode());
+		result = prime * result
+				+ ((userphone == null) ? 0 : userphone.hashCode());
+		result = prime * result
+				+ ((userprovince == null) ? 0 : userprovince.hashCode());
+		result = prime * result
+				+ ((userrealname == null) ? 0 : userrealname.hashCode());
 		result = prime * result + ((usersex == null) ? 0 : usersex.hashCode());
-		result = prime * result + ((userstate == null) ? 0 : userstate.hashCode());
-		result = prime * result + ((usertotalamount == null) ? 0 : usertotalamount.hashCode());
-		result = prime * result + ((usertype == null) ? 0 : usertype.hashCode());
-		result = prime * result + ((userweight == null) ? 0 : userweight.hashCode());
+		result = prime * result
+				+ ((userstate == null) ? 0 : userstate.hashCode());
+		result = prime * result
+				+ ((usertotalamount == null) ? 0 : usertotalamount.hashCode());
+		result = prime * result
+				+ ((usertype == null) ? 0 : usertype.hashCode());
+		result = prime * result
+				+ ((userweight == null) ? 0 : userweight.hashCode());
 		return result;
 	}
 

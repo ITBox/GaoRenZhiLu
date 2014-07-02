@@ -12,7 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
@@ -22,9 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
             android:text="声音"
             android:textSize="16sp" />
 
@@ -39,7 +37,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/selector_radius_middle" >
@@ -48,9 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
             android:text="震动"
             android:textSize="16sp" />
 
@@ -65,7 +61,7 @@
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/selector_radius_bottom" >
@@ -74,9 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
             android:text="退出后接收消息"
             android:textSize="16sp" />
 
@@ -92,7 +86,7 @@
     <RelativeLayout
         android:id="@+id/userset_version"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="15dp"
@@ -102,9 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
             android:text="版本更新"
             android:textSize="16sp" />
 
@@ -123,7 +115,7 @@
     <RelativeLayout
          android:id="@+id/userset_help"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/selector_radius_middle" >
@@ -132,9 +124,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
             android:text="帮助与反馈"
             android:textSize="16sp" />
 
@@ -151,7 +141,7 @@
     <RelativeLayout
         android:id="@+id/userset_about"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/selector_radius_bottom" >
@@ -160,9 +150,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="30dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="30dp"
             android:text="关于"
             android:textSize="16sp" />
 

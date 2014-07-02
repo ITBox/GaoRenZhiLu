@@ -14,16 +14,20 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.activeandroid.content.ContentProvider;
+import com.activeandroid.query.Update;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.api.ConsultationApi;
+import com.itbox.grzl.bean.Account;
 import com.itbox.grzl.bean.RespResult;
 import com.itbox.grzl.bean.TeacherExtension;
 import com.itbox.grzl.bean.UserListItem;
+import com.itbox.grzl.constants.AccountTable;
 import com.itbox.grzl.constants.TeacherExtensionTable;
+import com.itbox.grzl.engine.TeacherEngine;
 import com.itbox.grzl.engine.UserEngine;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
@@ -54,6 +58,8 @@ public class TeacherDetialActivity extends BaseActivity implements
 	TextView phoneConsultationTextView;
 	@InjectView(R.id.tv_attention)
 	TextView tv_attention;
+	@InjectView(R.id.tv_attention_count)
+	TextView tv_attention_count;
 	private TeacherExtension teacherExtension;
 
 	private boolean isAttention;
@@ -107,6 +113,17 @@ public class TeacherDetialActivity extends BaseActivity implements
 						}
 					}
 				});
+		// 获取关注数量
+		TeacherEngine.getUserList(new GsonResponseHandler<Account>(
+				Account.class) {
+			@Override
+			public void onSuccess(Account user) {
+				super.onSuccess(user);
+				if (user != null) {
+					tv_attention_count.setText("粉丝 " + user.getAttentioncount());
+				}
+			}
+		});
 	}
 
 	@OnClick(R.id.tv_attention)
