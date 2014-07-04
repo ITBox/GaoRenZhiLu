@@ -38,10 +38,10 @@
                     android:id="@+id/more_my_name_et"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_alignParentRight="true"
                     android:layout_toLeftOf="@+id/more_my_name_iv"
                     android:layout_toRightOf="@id/more_my_name"
                     android:background="@android:color/transparent"
@@ -112,6 +112,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
+                android:id="@+id/more_my_bankcard_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -159,6 +160,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
+                android:id="@+id/more_my_bankcard_name_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -250,7 +252,7 @@
                     android:text="职位类型"
                     android:textSize="15sp" />
 
-                 <TextView
+                <TextView
                     android:id="@+id/position_type"
                     style="@style/text_view_filter"
                     android:layout_width="wrap_content"
@@ -266,7 +268,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
-                android:id="@+id/more_my_intro_rl"
+                    android:id="@+id/more_my_zixunImg_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_bg_more"
@@ -327,7 +329,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
-                android:id="@+id/more_my_moreinfo_rl"
+                    android:id="@+id/more_my_zixunPhone_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_bg_more"
@@ -388,6 +390,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
+                android:id="@+id/more_my_zixunTime_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/selector_bg_more"

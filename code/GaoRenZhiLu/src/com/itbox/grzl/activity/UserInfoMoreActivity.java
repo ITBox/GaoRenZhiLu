@@ -140,7 +140,7 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 //		return true;
 //	}
 
-	@OnClick({ R.id.text_left, R.id.text_right, R.id.more_my_name_iv, R.id.more_my_shenfenzheng_rl, R.id.more_my_bankcard_iv, R.id.more_my_bankcard_name_iv, R.id.teacher_type, R.id.position_type, R.id.more_my_zixunImg_iv, R.id.more_my_zixunPhone_iv, R.id.more_my_zixunTime_iv })
+	@OnClick({ R.id.text_left, R.id.text_right, R.id.more_my_name_iv, R.id.more_my_shenfenzheng_rl, R.id.more_my_bankcard_rl, R.id.more_my_bankcard_name_rl, R.id.teacher_type, R.id.position_type, R.id.more_my_zixunImg_rl, R.id.more_my_zixunPhone_rl, R.id.more_my_zixunTime_rl })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -157,11 +157,11 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 		case R.id.more_my_shenfenzheng_rl:
 			startActivity(UserIDCardActivity.class);
 			break;
-		case R.id.more_my_bankcard_iv:// 银行卡号
+		case R.id.more_my_bankcard_rl:// 银行卡号
 			EditTextUtils.showKeyboard(mEtUserInfoBankCard);
 			EditTextUtils.setSelection(mEtUserInfoBankCard);
 			break;
-		case R.id.more_my_bankcard_name_iv:// 开户行名称
+		case R.id.more_my_bankcard_name_rl:// 开户行名称
 			EditTextUtils.showKeyboard(mEtUserInfoBankCardName);
 			EditTextUtils.setSelection(mEtUserInfoBankCardName);
 			break;
@@ -188,15 +188,15 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 				}
 			}).show();
 			break;
-		case R.id.more_my_zixunImg_iv:// 图文咨询
+		case R.id.more_my_zixunImg_rl:// 图文咨询
 			EditTextUtils.showKeyboard(mEtUserInfoZixunImg);
 			EditTextUtils.setSelection(mEtUserInfoZixunImg);
 			break;
-		case R.id.more_my_zixunPhone_iv:// 电话咨询
+		case R.id.more_my_zixunPhone_rl:// 电话咨询
 			EditTextUtils.showKeyboard(mEtUserInfoZixunPhone);
 			EditTextUtils.setSelection(mEtUserInfoZixunPhone);
 			break;
-		case R.id.more_my_zixunTime_iv:// 咨询时段
+		case R.id.more_my_zixunTime_rl:// 咨询时段
 			Intent intent = new Intent(mActThis, SelectDoubleHourActivity.class);
 			intent.putExtra("type", "workTime");
 			mActThis.startActivityForResult(intent, Contasts.REQUEST_SELECT_ZIXUN_TIME);
@@ -262,6 +262,15 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 				int result = object.getResult();
 				switch (result) {
 				case Contasts.RESULT_SUCCES:
+					// 保存用户数据
+					userExtension.setUserbank(EditTextUtils.getText(mEtUserInfoBankCard));
+					userExtension.setBankaddress(EditTextUtils.getText(mEtUserInfoBankCardName));
+					userExtension.setTeachertype(teacherId + "");
+					userExtension.setJobtype(jobId + "");
+					userExtension.setPictureprice(EditTextUtils.getText(mEtUserInfoZixunImg));
+					userExtension.setPhoneprice(EditTextUtils.getText(mEtUserInfoZixunPhone));
+					userExtension.setStarttime(time1);
+					userExtension.setEndtime(time2);
 					userExtension.save();
 					dismissProgressDialog();
 					UserInfoMoreActivity.this.finish();
