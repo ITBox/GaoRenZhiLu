@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -31,14 +32,25 @@ import com.zhaoliewang.grzl.R;
  */
 public class ConsultationFreeActivity extends BaseLoadActivity<UserProblem> {
 
+	private static final String[] ORDER = new String[] { "时间正序", "时间倒序" };
+
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
+
+	@InjectView(R.id.tv_type)
+	TextView tv_type;
+	@InjectView(R.id.tv_order)
+	TextView tv_order;
+	@InjectView(R.id.tv_empty)
+	protected View mEmptyView;
 
 	private CursorAdapter mAdapter;
 
 	private String jobType = "";
 
 	private String orderBy = "0";
+
+	private String[] jobNames = AppContext.getJobNameArray();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +69,12 @@ public class ConsultationFreeActivity extends BaseLoadActivity<UserProblem> {
 
 		new Delete().from(UserProblem.class).execute();
 
+		mListView.setEmptyView(mEmptyView);
+
 		initLoad(mListView, mAdapter, UserProblem.class);
+		
+		tv_order.setText(ORDER[0]);
+		tv_type.setText(jobNames[0]);
 	}
 
 	@OnClick({ R.id.tv_type, R.id.tv_order })
@@ -65,12 +82,12 @@ public class ConsultationFreeActivity extends BaseLoadActivity<UserProblem> {
 		switch (v.getId()) {
 		case R.id.tv_order:
 			// 选择排序
-			new AlertDialog.Builder(this).setItems(
-					new String[] { "时间正序", "时间倒序" },
+			new AlertDialog.Builder(this).setItems(ORDER,
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							orderBy = which + "";
+							tv_order.setText(ORDER[which]);
 							startSearch();
 						}
 					}).show();
@@ -78,12 +95,12 @@ public class ConsultationFreeActivity extends BaseLoadActivity<UserProblem> {
 		case R.id.tv_type:
 			// 选择类型
 			AlertDialog.Builder builder = new Builder(this);
-			final String[] jobNames = AppContext.getJobNameArray();
 			builder.setItems(jobNames, new DialogInterface.OnClickListener() {
 
 				@Override
 				public void onClick(DialogInterface arg0, int arg1) {
 					jobType = (arg1 + 1) + "";
+					tv_type.setText(jobNames[arg1]);
 					startSearch();
 				}
 			}).show();
@@ -104,6 +121,15 @@ public class ConsultationFreeActivity extends BaseLoadActivity<UserProblem> {
 					@Override
 					public void onSuccess(UserProblemItem object) {
 						saveData(page, object.getUserProblemItem());
+					}
+
+					@Override
+					public void onFailure(Throwable e, int statusCode,
+							String content) {
+						super.onFailure(e, statusCode, content);
+						if (page == 1 && statusCode == 400) {
+							new Delete().from(UserProblem.class).execute();
+						}
 					}
 				});
 	}

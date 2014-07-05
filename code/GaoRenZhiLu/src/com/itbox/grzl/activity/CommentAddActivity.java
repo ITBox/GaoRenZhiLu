@@ -1,12 +1,16 @@
 package com.itbox.grzl.activity;
 
+import java.io.FileNotFoundException;
+
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -39,6 +43,8 @@ public class CommentAddActivity extends BaseActivity {
 	protected EditText mTitleEt;
 	@InjectView(R.id.et_content)
 	protected EditText mContentEt;
+	@InjectView(R.id.iv_photo)
+	protected ImageView mPhotoIv;
 
 	private Uri mPhotoUri;
 
@@ -61,6 +67,14 @@ public class CommentAddActivity extends BaseActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (data != null) {
 			mPhotoUri = data.getData();
+
+			try {
+				mPhotoIv.setImageBitmap(BitmapFactory
+						.decodeStream(getContentResolver().openInputStream(
+								mPhotoUri)));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -77,7 +91,7 @@ public class CommentAddActivity extends BaseActivity {
 			break;
 
 		case R.id.bt_add:
-			if(!checkParams()){
+			if (!checkParams()) {
 				return;
 			}
 			// 发布
@@ -126,11 +140,11 @@ public class CommentAddActivity extends BaseActivity {
 			showToast("请选择海报");
 			return false;
 		}
-		if(TextUtils.isEmpty(mTitleEt.getText().toString())){
+		if (TextUtils.isEmpty(mTitleEt.getText().toString())) {
 			showToast("请输入标题");
 			return false;
 		}
-		if(TextUtils.isEmpty(mContentEt.getText().toString())){
+		if (TextUtils.isEmpty(mContentEt.getText().toString())) {
 			showToast("请输入描述");
 			return false;
 		}

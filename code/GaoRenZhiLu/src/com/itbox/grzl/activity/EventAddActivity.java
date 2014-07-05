@@ -1,15 +1,19 @@
 package com.itbox.grzl.activity;
 
+import java.io.FileNotFoundException;
 import java.util.Calendar;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -22,7 +26,6 @@ import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.Const;
 import com.itbox.grzl.Const.State;
-import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.activity.SelectTimeHalfHourActivity.Extra;
 import com.itbox.grzl.bean.EventAdd;
 import com.itbox.grzl.bean.RespResult;
@@ -31,6 +34,7 @@ import com.itbox.grzl.engine.EventEngine;
 import com.itbox.grzl.enumeration.EventType;
 import com.itbox.grzl.map.AddrInfoModel;
 import com.loopj.android.http.RequestParams;
+import com.zhaoliewang.grzl.R;
 
 /**
  * 添加活动页面
@@ -57,6 +61,8 @@ public class EventAddActivity extends BaseActivity {
 	protected TextView mStartTimeTv;
 	@InjectView(R.id.tv_end_time)
 	protected TextView mEndTimeTv;
+	@InjectView(R.id.iv_photo)
+	protected ImageView mPhotoIv;
 	@InjectView(R.id.tv_address)
 	protected TextView mAddressTv;
 	@InjectView(R.id.et_person_count)
@@ -92,6 +98,13 @@ public class EventAddActivity extends BaseActivity {
 			switch (requestCode) {
 			case REQ_PICTURE:
 				mPhotoUri = data.getData();
+				try {
+					mPhotoIv.setImageBitmap(BitmapFactory
+							.decodeStream(getContentResolver().openInputStream(
+									mPhotoUri)));
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
 				break;
 			case REQ_START_TIME:
 				startTime = data.getLongExtra(Extra.SelectedTime,

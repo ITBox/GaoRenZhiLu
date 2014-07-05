@@ -150,7 +150,7 @@ public class UserInfoActivity extends BaseActivity {
 	// return true;
 	// }
 
-	@OnClick({ R.id.userinfo_photo, R.id.text_left, R.id.text_right, R.id.more_my_name_iv, R.id.more_my_city_iv, R.id.more_my_birthday_iv, R.id.more_my_sex_iv, R.id.more_my_phone_iv, R.id.more_my_email_iv, R.id.more_my_intro_rl, R.id.more_my_moreinfo_rl })
+	@OnClick({ R.id.userinfo_photo, R.id.text_left, R.id.text_right, R.id.more_my_name_rl, R.id.more_my_city_rl, R.id.more_my_birthday_rl, R.id.more_my_sex_rl, R.id.more_my_phone_rl, R.id.more_my_email_rl, R.id.more_my_intro_rl, R.id.more_my_moreinfo_rl })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -186,28 +186,28 @@ public class UserInfoActivity extends BaseActivity {
 				}
 			}).show();
 			break;
-		case R.id.more_my_name_iv:
+		case R.id.more_my_name_rl:
 			EditTextUtils.showKeyboard(mEtUserInfoName);
 			String userName = mEtUserInfoName.getText().toString();
 			if (!TextUtils.isEmpty(userName)) {
 				mEtUserInfoName.setSelection(userName.length());
 			}
 			break;
-		case R.id.more_my_phone_iv:
+		case R.id.more_my_phone_rl:
 			EditTextUtils.showKeyboard(mEtUserInfoPhone);
 			String userPhone = mEtUserInfoPhone.getText().toString();
 			if (!TextUtils.isEmpty(userPhone)) {
 				mEtUserInfoPhone.setSelection(userPhone.length());
 			}
 			break;
-		case R.id.more_my_email_iv:
+		case R.id.more_my_email_rl:
 			EditTextUtils.showKeyboard(mEtUserInfoEmail);
 			String userEmail = mEtUserInfoEmail.getText().toString();
 			if (!TextUtils.isEmpty(userEmail)) {
 				mEtUserInfoEmail.setSelection(userEmail.length());
 			}
 			break;
-		case R.id.more_my_sex_iv:
+		case R.id.more_my_sex_rl:
 			Intent sexIntent = new Intent(this, SelectButton3Activity.class);
 			sexIntent.putExtra(SelectButton3Activity.Extra.Button0_Text, "男");
 			sexIntent.putExtra(SelectButton3Activity.Extra.Button1_Text, "女");
@@ -383,7 +383,6 @@ public class UserInfoActivity extends BaseActivity {
 		account.setUsername(EditTextUtils.getText(mEtUserInfoName));
 		account.setUserphone(EditTextUtils.getText(mEtUserInfoPhone));
 		account.setUseremail(EditTextUtils.getText(mEtUserInfoEmail));
-		account.setUseravatarversion("");
 		account.setUsersex(sex + "");
 		account.setUserprovince(provinceCode + "");
 		account.setUsercity(cityCode + "");

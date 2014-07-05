@@ -49,7 +49,7 @@ public class Attention extends BaseModel {
 	}
 
 	public String getUsersex() {
-		return usersex == "1" ? "男" : "女";
+		return "1".equals(usersex) ? "男" : "女";
 	}
 
 	public void setUsersex(String usersex) {

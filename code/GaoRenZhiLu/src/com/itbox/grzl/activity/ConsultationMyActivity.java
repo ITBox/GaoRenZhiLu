@@ -1,7 +1,5 @@
 package com.itbox.grzl.activity;
 
-import java.util.List;
-
 import handmark.pulltorefresh.library.PullToRefreshListView;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
@@ -12,13 +10,13 @@ import android.os.Bundle;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.activeandroid.query.Delete;
 import com.baoyz.pg.PG;
-import com.itbox.fx.core.L;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.adapter.UserProblemAdapter;
 import com.itbox.grzl.bean.Account;
@@ -35,8 +33,19 @@ import com.zhaoliewang.grzl.R;
  */
 public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 
+	private static final String[] ORDER = new String[] { "时间正序", "时间倒序" };
+
+	private static final String[] TYPE = new String[] { "电话咨询", "图文咨询", "免费咨询" };
+
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
+
+	@InjectView(R.id.tv_type)
+	TextView tv_type;
+	@InjectView(R.id.tv_order)
+	TextView tv_order;
+	@InjectView(R.id.tv_empty)
+	protected View mEmptyView;
 
 	private CursorAdapter mAdapter;
 
@@ -55,13 +64,17 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 	}
 
 	private void initView() {
-		setTitle("免费咨询");
+		setTitle("我的咨询");
 		showLeftBackButton();
 		mAdapter = new UserProblemAdapter(this, null);
 
 		new Delete().from(UserProblem.class).execute();
 
+		mListView.setEmptyView(mEmptyView);
+
 		initLoad(mListView, mAdapter, UserProblem.class);
+		tv_order.setText(ORDER[0]);
+		tv_type.setText(TYPE[0]);
 	}
 
 	@OnClick({ R.id.tv_type, R.id.tv_order })
@@ -69,12 +82,12 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 		switch (v.getId()) {
 		case R.id.tv_order:
 			// 选择排序
-			new AlertDialog.Builder(this).setItems(
-					new String[] { "时间正序", "时间倒序" },
+			new AlertDialog.Builder(this).setItems(ORDER,
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							orderBy = which + "";
+							tv_order.setText(ORDER[which]);
 							startSearch();
 						}
 					}).show();
@@ -82,15 +95,15 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 		case R.id.tv_type:
 			// 选择类型
 			AlertDialog.Builder builder = new Builder(this);
-			builder.setItems(new String[] { "电话咨询", "图文咨询", "免费咨询" },
-					new DialogInterface.OnClickListener() {
+			builder.setItems(TYPE, new DialogInterface.OnClickListener() {
 
-						@Override
-						public void onClick(DialogInterface arg0, int arg1) {
-							consultationType = (arg1 + 1) + "";
-							startSearch();
-						}
-					}).show();
+				@Override
+				public void onClick(DialogInterface arg0, int arg1) {
+					consultationType = (arg1 + 1) + "";
+					tv_type.setText(TYPE[arg1]);
+					startSearch();
+				}
+			}).show();
 			break;
 		}
 	}
@@ -113,6 +126,15 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 						public void onSuccess(UserProblemItem object) {
 							saveData(page, object.getUserProblemItem());
 						}
+
+						@Override
+						public void onFailure(Throwable e, int statusCode,
+								String content) {
+							super.onFailure(e, statusCode, content);
+							if (page == 1 && statusCode == 400) {
+								new Delete().from(UserProblem.class).execute();
+							}
+						}
 					});
 		} else {
 			// 学生
@@ -124,6 +146,15 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 						@Override
 						public void onSuccess(UserProblemItem object) {
 							saveData(page, object.getUserProblemItem());
+						}
+
+						@Override
+						public void onFailure(Throwable e, int statusCode,
+								String content) {
+							super.onFailure(e, statusCode, content);
+							if (page == 1 && statusCode == 400) {
+								new Delete().from(UserProblem.class).execute();
+							}
 						}
 					});
 		}

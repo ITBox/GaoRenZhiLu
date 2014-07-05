@@ -108,6 +108,7 @@
                 android:src="@drawable/top_more_line2" />
 
             <RelativeLayout
+                    android:id="@+id/more_my_name_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -155,6 +156,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
+                    android:id="@+id/more_my_city_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -195,6 +197,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
+                    android:id="@+id/more_my_birthday_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -234,6 +237,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
+                    android:id="@+id/more_my_sex_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -274,6 +278,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
+                    android:id="@+id/more_my_phone_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -321,6 +326,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
+                    android:id="@+id/more_my_email_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"

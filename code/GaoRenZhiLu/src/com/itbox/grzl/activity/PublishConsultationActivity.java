@@ -160,7 +160,7 @@ public class PublishConsultationActivity extends BaseActivity implements
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
 				jobType = arg1;
-				selectJobtype.setText(jobNames[0]);
+				selectJobtype.setText(jobNames[arg1]);
 			}
 		}).show();
 	}

@@ -80,10 +80,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:drawableRight="@drawable/ic_more_arrow"
-                    android:padding="5dp"
                     android:background="@null"
+                    android:drawableRight="@drawable/ic_more_arrow"
                     android:hint="请输入活动标题，2-20个汉字"
+                    android:padding="5dp"
                     android:textColor="@color/gray_text"
                     android:textColorHint="@color/gray_text"
                     android:textSize="12sp" />
@@ -222,12 +222,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
+                    android:background="@null"
                     android:drawableRight="@drawable/ic_more_arrow"
-                    android:padding="5dp"
                     android:hint="仅填写一个数字表示固定人数"
                     android:inputType="numberSigned"
+                    android:padding="5dp"
                     android:textColor="@color/gray_text"
-                    android:background="@null"
                     android:textColorHint="@color/gray_text"
                     android:textSize="12sp" />
             </LinearLayout>
@@ -241,6 +241,7 @@
             <!-- 海报 -->
 
             <LinearLayout
+                android:id="@+id/tv_photo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -255,8 +256,12 @@
                     android:textSize="14sp" >
                 </TextView>
 
+                <ImageView
+                    android:id="@+id/iv_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp" />
+
                 <TextView
-                    android:id="@+id/tv_photo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"

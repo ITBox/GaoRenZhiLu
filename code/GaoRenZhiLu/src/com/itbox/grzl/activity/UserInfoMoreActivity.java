@@ -118,20 +118,27 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 			mTVShenfenzheng.setText("审核失败");
 		} 
 		if (TextUtils.isEmpty(userExtension.getTeachertype())) {
-			mTeacherType.setText(TeacherType.getTeacherName(0));
+			teacherId = 1;
 		} else {
-			mTeacherType.setText(TeacherType.getTeacherName(Integer.parseInt(userExtension.getTeachertype())));
+			teacherId = Integer.parseInt(userExtension.getTeachertype());
 		}
+		mTeacherType.setText(TeacherType.getTeacherName(teacherId));
 		if (TextUtils.isEmpty(userExtension.getJobtype())) {
-			mPositionType.setText(jobsNames[0]);
+			jobId = 1;
 		} else {
-			mPositionType.setText(jobsNames[Integer.parseInt(userExtension.getJobtype())]);
+			jobId = Integer.parseInt(userExtension.getJobtype());
+			if (jobId < 1) {
+				jobId = 1;
+			}
 		}
+		mPositionType.setText(jobsNames[jobId - 1]);
 		mEtUserInfoBankCard.setText(userExtension.getUserbank());
 		mEtUserInfoBankCardName.setText(userExtension.getBankaddress());
 		mEtUserInfoZixunPhone.setText(userExtension.getPhoneprice());
 		mEtUserInfoZixunImg.setText(userExtension.getPictureprice());
 		mTVUserInfoZixunTime.setText(userExtension.getStarttime() + "-" + userExtension.getEndtime());
+		time1 = userExtension.getStarttime();
+		time2 = userExtension.getEndtime();
 	}
 
 //	@Override
@@ -170,8 +177,7 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					teacherId = TeacherType.getTeacherId(which);
-					teacherId = teacherId + 1;
+					teacherId = TeacherType.getTeacherId(which + 1);
 					Log.i("youzh", "teacher:" + teacherId + "--" + which);
 					mTeacherType.setText(TeacherType.getTeacherName(which +1));
 				}
@@ -282,6 +288,14 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 				default:
 					break;
 				}
+			}
+			@Override
+			public void onFinish() {
+				dismissProgressDialog();
+			}
+			@Override
+			public void onFailure(Throwable error, String content) {
+				showToast(content);
 			}
 		});
 	}
