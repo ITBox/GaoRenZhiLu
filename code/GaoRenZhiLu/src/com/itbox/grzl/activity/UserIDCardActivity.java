@@ -15,6 +15,7 @@ import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.util.EditTextUtils;
 import com.itbox.fx.util.ImageUtils;
+import com.itbox.fx.util.StringUtil;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.bean.AddUserAuthEntication;
@@ -80,6 +81,18 @@ public class UserIDCardActivity extends BaseActivity {
 			String name = EditTextUtils.getText(mIDCardName);
 			String birthday = mIDCardBirthday.getText().toString();
 			String num = EditTextUtils.getText(mIDCardNum);
+			if (StringUtil.isBlank(name)) {
+				showToast("姓名为空");
+				return;
+			}
+			if (StringUtil.isBlank(birthday)) {
+				showToast("出生日期为空");
+				return;
+			}
+			if (StringUtil.isBlank(num)) {
+				showToast("身份证号为空");
+				return;
+			}
 			postIDCard(num, name, birthday, idcardPath);
 			break;
 		case R.id.idcard_birthday_et:
@@ -150,7 +163,7 @@ public class UserIDCardActivity extends BaseActivity {
 							UserIDCardActivity.this.finish();
 							break;
 						case Contasts.RESULT_FAIL:
-
+                            showToast("保存失败");
 							break;
 
 						default:
