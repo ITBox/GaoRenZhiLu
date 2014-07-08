@@ -3,9 +3,6 @@ package com.itbox.grzl.activity;
 import java.util.Calendar;
 import java.util.Date;
 
-import com.itbox.fx.util.DateUtil;
-import com.zhaoliewang.grzl.R;
-
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.ArrayWheelAdapter;
@@ -16,29 +13,21 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import com.itbox.fx.util.DateUtil;
+import com.itbox.fx.util.Utils;
+import com.itbox.grzl.Const.Extra;
+import com.zhaoliewang.grzl.R;
+
 /**
  * 设置时间(月日时,需指定范围)
  * 
  * @author HYH create at：2013-4-8 下午01:08:40
  */
-public class SelectTimeHalfHourActivity extends SelectAbstractActivity implements OnClickListener, OnWheelChangedListener {
+public class SelectTimeHalfHourActivity extends AbsSelectActivity implements OnClickListener, OnWheelChangedListener {
 
 	public static final String BEGINTIME_TAG = "BeginTime";
 	public static final String ENDTIME_TAG = "EndTime";
 	public static final long Mills_of_One_Month = 2592000000L;
-	
-	public static class Extra{
-		public static final String SelectedID = "selected_id";
-		public static final String SelectedItem = "selected_item";
-		public static final String SelectedItemStr = "selected_item_string";
-		public static final String SelectedTime = "selected_time_millis";
-		public static final String SelectedTimeStr = "selected_time_String";
-		public static final String Time_Earliest = "earliest_time";
-		public static final String Time_Latest = "latest_time";
-		public static final String Time_EarliestStr = "earliest_time_string";
-		public static final String Time_LatestStr = "latest_time_string";
-	}
-	
 	private WheelView monthWheel;
 	private WheelView dayWheel;
 	private WheelView hourWheel;
@@ -102,6 +91,8 @@ public class SelectTimeHalfHourActivity extends SelectAbstractActivity implement
 			yearTv.setVisibility(View.VISIBLE);
 		}
 
+		yearTv.setText(years[0]+"年");
+		
 		monthWheel.setViewAdapter(new IntWheelAdapter(this, months, " 月"));
 		dayWheel.setViewAdapter(new IntWheelAdapter(this, days, " 日"));
 		hourWheel.setViewAdapter(new ArrayWheelAdapter<String>(this, hours));
@@ -158,13 +149,22 @@ public class SelectTimeHalfHourActivity extends SelectAbstractActivity implement
 		if(1 == months.length && 1 == days.length){//如果只有一个月,且这个月只有1天
 			firstHours = lastHours = DateUtil.getBeginHalfHourArray(earlyCal.get(Calendar.HOUR_OF_DAY), earlyCal.get(Calendar.MINUTE));
 		}else{
-			firstHours = DateUtil.getBeginHalfHourArray(earlyCal.get(Calendar.HOUR_OF_DAY) - 1, earlyCal.get(Calendar.MINUTE));
+			firstHours = DateUtil.getBeginHalfHourArray(earlyCal.get(Calendar.HOUR_OF_DAY), earlyCal.get(Calendar.MINUTE));
 			lastHours = DateUtil.getEndHalfHourArray(lastCal.get(Calendar.HOUR_OF_DAY), lastCal.get(Calendar.MINUTE));
 		}
 		hours = firstHours;
 
 	}
-
+	
+	/**获取一个升序的int数组*/
+	public static int[] getRiseArray(int begin, int end) {
+		int length = end - begin + 1;
+		int[] array = new int[length];
+		for (int i = 0; i < length; i++) {
+			array[i] = begin + i;
+		}
+		return array;
+	}
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -258,14 +258,4 @@ public class SelectTimeHalfHourActivity extends SelectAbstractActivity implement
 	public String toString() {
 		return "设置时间(月日时,需指定范围)";
 	}
-	
-	public static int[] getRiseArray(int begin, int end) {
-		int length = end - begin + 1;
-		int[] array = new int[length];
-		for (int i = 0; i < length; i++) {
-			array[i] = begin + i;
-		}
-		return array;
-	}
-
 }

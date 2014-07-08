@@ -7,7 +7,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,8 +24,8 @@ import com.itbox.fx.util.DateUtil;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.Const;
+import com.itbox.grzl.Const.Extra;
 import com.itbox.grzl.Const.State;
-import com.itbox.grzl.activity.SelectTimeHalfHourActivity.Extra;
 import com.itbox.grzl.bean.EventAdd;
 import com.itbox.grzl.bean.RespResult;
 import com.itbox.grzl.bean.UploadImageResult;
@@ -110,7 +109,7 @@ public class EventAddActivity extends BaseActivity {
 				startTime = data.getLongExtra(Extra.SelectedTime,
 						State.Selected_cancle);
 				bean.setBegintime(data
-						.getStringExtra(SelectTimeHalfHourActivity.Extra.SelectedTimeStr));
+						.getStringExtra(Extra.SelectedTimeStr));
 				mStartTimeTv.setText(bean.getBegintime());
 				break;
 			case REQ_END_TIME:
@@ -159,7 +158,6 @@ public class EventAddActivity extends BaseActivity {
 			Intent beginIntent = new Intent(this,
 					SelectTimeHalfHourActivity.class);
 			cal.set(Calendar.HOUR_OF_DAY, cal.get(Calendar.HOUR_OF_DAY) + 1);// 普通活动，1小时候
-			cal.setTimeInMillis(cal.getTimeInMillis());
 			beginIntent.putExtra(Extra.Time_Earliest, cal.getTimeInMillis());
 			cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH) + 15);// 15天内
 			beginIntent.putExtra(Extra.Time_Latest, cal.getTimeInMillis());

@@ -252,6 +252,10 @@
             android:name="com.itbox.grzl.activity.SelectDoubleHourActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Translucent_NoTitleBar" />
+        <activity
+            android:name="com.itbox.grzl.activity.SelectAfterDateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Translucent_NoTitleBar" />
 
         <provider
             android:name="com.activeandroid.content.ContentProvider"
