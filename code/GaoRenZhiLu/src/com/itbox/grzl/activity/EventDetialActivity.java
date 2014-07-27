@@ -5,6 +5,7 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -12,12 +13,15 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import butterknife.OnItemClick;
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.widget.HorizontalListView;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.Const;
-import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.JoinUserAdapter;
 import com.itbox.grzl.bean.EventCommentGet;
 import com.itbox.grzl.bean.EventDetailGet;
@@ -26,6 +30,7 @@ import com.itbox.grzl.bean.RespResult;
 import com.itbox.grzl.engine.EventEngine;
 import com.itbox.grzl.engine.EventEngine.ActivityDetail;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zhaoliewang.grzl.R;
 
 /**
  * 活动详情页面
@@ -68,12 +73,14 @@ public class EventDetialActivity extends BaseActivity {
 	private List<EventUser> mUserItem;
 	private List<EventCommentGet> mCommentList;
 	private String mActivityId;
+	private String userid;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_event_detial);
 
+		userid = AppContext.getInstance().getAccount().getUserid().toString();
 		mActivityId = getIntent().getStringExtra("activityid");
 		if (mActivityId == null) {
 			finish();
@@ -107,6 +114,17 @@ public class EventDetialActivity extends BaseActivity {
 					}
 				});
 	}
+	
+	@OnItemClick(R.id.hlv_user)
+	public void onUserItemClick(AdapterView<?> parent, View view,
+			int position, long id){
+		EventUser user = mUserItem.get(position);
+		if (user.getUserid().equals(mBean.getUserid())) {
+			Intent intent = new Intent(this, OtherUserInfoActivity.class);
+			intent.putExtra("userid", user.getUserid());
+			startActivity(intent);
+		}
+	}
 
 	/**
 	 * 初始化详情
@@ -126,11 +144,10 @@ public class EventDetialActivity extends BaseActivity {
 		ImageLoader.getInstance().displayImage(
 				Api.User.getAvatarUrl(mBean.getActivitypicture()), iv_head);
 
-		tv_join_person_count.setText("参与人员(" + mBean.getJoinnumber() + "/"
-				+ mBean.getPeoplecount() + ")");
-
 		// 参与用户
 		if (mUserItem != null) {
+			tv_join_person_count.setText("参与人员(" + mUserItem.size() + "/"
+					+ mBean.getPeoplecount() + ")");
 			hlv_user.setAdapter(new JoinUserAdapter(getApplicationContext(),
 					mUserItem));
 		}
@@ -147,9 +164,15 @@ public class EventDetialActivity extends BaseActivity {
 						.getCreateTime());
 			}
 		}
+
+		if (mBean.getUserid().equals(
+				userid)) {
+			bt_join.setVisibility(View.GONE);
+		}
 	}
 
-	@OnClick({ R.id.bt_join, R.id.bt_like, R.id.bt_comment, R.id.tv_location })
+	@OnClick({ R.id.bt_join, R.id.bt_like, R.id.bt_comment, R.id.tv_location,
+			R.id.bt_share })
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.bt_join:
@@ -170,7 +193,42 @@ public class EventDetialActivity extends BaseActivity {
 			// 打开地图
 			goMap();
 			break;
+		case R.id.bt_share:
+			showShare();
+			break;
 		}
+	}
+
+	private void showShare() {
+		ShareSDK.initSDK(this);
+		OnekeyShare oks = new OnekeyShare();
+		// 关闭sso授权
+		oks.disableSSOWhenAuthorize();
+
+		// 分享时Notification的图标和文字
+		oks.setNotification(R.drawable.icon,
+				getString(R.string.app_name));
+		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+		oks.setTitle(getString(R.string.share));
+		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+		oks.setTitleUrl("http://sharesdk.cn");
+		// text是分享文本，所有平台都需要这个字段
+		oks.setText(mBean.getActivitydescription());
+		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+		oks.setImagePath(ImageLoader.getInstance().getDiscCache()
+				.get(Api.User.getAvatarUrl(mBean.getActivitypicture()))
+				.getAbsolutePath());
+		// url仅在微信（包括好友和朋友圈）中使用
+		oks.setUrl("http://sharesdk.cn");
+		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
+		oks.setComment("我是测试评论文本");
+		// site是分享此内容的网站名称，仅在QQ空间使用
+		oks.setSite(getString(R.string.app_name));
+		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
+		oks.setSiteUrl("http://sharesdk.cn");
+
+		// 启动分享GUI
+		oks.show(this);
 	}
 
 	/**

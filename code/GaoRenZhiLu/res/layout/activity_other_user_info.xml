@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ECF0F1" >
+
+    <include
+        android:id="@+id/top_title"
+        layout="@layout/unit_top_title" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_title" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <ImageView
+                    android:id="@+id/bg_user_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg_more_top" />
+
+                <com.itbox.fx.widget.CircleImageView
+                    android:id="@+id/userinfo_photo"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="40dp"
+                    app:border_color="@android:color/white"
+                    app:border_width="2dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/bg_user_top"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toRightOf="@id/userinfo_photo"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/userinfo_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F14F3B"
+                        android:textSize="20sp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true" >
+
+                            <TextView
+                                android:id="@+id/userinfo_place"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+
+                            <TextView
+                                android:id="@+id/userinfo_xingzuo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp" />
+
+                            <TextView
+                                android:id="@+id/userinfo_yearold"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/userinfo_yue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/selector_bg_red"
+                            android:padding="3dp"
+                            android:textColor="@android:color/white" />
+                    </RelativeLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/top_more_line2" />
+
+            <RelativeLayout
+                android:id="@+id/more_my_name_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="昵  称" />
+
+                <EditText
+                    android:id="@+id/more_my_name_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/more_my_name"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <LinearLayout
+                android:id="@+id/more_my_city_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="城  市"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <LinearLayout
+                android:id="@+id/more_my_birthday_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="生  日"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_birthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <LinearLayout
+                android:id="@+id/more_my_sex_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="性  别"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <LinearLayout
+                android:id="@+id/more_my_phone_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="手  机"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/more_my_phone_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <LinearLayout
+                android:id="@+id/more_my_email_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="邮  箱"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/more_my_email_et"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center_vertical"
+                    android:background="@android:color/transparent"
+                    android:focusable="false"
+                    android:singleLine="true"
+                    android:textColor="@color/dark"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+
+            <LinearLayout
+                android:id="@+id/more_my_intro_rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bg_more"
+                android:paddingBottom="12dp"
+                android:paddingLeft="15dp"
+                android:paddingTop="12dp" >
+
+                <TextView
+                    android:id="@+id/more_my_intro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="个人简介"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/more_my_intro_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@+id/more_my_intro_iv"
+                    android:layout_toRightOf="@id/more_my_intro"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="fdfdsfd"
+                    android:textColor="@color/dark" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bg_more_line" />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

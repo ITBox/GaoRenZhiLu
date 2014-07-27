@@ -88,7 +88,8 @@ public class AppTime extends BroadcastReceiver {
 		}
 		long clientTime = System.currentTimeMillis();
 		long svrTime = clientTime + deviationMills;
-		return svrTime;
+//		return svrTime;
+		return System.currentTimeMillis();
 	}
 	
 	public static void refreshTimeDeviation(long svrTimeMills) {

@@ -21,7 +21,7 @@
             <ImageView
                 android:id="@+id/idcard_img"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_margin="10dp"
                 android:background="@android:color/white"
                 android:padding="20dp" />

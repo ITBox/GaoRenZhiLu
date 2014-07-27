@@ -484,4 +484,8 @@ public class Account extends BaseModel {
 		return true;
 	}
 
+	public boolean isTeacher() {
+		return getUsertype() == 1;
+	}
+
 }

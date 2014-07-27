@@ -77,6 +77,9 @@ public class UserInfoActivity extends BaseActivity {
 	@InjectView(R.id.more_my_intro_tv)
 	TextView mUserInfoIntro;
 	
+	@InjectView(R.id.more_my_moreinfo_rl)
+	View mMore;
+	
 	private Uri photoUri;
 	private Account account;
 	private long birthdayMils;
@@ -106,6 +109,10 @@ public class UserInfoActivity extends BaseActivity {
 		mTVTopSave.setVisibility(View.VISIBLE);
 		mTVTopMedium.setText("个人资料");
 		mTVTopSave.setText("保存");
+		
+		if (!AppContext.getInstance().getAccount().isTeacher()) {
+			mMore.setVisibility(View.GONE);
+		}
 	}
 
 	private void initDatas() {

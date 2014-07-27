@@ -208,6 +208,12 @@
             style="@style/event_detial_bottom_button"
             android:text="活动交流"
             android:drawableTop="@drawable/criticism"/>
+
+        <Button
+            android:id="@+id/bt_share"
+            style="@style/event_detial_bottom_button"
+            android:text="分享"
+            android:drawableTop="@drawable/icon_share"/>
     </LinearLayout>
 
 </LinearLayout>

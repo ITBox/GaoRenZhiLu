@@ -18,6 +18,7 @@ import com.itbox.grzl.bean.Account;
 import com.itbox.grzl.bean.TeacherIncoming;
 import com.itbox.grzl.constants.AccountTable;
 import com.itbox.grzl.engine.TeacherEngine;
+import com.itbox.grzl.engine.UserEngine;
 import com.itbox.grzl.engine.TeacherEngine.UserPayDetailItem;
 
 /**
@@ -53,7 +54,7 @@ public class TeacherIncomingActivity extends BaseLoadActivity<TeacherIncoming> {
 	}
 
 	private void initData() {
-		TeacherEngine.getUserList(new GsonResponseHandler<Account>(
+		UserEngine.getUserList(new GsonResponseHandler<Account>(
 				Account.class) {
 			@Override
 			public void onSuccess(Account user) {

@@ -8,6 +8,7 @@ import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
+import com.itbox.grzl.bean.ProblemMsg;
 import com.itbox.grzl.bean.UserProblem;
 import com.loopj.android.http.RequestParams;
 
@@ -150,6 +151,64 @@ public class ConsultationEngine {
 		params.put("jobtype", jobtype);
 		Net.request(params, Api.getUrl(Api.Consultation.searchprobleming),
 				handler);
+	}
+
+	/**
+	 * 发送图文咨询消息
+	 * 
+	 * @param handler
+	 * @param info
+	 */
+	public static void sendMsg(String id, String msg, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
+		params.put("commentcontent", msg);
+		Net.request(params, Api.getUrl(Api.Consultation.adduserproblemdetail),
+				handler);
+	}
+
+	/**
+	 * 获取咨询消息记录
+	 * 
+	 * @param handler
+	 * @param info
+	 */
+	public static void finishConsulation(String id, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		Net.request(params, Api.getUrl(Api.Consultation.conversationfinish),
+				handler);
+	}
+
+	/**
+	 * 获取咨询消息记录
+	 * 
+	 * @param handler
+	 * @param info
+	 */
+	public static void getMsgList(String id, int page, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("id", id);
+		params.put("pagesize", "20");
+		params.put("pageindex", page + "");
+		Net.request(params, Api.getUrl(Api.Consultation.getuserproblemdetail),
+				handler);
+	}
+
+	public static class UserProblemDetailItem {
+		List<ProblemMsg> UserProblemDetailItem;
+
+		public List<ProblemMsg> getUserProblemDetailItem() {
+			return UserProblemDetailItem;
+		}
+
+		public void setUserProblemDetailItem(
+				List<ProblemMsg> userProblemDetailItem) {
+			UserProblemDetailItem = userProblemDetailItem;
+		}
+
 	}
 
 	public static class GetTeacher {

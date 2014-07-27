@@ -75,6 +75,10 @@ public class LoginActicity extends BaseActivity implements
 						dismissProgressDialog();
 						showToast("用户名或密码错误");
 					}
+					@Override
+					public void onFinish() {
+						dismissProgressDialog();
+					}
 				});
 			}
 		}

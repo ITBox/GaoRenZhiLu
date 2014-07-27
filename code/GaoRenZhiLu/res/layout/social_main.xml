@@ -1,0 +1,216 @@
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+	<LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	    <Button android:layout_height="wrap_content"
+	        android:id="@+id/sinaBtn"
+	        android:text="新浪微博登录"
+	        android:layout_weight="1"
+	        android:layout_width="wrap_content"/>
+	    <Button
+	         android:layout_height="wrap_content"
+	         android:id="@+id/sinaQuitBtn"
+	         android:text="新浪微博退出"
+			 android:layout_weight="1"
+			 android:layout_width="wrap_content"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	  <Button android:layout_height="wrap_content"
+         android:id="@+id/sinaStatusBtn"
+         android:text="新浪微博状态"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+      <Button
+         android:layout_height="wrap_content"
+         android:id="@+id/sinaInfoBtn"
+         android:text="新浪微博用户信息"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_marginTop="10dp">
+	    <Button android:layout_height="wrap_content"
+	        android:id="@+id/tecentBtn"
+	        android:text="腾讯微博登录"
+	        android:layout_width="wrap_content"
+	        android:layout_weight="1"/>
+	     <Button
+	         android:layout_height="wrap_content"
+	         android:id="@+id/tecentQuitBtn"
+	         android:text="腾讯微博退出"
+	         android:layout_width="wrap_content"
+	         android:layout_weight="1"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	    <Button android:layout_height="wrap_content"
+	         android:id="@+id/tecentStatusBtn"
+	         android:text="腾讯微博状态"
+	         android:layout_width="wrap_content"
+	         android:layout_weight="1"/>
+	     <Button
+	         android:layout_height="wrap_content"
+	         android:id="@+id/tecentInfoBtn"
+	         android:text="腾讯微博用户信息"
+	         android:layout_width="wrap_content"
+	         android:layout_weight="1"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_marginTop="10dp">
+	 <Button android:layout_height="wrap_content"
+        android:id="@+id/qqzoneBtn"
+        android:text="qqzone登录"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"/>
+     <Button
+         android:layout_height="wrap_content"
+         android:id="@+id/qqzoneQuitBtn"
+         android:text="qqzone退出"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	 <Button android:layout_height="wrap_content"
+         android:id="@+id/qqzoneStatusBtn"
+         android:text="qqzone状态"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+     <Button
+         android:layout_height="wrap_content"
+         android:id="@+id/qqzoneInfoBtn"
+         android:text="qqzone用户信息"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_marginTop="10dp">
+	    <Button android:layout_height="wrap_content"
+        android:id="@+id/kaixinBtn"
+        android:text="开心网登录"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"/>
+     	<Button
+         android:layout_height="wrap_content"
+         android:id="@+id/kaixinQuitBtn"
+         android:text="开心网退出"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+		<Button android:layout_height="wrap_content"
+         android:id="@+id/kaixinStatusBtn"
+         android:text="开心网状态"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+     <Button
+         android:layout_height="wrap_content"
+         android:id="@+id/kaixinInfoBtn"
+         android:text="开心网用户信息"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>	    
+	</LinearLayout>
+	
+		<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_marginTop="10dp">
+	    <Button android:layout_height="wrap_content"
+        android:id="@+id/renrenBtn"
+        android:text="人人网登录"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"/>
+     	<Button
+         android:layout_height="wrap_content"
+         android:id="@+id/renrenQuitBtn"
+         android:text="人人网退出"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+		<Button android:layout_height="wrap_content"
+         android:id="@+id/renrenStatusBtn"
+         android:text="人人网状态"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+     <Button
+         android:layout_height="wrap_content"
+         android:id="@+id/renrenInfoBtn"
+         android:text="人人网用户信息"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>	    
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_marginTop="10dp">
+	  <Button android:layout_height="wrap_content"
+        android:id="@+id/baiduBtn"
+        android:text="百度登录"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"/>
+     <Button
+         android:layout_height="wrap_content"
+         android:id="@+id/baiduQuitBtn"
+         android:text="百度退出"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+	</LinearLayout>
+	
+	<LinearLayout android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal">
+	    <Button android:layout_height="wrap_content"
+         android:id="@+id/baiduStatusBtn"
+         android:text="百度状态"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+     	<Button
+         android:layout_height="wrap_content"
+         android:id="@+id/baiduInfoBtn"
+         android:text="百度用户信息"
+         android:layout_width="wrap_content"
+         android:layout_weight="1"/>
+	</LinearLayout>
+     
+    <Button android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/allQuit"
+        android:text="全部退出"/>
+    
+    <TextView android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:id="@+id/social_result"/> 
+</LinearLayout>
+</ScrollView>

@@ -37,8 +37,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/bg_edit_normal_reverse"
+                    android:background="@drawable/rect_radius_white"
                     android:padding="5dp"
+                    android:hint="输入真实姓名"
                     android:textColor="@color/dark"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -66,9 +67,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/bg_edit_normal_reverse"
+                    android:background="@drawable/rect_radius_white"
                     android:padding="5dp"
                     android:textColor="@color/dark"
+                    android:hint="选择生日"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -95,9 +97,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/bg_edit_normal_reverse"
+                    android:background="@drawable/rect_radius_white"
                     android:padding="5dp"
                     android:textColor="@color/dark"
+                    android:hint="输入省份证号"
                     android:textSize="16sp" />
             </LinearLayout>
 

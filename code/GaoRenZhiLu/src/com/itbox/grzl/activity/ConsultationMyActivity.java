@@ -18,7 +18,7 @@ import butterknife.OnClick;
 import com.activeandroid.query.Delete;
 import com.baoyz.pg.PG;
 import com.itbox.grzl.AppContext;
-import com.itbox.grzl.adapter.UserProblemAdapter;
+import com.itbox.grzl.adapter.MyProblemAdapter;
 import com.itbox.grzl.bean.Account;
 import com.itbox.grzl.bean.UserProblem;
 import com.itbox.grzl.engine.ConsultationEngine;
@@ -66,7 +66,7 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 	private void initView() {
 		setTitle("我的咨询");
 		showLeftBackButton();
-		mAdapter = new UserProblemAdapter(this, null);
+		mAdapter = new MyProblemAdapter(this, null);
 
 		new Delete().from(UserProblem.class).execute();
 
@@ -173,8 +173,15 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 			startActivity(intent);
 		} else if (UserProblem.TYPE_PHOTO == bean.getConsultationtype()) {
 			// 图文咨询
-			Intent intent = new Intent(this,
-					ConsultationPhotoDetailActivity.class);
+			// Intent intent = new Intent(this,
+			// ConsultationPhotoDetailActivity.class);
+			// intent.putExtra("bean", PG.convertParcelable(bean));
+			// startActivity(intent);
+			Intent intent = new Intent(this, MyProblemDetailActivity.class);
+			intent.putExtra("bean", PG.convertParcelable(bean));
+			startActivity(intent);
+		}else{
+			Intent intent = new Intent(this, ConsultationPhoneDetailActivity.class);
 			intent.putExtra("bean", PG.convertParcelable(bean));
 			startActivity(intent);
 		}

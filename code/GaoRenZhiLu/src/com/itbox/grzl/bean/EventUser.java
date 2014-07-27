@@ -1,12 +1,14 @@
 package com.itbox.grzl.bean;
 
+import java.io.Serializable;
+
 /**
  * 参加活动的用户
  * 
  * @author baoboy
  * @date 2014-5-26下午10:32:03
  */
-public class EventUser {
+public class EventUser implements Serializable {
 
 	private String activityid;
 	private String userid;

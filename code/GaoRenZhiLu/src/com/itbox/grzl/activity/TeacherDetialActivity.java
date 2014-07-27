@@ -115,7 +115,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 					}
 				});
 		// 获取关注数量
-		TeacherEngine.getUserList(new GsonResponseHandler<Account>(
+		UserEngine.getUserList(new GsonResponseHandler<Account>(
 				Account.class) {
 
 			@Override

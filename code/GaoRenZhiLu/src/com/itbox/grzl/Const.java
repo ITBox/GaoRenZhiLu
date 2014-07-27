@@ -7,7 +7,8 @@ package com.itbox.grzl;
  */
 public class Const {
 
-	public static final String AppName = "互邀";
+	public static final String AppName = "高人指路";
+	public final static String SINA_APP_KEY = "319137445";
 
 	public static final int STATUS_TAMPER = -1; //被篡改
 	public static final int STATUS_DEBUG = 1; //正在开发：{日志:打印, 捕获异常:打印、保存, 未捕获异常:打印、保存}
@@ -16,7 +17,7 @@ public class Const {
 	/**App状态*/
 //	public static final int AppSatus = STATUS_TESTING;
 
-
+	public static final String BAIDU_KEY = "kwxeOmTf3uzqyerFGarub1D2";
 
 	/**用于2.1.3及以后版本*/
 	public static final String MapKey_Debug = "kwxeOmTf3uzqyerFGarub1D2",MapKey_Release = "7330289457bcebe623aa2c0434fe7f87";

@@ -36,6 +36,7 @@ import com.itbox.grzl.bean.UserLevelList;
 import com.itbox.grzl.bean.UserListItem;
 import com.itbox.grzl.engine.ConsultationEngine;
 import com.itbox.grzl.engine.TeacherEngine;
+import com.itbox.grzl.engine.UserEngine;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhaoliewang.grzl.R;
 
@@ -146,7 +147,7 @@ public class ConsultationDetialActivity extends BaseActivity implements
 	public void buy() {
 		// 判断会员
 		showLoadProgressDialog();
-		TeacherEngine.getUserList(new GsonResponseHandler<Account>(
+		UserEngine.getUserList(new GsonResponseHandler<Account>(
 				Account.class) {
 			@Override
 			public void onSuccess(Account user) {

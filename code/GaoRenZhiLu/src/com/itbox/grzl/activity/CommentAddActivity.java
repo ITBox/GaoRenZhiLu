@@ -69,6 +69,7 @@ public class CommentAddActivity extends BaseActivity {
 			mPhotoUri = data.getData();
 
 			try {
+				mPhotoIv.setVisibility(View.VISIBLE);
 				mPhotoIv.setImageBitmap(BitmapFactory
 						.decodeStream(getContentResolver().openInputStream(
 								mPhotoUri)));

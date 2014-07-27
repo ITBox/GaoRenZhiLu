@@ -284,6 +284,9 @@ public class Api {
 		public static final String GETUSERPROBLEMDETAIL = PartName
 				+ "getuserproblemdetail";
 		public static final String GETMYPROBLEM = PartName + "getmyproblem";
+		public static final String adduserproblemdetail = PartName + "adduserproblemdetail";
+		public static final String getuserproblemdetail = PartName + "getuserproblemdetail";
+		public static final String conversationfinish = PartName + "conversationfinish";
 
 	}
 

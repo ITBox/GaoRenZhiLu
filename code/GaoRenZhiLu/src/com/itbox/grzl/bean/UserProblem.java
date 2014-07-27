@@ -29,6 +29,9 @@ public class UserProblem extends BaseModel {
 	public static final String JOBTYPE = "up_jobtype";
 	public static final String CONSULTATIONTYPE = "up_consultationtype";
 	public static final String CREATETIME = "up_createtime";
+	public static final String UNMESSAGECOUNT = "up_unmessagecount";
+	public static final String STATUS = "up_status";
+	public static final String REMARKSTATUS = "up_remarkstatus";
 
 	@Column(name = UserProblem.UP_ID)
 	private int id;
@@ -50,6 +53,28 @@ public class UserProblem extends BaseModel {
 	private String createtime;
 	@Column(name = UserProblem.USERNAME)
 	private String username;
+	@Column(name = UserProblem.REMARKSTATUS)
+	private int remarkstatus;
+	@Column(name = UserProblem.STATUS)
+	private int status;
+	@Column(name = UserProblem.UNMESSAGECOUNT)
+	private int unmessagecount;
+
+	public boolean isRemark() {
+		return remarkstatus == 1;
+	}
+
+	public boolean isFinish() {
+		return status == 1;
+	}
+
+	public int getUnmessagecount() {
+		return unmessagecount;
+	}
+
+	public void setUnmessagecount(int unmessagecount) {
+		this.unmessagecount = unmessagecount;
+	}
 
 	public String getUsername() {
 		return username;

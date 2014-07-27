@@ -130,7 +130,7 @@ public class PublishConsultationActivity extends BaseActivity implements
 						super.onSuccess(result);
 						if (result != null && result.getReturnUrl() != null) {
 							api.freeAskQuestion(title, jobType + "",
-									result.getReturnUrl(), content, "14");
+									result.getReturnUrl(), content, AppContext.getInstance().getAccount().getUserid().toString());
 						} else {
 							dismissProgressDialog();
 							showToast("图片上传失败");

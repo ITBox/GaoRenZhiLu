@@ -41,6 +41,7 @@
                     android:background="@drawable/rect_radius_white"
                     android:paddingLeft="5dp"
                     android:textColor="@color/light_blue"
+                    android:hint="输入邮箱"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -92,6 +93,7 @@
                     android:background="@drawable/rect_radius_white"
                     android:paddingLeft="5dp"
                     android:textColor="@color/light_blue"
+                    android:hint="输入昵称"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -118,6 +120,7 @@
                     android:focusable="false"
                     android:paddingLeft="5dp"
                     android:textColor="@color/light_blue"
+                    android:hint="选择性别"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -143,6 +146,7 @@
                     android:background="@drawable/rect_radius_white"
                     android:focusable="false"
                     android:paddingLeft="5dp"
+                    android:hint="选择生日"
                     android:textColor="@color/light_blue"
                     android:textSize="14sp" />
             </LinearLayout>
@@ -170,6 +174,7 @@
                     android:focusable="false"
                     android:paddingLeft="5dp"
                     android:textColor="@color/light_blue"
+                    android:hint="选择地址"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -196,6 +201,7 @@
                     android:focusable="false"
                     android:paddingLeft="5dp"
                     android:textColor="@color/light_blue"
+                    android:hint="选择类型"
                     android:textSize="14sp" />
             </LinearLayout>
 

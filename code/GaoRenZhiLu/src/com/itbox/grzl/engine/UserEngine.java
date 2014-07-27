@@ -20,6 +20,27 @@ public class UserEngine {
 	public static final int PAGE_NUM = 20;
 
 	/**
+	 * 获取用户信息
+	 * 
+	 * @param handler
+	 */
+	public static void getUserList(ResponseHandler handler) {
+		getUserList(AppContext.getInstance().getAccount().getUserid()
+				.toString(), handler);
+	}
+
+	/**
+	 * 获取用户信息
+	 * 
+	 * @param handler
+	 */
+	public static void getUserList(String userid, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("userid", userid);
+		Net.request(params, Api.getUrl(Api.User.GET_USER_LIST), handler);
+	}
+
+	/**
 	 * 上传图片
 	 * 
 	 * @param userId

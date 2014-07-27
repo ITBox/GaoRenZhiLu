@@ -14,7 +14,6 @@ import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 import com.itbox.fx.util.DateUtil;
-import com.itbox.fx.util.Utils;
 import com.itbox.grzl.Const.Extra;
 import com.zhaoliewang.grzl.R;
 

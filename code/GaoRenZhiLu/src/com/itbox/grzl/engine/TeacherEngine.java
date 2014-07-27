@@ -84,18 +84,6 @@ public class TeacherEngine {
 	}
 
 	/**
-	 * 获取用户信息
-	 * 
-	 * @param handler
-	 */
-	public static void getUserList(ResponseHandler handler) {
-		RequestParams params = new RequestParams();
-		params.put("userid", AppContext.getInstance().getAccount().getUserid()
-				.toString());
-		Net.request(params, Api.getUrl(Api.User.GET_USER_LIST), handler);
-	}
-
-	/**
 	 * 获取老师评价
 	 * 
 	 * @param handler

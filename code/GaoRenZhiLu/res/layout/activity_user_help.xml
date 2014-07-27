@@ -30,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="1.高人指路V1.0版本功能？"
+                    android:text="一、图文咨询怎么使用？"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -50,8 +50,10 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/rect_radius_white"
                 android:padding="10dp"
-                android:visibility="gone"
-                android:text="V1.0版可以XXXXXXXXXXXXX" />
+                android:text="如果学生进行的是免费咨询，导师在看到咨询内容后，可以进行抢答，在导师抢答后，其他导师将不能再进行回答，学生在咨询后可以给导师评价及进行关注。
+如果是学生指定导师进行回答，导师在学生完成付费后，将可以对其问题进行回答，答题完毕，费用将进入导师的APP账户内。
+"
+                android:visibility="gone" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -69,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="2.使用是否需要收费？"
+                    android:text="二、电话咨询怎么使用？"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -89,8 +91,8 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/rect_radius_white"
                 android:padding="10dp"
-                android:visibility="gone"
-                android:text="V1.0版可以XXXXXXXXXXXXX" />
+                android:text="对于电话咨询，导师需要事先预留好导师的方便时间。在学生预约导师的方便时间并完成付费后，系统会给导师发送短信，提示导师在相关时间做好接听准备。同时，系统会将导师的电话号码绑定一个400号码提供给学生，学生在拨打400电话后，会转接到导师的手机上，这样将确保导师的手机号码将不会泄露。在导师和学生完成电话咨询后，相关费用将汇到导师的APP账户内，如果导师在规定时间内未能进行咨询，则相关费用会退回至学生账户。如果导师爽约的次数较多，则会对导师的评级产生影响。"
+                android:visibility="gone" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -108,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="3.如何退出高人指路客户端？"
+                    android:text="三、测评功能如何使用？"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
@@ -128,8 +130,8 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/rect_radius_white"
                 android:padding="10dp"
-                android:visibility="gone"
-                android:text="V1.0版可以XXXXXXXXXXXXX" />
+                android:text="学生可以通过测评功能，知道自己的先天的一些特性，对自己会有个更好的了解。同时，在学生邀请导师进行图文、电话咨询时，导师可以调取学生的测评结果进行查看。"
+                android:visibility="gone" />
 
             <ImageView
                 android:layout_width="match_parent"
