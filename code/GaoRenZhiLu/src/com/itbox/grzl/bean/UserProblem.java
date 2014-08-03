@@ -3,6 +3,7 @@ package com.itbox.grzl.bean;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.baoyz.pg.Parcelable;
+import com.itbox.grzl.AppContext;
 
 /**
  * 获取免费咨询信息
@@ -60,12 +61,21 @@ public class UserProblem extends BaseModel {
 	@Column(name = UserProblem.UNMESSAGECOUNT)
 	private int unmessagecount;
 
+	public boolean isSelf() {
+		return AppContext.getInstance().getAccount().getUserid().toString()
+				.equals(userid);
+	}
+
 	public boolean isRemark() {
 		return remarkstatus == 1;
 	}
 
 	public boolean isFinish() {
 		return status == 1;
+	}
+
+	public void setFinish() {
+		status = 1;
 	}
 
 	public int getUnmessagecount() {

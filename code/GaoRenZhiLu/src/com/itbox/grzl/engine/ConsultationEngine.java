@@ -4,12 +4,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import android.util.Log;
+
 import com.itbox.fx.net.Net;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.bean.ProblemMsg;
 import com.itbox.grzl.bean.UserProblem;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 /**
@@ -167,6 +170,26 @@ public class ConsultationEngine {
 		params.put("commentcontent", msg);
 		Net.request(params, Api.getUrl(Api.Consultation.adduserproblemdetail),
 				handler);
+	}
+
+	/**
+	 * 评价导师
+	 * 
+	 * @param handler
+	 * 
+	 * @param handler
+	 * @param info
+	 */
+	public static void comment(String teacheruserid, String commentcontent,
+			String score, String id, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("teacheruserid", teacheruserid);
+		params.put("userid", AppContext.getInstance().getAccount().getUserid()
+				.toString());
+		params.put("commentcontent", commentcontent);
+		params.put("score", score);
+		params.put("id", id);
+		Net.request(params, Api.getUrl(Api.User.ADD_TEACHER_COMMENT), handler);
 	}
 
 	/**

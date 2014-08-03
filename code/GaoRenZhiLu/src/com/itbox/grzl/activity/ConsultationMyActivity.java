@@ -167,8 +167,7 @@ public class ConsultationMyActivity extends BaseLoadActivity<UserProblem> {
 		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
 		if (UserProblem.TYPE_FREE == bean.getConsultationtype()) {
 			// 免费咨询
-			Intent intent = new Intent(this,
-					ConsultationFreeDetailActivity.class);
+			Intent intent = new Intent(this, MyProblemDetailActivity.class);
 			intent.putExtra("bean", PG.convertParcelable(bean));
 			startActivity(intent);
 		} else if (UserProblem.TYPE_PHOTO == bean.getConsultationtype()) {

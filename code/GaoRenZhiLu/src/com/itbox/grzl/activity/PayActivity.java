@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +23,17 @@ import butterknife.InjectView;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
+import com.itbox.fx.core.L;
+import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.util.DateUtil;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.bean.OrderInfoModel;
 import com.itbox.grzl.bean.TeacherExtension;
 import com.itbox.grzl.bean.UserListItem;
 import com.itbox.grzl.engine.ConsultationEngine;
+import com.itbox.grzl.engine.PayEngine;
+import com.itbox.grzl.engine.alipay.Result;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhaoliewang.grzl.R;
 
@@ -156,6 +162,26 @@ public class PayActivity extends BaseActivity {
 		}
 	}
 
+	Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+
+			Result resultAli = new Result((String) msg.obj);
+			String resultStatus = resultAli.getResultStatus();
+			if (TextUtils.equals(resultStatus, "9000")) {
+				// 跳支付成功
+				startActivity(PaySuccessActivity.class);
+				finish();
+			} else if (TextUtils.equals(resultStatus, "6001")) {
+				showToast("支付取消");
+			} else {
+				// 跳支付失败
+				startActivity(PayFailActivity.class);
+
+			}
+
+		};
+	};
+
 	/**
 	 * 购买电话咨询
 	 */
@@ -163,19 +189,115 @@ public class PayActivity extends BaseActivity {
 		TimeSpan bean = mAdapter.getItem(mTimeSelected);
 		String phone = et_phone.getText().toString();
 		String date = tv_date.getText().toString();
-		ConsultationEngine.buyPhone(teacher.getUserid(),
-				teacherExtension.getFinalPhoneprice() + "",
-				teacherExtension.getPhoneprice(), date, bean.getHour() + "",
-				bean.getMin() + "", phone, isClient, null);
+		showProgressDialog("正在下订单...");
+		if (isClient) {
+			ConsultationEngine.buyPhone(teacher.getUserid(),
+					teacherExtension.getFinalPhoneprice() + "",
+					teacherExtension.getPhoneprice(), date,
+					bean.getHour() + "", bean.getMin() + "", phone, isClient,
+					new GsonResponseHandler<OrderInfoModel>(
+							OrderInfoModel.class) {
+						@Override
+						public void onFinish() {
+							dismissProgressDialog();
+						}
+
+						@Override
+						public void onSuccess(OrderInfoModel object) {
+							PayEngine.startAliPayClient(mActThis,
+									object.getApipost(), object.getSign(),
+									handler);
+						}
+					});
+		} else {
+			ConsultationEngine.buyPhone(teacher.getUserid(),
+					teacherExtension.getFinalPhoneprice() + "",
+					teacherExtension.getPhoneprice(), date,
+					bean.getHour() + "", bean.getMin() + "", phone, isClient,
+					new GsonResponseHandler<OrderInfoModel>(
+							OrderInfoModel.class) {
+						@Override
+						public void onFinish() {
+							dismissProgressDialog();
+						}
+
+						@Override
+						public void onSuccess(int statusCode, String content) {
+							Intent intent = new Intent(mActThis,
+									WebBrowserActivity.class);
+							intent.putExtra("html", content);
+							startActivity(intent);
+						}
+
+						@Override
+						public void onFailure(Throwable e, int statusCode,
+								String content) {
+							L.i(content);
+							if (statusCode == 417) {
+								Intent intent = new Intent(mActThis,
+										WebBrowserActivity.class);
+								intent.putExtra("html", content);
+								startActivity(intent);
+							}
+						}
+					});
+		}
 	}
 
 	/**
 	 * 购买图文咨询
 	 */
 	private void buyPicture() {
-		ConsultationEngine.buyPicture(teacher.getUserid(),
-				teacherExtension.getFinalPictureprice() + "",
-				teacherExtension.getPictureprice(), isClient, null);
+		if (isClient) {
+			ConsultationEngine.buyPicture(teacher.getUserid(),
+					teacherExtension.getFinalPictureprice() + "",
+					teacherExtension.getPictureprice(), isClient,
+					new GsonResponseHandler<OrderInfoModel>(
+							OrderInfoModel.class) {
+						@Override
+						public void onFinish() {
+							dismissProgressDialog();
+						}
+
+						@Override
+						public void onSuccess(OrderInfoModel object) {
+							PayEngine.startAliPayClient(mActThis,
+									object.getApipost(), object.getSign(),
+									handler);
+						}
+					});
+		} else {
+			ConsultationEngine.buyPicture(teacher.getUserid(),
+					teacherExtension.getFinalPictureprice() + "",
+					teacherExtension.getPictureprice(), isClient,
+					new GsonResponseHandler<OrderInfoModel>(
+							OrderInfoModel.class) {
+						@Override
+						public void onFinish() {
+							dismissProgressDialog();
+						}
+
+						@Override
+						public void onSuccess(int statusCode, String content) {
+							Intent intent = new Intent(mActThis,
+									WebBrowserActivity.class);
+							intent.putExtra("html", content);
+							startActivity(intent);
+						}
+
+						@Override
+						public void onFailure(Throwable e, int statusCode,
+								String content) {
+							L.i(content);
+							if (statusCode == 417) {
+								Intent intent = new Intent(mActThis,
+										WebBrowserActivity.class);
+								intent.putExtra("html", content);
+								startActivity(intent);
+							}
+						}
+					});
+		}
 	}
 
 	private void initTeacherInfo() {

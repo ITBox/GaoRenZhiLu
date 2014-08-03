@@ -121,29 +121,36 @@ public class PublishConsultationActivity extends BaseActivity implements
 		} catch (FileNotFoundException e) {
 			return;
 		}
+		showProgressDialog("上传图片...");
 		UserEngine.uploadImg(AppContext.getInstance().getAccount().getUserid()
-				.toString(), in, 2,
-				new GsonResponseHandler<UploadImageResult>(
-						UploadImageResult.class) {
-					@Override
-					public void onSuccess(UploadImageResult result) {
-						super.onSuccess(result);
-						if (result != null && result.getReturnUrl() != null) {
-							api.freeAskQuestion(title, jobType + "",
-									result.getReturnUrl(), content, AppContext.getInstance().getAccount().getUserid().toString());
-						} else {
-							dismissProgressDialog();
-							showToast("图片上传失败");
-						}
-					}
+				.toString(), in, 2, new GsonResponseHandler<UploadImageResult>(
+				UploadImageResult.class) {
+			@Override
+			public void onFinish() {
+				dismissProgressDialog();
+			}
 
-					@Override
-					public void onFailure(Throwable error, String content) {
-						super.onFailure(error, content);
-						dismissProgressDialog();
-						showToast(content);
-					}
-				});
+			@Override
+			public void onSuccess(UploadImageResult result) {
+				super.onSuccess(result);
+				if (result != null && result.getReturnUrl() != null) {
+					api.freeAskQuestion(title, jobType + "",
+							result.getReturnUrl(), content, AppContext
+									.getInstance().getAccount().getUserid()
+									.toString());
+				} else {
+					dismissProgressDialog();
+					showToast("图片上传失败");
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable error, String content) {
+				super.onFailure(error, content);
+				dismissProgressDialog();
+				showToast(content);
+			}
+		});
 	}
 
 	@OnClick(R.id.text_left)
