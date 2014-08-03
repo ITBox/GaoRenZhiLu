@@ -1,10 +1,13 @@
 package com.itbox.grzl.activity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,12 +20,17 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
 import com.activeandroid.content.ContentProvider;
+import com.itbox.fx.core.L;
+import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.adapter.UserLevelAdapter;
 import com.itbox.grzl.api.ConsultationApi;
+import com.itbox.grzl.bean.OrderInfoModel;
 import com.itbox.grzl.bean.UserLevel;
 import com.itbox.grzl.constants.UserLevelTable;
 import com.itbox.grzl.engine.ConsultationEngine;
+import com.itbox.grzl.engine.PayEngine;
+import com.itbox.grzl.engine.alipay.Result;
 import com.zhaoliewang.grzl.R;
 
 public class BuyVipActivity extends BaseActivity implements
@@ -84,14 +92,79 @@ public class BuyVipActivity extends BaseActivity implements
 		}
 	}
 
+	Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+
+			Result resultAli = new Result((String) msg.obj);
+			String resultStatus = resultAli.getResultStatus();
+			showToast(resultStatus);
+			if (TextUtils.equals(resultStatus, "9000")) {
+				// 跳支付成功
+				startActivity(PaySuccessActivity.class);
+				finish();
+			} else if (TextUtils.equals(resultStatus, "6001")) {
+				showToast("支付取消");
+			} else {
+				// 跳支付失败
+				startActivity(PayFailActivity.class);
+
+			}
+
+		};
+	};
+
 	@OnClick(R.id.tv_buy)
 	public void buy(View v) {
 		if (bean == null) {
 			showToast("请选择会员");
 			return;
 		}
-		ConsultationEngine.buyMember(bean.getMemberid().toString(), isClient,
-				null);
+		if (isClient) {
+			ConsultationEngine.buyMember(bean.getMemberid().toString(),
+					isClient, new GsonResponseHandler<OrderInfoModel>(
+							OrderInfoModel.class) {
+						@Override
+						public void onFinish() {
+							dismissProgressDialog();
+						}
+
+						@Override
+						public void onSuccess(OrderInfoModel object) {
+							PayEngine.startAliPayClient(mActThis,
+									object.getApipost(), object.getSign(),
+									handler);
+						}
+					});
+		} else {
+			ConsultationEngine.buyMember(bean.getMemberid().toString(),
+					isClient, new GsonResponseHandler<OrderInfoModel>(
+							OrderInfoModel.class) {
+						@Override
+						public void onFinish() {
+							dismissProgressDialog();
+						}
+
+						@Override
+						public void onSuccess(int statusCode, String content) {
+							Intent intent = new Intent(mActThis,
+									WebBrowserActivity.class);
+							intent.putExtra("html", content);
+							startActivity(intent);
+						}
+
+						@Override
+						public void onFailure(Throwable e, int statusCode,
+								String content) {
+							L.i(content);
+							if (statusCode == 417) {
+								Intent intent = new Intent(mActThis,
+										WebBrowserActivity.class);
+								intent.putExtra("html", content);
+								startActivity(intent);
+							}
+						}
+					});
+		}
 	}
 
 	@Override

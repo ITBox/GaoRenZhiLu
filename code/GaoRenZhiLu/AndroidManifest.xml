@@ -78,6 +78,10 @@
             android:value="18" />
 
         <activity
+            android:name="com.alipay.android.app.sdk.WapPayActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.itbox.grzl.activity.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
@@ -289,6 +293,15 @@
         <activity
             android:name="com.itbox.grzl.activity.ConsultationPhoneDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.WebBrowserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.PayFailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.PaySuccessActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"
@@ -381,48 +394,6 @@
             android:value="7231e5070257ab9eacb5325c" />
         <!-- </>值来自开发者平台取得的AppKey -->
 
-        <receiver
-            android:name="com.baidu.android.pushservice.PushServiceReceiver"
-            android:process=":bdservice_v1" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-                <action android:name="com.baidu.android.pushservice.action.notification.SHOW" />
-                <action android:name="com.baidu.android.pushservice.action.media.CLICK" />
-                <action android:name="com.baidu.android.pushservice.action.frontia.user" />
-            </intent-filter>
-        </receiver>
-        <receiver
-            android:name="com.baidu.android.pushservice.RegistrationReceiver"
-            android:process=":bdservice_v1" >
-            <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.METHOD" />
-                <action android:name="com.baidu.android.pushservice.action.BIND_SYNC" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REMOVED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
-
-        <service
-            android:name="com.baidu.android.pushservice.PushService"
-            android:exported="true"
-            android:process=":bdservice_v1" />
-
-        <receiver android:name="com.baidu.frontia.module.deeplink.db.DLDataPushReceiver" >
-            <intent-filter>
-                <action android:name="com.baidu.android.pushservice.action.SDK_MESSAGE" />
-                <action android:name="com.baidu.android.pushservice.action.sdk.RECEIVE" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_REPLACED" />
-                <action android:name="android.intent.action.PACKAGE_ADDED" />
-
-                <data android:scheme="package" />
-            </intent-filter>
-        </receiver>
 
         <!-- ShareSDK_________________________________________start -->
         <activity

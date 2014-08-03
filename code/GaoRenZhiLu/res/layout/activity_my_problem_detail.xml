@@ -14,12 +14,33 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
-        android:layout_weight="1"        android:cacheColorHint="@null"
+        android:layout_weight="1"
+        android:cacheColorHint="@null"
         android:divider="@null"
         android:listSelector="@null"
         android:stackFromBottom="true" />
 
+    <TextView
+        android:id="@+id/tv_finish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="对话已结束"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <RatingBar
+        android:id="@+id/rb_score"
+        style="?android:attr/ratingBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:max="10"
+        android:numStars="5"
+        android:visibility="gone" />
+
     <LinearLayout
+        android:id="@+id/ll_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp" >
