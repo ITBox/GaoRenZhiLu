@@ -30,6 +30,7 @@ public class SearchBar extends FrameLayout {
 
 	private boolean isInput;
 	private OnSearchListener onSearchListener;
+	private OnClickListener clickListener;
 
 	public SearchBar(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -54,13 +55,26 @@ public class SearchBar extends FrameLayout {
 		mInputEt.setFocusable(false);
 	}
 
-	@OnFocusChange(R.id.et_input)
-	public void onFocus(View view, boolean focus) {
-
+	@Override
+	public void setOnClickListener(OnClickListener l) {
+		super.setOnClickListener(l);
+		clickListener = l;
+	}
+	
+	@OnClick(R.id.et_input)
+	public void onEditClick(View v){
+		if (clickListener != null) {
+			performClick();
+			return;
+		}
 	}
 
 	@OnClick(R.id.tv_search)
 	public void onClick(View v) {
+		if (clickListener != null) {
+			performClick();
+			return;
+		}
 		if (isInput) {
 			// 开始搜索
 			if (onSearchListener != null) {

@@ -214,7 +214,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:listSelector="@null"
-                    android:numColumns="5" >
+                    android:numColumns="3" >
                 </com.itbox.grzl.ui.GridViewNoScroll>
 
                 <LinearLayout
@@ -244,6 +244,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:gravity="right"
+                        android:padding="8dp"
                         android:text="未选择" />
                 </LinearLayout>
 
@@ -272,9 +273,11 @@
                         style="@style/userInfoItemContent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_margin="8dp"
+                        android:padding="8dp"
                         android:background="@null"
                         android:inputType="phone"
+                        android:hint="请输入接听电话"
                         android:gravity="right" />
                 </RelativeLayout>
             </LinearLayout>

@@ -115,18 +115,19 @@ public class TeacherDetialActivity extends BaseActivity implements
 					}
 				});
 		// 获取关注数量
-		UserEngine.getUserList(new GsonResponseHandler<Account>(
-				Account.class) {
+		UserEngine.getUserList(teacher.getUserid(),
+				new GsonResponseHandler<Account>(Account.class) {
 
-			@Override
-			public void onSuccess(Account user) {
-				super.onSuccess(user);
-				if (user != null) {
-					attentioncount = Integer.parseInt(user.getAttentioncount());
-					tv_attention_count.setText("粉丝 " + attentioncount);
-				}
-			}
-		});
+					@Override
+					public void onSuccess(Account user) {
+						super.onSuccess(user);
+						if (user != null) {
+							attentioncount = Integer.parseInt(user
+									.getAttentioncount());
+							tv_attention_count.setText("粉丝 " + attentioncount);
+						}
+					}
+				});
 	}
 
 	@OnClick(R.id.tv_attention)
@@ -146,6 +147,8 @@ public class TeacherDetialActivity extends BaseActivity implements
 							if (resp.isSuccess()) {
 								tv_attention.setText("加关注");
 								isAttention = false;
+								tv_attention_count.setText("粉丝 "
+										+ (attentioncount - 1));
 							}
 						}
 					});
@@ -163,8 +166,9 @@ public class TeacherDetialActivity extends BaseActivity implements
 						public void onSuccess(RespResult resp) {
 							if (resp.isSuccess()) {
 								tv_attention.setText("已关注");
-								attentioncount ++;
-								tv_attention_count.setText("粉丝 " + attentioncount);
+								attentioncount++;
+								tv_attention_count.setText("粉丝 "
+										+ attentioncount);
 								isAttention = true;
 							}
 						}

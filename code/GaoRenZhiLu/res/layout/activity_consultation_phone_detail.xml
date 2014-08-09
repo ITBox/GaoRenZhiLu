@@ -84,7 +84,7 @@
 
             <ScrollView
                 android:layout_width="wrap_content"
-                android:layout_height="200dp" >
+                android:layout_height="150dp" >
 
                 <TextView
                     android:id="@+id/tv_content"
@@ -105,6 +105,49 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:text="拨打老师电话" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <RatingBar
+            android:id="@+id/rb_score"
+            style="?android:attr/ratingBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:numStars="5"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/ll_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:visibility="gone" >
+
+            <EditText
+                android:id="@+id/et_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/et_bg_gray"
+                android:hint="评论内容"
+                android:padding="5dp"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/bt_send"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bt_red_bg"
+                android:padding="5dp"
+                android:text="评论"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

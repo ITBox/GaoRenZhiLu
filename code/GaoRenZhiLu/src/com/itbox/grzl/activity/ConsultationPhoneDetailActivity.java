@@ -3,16 +3,23 @@ package com.itbox.grzl.activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.Cache;
+import com.activeandroid.content.ContentProvider;
+import com.activeandroid.query.Update;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.bean.Account;
+import com.itbox.grzl.bean.RespResult;
 import com.itbox.grzl.bean.UserProblem;
 import com.itbox.grzl.engine.ConsultationEngine;
 import com.itbox.grzl.engine.UserEngine;
@@ -37,6 +44,12 @@ public class ConsultationPhoneDetailActivity extends BaseActivity {
 	protected TextView tv_content;
 	@InjectView(R.id.iv_head)
 	protected ImageView iv_head;
+	@InjectView(R.id.ll_edit)
+	protected View ll_edit;
+	@InjectView(R.id.et_content)
+	protected EditText et_content;
+	@InjectView(R.id.rb_score)
+	protected RatingBar mScoreRb;
 
 	private UserProblem mBean;
 
@@ -63,6 +76,61 @@ public class ConsultationPhoneDetailActivity extends BaseActivity {
 				Api.User.getAvatarUrl(mBean.getPhoto()), iv_head);
 
 		ConsultationEngine.getProblemDetail(mBean.getProblemId() + "", null);
+
+		if (mBean.isSelf() && !mBean.isRemark()) {
+			ll_edit.setVisibility(View.VISIBLE);
+			mScoreRb.setVisibility(View.VISIBLE);
+		}
+	}
+
+	@OnClick(R.id.bt_send)
+	public void onCommentClick(View v) {
+		// 发表评论
+		String content = et_content.getText().toString();
+		if (TextUtils.isEmpty(content)) {
+			showToast("请输入内容");
+			return;
+		}
+		showProgressDialog("正在提交...");
+		ConsultationEngine.comment(mBean.getTeacherid(), content,
+				mScoreRb.getProgress() + "", mBean.getProblemId() + "",
+				new GsonResponseHandler<RespResult>(RespResult.class) {
+					@Override
+					public void onFinish() {
+						super.onFinish();
+						dismissProgressDialog();
+					}
+
+					@Override
+					public void onSuccess(RespResult result) {
+						super.onSuccess(result);
+						if (result.isSuccess()) {
+							showToast("评论成功");
+							ll_edit.setVisibility(View.GONE);
+							mScoreRb.setVisibility(View.GONE);
+							mBean.setRemark();
+							new Update(UserProblem.class)
+									.set(UserProblem.REMARKSTATUS + "=2")
+									.where(UserProblem.UP_ID + "='"
+											+ mBean.getProblemId() + "'")
+									.execute();
+							Cache.getContext()
+									.getContentResolver()
+									.notifyChange(
+											ContentProvider.createUri(
+													UserProblem.class, null),
+											null);
+						} else {
+							showToast("评论失败");
+						}
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						super.onFailure(error, content);
+						showToast(content);
+					}
+				});
 	}
 
 	@OnClick(R.id.bt_ok)

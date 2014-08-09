@@ -41,7 +41,7 @@ public class UserProblem extends BaseModel {
 	@Column(name = UserProblem.USERID)
 	private String userid;
 	@Column(name = UserProblem.TEACHERUSERID)
-	private String teacherid;
+	private String teacheruserid;
 	@Column(name = UserProblem.CONTENTS)
 	private String contents;
 	@Column(name = UserProblem.PHOTO)
@@ -67,7 +67,11 @@ public class UserProblem extends BaseModel {
 	}
 
 	public boolean isRemark() {
-		return remarkstatus == 1;
+		return remarkstatus == 2;
+	}
+	
+	public void setRemark(){
+		remarkstatus = 2;
 	}
 
 	public boolean isFinish() {
@@ -115,11 +119,11 @@ public class UserProblem extends BaseModel {
 	}
 
 	public String getTeacherid() {
-		return teacherid;
+		return teacheruserid;
 	}
 
 	public void setTeacherid(String teacherid) {
-		this.teacherid = teacherid;
+		this.teacheruserid = teacherid;
 	}
 
 	public String getContents() {

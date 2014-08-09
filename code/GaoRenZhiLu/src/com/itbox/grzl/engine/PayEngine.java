@@ -87,6 +87,7 @@ public class PayEngine {
 			String info = model;
 			// String info2 = signInfo2(info);
 			info = signInfo(info, sign);
+			L.i(info);
 			new AlipayThread(context, info, handler).start();
 		} catch (Exception ex) {
 			AppException.handle(ex);

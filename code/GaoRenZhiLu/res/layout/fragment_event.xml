@@ -10,11 +10,17 @@
         android:layout_height="wrap_content"
         layout="@layout/unit_top_title" />
 
+    <com.itbox.grzl.widget.SearchBar
+        android:layout_below="@+id/title"
+        android:id="@+id/searchBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/lv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/title"
+        android:layout_below="@+id/searchBar"
         android:listSelector="@android:color/transparent" />
 
     <RelativeLayout

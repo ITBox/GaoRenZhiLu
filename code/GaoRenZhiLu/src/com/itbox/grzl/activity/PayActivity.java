@@ -17,6 +17,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -174,11 +175,11 @@ public class PayActivity extends BaseActivity {
 			} else if (TextUtils.equals(resultStatus, "6001")) {
 				showToast("支付取消");
 			} else {
+				Intent intent = new Intent(mActThis, PayFailActivity.class);
+				intent.putExtra("info", resultAli.getResultStatus());
 				// 跳支付失败
-				startActivity(PayFailActivity.class);
-
+				startActivity(intent);
 			}
-
 		};
 	};
 

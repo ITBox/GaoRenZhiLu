@@ -76,7 +76,8 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/rect_radius_white"
-            android:focusable="true"
+            android:focusable="false"
+            android:hint="选择性别"
             android:paddingLeft="5dp"
             android:textColor="@color/light_blue"
             android:textSize="14sp" />
@@ -102,7 +103,8 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/rect_radius_white"
-            android:focusable="true"
+            android:focusable="false"
+            android:hint="选择生日"
             android:paddingLeft="5dp"
             android:textColor="@color/light_blue"
             android:textSize="14sp" />
@@ -128,7 +130,8 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/rect_radius_white"
-            android:focusable="true"
+            android:focusable="false"
+            android:hint="选择地址"
             android:paddingLeft="5dp"
             android:textColor="@color/light_blue"
             android:textSize="14sp" />
@@ -154,7 +157,8 @@
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:background="@drawable/rect_radius_white"
-            android:focusable="true"
+            android:focusable="false"
+            android:hint="选择类型"
             android:paddingLeft="5dp"
             android:textColor="@color/light_blue"
             android:textSize="14sp" />

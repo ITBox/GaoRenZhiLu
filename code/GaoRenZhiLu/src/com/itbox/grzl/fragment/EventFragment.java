@@ -36,8 +36,6 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 	protected TextView mTitleTv;
 	@InjectView(R.id.text_right)
 	protected TextView mRightTv;
-	@InjectView(R.id.text_left)
-	protected TextView mLeftTv;
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
 	@InjectView(R.id.rl_empty)
@@ -58,9 +56,6 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 
 	private void initView() {
 		mTitleTv.setText("活动首页");
-		mLeftTv.setVisibility(View.VISIBLE);
-		mLeftTv.setText("");
-		mLeftTv.setBackgroundResource(R.drawable.left_search);
 		mRightTv.setVisibility(View.VISIBLE);
 		mRightTv.setText("发布活动");
 		mListView.setEmptyView(mEmptyView);
@@ -68,7 +63,7 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 		initLoad(mListView, mAdapter, EventGet.class);
 	}
 
-	@OnClick({ R.id.text_right, R.id.text_left, R.id.bt_add })
+	@OnClick({ R.id.text_right, R.id.bt_add })
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.text_right:
@@ -79,6 +74,11 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 			startActivity(EventSearchActivity.class);
 			break;
 		}
+	}
+	
+	@OnClick(R.id.searchBar)
+	public void onSearchClick(View v){
+		startActivity(EventSearchActivity.class);
 	}
 
 	@Override

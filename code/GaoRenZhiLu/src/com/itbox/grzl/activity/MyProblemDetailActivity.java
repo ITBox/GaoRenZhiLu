@@ -157,11 +157,12 @@ public class MyProblemDetailActivity extends BaseLoadActivity<ProblemMsg> {
 						public void onSuccess(RespResult result) {
 							super.onSuccess(result);
 							if (result.isSuccess()) {
-								showToast("发送成功");
+								showToast("评论成功");
 								mContentEt.setText("");
-								loadFirstData();
+								mBean.setRemark();
+								initStatus();
 							} else {
-								showToast("发送失败");
+								showToast("评论失败");
 							}
 						}
 

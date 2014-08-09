@@ -76,10 +76,10 @@ public class UserInfoActivity extends BaseActivity {
 	EditText mEtUserInfoEmail;
 	@InjectView(R.id.more_my_intro_tv)
 	TextView mUserInfoIntro;
-	
+
 	@InjectView(R.id.more_my_moreinfo_rl)
 	View mMore;
-	
+
 	private Uri photoUri;
 	private Account account;
 	private long birthdayMils;
@@ -109,25 +109,31 @@ public class UserInfoActivity extends BaseActivity {
 		mTVTopSave.setVisibility(View.VISIBLE);
 		mTVTopMedium.setText("个人资料");
 		mTVTopSave.setText("保存");
-		
+
 		if (!AppContext.getInstance().getAccount().isTeacher()) {
 			mMore.setVisibility(View.GONE);
 		}
 	}
 
 	private void initDatas() {
-		loader.displayImage(account.getUseravatarversion(), mUserInfoPhoto, photoOptions);
+		loader.displayImage(account.getUseravatarversion(), mUserInfoPhoto,
+				photoOptions);
 		mUserInfoName.setText(account.getUsername());
-		mUserInfoYearOld.setText(DateUtil.getAge(account.getUserbirthday()) + "岁");
+		mUserInfoYearOld.setText(DateUtil.getAge(account.getUserbirthday())
+				+ "岁");
 		mUserInfoPlace.setText(getUserPlace(account.getUsercity()));
-		mUserInfoXingzuo.setText(DateUtil.getConstellation(account.getUserbirthday()));
+		mUserInfoXingzuo.setText(DateUtil.getConstellation(account
+				.getUserbirthday()));
 		mUserInfoYuE.setText(account.getBuycount() + "购买");
 
 		mEtUserInfoName.setText(account.getUsername());
-		mUserInfoCity.setText(getUserPlace(account.getUserprovince()) + getUserPlace(account.getUsercity()) + getUserPlace(account.getUserdistrict()));
+		mUserInfoCity.setText(getUserPlace(account.getUserprovince())
+				+ getUserPlace(account.getUsercity())
+				+ getUserPlace(account.getUserdistrict()));
 		if (!TextUtils.isEmpty(account.getUserbirthday())) {
 			birthday = account.getUserbirthday();
-			mUserInfoBirthday.setText(account.getUserbirthday().substring(0, 10));
+			mUserInfoBirthday.setText(account.getUserbirthday()
+					.substring(0, 10));
 		} else {
 			mUserInfoBirthday.setText(account.getUserbirthday());
 		}
@@ -157,7 +163,11 @@ public class UserInfoActivity extends BaseActivity {
 	// return true;
 	// }
 
-	@OnClick({ R.id.userinfo_photo, R.id.text_left, R.id.text_right, R.id.more_my_name_rl, R.id.more_my_city_rl, R.id.more_my_birthday_rl, R.id.more_my_sex_rl, R.id.more_my_phone_rl, R.id.more_my_email_rl, R.id.more_my_intro_rl, R.id.more_my_moreinfo_rl })
+	@OnClick({ R.id.userinfo_photo, R.id.text_left, R.id.text_right,
+			R.id.more_my_name_rl, R.id.more_my_city_rl,
+			R.id.more_my_birthday_rl, R.id.more_my_sex_rl,
+			R.id.more_my_phone_rl, R.id.more_my_email_rl,
+			R.id.more_my_intro_rl, R.id.more_my_moreinfo_rl })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -168,30 +178,37 @@ public class UserInfoActivity extends BaseActivity {
 			postUserInfoMethod();
 			break;
 		case R.id.userinfo_photo:
-			new AlertDialog.Builder(mActThis).setItems(new String[] { "拍照", "从图库选择" }, new OnClickListener() {
+			new AlertDialog.Builder(mActThis).setItems(
+					new String[] { "拍照", "从图库选择" }, new OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					// TODO Auto-generated method stub
-					switch (which) {
-					case 0:
-						Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-						photoUri = Contasts.photoUri(mActThis);
-						intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, photoUri);
-						// 开启系统拍照的Activity
-						mActThis.startActivityForResult(intent, Contasts.TAKE_PICTURE_FROM_CAMERA);
-						break;
-					case 1:
-						Intent intent2 = new Intent("android.intent.action.PICK");
-						intent2.setType("image/*");
-						mActThis.startActivityForResult(intent2, Contasts.TAKE_PICTURE_FROM_GALLERY);
-						break;
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							switch (which) {
+							case 0:
+								Intent intent = new Intent(
+										android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+								photoUri = Contasts.photoUri(mActThis);
+								intent.putExtra(
+										android.provider.MediaStore.EXTRA_OUTPUT,
+										photoUri);
+								// 开启系统拍照的Activity
+								mActThis.startActivityForResult(intent,
+										Contasts.TAKE_PICTURE_FROM_CAMERA);
+								break;
+							case 1:
+								Intent intent2 = new Intent(
+										"android.intent.action.PICK");
+								intent2.setType("image/*");
+								mActThis.startActivityForResult(intent2,
+										Contasts.TAKE_PICTURE_FROM_GALLERY);
+								break;
 
-					default:
-						break;
-					}
-				}
-			}).show();
+							default:
+								break;
+							}
+						}
+					}).show();
 			break;
 		case R.id.more_my_name_rl:
 			EditTextUtils.showKeyboard(mEtUserInfoName);
@@ -222,7 +239,8 @@ public class UserInfoActivity extends BaseActivity {
 			break;
 		case R.id.more_my_birthday_iv:
 			Intent birIntent = new Intent(this, SelectDateActivity.class);
-			birIntent.putExtra(SelectDateActivity.Extra.DefaultTimeMillis, birthdayMils);
+			birIntent.putExtra(SelectDateActivity.Extra.DefaultTimeMillis,
+					birthdayMils);
 			startActivityForResult(birIntent, Contasts.REQUEST_SELECT_BIRTHDAY);
 			break;
 		case R.id.more_my_city_iv:
@@ -246,22 +264,24 @@ public class UserInfoActivity extends BaseActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-//		Intent intent = null;
+		// Intent intent = null;
 		switch (requestCode) {
 		case Contasts.TAKE_PICTURE_FROM_CAMERA:
 			Intent intent = new Intent(mActThis, CropImgActivity.class);
-//			intent.setDataAndType(photoUri, "image/jpeg");
-//			intent.putExtra("imgUri", photoUri);
+			// intent.setDataAndType(photoUri, "image/jpeg");
+			// intent.putExtra("imgUri", photoUri);
 			intent.setData(photoUri);
-			mActThis.startActivityForResult(intent, Contasts.CROP_CAMERA_PICTURE);
+			mActThis.startActivityForResult(intent,
+					Contasts.CROP_CAMERA_PICTURE);
 			break;
 		case Contasts.TAKE_PICTURE_FROM_GALLERY:
 			Intent intent2 = new Intent(mActThis, CropImgActivity.class);
-//			intent2.setDataAndType(data.getData(), "image/jpeg");
-//			intent2.putExtra("imgUri", photoUri);
+			// intent2.setDataAndType(data.getData(), "image/jpeg");
+			// intent2.putExtra("imgUri", photoUri);
 			intent2.setData(data.getData());
-			Log.i("youzh", "URI : "+data.getData());
-			mActThis.startActivityForResult(intent2, Contasts.CROP_GALLERY_PICTURE);
+			Log.i("youzh", "URI : " + data.getData());
+			mActThis.startActivityForResult(intent2,
+					Contasts.CROP_GALLERY_PICTURE);
 			break;
 		case Contasts.CROP_CAMERA_PICTURE:
 			if (data != null) {
@@ -278,34 +298,50 @@ public class UserInfoActivity extends BaseActivity {
 			}
 			break;
 		case 20:
-			String userIntro = data.getStringExtra("userIntro");
-			if (!TextUtils.isEmpty(userIntro)) {
-				mUserInfoIntro.setText(userIntro);
+			if (data != null) {
+				String userIntro = data.getStringExtra("userIntro");
+				if (!TextUtils.isEmpty(userIntro)) {
+					mUserInfoIntro.setText(userIntro);
+				}
 			}
 			break;
 		case Contasts.REQUEST_SELECT_SEX:
 			if (RESULT_OK == resultCode && null != data) {
-				int intExtra = data.getIntExtra(SelectButton3Activity.Extra.SelectedItem, SelectButton3Activity.Extra.Selected_cancle);
+				int intExtra = data.getIntExtra(
+						SelectButton3Activity.Extra.SelectedItem,
+						SelectButton3Activity.Extra.Selected_cancle);
 				if (intExtra != SelectButton3Activity.Extra.Selected_cancle) {
 					sex = intExtra + 1;
-					mUserInfoSex.setText(data.getStringExtra(SelectButton3Activity.Extra.SelectedItemStr));
+					mUserInfoSex
+							.setText(data
+									.getStringExtra(SelectButton3Activity.Extra.SelectedItemStr));
 				}
 			}
 			break;
 		case Contasts.REQUEST_SELECT_BIRTHDAY:
 			if (RESULT_OK == resultCode && null != data) {
-				birthdayMils = data.getLongExtra(SelectDateActivity.Extra.SelectedTime, 0);
-				String birStr = data.getStringExtra(SelectDateActivity.Extra.SelectedTimeStr);
+				birthdayMils = data.getLongExtra(
+						SelectDateActivity.Extra.SelectedTime, 0);
+				String birStr = data
+						.getStringExtra(SelectDateActivity.Extra.SelectedTimeStr);
 				birthday = birStr;
 				mUserInfoBirthday.setText(birStr.substring(0, 10));
 			}
 			break;
 		case Contasts.REQUEST_SELECT_AREA:
 			if (RESULT_OK == resultCode && null != data) {
-				provinceCode = data.getIntExtra(SelectAddrActivity.Extra.ProvinceCode, 0);
-				cityCode = data.getIntExtra(SelectAddrActivity.Extra.CityCode, 0);
-				districtCode = data.getIntExtra(SelectAddrActivity.Extra.DistrictCode, 0);
-				String addrName = data.getStringExtra(SelectAddrActivity.Extra.ProvinceName) + " " + data.getStringExtra(SelectAddrActivity.Extra.CityName) + " " + data.getStringExtra(SelectAddrActivity.Extra.DistrictName);
+				provinceCode = data.getIntExtra(
+						SelectAddrActivity.Extra.ProvinceCode, 0);
+				cityCode = data.getIntExtra(SelectAddrActivity.Extra.CityCode,
+						0);
+				districtCode = data.getIntExtra(
+						SelectAddrActivity.Extra.DistrictCode, 0);
+				String addrName = data
+						.getStringExtra(SelectAddrActivity.Extra.ProvinceName)
+						+ " "
+						+ data.getStringExtra(SelectAddrActivity.Extra.CityName)
+						+ " "
+						+ data.getStringExtra(SelectAddrActivity.Extra.DistrictName);
 				mUserInfoCity.setText(addrName);
 			}
 			break;
@@ -332,60 +368,77 @@ public class UserInfoActivity extends BaseActivity {
 		params.put("userintroduction", mUserInfoIntro.getText().toString());
 		params.put("userbirthday", birthday);
 
-		Net.request(params, Api.getUrl(Api.User.UP_USER_INFO), new GsonResponseHandler<UpdateUserList>(UpdateUserList.class) {
-			@Override
-			public void onSuccess(UpdateUserList object) {
-				super.onSuccess(object);
-				switch (object.getResult()) {
-				case Contasts.RESULT_SUCCES:
-					dismissProgressDialog();
-					userinfo();
-					account.save();
-					mActThis.finish();
-					break;
-				case Contasts.RESULT_FAIL:
-					dismissProgressDialog();
-					ToastUtils.showToast(mActThis, "修改失败");
-					break;
+		Net.request(params, Api.getUrl(Api.User.UP_USER_INFO),
+				new GsonResponseHandler<UpdateUserList>(UpdateUserList.class) {
+					@Override
+					public void onSuccess(UpdateUserList object) {
+						super.onSuccess(object);
+						switch (object.getResult()) {
+						case Contasts.RESULT_SUCCES:
+							userinfo();
+							account.save();
+							mActThis.finish();
+							break;
+						case Contasts.RESULT_FAIL:
+							ToastUtils.showToast(mActThis, "修改失败");
+							break;
+						case 2:
+							ToastUtils.showToast(mActThis, "昵称重复");
+							break;
+						case 3:
+							ToastUtils.showToast(mActThis, "手机号码重复");
+							break;
+						case 4:
+							ToastUtils.showToast(mActThis, "邮箱重复");
+							break;
 
-				default:
-					break;
-				}
-			}
+						default:
+							break;
+						}
+					}
+					@Override
+					public void onFinish() {
+						dismissProgressDialog();
+					}
 
-		});
+				});
 	}
+
 	/**
 	 * 上传头像
 	 */
 	private void uplaodUserPhoto() {
 		showProgressDialog("头像上传中...");
-		UserEngine.uploadImg(account.getUserid() + "", ImageUtils.bitmap2InputStream(photoBit), 1, new GsonResponseHandler<UploadImageResult>(UploadImageResult.class) {
-			@Override
-			public void onSuccess(UploadImageResult result) {
-				super.onSuccess(result);
-				if (result != null) {
-					mUserInfoPhoto.setImageBitmap(photoBit);
-					userinfo();
-					account.setUseravatarversion(result.getReturnUrl());
-					account.save();
-					dismissProgressDialog();
-					showToast("头像上传成功");
-				} else {
-					dismissProgressDialog();
-					showToast("头像上传失败");
-				}
-			}
-			
-			@Override
-			public void onFailure(Throwable e, int statusCode, String content) {
-				super.onFailure(e, statusCode, content);
-				dismissProgressDialog();
-				showToast(content);
-			}
-		});
+		UserEngine.uploadImg(account.getUserid() + "", ImageUtils
+				.bitmap2InputStream(photoBit), 1,
+				new GsonResponseHandler<UploadImageResult>(
+						UploadImageResult.class) {
+					@Override
+					public void onSuccess(UploadImageResult result) {
+						super.onSuccess(result);
+						if (result != null) {
+							mUserInfoPhoto.setImageBitmap(photoBit);
+							userinfo();
+							account.setUseravatarversion(result.getReturnUrl());
+							account.save();
+							dismissProgressDialog();
+							showToast("头像上传成功");
+						} else {
+							dismissProgressDialog();
+							showToast("头像上传失败");
+						}
+					}
+
+					@Override
+					public void onFailure(Throwable e, int statusCode,
+							String content) {
+						super.onFailure(e, statusCode, content);
+						dismissProgressDialog();
+						showToast(content);
+					}
+				});
 	}
-	
+
 	private void userinfo() {
 		account.setUsername(EditTextUtils.getText(mEtUserInfoName));
 		account.setUserphone(EditTextUtils.getText(mEtUserInfoPhone));
