@@ -69,6 +69,7 @@ public class ConsultationDetialActivity extends BaseActivity implements
 	private ImageView iconImageView;
 	private String type;
 	private TeacherExtension teacherExtension;
+	private boolean isNotPrice;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -81,17 +82,28 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		type = getIntent().getStringExtra("type");
 		String consultation_name = getIntent().getStringExtra(
 				"consultation_name");
-		
+
 		mHeaderView = View.inflate(this, R.layout.layout_comment_list_header,
 				null);
 
+		TextView tv_description = (TextView) mHeaderView
+				.findViewById(R.id.tv_description);
 		if ("picture".equals(type)) {
 			setTitle("图文咨询详情");
+			if (Double.parseDouble(teacherExtension.getPictureprice()) <= 0) {
+				tv_description.setText("当前导师未设置购买金额，不能购买");
+				isNotPrice = true;
+			}
 		} else {
 			setTitle("电话咨询详情");
-			TextView tv_description = (TextView) mHeaderView.findViewById(R.id.tv_description);
-			tv_description.setText("通过电话进行咨询专业导师");
+			if (Double.parseDouble(teacherExtension.getPhoneprice()) <= 0) {
+				tv_description.setText("当前导师未设置购买金额，不能购买");
+				isNotPrice = true;
+			} else {
+				tv_description.setText("通过电话进行咨询专业导师");
+			}
 		}
+
 		showLeftBackButton();
 
 		avatarImageView = (ImageView) mHeaderView.findViewById(R.id.iv_avatar);
@@ -145,10 +157,13 @@ public class ConsultationDetialActivity extends BaseActivity implements
 
 	@OnClick(R.id.tv_buy)
 	public void buy() {
+		if (isNotPrice) {
+			showToast("当前导师未设置购买金额，不能购买");
+			return;
+		}
 		// 判断会员
 		showLoadProgressDialog();
-		UserEngine.getUserList(new GsonResponseHandler<Account>(
-				Account.class) {
+		UserEngine.getUserList(new GsonResponseHandler<Account>(Account.class) {
 			@Override
 			public void onSuccess(Account user) {
 				super.onSuccess(user);

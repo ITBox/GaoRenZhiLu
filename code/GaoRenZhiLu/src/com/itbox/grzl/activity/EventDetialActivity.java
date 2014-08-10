@@ -96,6 +96,10 @@ public class EventDetialActivity extends BaseActivity {
 		setTitle("活动详情");
 		showLeftBackButton();
 
+		refreshDetail();
+	}
+
+	private void refreshDetail() {
 		// 获取详情信息
 		EventEngine.getEventDetail(mActivityId,
 				new GsonResponseHandler<ActivityDetail>(ActivityDetail.class) {
@@ -269,6 +273,7 @@ public class EventDetialActivity extends BaseActivity {
 								showToast("报名成功");
 								bt_join.setText("已报名");
 								mBean.setJoin(true);
+								refreshDetail();
 							} else {
 								showToast("报名失败");
 							}
@@ -296,6 +301,7 @@ public class EventDetialActivity extends BaseActivity {
 								showToast("取消成功");
 								bt_join.setText("我要报名");
 								mBean.setJoin(false);
+								refreshDetail();
 							} else {
 								showToast("取消失败");
 							}

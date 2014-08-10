@@ -92,6 +92,8 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 		}
 		
 		getSupportLoaderManager().initLoader(0, null, this);
+		
+		getData();
 	}
 
 	private void initViews() {
