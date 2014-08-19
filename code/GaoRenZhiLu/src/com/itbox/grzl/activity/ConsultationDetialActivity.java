@@ -12,6 +12,7 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RatingBar;
@@ -35,7 +36,6 @@ import com.itbox.grzl.bean.UserLevel;
 import com.itbox.grzl.bean.UserLevelList;
 import com.itbox.grzl.bean.UserListItem;
 import com.itbox.grzl.engine.ConsultationEngine;
-import com.itbox.grzl.engine.TeacherEngine;
 import com.itbox.grzl.engine.UserEngine;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhaoliewang.grzl.R;
@@ -121,6 +121,12 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		consultationNameTextView = (TextView) mHeaderView
 				.findViewById(R.id.tv_consultation_name);
 		iconImageView = (ImageView) mHeaderView.findViewById(R.id.iv_icon);
+		iconImageView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				buy();
+			}
+		});
 		if ("phone".equals(type)) {
 			iconImageView.setImageResource(R.drawable.phone_consultation);
 		} else {

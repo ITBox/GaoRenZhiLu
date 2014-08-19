@@ -39,6 +39,19 @@
                     app:border_color="@android:color/white"
                     app:border_width="2dp" />
 
+                <Button
+                    android:id="@+id/bt_user_code"
+                    android:layout_below="@+id/userinfo_photo"
+                    android:layout_height="wrap_content"
+                    android:layout_width="80dp"
+                    android:text="身份审核" 
+                    android:padding="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/bt_red_bg"
+                    android:visibility="gone"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -76,15 +89,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="10dp"
-                                android:layout_marginRight="10dp"
-                                
-                                />
+                                android:layout_marginRight="10dp" />
 
                             <TextView
                                 android:id="@+id/userinfo_yearold"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                 />
+                                android:layout_height="wrap_content" />
                         </LinearLayout>
 
                         <TextView
@@ -108,7 +118,7 @@
                 android:src="@drawable/top_more_line2" />
 
             <RelativeLayout
-                    android:id="@+id/more_my_name_rl"
+                android:id="@+id/more_my_name_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -132,9 +142,9 @@
                     android:layout_toLeftOf="@+id/more_my_name_iv"
                     android:layout_toRightOf="@id/more_my_name"
                     android:background="@android:color/transparent"
+                    android:focusable="false"
                     android:gravity="right"
                     android:singleLine="true"
-                    android:focusable="false"
                     android:textColor="@color/dark"
                     android:textSize="14sp" />
 
@@ -156,7 +166,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
-                    android:id="@+id/more_my_city_rl"
+                android:id="@+id/more_my_city_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -175,8 +185,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/dark"
                     android:layout_toLeftOf="@+id/more_my_city_iv"
+                    android:textColor="@color/dark"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -197,7 +207,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
-                    android:id="@+id/more_my_birthday_rl"
+                android:id="@+id/more_my_birthday_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -215,8 +225,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/dark"
                     android:layout_toLeftOf="@+id/more_my_birthday_iv"
+                    android:textColor="@color/dark"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -237,7 +247,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
-                    android:id="@+id/more_my_sex_rl"
+                android:id="@+id/more_my_sex_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -256,8 +266,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/dark"
                     android:layout_toLeftOf="@+id/more_my_sex_iv"
+                    android:textColor="@color/dark"
                     android:textSize="14sp" />
 
                 <ImageView
@@ -278,7 +288,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
-                    android:id="@+id/more_my_phone_rl"
+                android:id="@+id/more_my_phone_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -302,9 +312,9 @@
                     android:layout_toLeftOf="@+id/more_my_phone_iv"
                     android:layout_toRightOf="@id/more_my_phone"
                     android:background="@android:color/transparent"
+                    android:focusable="false"
                     android:gravity="right"
                     android:singleLine="true"
-                    android:focusable="false"
                     android:textColor="@color/dark"
                     android:textSize="14sp" />
 
@@ -326,7 +336,7 @@
                 android:src="@drawable/bg_more_line" />
 
             <RelativeLayout
-                    android:id="@+id/more_my_email_rl"
+                android:id="@+id/more_my_email_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="12dp"
@@ -350,9 +360,9 @@
                     android:layout_toLeftOf="@+id/more_my_email_iv"
                     android:layout_toRightOf="@id/more_my_email"
                     android:background="@android:color/transparent"
+                    android:focusable="false"
                     android:gravity="right"
                     android:singleLine="true"
-                    android:focusable="false"
                     android:textColor="@color/dark"
                     android:textSize="14sp" />
 

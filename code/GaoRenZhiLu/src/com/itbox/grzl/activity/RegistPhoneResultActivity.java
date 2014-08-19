@@ -15,6 +15,7 @@ import com.itbox.fx.util.StringUtil;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
+import com.itbox.grzl.Config;
 import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.api.LoginAndRegisterApi;
 import com.itbox.grzl.bean.Account;
@@ -162,6 +163,9 @@ public class RegistPhoneResultActivity extends BaseActivity {
 						super.onSuccess(object);
 						if (object.getResult() > 0) {
 							// 注册成功
+							AppContext.getUserPreferences().edit()
+									.putBoolean(Config.NEW_REGISTER, true)
+									.commit();
 							ToastUtils.showToast(mActThis, "注册成功");
 							showProgressDialog("登陆中...");
 							new LoginAndRegisterApi().login(mETRegistPhoneName

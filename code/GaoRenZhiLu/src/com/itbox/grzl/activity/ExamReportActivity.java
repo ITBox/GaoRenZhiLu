@@ -6,10 +6,12 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.activeandroid.query.Delete;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.ExamReportAdapter;
 import com.itbox.grzl.bean.ExamReport;
+import com.itbox.grzl.bean.TeacherCommentGet;
 import com.itbox.grzl.engine.ExamEngine;
 import com.itbox.grzl.engine.ExamEngine.UserTestingItem;
 
@@ -64,8 +66,12 @@ public class ExamReportActivity extends BaseLoadActivity<ExamReport> {
 					}
 
 					@Override
-					public void onFailure(Throwable error, String content) {
-						super.onFailure(error, content);
+					public void onFailure(Throwable e, int statusCode,
+							String content) {
+						super.onFailure(e, statusCode, content);
+						if (statusCode == 400) {
+							new Delete().from(ExamReport.class).execute();
+						}
 						// 还原页码
 						restorePage();
 					}

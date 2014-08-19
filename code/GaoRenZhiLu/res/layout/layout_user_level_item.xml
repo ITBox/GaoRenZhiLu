@@ -21,7 +21,7 @@
         android:layout_toRightOf="@id/iv_level_icon"
         android:text="张三"
         android:textColor="#E0564B"
-        android:textSize="14sp" />
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/tv_level_description"
@@ -44,9 +44,12 @@
         android:textSize="14sp" />
 
     <CheckBox
+        android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/iv_level_icon"
+        android:focusable="false"
+        android:clickable="false"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dip" />
 

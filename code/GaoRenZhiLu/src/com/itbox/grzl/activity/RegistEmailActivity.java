@@ -15,6 +15,7 @@ import com.itbox.fx.util.StringUtil;
 import com.itbox.fx.util.ToastUtils;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
+import com.itbox.grzl.Config;
 import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.api.LoginAndRegisterApi;
 import com.itbox.grzl.bean.Account;
@@ -156,6 +157,9 @@ public class RegistEmailActivity extends BaseActivity {
 					public void onSuccess(Register object) {
 						super.onSuccess(object);
 						if (object.getResult() > 0) {
+							AppContext.getUserPreferences().edit()
+									.putBoolean(Config.NEW_REGISTER, true)
+									.commit();
 							// 注册成功
 							ToastUtils.showToast(mActThis, "注册成功");
 							showProgressDialog("登陆中...");

@@ -21,8 +21,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
                 android:background="#E7E7E7"
-                android:paddingBottom="5dip"
-                android:paddingTop="5dip"
+                android:padding="5dp"
                 android:text="选择支付方式"
                 android:textColor="#838383"
                 android:textSize="16sp" />
@@ -53,7 +52,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dip"
-                        android:text="￥200"
+                        android:text=""
                         android:textColor="#E0564B"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -65,10 +64,11 @@
                         android:orientation="horizontal" >
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:orientation="vertical" >
+                            android:orientation="vertical"
+                            android:layout_weight="1" >
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -97,7 +97,8 @@
                         android:orientation="horizontal" >
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:orientation="vertical" >

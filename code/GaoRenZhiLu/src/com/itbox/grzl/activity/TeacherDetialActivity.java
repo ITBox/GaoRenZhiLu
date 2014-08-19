@@ -148,7 +148,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 								tv_attention.setText("加关注");
 								isAttention = false;
 								tv_attention_count.setText("粉丝 "
-										+ (attentioncount - 1));
+										+ (--attentioncount));
 							}
 						}
 					});

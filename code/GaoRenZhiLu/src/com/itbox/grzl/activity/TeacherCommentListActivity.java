@@ -7,6 +7,7 @@ import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.activeandroid.query.Delete;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.adapter.TeacherCommentAdapter;
@@ -44,7 +45,7 @@ public class TeacherCommentListActivity extends
 	private void initView() {
 		mTitleTv.setText("我的评价");
 		showLeftBackButton();
-		
+
 		startActivity(EventTeacherActivity.class);
 
 		mAdapter = new TeacherCommentAdapter(getContext(), null);
@@ -80,8 +81,12 @@ public class TeacherCommentListActivity extends
 					}
 
 					@Override
-					public void onFailure(Throwable error, String content) {
-						super.onFailure(error, content);
+					public void onFailure(Throwable e, int statusCode,
+							String content) {
+						if (statusCode == 400) {
+							new Delete().from(TeacherCommentGet.class)
+									.execute();
+						}
 						// 还原页码
 						restorePage();
 					}

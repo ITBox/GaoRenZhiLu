@@ -102,16 +102,16 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 		mTVTopCancel.setText("个人资料");
 		mTVTopMedium.setText("更多资料");
 		mTVTopSave.setText("保存");
-		mEtUserInfoName.setText(AppContext.getInstance().getAccount().getUsername());
 	}
 
 	private void initDatas() {
+		mEtUserInfoName.setText(userExtension.getUsernickname());
 		if (userExtension.getUsercode().equals("0")) {
 			mTVShenfenzheng.setTextColor(Color.rgb(235, 81, 77));// 红
-			mTVShenfenzheng.setText("未认证");
+			mTVShenfenzheng.setText("未审核");
 		} else if (userExtension.getUsercode().equals("1")) {
 			mTVShenfenzheng.setTextColor(Color.rgb(121, 185, 104));// 绿
-			mTVShenfenzheng.setText("已认证");
+			mTVShenfenzheng.setText("已审核");
 		} else if (userExtension.getUsercode().equals("2")) {
 			mTVShenfenzheng.setTextColor(Color.rgb(253, 108, 23));// 橘
 			mTVShenfenzheng.setText("审核中");
@@ -164,6 +164,12 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 			EditTextUtils.setSelection(mEtUserInfoName);
 			break;
 		case R.id.more_my_shenfenzheng_rl:
+			if (userExtension.getUsercode().equals("1")) {
+				break;
+			}
+			if (userExtension.getUsercode().equals("2")) {
+				break;
+			}
 			startActivity(UserIDCardActivity.class);
 			break;
 		case R.id.more_my_bankcard_rl:// 银行卡号

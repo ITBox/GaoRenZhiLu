@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.support.v4.widget.CursorAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.ButterKnife;
@@ -31,7 +32,11 @@ public class UserLevelAdapter extends CursorAdapter {
 		TextView levelDescription;
 		@InjectView(R.id.tv_price)
 		TextView price;
+		@InjectView(R.id.checkBox)
+		CheckBox checkbox;
 	}
+
+	private int mClickPosition = -1;
 
 	public UserLevelAdapter(Context context, Cursor c) {
 		super(context, c);
@@ -50,6 +55,7 @@ public class UserLevelAdapter extends CursorAdapter {
 				+ bean.getDiscount() * 10 + "折");
 		ImageLoader.getInstance().displayImage(
 				Api.User.getAvatarUrl(bean.getPhoto()), holder.levelIcon);
+		holder.checkbox.setChecked(mClickPosition == cursor.getPosition());
 	}
 
 	@Override
@@ -58,6 +64,10 @@ public class UserLevelAdapter extends CursorAdapter {
 				null);
 		new ViewHolder(view);
 		return view;
+	}
+
+	public void setClickPosition(int position) {
+		mClickPosition = position;
 	}
 
 }

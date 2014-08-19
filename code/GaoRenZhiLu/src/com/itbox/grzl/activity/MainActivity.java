@@ -1,5 +1,8 @@
 package com.itbox.grzl.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.KeyEvent;
@@ -12,13 +15,14 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.itbox.fx.util.ToastUtils;
-import com.zhaoliewang.grzl.R;
+import com.itbox.grzl.AppContext;
+import com.itbox.grzl.Config;
 import com.itbox.grzl.fragment.CommentFragment;
 import com.itbox.grzl.fragment.ConsultationFragment;
 import com.itbox.grzl.fragment.EventFragment;
 import com.itbox.grzl.fragment.ExamFragment;
 import com.itbox.grzl.fragment.MoreFragment;
-import com.itbox.grzl.fragment.OnlineStudyFragment;
+import com.zhaoliewang.grzl.R;
 
 public class MainActivity extends BaseActivity {
 
@@ -57,6 +61,28 @@ public class MainActivity extends BaseActivity {
 		// new ConsultationApi().getPhoneConsultation("14");
 
 		// new ConsultationApi().getPhoneConsultation("14");
+
+		// 检查是否是新用户
+		if (AppContext.getUserPreferences().getBoolean(Config.NEW_REGISTER,
+				false)) {
+			if (AppContext.getInstance().getAccount().isTeacher()) {
+				// 提示用户审核身份
+				new AlertDialog.Builder(this).setTitle("提示")
+						.setMessage("导师需要进行身份审核，是否进入？")
+						.setNegativeButton("取消", null)
+						.setPositiveButton("进入", new OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// 进入身份审核
+								startActivity(UserIDCardActivity.class);
+							}
+						}).show();
+			}
+			AppContext.getUserPreferences().edit()
+					.putBoolean(Config.NEW_REGISTER, false).commit();
+		}
 	}
 
 	/**

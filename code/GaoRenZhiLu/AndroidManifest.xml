@@ -75,7 +75,7 @@
             android:value="gaorenzhilu.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="18" />
+            android:value="19" />
 
         <activity
             android:name="com.alipay.android.app.sdk.WapPayActivity"
@@ -293,7 +293,7 @@
         <activity
             android:name="com.itbox.grzl.activity.ConsultationPhoneDetailActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden|adjustResize" />
         <activity
             android:name="com.itbox.grzl.activity.WebBrowserActivity"
             android:screenOrientation="portrait" />

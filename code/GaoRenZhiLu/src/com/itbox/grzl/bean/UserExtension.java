@@ -25,6 +25,8 @@ public class UserExtension extends BaseModel {
 	public static final String ENDTIME = "ue_endtime";
 	public static final String TEACHERLEVEL = "ue_teacherlevel";
 	public static final String REMARKCOUNT = "ue_remarkcount";
+	public static final String USERNICKNAME = "ue_usernickname";
+	public static final String BUYPHONE = "ue_buyphone";
 
 	@Column(name = UserExtension.USERID)
 	private String userid;
@@ -50,6 +52,26 @@ public class UserExtension extends BaseModel {
 	private String teacherlevel;// 导师级别
 	@Column(name = UserExtension.REMARKCOUNT)
 	private String remarkcount;// 导师评论数
+	@Column(name = UserExtension.USERNICKNAME)
+	private String usernickname;// 真实姓名
+	@Column(name = UserExtension.BUYPHONE)
+	private String buyphone;// 400号码
+
+	public String getUsernickname() {
+		return usernickname;
+	}
+
+	public void setUsernickname(String usernickname) {
+		this.usernickname = usernickname;
+	}
+
+	public String getBuyphone() {
+		return buyphone;
+	}
+
+	public void setBuyphone(String buyphone) {
+		this.buyphone = buyphone;
+	}
 
 	public String getUserid() {
 		return userid;
@@ -151,17 +173,26 @@ public class UserExtension extends BaseModel {
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((bankaddress == null) ? 0 : bankaddress.hashCode());
+		result = prime * result
+				+ ((bankaddress == null) ? 0 : bankaddress.hashCode());
 		result = prime * result + ((endtime == null) ? 0 : endtime.hashCode());
 		result = prime * result + ((jobtype == null) ? 0 : jobtype.hashCode());
-		result = prime * result + ((phoneprice == null) ? 0 : phoneprice.hashCode());
-		result = prime * result + ((pictureprice == null) ? 0 : pictureprice.hashCode());
-		result = prime * result + ((remarkcount == null) ? 0 : remarkcount.hashCode());
-		result = prime * result + ((starttime == null) ? 0 : starttime.hashCode());
-		result = prime * result + ((teacherlevel == null) ? 0 : teacherlevel.hashCode());
-		result = prime * result + ((teachertype == null) ? 0 : teachertype.hashCode());
-		result = prime * result + ((userbank == null) ? 0 : userbank.hashCode());
-		result = prime * result + ((usercode == null) ? 0 : usercode.hashCode());
+		result = prime * result
+				+ ((phoneprice == null) ? 0 : phoneprice.hashCode());
+		result = prime * result
+				+ ((pictureprice == null) ? 0 : pictureprice.hashCode());
+		result = prime * result
+				+ ((remarkcount == null) ? 0 : remarkcount.hashCode());
+		result = prime * result
+				+ ((starttime == null) ? 0 : starttime.hashCode());
+		result = prime * result
+				+ ((teacherlevel == null) ? 0 : teacherlevel.hashCode());
+		result = prime * result
+				+ ((teachertype == null) ? 0 : teachertype.hashCode());
+		result = prime * result
+				+ ((userbank == null) ? 0 : userbank.hashCode());
+		result = prime * result
+				+ ((usercode == null) ? 0 : usercode.hashCode());
 		result = prime * result + ((userid == null) ? 0 : userid.hashCode());
 		return result;
 	}
@@ -235,5 +266,5 @@ public class UserExtension extends BaseModel {
 			return false;
 		return true;
 	}
-    
+
 }

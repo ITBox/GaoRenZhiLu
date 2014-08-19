@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.TextView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnCheckedChanged;
@@ -27,7 +28,6 @@ import com.itbox.grzl.adapter.UserLevelAdapter;
 import com.itbox.grzl.api.ConsultationApi;
 import com.itbox.grzl.bean.OrderInfoModel;
 import com.itbox.grzl.bean.UserLevel;
-import com.itbox.grzl.constants.UserLevelTable;
 import com.itbox.grzl.engine.ConsultationEngine;
 import com.itbox.grzl.engine.PayEngine;
 import com.itbox.grzl.engine.alipay.Result;
@@ -46,8 +46,10 @@ public class BuyVipActivity extends BaseActivity implements
 	protected CheckBox cb_client;
 	@InjectView(R.id.cb_web)
 	protected CheckBox cb_web;
+	@InjectView(R.id.tv_price)
+	protected TextView tv_price;
 
-	private boolean isClient;
+	private boolean isClient = true;
 	private UserLevel bean;
 
 	@Override
@@ -71,6 +73,9 @@ public class BuyVipActivity extends BaseActivity implements
 					int position, long id) {
 				bean = new UserLevel();
 				bean.loadFromCursor((Cursor) adapter.getItem(position - 1));
+				adapter.setClickPosition(position - 1);
+				adapter.notifyDataSetChanged();
+				tv_price.setText("￥" + bean.getPrice());
 			}
 		});
 		getSupportLoaderManager().initLoader(0, null, this);
@@ -97,7 +102,6 @@ public class BuyVipActivity extends BaseActivity implements
 
 			Result resultAli = new Result((String) msg.obj);
 			String resultStatus = resultAli.getResultStatus();
-			showToast(resultStatus);
 			if (TextUtils.equals(resultStatus, "9000")) {
 				// 跳支付成功
 				startActivity(PaySuccessActivity.class);
