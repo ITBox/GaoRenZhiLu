@@ -1,5 +1,6 @@
 package com.itbox.grzl.activity;
 
+import java.io.File;
 import java.util.List;
 
 import android.content.Intent;
@@ -219,8 +220,9 @@ public class EventDetialActivity extends BaseActivity {
 		// text是分享文本，所有平台都需要这个字段
 		oks.setText(mBean.getActivitydescription());
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
-		oks.setImagePath(ImageLoader.getInstance().getDiscCache()
-				.get(Api.User.getAvatarUrl(mBean.getActivitypicture()))
+		File file = ImageLoader.getInstance().getDiscCache()
+				.get(Api.User.getAvatarUrl(mBean.getActivitypicture()));
+		oks.setImagePath(file
 				.getAbsolutePath());
 		// url仅在微信（包括好友和朋友圈）中使用
 		oks.setUrl("http://sharesdk.cn");

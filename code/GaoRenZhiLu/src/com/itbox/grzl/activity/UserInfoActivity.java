@@ -1,5 +1,7 @@
 package com.itbox.grzl.activity;
 
+import java.util.List;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -20,7 +22,9 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.Model;
 import com.activeandroid.content.ContentProvider;
+import com.activeandroid.query.Delete;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.util.DateUtil;
@@ -179,7 +183,7 @@ public class UserInfoActivity extends BaseActivity implements
 			R.id.more_my_name_rl, R.id.more_my_city_rl,
 			R.id.more_my_birthday_rl, R.id.more_my_sex_rl,
 			R.id.more_my_phone_rl, R.id.more_my_email_rl,
-			R.id.more_my_intro_rl, R.id.more_my_moreinfo_rl , R.id.bt_user_code})
+			R.id.more_my_intro_rl, R.id.more_my_moreinfo_rl, R.id.bt_user_code })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -471,7 +475,9 @@ public class UserInfoActivity extends BaseActivity implements
 	public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
 		return new android.support.v4.content.CursorLoader(mActThis,
 				ContentProvider.createUri(UserExtension.class, null), null,
-				null, null, null);
+				UserExtension.USERID + "=?", new String[] { AppContext
+						.getInstance().getAccount().getUserid().toString() },
+				null);
 	}
 
 	@Override
@@ -479,8 +485,8 @@ public class UserInfoActivity extends BaseActivity implements
 		if (cursor != null && cursor.moveToNext()) {
 			userExtension = new UserExtension();
 			userExtension.loadFromCursor(cursor);
-			if (userExtension.getUsercode().equals("0")
-					|| userExtension.getUsercode().equals("3")) {
+			if (userExtension.getUsercodestate() == 0
+					|| userExtension.getUsercodestate() == 3) {
 				mUserCodeBt.setVisibility(View.VISIBLE);
 			}
 		} else {
@@ -498,6 +504,11 @@ public class UserInfoActivity extends BaseActivity implements
 					@Override
 					public void onSuccess(UserExtension object) {
 						super.onSuccess(object);
+						new Delete()
+								.from(UserExtension.class)
+								.where(UserExtension.USERID + "=?",
+										object.getUserid().toString())
+								.execute();
 						object.save();
 					}
 				});

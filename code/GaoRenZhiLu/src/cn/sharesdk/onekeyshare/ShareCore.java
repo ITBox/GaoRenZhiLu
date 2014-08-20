@@ -67,6 +67,13 @@ public class ShareCore {
 		if (customizeCallback != null) {
 			customizeCallback.onShare(plat, sp);
 		}
+
+		String[] flags = new String[] {
+				"OnekeyShare",
+				plat.getContext().getPackageName(),
+				String.valueOf(ShareSDK.getSDKVersionCode())
+		};
+		sp.setCustomFlag(flags);
 		plat.share(sp);
 		return true;
 	}
@@ -105,9 +112,8 @@ public class ShareCore {
 		if ("Wechat".equals(platform) || "WechatMoments".equals(platform)
 				|| "WechatFavorite".equals(platform) || "ShortMessage".equals(platform)
 				|| "Email".equals(platform) || "GooglePlus".equals(platform)
-				|| "QQ".equals(platform) || "Pinterest".equals(platform)
-				|| "Yixin".equals(platform) || "YixinMoments".equals(platform)
-				|| "Line".equals(platform)) {
+				|| "Pinterest".equals(platform) || "Yixin".equals(platform)
+				|| "YixinMoments".equals(platform) || "Line".equals(platform)) {
 			return false;
 		}
 		return true;

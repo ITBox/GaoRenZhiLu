@@ -1,0 +1,1 @@
+ALTER TABLE userextension ADD COLUMN ue_usercodestate INTEGER;

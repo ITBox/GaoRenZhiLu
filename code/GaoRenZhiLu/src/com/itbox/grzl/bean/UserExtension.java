@@ -27,6 +27,7 @@ public class UserExtension extends BaseModel {
 	public static final String REMARKCOUNT = "ue_remarkcount";
 	public static final String USERNICKNAME = "ue_usernickname";
 	public static final String BUYPHONE = "ue_buyphone";
+	public static final String USERCODESTATE = "ue_usercodestate";
 
 	@Column(name = UserExtension.USERID)
 	private String userid;
@@ -56,6 +57,16 @@ public class UserExtension extends BaseModel {
 	private String usernickname;// 真实姓名
 	@Column(name = UserExtension.BUYPHONE)
 	private String buyphone;// 400号码
+	@Column(name = UserExtension.USERCODESTATE)
+	private int usercodestate;
+
+	public int getUsercodestate() {
+		return usercodestate;
+	}
+
+	public void setUsercodestate(int usercodestate) {
+		this.usercodestate = usercodestate;
+	}
 
 	public String getUsernickname() {
 		return usernickname;

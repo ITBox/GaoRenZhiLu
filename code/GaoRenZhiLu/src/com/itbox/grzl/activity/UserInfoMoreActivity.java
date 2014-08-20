@@ -1,12 +1,15 @@
 package com.itbox.grzl.activity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.Model;
 import com.activeandroid.content.ContentProvider;
+import com.activeandroid.query.Delete;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.Net;
 import com.itbox.fx.util.EditTextUtils;
@@ -38,10 +41,12 @@ import android.widget.TextView;
 
 /**
  * 更多资料
+ * 
  * @author youzh
  * 
  */
-public class UserInfoMoreActivity extends BaseActivity implements LoaderCallbacks<Cursor> {
+public class UserInfoMoreActivity extends BaseActivity implements
+		LoaderCallbacks<Cursor> {
 	@InjectView(R.id.text_left)
 	TextView mTVTopCancel;
 	@InjectView(R.id.text_medium)
@@ -74,15 +79,16 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 	private int[] jobsIds;
 	private int teacherId;
 	private int jobId;
-//    private UserExtension newUserExtension = new UserExtension();
-    
+
+	// private UserExtension newUserExtension = new UserExtension();
+
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
 		setContentView(R.layout.activity_user_info_more);
 		ButterKnife.inject(mActThis);
 		initViews();
-       
+
 		ArrayList<Job> jobList = AppContext.getJobs();
 		jobsNames = new String[jobList.size()];
 		jobsIds = new int[jobList.size()];
@@ -90,9 +96,9 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 			jobsNames[i] = jobList.get(i).getName();
 			jobsIds[i] = jobList.get(i).getId();
 		}
-		
+
 		getSupportLoaderManager().initLoader(0, null, this);
-		
+
 		getData();
 	}
 
@@ -106,19 +112,24 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 
 	private void initDatas() {
 		mEtUserInfoName.setText(userExtension.getUsernickname());
-		if (userExtension.getUsercode().equals("0")) {
+		switch (userExtension.getUsercodestate()) {
+		case 0:
 			mTVShenfenzheng.setTextColor(Color.rgb(235, 81, 77));// 红
 			mTVShenfenzheng.setText("未审核");
-		} else if (userExtension.getUsercode().equals("1")) {
+			break;
+		case 1:
 			mTVShenfenzheng.setTextColor(Color.rgb(121, 185, 104));// 绿
 			mTVShenfenzheng.setText("已审核");
-		} else if (userExtension.getUsercode().equals("2")) {
+			break;
+		case 2:
 			mTVShenfenzheng.setTextColor(Color.rgb(253, 108, 23));// 橘
 			mTVShenfenzheng.setText("审核中");
-		} else if (userExtension.getUsercode().equals("3")) {
+			break;
+		case 3:
 			mTVShenfenzheng.setTextColor(Color.rgb(253, 108, 23));// 橘
 			mTVShenfenzheng.setText("审核失败");
-		} 
+			break;
+		}
 		if (TextUtils.isEmpty(userExtension.getTeachertype())) {
 			teacherId = 1;
 		} else {
@@ -138,18 +149,23 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 		mEtUserInfoBankCardName.setText(userExtension.getBankaddress());
 		mEtUserInfoZixunPhone.setText(userExtension.getPhoneprice());
 		mEtUserInfoZixunImg.setText(userExtension.getPictureprice());
-		mTVUserInfoZixunTime.setText(userExtension.getStarttime() + "-" + userExtension.getEndtime());
+		mTVUserInfoZixunTime.setText(userExtension.getStarttime() + "-"
+				+ userExtension.getEndtime());
 		time1 = userExtension.getStarttime();
 		time2 = userExtension.getEndtime();
 	}
 
-//	@Override
-//	protected boolean onBack() {
-//		userExtension.equals(obj);
-//		return true;
-//	}
+	// @Override
+	// protected boolean onBack() {
+	// userExtension.equals(obj);
+	// return true;
+	// }
 
-	@OnClick({ R.id.text_left, R.id.text_right, R.id.more_my_name_iv, R.id.more_my_shenfenzheng_rl, R.id.more_my_bankcard_rl, R.id.more_my_bankcard_name_rl, R.id.teacher_type, R.id.position_type, R.id.more_my_zixunImg_rl, R.id.more_my_zixunPhone_rl, R.id.more_my_zixunTime_rl })
+	@OnClick({ R.id.text_left, R.id.text_right, R.id.more_my_name_iv,
+			R.id.more_my_shenfenzheng_rl, R.id.more_my_bankcard_rl,
+			R.id.more_my_bankcard_name_rl, R.id.teacher_type,
+			R.id.position_type, R.id.more_my_zixunImg_rl,
+			R.id.more_my_zixunPhone_rl, R.id.more_my_zixunTime_rl })
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -164,10 +180,7 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 			EditTextUtils.setSelection(mEtUserInfoName);
 			break;
 		case R.id.more_my_shenfenzheng_rl:
-			if (userExtension.getUsercode().equals("1")) {
-				break;
-			}
-			if (userExtension.getUsercode().equals("2")) {
+			if (userExtension.getUsercodestate() == 1 || userExtension.getUsercodestate() == 2) {
 				break;
 			}
 			startActivity(UserIDCardActivity.class);
@@ -181,26 +194,30 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 			EditTextUtils.setSelection(mEtUserInfoBankCardName);
 			break;
 		case R.id.teacher_type:
-			new AlertDialog.Builder(mActThis).setItems(TeacherType.getAllTeacherName(), new OnClickListener() {
+			new AlertDialog.Builder(mActThis).setItems(
+					TeacherType.getAllTeacherName(), new OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					teacherId = TeacherType.getTeacherId(which + 1);
-					Log.i("youzh", "teacher:" + teacherId + "--" + which);
-					mTeacherType.setText(TeacherType.getTeacherName(which +1));
-				}
-			}).show();
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							teacherId = TeacherType.getTeacherId(which + 1);
+							Log.i("youzh", "teacher:" + teacherId + "--"
+									+ which);
+							mTeacherType.setText(TeacherType
+									.getTeacherName(which + 1));
+						}
+					}).show();
 			break;
 		case R.id.position_type:
-			new AlertDialog.Builder(mActThis).setItems(jobsNames, new OnClickListener() {
+			new AlertDialog.Builder(mActThis).setItems(jobsNames,
+					new OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					jobId = jobsIds[which];
-					Log.i("youzh", "job:" +jobId + "--" + which);
-					mPositionType.setText(jobsNames[which]);
-				}
-			}).show();
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							jobId = jobsIds[which];
+							Log.i("youzh", "job:" + jobId + "--" + which);
+							mPositionType.setText(jobsNames[which]);
+						}
+					}).show();
 			break;
 		case R.id.more_my_zixunImg_rl:// 图文咨询
 			EditTextUtils.showKeyboard(mEtUserInfoZixunImg);
@@ -213,7 +230,8 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 		case R.id.more_my_zixunTime_rl:// 咨询时段
 			Intent intent = new Intent(mActThis, SelectDoubleHourActivity.class);
 			intent.putExtra("type", "workTime");
-			mActThis.startActivityForResult(intent, Contasts.REQUEST_SELECT_ZIXUN_TIME);
+			mActThis.startActivityForResult(intent,
+					Contasts.REQUEST_SELECT_ZIXUN_TIME);
 			break;
 		default:
 			break;
@@ -227,8 +245,10 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 		switch (requestCode) {
 		case Contasts.REQUEST_SELECT_ZIXUN_TIME:
 			if (resultCode == RESULT_OK && data != null) {
-				time1 = data.getStringExtra(SelectDoubleHourActivity.Extra.Time_EarliestStr);
-				time2 = data.getStringExtra(SelectDoubleHourActivity.Extra.Time_LatestStr);
+				time1 = data
+						.getStringExtra(SelectDoubleHourActivity.Extra.Time_EarliestStr);
+				time2 = data
+						.getStringExtra(SelectDoubleHourActivity.Extra.Time_LatestStr);
 				// String time3 =
 				// data.getStringExtra(SelectDoubleHourActivity.Extra.Time_Earliest);
 				// String time4 =
@@ -244,13 +264,20 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 	 * 获取用户更多资料
 	 */
 	private void getData() {
-		Net.request("userid", AppContext.getInstance().getAccount().getUserid() + "", Api.getUrl(Api.User.GET_USER_EXTENSION), new GsonResponseHandler<UserExtension>(UserExtension.class) {
-			@Override
-			public void onSuccess(UserExtension object) {
-				super.onSuccess(object);
-				object.save();
-			}
-		});
+		Net.request("userid", AppContext.getInstance().getAccount().getUserid()
+				+ "", Api.getUrl(Api.User.GET_USER_EXTENSION),
+				new GsonResponseHandler<UserExtension>(UserExtension.class) {
+					@Override
+					public void onSuccess(UserExtension object) {
+						super.onSuccess(object);
+						new Delete()
+								.from(UserExtension.class)
+								.where(UserExtension.USERID + "=?",
+										object.getUserid().toString())
+								.execute();
+						object.save();
+					}
+				});
 	}
 
 	/**
@@ -261,66 +288,79 @@ public class UserInfoMoreActivity extends BaseActivity implements LoaderCallback
 		RequestParams params = new RequestParams();
 		params.put("userid", userExtension.getUserid());
 		params.put("userbank", EditTextUtils.getText(mEtUserInfoBankCard));
-		params.put("bankaddress", EditTextUtils.getText(mEtUserInfoBankCardName));
-		params.put("teachertype", teacherId+"");
-		params.put("jobtype", jobId+"");
+		params.put("bankaddress",
+				EditTextUtils.getText(mEtUserInfoBankCardName));
+		params.put("teachertype", teacherId + "");
+		params.put("jobtype", jobId + "");
 		params.put("pictureprice", EditTextUtils.getText(mEtUserInfoZixunImg));
 		params.put("phoneprice", EditTextUtils.getText(mEtUserInfoZixunPhone));
 		params.put("starttime", time1);
 		params.put("endtime", time2);
-		
-		Net.request(params, Api.getUrl(Api.User.UP_USER_MORE), new GsonResponseHandler<UpdateUserExtension>(UpdateUserExtension.class) {
-			@Override
-			public void onSuccess(UpdateUserExtension object) {
-				super.onSuccess(object);
-				int result = object.getResult();
-				switch (result) {
-				case Contasts.RESULT_SUCCES:
-					// 保存用户数据
-					userExtension.setUserbank(EditTextUtils.getText(mEtUserInfoBankCard));
-					userExtension.setBankaddress(EditTextUtils.getText(mEtUserInfoBankCardName));
-					userExtension.setTeachertype(teacherId + "");
-					userExtension.setJobtype(jobId + "");
-					userExtension.setPictureprice(EditTextUtils.getText(mEtUserInfoZixunImg));
-					userExtension.setPhoneprice(EditTextUtils.getText(mEtUserInfoZixunPhone));
-					userExtension.setStarttime(time1);
-					userExtension.setEndtime(time2);
-					userExtension.save();
-					dismissProgressDialog();
-					UserInfoMoreActivity.this.finish();
-					break;
-				case Contasts.RESULT_FAIL:
-					dismissProgressDialog();
-					ToastUtils.showToast(mActThis, "更新失败，请重试");
-					break;
-				default:
-					break;
-				}
-			}
-			@Override
-			public void onFinish() {
-				dismissProgressDialog();
-			}
-			@Override
-			public void onFailure(Throwable error, String content) {
-				showToast(content);
-			}
-		});
+
+		Net.request(params, Api.getUrl(Api.User.UP_USER_MORE),
+				new GsonResponseHandler<UpdateUserExtension>(
+						UpdateUserExtension.class) {
+					@Override
+					public void onSuccess(UpdateUserExtension object) {
+						super.onSuccess(object);
+						int result = object.getResult();
+						switch (result) {
+						case Contasts.RESULT_SUCCES:
+							// 保存用户数据
+							userExtension.setUserbank(EditTextUtils
+									.getText(mEtUserInfoBankCard));
+							userExtension.setBankaddress(EditTextUtils
+									.getText(mEtUserInfoBankCardName));
+							userExtension.setTeachertype(teacherId + "");
+							userExtension.setJobtype(jobId + "");
+							userExtension.setPictureprice(EditTextUtils
+									.getText(mEtUserInfoZixunImg));
+							userExtension.setPhoneprice(EditTextUtils
+									.getText(mEtUserInfoZixunPhone));
+							userExtension.setStarttime(time1);
+							userExtension.setEndtime(time2);
+							userExtension.save();
+							dismissProgressDialog();
+							UserInfoMoreActivity.this.finish();
+							break;
+						case Contasts.RESULT_FAIL:
+							dismissProgressDialog();
+							ToastUtils.showToast(mActThis, "更新失败，请重试");
+							break;
+						default:
+							break;
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						dismissProgressDialog();
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						showToast(content);
+					}
+				});
 	}
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle bundle) {
-		return new android.support.v4.content.CursorLoader(mActThis, ContentProvider.createUri(UserExtension.class, null), null, null, null, null);
+		return new android.support.v4.content.CursorLoader(mActThis,
+				ContentProvider.createUri(UserExtension.class, null), null,
+				UserExtension.USERID + "=?", new String[] { AppContext
+						.getInstance().getAccount().getUserid().toString() },
+				null);
 	}
 
 	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor cursor) {
 		if (cursor != null && cursor.moveToNext()) {
-			userExtension  = new UserExtension();
+			userExtension = new UserExtension();
 			userExtension.loadFromCursor(cursor);
 			initDatas();
 		} else {
-			getData();//获取网络数据
+			getData();// 获取网络数据
 		}
 	}
 
