@@ -6,6 +6,7 @@ import java.util.List;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import butterknife.OnFocusChange;
 
 import com.activeandroid.Model;
 import com.activeandroid.content.ContentProvider;
@@ -110,6 +111,19 @@ public class UserInfoMoreActivity extends BaseActivity implements
 		mTVTopSave.setText("保存");
 	}
 
+	private String mSaveEtString;
+
+	@OnFocusChange({ R.id.more_my_zixunPhone_et, R.id.more_my_zixunImg_et })
+	public void onFocusChange(View v, boolean b) {
+		EditText et = (EditText) v;
+		if (b) {
+			mSaveEtString = et.getText().toString();
+			et.setText("");
+		} else if (TextUtils.isEmpty(et.getText().toString())) {
+			et.setText(mSaveEtString);
+		}
+	}
+
 	private void initDatas() {
 		mEtUserInfoName.setText(userExtension.getUsernickname());
 		switch (userExtension.getUsercodestate()) {
@@ -180,7 +194,8 @@ public class UserInfoMoreActivity extends BaseActivity implements
 			EditTextUtils.setSelection(mEtUserInfoName);
 			break;
 		case R.id.more_my_shenfenzheng_rl:
-			if (userExtension.getUsercodestate() == 1 || userExtension.getUsercodestate() == 2) {
+			if (userExtension.getUsercodestate() == 1
+					|| userExtension.getUsercodestate() == 2) {
 				break;
 			}
 			startActivity(UserIDCardActivity.class);

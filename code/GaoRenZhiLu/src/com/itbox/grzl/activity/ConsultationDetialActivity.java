@@ -91,17 +91,18 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		if ("picture".equals(type)) {
 			setTitle("图文咨询详情");
 			if (Double.parseDouble(teacherExtension.getPictureprice()) <= 0) {
-				tv_description.setText("当前导师未设置购买金额，不能购买");
+//				tv_description.setText("当前导师未设置购买金额，不能购买");
 				isNotPrice = true;
 			}
 		} else {
 			setTitle("电话咨询详情");
 			if (Double.parseDouble(teacherExtension.getPhoneprice()) <= 0) {
-				tv_description.setText("当前导师未设置购买金额，不能购买");
+//				tv_description.setText("当前导师未设置购买金额，不能购买");
 				isNotPrice = true;
 			} else {
-				tv_description.setText("通过电话进行咨询专业导师");
+//				tv_description.setText("通过电话进行咨询专业导师");
 			}
+			tv_description.setText("通过电话进行咨询专业导师");
 		}
 
 		showLeftBackButton();
@@ -163,10 +164,11 @@ public class ConsultationDetialActivity extends BaseActivity implements
 
 	@OnClick(R.id.tv_buy)
 	public void buy() {
-		if (isNotPrice) {
-			showToast("当前导师未设置购买金额，不能购买");
-			return;
-		}
+		// TODO 0元先让购买
+//		if (isNotPrice) {
+//			showToast("当前导师未设置购买金额，不能购买");
+//			return;
+//		}
 		// 判断会员
 		showLoadProgressDialog();
 		UserEngine.getUserList(new GsonResponseHandler<Account>(Account.class) {

@@ -9,6 +9,7 @@ import com.itbox.grzl.Const;
  * @author hyh creat_at：2014-2-28-下午5:10:12
  */
 public class OrderInfoModel {
+	private String result;
 	/** 支付宝身份ID */
 	private String partner = Const.ALIPAY_PARTNER;
 	private String service = "mobile.securitypay.pay";
@@ -34,12 +35,14 @@ public class OrderInfoModel {
 	private String notify_url;
 	/** 授权令牌 */
 	private String extern_token;
-	
+
 	/*------*/
 	private String sign;
 	private String apipost;
-	
-	
+
+	public boolean isSuccess() {
+		return "success".equals(result);
+	}
 
 	public String getApipost() {
 		return apipost;

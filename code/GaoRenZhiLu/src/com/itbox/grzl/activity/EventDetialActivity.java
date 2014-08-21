@@ -18,6 +18,7 @@ import butterknife.OnItemClick;
 import cn.sharesdk.framework.ShareSDK;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
+import com.itbox.fx.core.L;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.widget.HorizontalListView;
 import com.itbox.grzl.Api;
@@ -160,13 +161,14 @@ public class EventDetialActivity extends BaseActivity {
 		if (mCommentList != null) {
 			for (EventCommentGet comment : mCommentList) {
 				View view = View.inflate(getApplicationContext(),
-						R.layout.item_event_detail_comment, ll_bottom);
+						R.layout.item_event_detail_comment, null);
 				((TextView) view.findViewById(R.id.tv_name)).setText(comment
 						.getUsername());
 				((TextView) view.findViewById(R.id.tv_content)).setText(comment
 						.getCommentcontent());
 				((TextView) view.findViewById(R.id.tv_time)).setText(comment
 						.getCreateTime());
+				ll_bottom.addView(view);
 			}
 		}
 

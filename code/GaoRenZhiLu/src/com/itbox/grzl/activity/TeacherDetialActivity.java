@@ -181,10 +181,18 @@ public class TeacherDetialActivity extends BaseActivity implements
 		Intent intent = new Intent(this, ConsultationDetialActivity.class);
 		intent.putExtra("teacherExtension", teacherExtension);
 		intent.putExtra("teacher", teacher);
-		intent.putExtra("consultation_name",
-				"图文咨询 ￥" + teacherExtension.getPictureprice());
+		intent.putExtra("consultation_name", "图文咨询 " + getPicturePrice());
 		intent.putExtra("type", "picture");
 		startActivity(intent);
+	}
+
+	private String getPicturePrice() {
+		return Double.parseDouble(teacherExtension.getPictureprice()) > 0 ? "￥"
+				+ teacherExtension.getPictureprice() : "免费";
+	}
+	private String getPhonePrice() {
+		return Double.parseDouble(teacherExtension.getPhoneprice()) > 0 ? "￥"
+				+ teacherExtension.getPhoneprice() : "免费";
 	}
 
 	@OnClick(R.id.ll_phone_consultation)
@@ -193,7 +201,7 @@ public class TeacherDetialActivity extends BaseActivity implements
 		intent.putExtra("teacher", teacher);
 		intent.putExtra("teacherExtension", teacherExtension);
 		intent.putExtra("consultation_name",
-				"电话资讯 ￥" + teacherExtension.getPhoneprice());
+				"电话资讯 " + getPhonePrice());
 		intent.putExtra("type", "phone");
 		startActivity(intent);
 	}
@@ -218,10 +226,8 @@ public class TeacherDetialActivity extends BaseActivity implements
 		if (cursor != null && cursor.moveToNext()) {
 
 			teacherExtension.loadFromCursor(cursor);
-			pictureConsultationTextView.setText("图文咨询 ￥"
-					+ teacherExtension.getPictureprice());
-			phoneConsultationTextView.setText("电话咨询 ￥"
-					+ teacherExtension.getPhoneprice());
+			pictureConsultationTextView.setText("图文咨询 " + getPicturePrice());
+			phoneConsultationTextView.setText("电话咨询 " + getPicturePrice());
 		}
 	}
 

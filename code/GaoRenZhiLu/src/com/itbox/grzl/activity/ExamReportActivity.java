@@ -69,7 +69,7 @@ public class ExamReportActivity extends BaseLoadActivity<ExamReport> {
 					public void onFailure(Throwable e, int statusCode,
 							String content) {
 						super.onFailure(e, statusCode, content);
-						if (statusCode == 400) {
+						if (statusCode == 400 && page == 1) {
 							new Delete().from(ExamReport.class).execute();
 						}
 						// 还原页码

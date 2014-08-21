@@ -19,6 +19,7 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.CursorAdapter;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -143,7 +144,11 @@ public abstract class BaseLoadFragment<T extends Model> extends BaseFragment
 			if (page == 1) {
 				try {
 					// 清空数据库
-					new Delete().from(mClazz).where(mSelection).execute();
+					if (TextUtils.isEmpty(mSelection)) {
+						new Delete().from(mClazz).execute();
+					}else{
+						new Delete().from(mClazz).where(mSelection).execute();
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -164,7 +169,6 @@ public abstract class BaseLoadFragment<T extends Model> extends BaseFragment
 
 	@Override
 	public Loader<Cursor> onCreateLoader(int id, Bundle arg1) {
-		L.i("create loader = " + mClazz.getCanonicalName());
 		return new CursorLoader(getActivity(), ContentProvider.createUri(
 				mClazz, null), null, mSelection, null, mOrderBy);
 	}

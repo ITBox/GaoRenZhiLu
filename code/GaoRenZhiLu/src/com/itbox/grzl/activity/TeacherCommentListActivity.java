@@ -83,7 +83,7 @@ public class TeacherCommentListActivity extends
 					@Override
 					public void onFailure(Throwable e, int statusCode,
 							String content) {
-						if (statusCode == 400) {
+						if (statusCode == 400 && page == 1) {
 							new Delete().from(TeacherCommentGet.class)
 									.execute();
 						}

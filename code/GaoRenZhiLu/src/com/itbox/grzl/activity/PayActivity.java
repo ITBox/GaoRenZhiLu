@@ -82,6 +82,7 @@ public class PayActivity extends BaseActivity {
 
 	private boolean isPicture;
 	private boolean isClient;
+	private boolean isFree;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -102,11 +103,21 @@ public class PayActivity extends BaseActivity {
 
 		if ("picture".equals(getIntent().getStringExtra("type"))) {
 			ll_select_time.setVisibility(View.GONE);
-			tv_price.setText("￥" + teacherExtension.getFinalPictureprice());
+			if (teacherExtension.getFinalPictureprice() > 0)
+				tv_price.setText("￥" + teacherExtension.getFinalPictureprice());
+			else {
+				tv_price.setText("免费");
+				isFree = true;
+			}
 			isPicture = true;
 		} else {
 			initTime();
-			tv_price.setText("￥" + teacherExtension.getFinalPhoneprice());
+			if (teacherExtension.getFinalPhoneprice() > 0)
+				tv_price.setText("￥" + teacherExtension.getFinalPhoneprice());
+			else {
+				tv_price.setText("免费");
+				isFree = true;
+			}
 		}
 
 		isClient = true;
@@ -130,6 +141,9 @@ public class PayActivity extends BaseActivity {
 
 	@OnClick(R.id.tv_buy)
 	public void onBuy(View v) {
+		if (isFree) {
+			isClient = true;
+		}
 		// 购买
 		if (isPicture) {
 			buyPicture();
@@ -169,9 +183,7 @@ public class PayActivity extends BaseActivity {
 			Result resultAli = new Result((String) msg.obj);
 			String resultStatus = resultAli.getResultStatus();
 			if (TextUtils.equals(resultStatus, "9000")) {
-				// 跳支付成功
-				startActivity(PaySuccessActivity.class);
-				finish();
+				goPaySuccess();
 			} else if (TextUtils.equals(resultStatus, "6001")) {
 				showToast("支付取消");
 			} else {
@@ -180,7 +192,13 @@ public class PayActivity extends BaseActivity {
 				// 跳支付失败
 				startActivity(intent);
 			}
-		};
+		}
+	};
+
+	private void goPaySuccess() {
+		// 跳支付成功
+		startActivity(PaySuccessActivity.class);
+		finish();
 	};
 
 	/**
@@ -205,9 +223,14 @@ public class PayActivity extends BaseActivity {
 
 						@Override
 						public void onSuccess(OrderInfoModel object) {
-							PayEngine.startAliPayClient(mActThis,
-									object.getApipost(), object.getSign(),
-									handler);
+							if (object.isSuccess()) {
+								// 支付成功直接跳转
+								goPaySuccess();
+							} else {
+								PayEngine.startAliPayClient(mActThis,
+										object.getApipost(), object.getSign(),
+										handler);
+							}
 						}
 					});
 		} else {
@@ -249,6 +272,7 @@ public class PayActivity extends BaseActivity {
 	 * 购买图文咨询
 	 */
 	private void buyPicture() {
+		showProgressDialog("正在下订单...");
 		if (isClient) {
 			ConsultationEngine.buyPicture(teacher.getUserid(),
 					teacherExtension.getFinalPictureprice() + "",
@@ -262,9 +286,14 @@ public class PayActivity extends BaseActivity {
 
 						@Override
 						public void onSuccess(OrderInfoModel object) {
-							PayEngine.startAliPayClient(mActThis,
-									object.getApipost(), object.getSign(),
-									handler);
+							if (object.isSuccess()) {
+								// 支付成功直接跳转
+								goPaySuccess();
+							} else {
+								PayEngine.startAliPayClient(mActThis,
+										object.getApipost(), object.getSign(),
+										handler);
+							}
 						}
 					});
 		} else {

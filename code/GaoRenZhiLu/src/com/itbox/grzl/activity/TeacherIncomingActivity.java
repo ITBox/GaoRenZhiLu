@@ -54,8 +54,7 @@ public class TeacherIncomingActivity extends BaseLoadActivity<TeacherIncoming> {
 	}
 
 	private void initData() {
-		UserEngine.getUserList(new GsonResponseHandler<Account>(
-				Account.class) {
+		UserEngine.getUserList(new GsonResponseHandler<Account>(Account.class) {
 			@Override
 			public void onSuccess(Account user) {
 				super.onSuccess(user);
@@ -99,8 +98,13 @@ public class TeacherIncomingActivity extends BaseLoadActivity<TeacherIncoming> {
 
 	@OnClick(R.id.text_right)
 	public void onClick(View v) {
-		// 进入申请提现页面
-		startActivityForResult(TeacherWithdrawalsAddActivity.class, 0);
+		if (Double.parseDouble(AppContext.getInstance().getAccount()
+				.getUserbalance()) > 0) {
+			// 进入申请提现页面
+			startActivityForResult(TeacherWithdrawalsAddActivity.class, 0);
+		} else {
+			showToast("余额不足");
+		}
 	}
 
 	@Override
