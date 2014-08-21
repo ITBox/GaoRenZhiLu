@@ -163,10 +163,11 @@ public class ConsultationDetialActivity extends BaseActivity implements
 
 	@OnClick(R.id.tv_buy)
 	public void buy() {
-		if (isNotPrice) {
-			showToast("当前导师未设置购买金额，不能购买");
-			return;
-		}
+		// TODO 0元先让购买
+//		if (isNotPrice) {
+//			showToast("当前导师未设置购买金额，不能购买");
+//			return;
+//		}
 		// 判断会员
 		showLoadProgressDialog();
 		UserEngine.getUserList(new GsonResponseHandler<Account>(Account.class) {

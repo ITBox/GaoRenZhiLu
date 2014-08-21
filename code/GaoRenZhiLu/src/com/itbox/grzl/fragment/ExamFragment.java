@@ -37,7 +37,7 @@ public class ExamFragment extends BaseFragment {
 	}
 
 	private void initView() {
-		mTitleTv.setText("先天慧根");
+		mTitleTv.setText("在线测评");
 	}
 
 	@OnClick(R.id.bt_start_exam)
