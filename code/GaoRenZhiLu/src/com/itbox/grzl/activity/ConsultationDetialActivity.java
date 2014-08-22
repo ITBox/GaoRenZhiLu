@@ -1,4 +1,4 @@
-package com.itbox.grzl.activity;
+﻿package com.itbox.grzl.activity;
 
 import handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
@@ -238,10 +238,11 @@ public class ConsultationDetialActivity extends BaseActivity implements
 	@OnClick(R.id.tv_buy)
 	public void buy() {
 		// TODO 0元先让购买
-		// if (isNotPrice) {
-		// showToast("当前导师未设置购买金额，不能购买");
-		// return;
-		// }
+
+//		if (isNotPrice) {
+//			showToast("当前导师未设置购买金额，不能购买");
+//			return;
+//		}
 		// 判断会员
 		showLoadProgressDialog();
 		UserEngine.getUserList(new GsonResponseHandler<Account>(Account.class) {
