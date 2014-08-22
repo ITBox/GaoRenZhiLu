@@ -78,7 +78,7 @@ public class PayActivity extends BaseActivity {
 	private UserListItem teacher;
 	private List<TimeSpan> mTimeList;
 	private TimeAdapter mAdapter;
-	private int mTimeSelected;
+	private int mTimeSelected = -1;
 
 	private boolean isPicture;
 	private boolean isClient;
@@ -164,6 +164,7 @@ public class PayActivity extends BaseActivity {
 
 	@OnClick(R.id.tv_date)
 	public void selectDate() {
+		// 选择某天
 		Intent intent = new Intent(this, SelectAfterDateActivity.class);
 		startActivityForResult(intent, 0);
 	}
@@ -197,7 +198,11 @@ public class PayActivity extends BaseActivity {
 
 	private void goPaySuccess() {
 		// 跳支付成功
-		startActivity(PaySuccessActivity.class);
+		Intent intent = new Intent(this, PaySuccessActivity.class);
+		intent.putExtra("price",
+				isPicture ? teacherExtension.getFinalPictureprice()
+						: teacherExtension.getFinalPhoneprice());
+		startActivity(intent);
 		finish();
 	};
 
@@ -350,11 +355,19 @@ public class PayActivity extends BaseActivity {
 		// 计算时间段
 		int startTime = Integer.parseInt(teacherExtension.getStarttime());
 		int endTime = Integer.parseInt(teacherExtension.getEndtime());
+		if (startTime == endTime) {
+			return;
+		}
 		mTimeList = new ArrayList<TimeSpan>();
 		boolean isToday = DateUtil.getTodayString().equals(
 				tv_date.getText().toString());
 		for (int i = startTime; i <= endTime; i++) {
-			for (int j = 0; j < 60; j += 30) {
+			int jMax = 60;
+			if (endTime == i) {
+				// 最后一个时间点，不能计算30
+				jMax = 30;
+			}
+			for (int j = 0; j < jMax; j += 30) {
 				if (isToday && (i * 60 + j) < DateUtil.getTodayMin()) {
 					continue;
 				}

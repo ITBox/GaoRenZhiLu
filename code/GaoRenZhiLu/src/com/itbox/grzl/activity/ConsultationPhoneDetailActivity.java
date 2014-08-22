@@ -15,11 +15,15 @@ import butterknife.OnClick;
 
 import com.activeandroid.Cache;
 import com.activeandroid.content.ContentProvider;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Update;
 import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.fx.net.Net;
 import com.itbox.grzl.Api;
+import com.itbox.grzl.AppContext;
 import com.itbox.grzl.bean.Account;
 import com.itbox.grzl.bean.RespResult;
+import com.itbox.grzl.bean.UserExtension;
 import com.itbox.grzl.bean.UserProblem;
 import com.itbox.grzl.engine.ConsultationEngine;
 import com.itbox.grzl.engine.UserEngine;
@@ -137,16 +141,16 @@ public class ConsultationPhoneDetailActivity extends BaseActivity {
 	public void onClick(View v) {
 		showLoadProgressDialog();
 		// 打电话
-		UserEngine.getUserList(mBean.getUserid(),
-				new GsonResponseHandler<Account>(Account.class) {
+		Net.request("userid", mBean.getUserid(), Api.getUrl(Api.User.GET_USER_EXTENSION),
+				new GsonResponseHandler<UserExtension>(UserExtension.class) {
 					@Override
-					public void onSuccess(Account user) {
+					public void onSuccess(UserExtension object) {
 						Intent phoneIntent = new Intent(
 								"android.intent.action.CALL", Uri.parse("tel:"
-										+ user.getUserphone()));
+										+ object.getBuyphone()));
 						startActivity(phoneIntent);
 					}
-
+					
 					@Override
 					public void onFinish() {
 						dismissProgressDialog();

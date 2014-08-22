@@ -29,12 +29,52 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp"
             android:gravity="center"
-            android:textSize="16sp"
+            android:text="恭喜您\n本次预定成功"
             android:textColor="#1F8A06"
-            android:text="恭喜您\n本次预定成功" />
+            android:textSize="16sp" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:background="@drawable/search_bar_bg"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="黄浦天禧已收到您的付款120元"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#19212B"
+        android:paddingBottom="8dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="8dp"
+        android:text="注意事项"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:text="如果有不可抗力因素造成导师不能按照预定时间回复的，请致电黄浦天下客户服务，核实后黄浦天下将为您全额退未消费部分的款项"
+        android:textColor="@color/dark"
+        android:textSize="15sp" />
 
 </LinearLayout>

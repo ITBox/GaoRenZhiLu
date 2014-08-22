@@ -275,43 +275,17 @@ public class ConsultationApi extends BaseApi {
 
 	/**
 	 * 获取导师评论接口
+	 * @param page 
+	 * @param handler 
 	 * 
 	 */
-	public void getTeacherComment(final String teacherid) {
+	public void getTeacherComment(final String teacherid, final int page, ResponseHandler handler) {
 		RequestParams params = new RequestParams();
 		params.put("teacherid", teacherid);
+		params.put("pageindex", page + "");
+		params.put("pagesize", "20");
 		Net.request(params, Api.getUrl(Api.User.GET_TEACHER_COMMENT),
-				new ResponseHandler() {
-					@Override
-					public void onSuccess(int statusCode, String content) {
-						super.onSuccess(statusCode, content);
-						TeacherCommentList mTeacherCommentList = mGson
-								.fromJson(content, TeacherCommentList.class);
-						new Delete()
-								.from(TeacherCommentGet.class)
-								.where(TeacherCommentGet.TEACHERUSERID + "=?",
-										teacherid).execute();
-						if (mTeacherCommentList != null
-								&& mTeacherCommentList.getTeacherCommentItem() != null) {
-							ActiveAndroid.beginTransaction();
-							try {
-								for (TeacherCommentGet comment : mTeacherCommentList
-										.getTeacherCommentItem()) {
-									comment.save();
-								}
-								ActiveAndroid.setTransactionSuccessful();
-							} finally {
-								ActiveAndroid.endTransaction();
-							}
-						}
-					}
-
-					@Override
-					public void onFailure(Throwable error, String content) {
-						super.onFailure(error, content);
-						Log.e(TAG, "获取老师评论接口" + error.toString());
-					}
-				});
+				handler);
 
 	}
 

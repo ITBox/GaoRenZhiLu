@@ -58,13 +58,13 @@ public class UserSetActivity extends BaseActivity {
 			UserSetActivity.this.finish();
 			break;
 		case R.id.userset_version:
-			dialog = new Dialog(mActThis, R.style.custom_dialog);
-			View inflate = View.inflate(mActThis, R.layout.dialog_updata_apk,
-					null);
-			dialog.setContentView(inflate);
-			dialog.setCancelable(false);
-			new UpdataView(inflate);
-			dialog.show();
+//			dialog = new Dialog(mActThis, R.style.custom_dialog);
+//			View inflate = View.inflate(mActThis, R.layout.dialog_updata_apk,
+//					null);
+//			dialog.setContentView(inflate);
+//			dialog.setCancelable(false);
+//			new UpdataView(inflate);
+//			dialog.show();
 			break;
 		case R.id.userset_help:
 			if (AppContext.getInstance().getAccount().isTeacher()) {

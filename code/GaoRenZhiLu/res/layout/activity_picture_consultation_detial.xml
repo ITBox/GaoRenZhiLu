@@ -11,12 +11,12 @@
         android:layout_height="wrap_content"
         layout="@layout/unit_top_title" />
 
-    <ListView
+    <handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1" >
-    </ListView>
+    </handmark.pulltorefresh.library.PullToRefreshListView>
 
     <TextView
         android:id="@+id/tv_buy"

@@ -104,7 +104,9 @@ public class BuyVipActivity extends BaseActivity implements
 			String resultStatus = resultAli.getResultStatus();
 			if (TextUtils.equals(resultStatus, "9000")) {
 				// 跳支付成功
-				startActivity(PaySuccessActivity.class);
+				Intent intent = new Intent(mActThis, PaySuccessActivity.class);
+				intent.putExtra("price", bean.getPrice().doubleValue());
+				startActivity(intent);
 				finish();
 			} else if (TextUtils.equals(resultStatus, "6001")) {
 				showToast("支付取消");

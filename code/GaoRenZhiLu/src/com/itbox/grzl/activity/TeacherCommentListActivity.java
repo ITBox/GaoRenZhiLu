@@ -1,6 +1,7 @@
 package com.itbox.grzl.activity;
 
 import handmark.pulltorefresh.library.PullToRefreshListView;
+import handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -50,6 +51,8 @@ public class TeacherCommentListActivity extends
 
 		mAdapter = new TeacherCommentAdapter(getContext(), null);
 		initLoad(mListView, mAdapter, TeacherCommentGet.class);
+
+		mListView.setMode(Mode.PULL_FROM_START);
 	}
 
 	@Override

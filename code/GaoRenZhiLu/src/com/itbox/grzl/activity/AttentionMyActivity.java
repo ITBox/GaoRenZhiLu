@@ -2,13 +2,17 @@ package com.itbox.grzl.activity;
 
 import handmark.pulltorefresh.library.PullToRefreshListView;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 import com.itbox.grzl.adapter.AttentionListAdapter;
 import com.itbox.grzl.adapter.CommentListAdapter;
 import com.itbox.grzl.bean.Attention;
+import com.itbox.grzl.bean.UserListItem;
 import com.itbox.grzl.engine.UserEngine;
 import com.itbox.grzl.engine.UserEngine.UserAttention;
 import com.zhaoliewang.grzl.R;
@@ -64,5 +68,19 @@ public class AttentionMyActivity extends BaseLoadActivity<Attention> {
 				saveData(page, object.getUserAttention());
 			}
 		});
+	}
+	
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
+//		Attention bean = new Attention();
+//		bean.loadFromCursor((Cursor) mAdapter.getItem(position));
+//		UserEngine.getUserList(userid, handler)
+//		UserListItem teacher = new UserListItem();
+//		teacher.loadFromCursor(cursor);
+//		Intent intent = new Intent(ConsultationSearchActivity.this,
+//				TeacherDetialActivity.class);
+//		intent.putExtra("teacher", teacher);
+//		startActivity(intent);
 	}
 }

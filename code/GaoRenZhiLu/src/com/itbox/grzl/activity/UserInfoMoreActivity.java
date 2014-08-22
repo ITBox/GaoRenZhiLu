@@ -260,10 +260,10 @@ public class UserInfoMoreActivity extends BaseActivity implements
 		switch (requestCode) {
 		case Contasts.REQUEST_SELECT_ZIXUN_TIME:
 			if (resultCode == RESULT_OK && data != null) {
-				time1 = data
-						.getStringExtra(SelectDoubleHourActivity.Extra.Time_EarliestStr);
-				time2 = data
-						.getStringExtra(SelectDoubleHourActivity.Extra.Time_LatestStr);
+				time1 = (data
+						.getIntExtra(SelectDoubleHourActivity.Extra.Time_Earliest, 0) / 60) + "";
+				time2 = (data
+						.getIntExtra(SelectDoubleHourActivity.Extra.Time_Latest, 0) / 60) + "";
 				// String time3 =
 				// data.getStringExtra(SelectDoubleHourActivity.Extra.Time_Earliest);
 				// String time4 =

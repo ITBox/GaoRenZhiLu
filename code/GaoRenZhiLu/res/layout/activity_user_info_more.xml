@@ -293,7 +293,7 @@
                     android:layout_toLeftOf="@+id/more_my_zixunImg"
                     android:layout_toRightOf="@id/more_my_zixunImg_tv"
                     android:background="@android:color/transparent"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:focusable="false"
                     android:gravity="right"
                     android:singleLine="true"
@@ -358,7 +358,7 @@
                     android:focusable="false"
                     android:gravity="right"
                     android:singleLine="true"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textColor="@color/dark"
                     android:textSize="14sp" />
 

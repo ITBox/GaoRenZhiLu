@@ -50,8 +50,8 @@ public class SelectDoubleHourActivity extends SelectAbstractActivity implements 
 		wvBegMinute = (WheelView)findViewById(R.id.wheel_begin_minute);
 		wvEndHour = (WheelView)findViewById(R.id.wheel_end_hour);
 		wvEndMinute = (WheelView)findViewById(R.id.wheel_end_minute);
-//		minutes = new String[]{"00","30"};
-		minutes = DateUtil.getMinutes();
+		minutes = new String[]{"00"};
+//		minutes = DateUtil.getMinutes();
 		wvBegHour.setViewAdapter(new NumericWheelAdapter(this, 0, 23));
 		wvEndHour.setViewAdapter(new NumericWheelAdapter(this, 0, 23));
 		wvBegMinute.setViewAdapter(new ArrayWheelAdapter<String>(this, minutes));

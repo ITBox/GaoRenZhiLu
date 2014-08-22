@@ -38,14 +38,57 @@
             android:textSize="16sp" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="10dp"
+        android:background="@drawable/search_bar_bg"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="请您再次选择支付方式，并重新支付"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
+
     <Button
         android:id="@+id/bt_retry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/bt_red_bg"
         android:text="重新支付"
-        android:layout_margin="10dp"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#19212B"
+        android:paddingBottom="8dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="8dp"
+        android:text="注意事项"
+        android:textColor="@android:color/white"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@android:color/white"
+        android:padding="8dp"
+        android:text="由于网络原因或者银行系统升级，有可能导致支付失败，您可以返回重新进行支付。
+请确保您的支付宝或网银的余额大于在此次操作所需的金额。
+如发现支付失败但支付宝或银行卡余额已扣，请联系客户核对信息。"
+        android:textColor="@color/dark"
+        android:textSize="15sp" />
 
 </LinearLayout>

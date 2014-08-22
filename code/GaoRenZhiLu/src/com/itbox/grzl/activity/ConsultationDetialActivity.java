@@ -1,5 +1,10 @@
 package com.itbox.grzl.activity;
 
+import handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
+import handmark.pulltorefresh.library.PullToRefreshBase;
+import handmark.pulltorefresh.library.PullToRefreshListView;
+
 import org.apache.http.Header;
 
 import android.app.AlertDialog;
@@ -11,6 +16,7 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -21,7 +27,10 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.ActiveAndroid;
 import com.activeandroid.content.ContentProvider;
+import com.activeandroid.query.Delete;
+import com.google.gson.Gson;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.fx.net.ResponseHandler;
 import com.itbox.fx.util.GSON;
@@ -31,6 +40,7 @@ import com.itbox.grzl.adapter.TeacherCommentAdapter;
 import com.itbox.grzl.api.ConsultationApi;
 import com.itbox.grzl.bean.Account;
 import com.itbox.grzl.bean.TeacherCommentGet;
+import com.itbox.grzl.bean.TeacherCommentList;
 import com.itbox.grzl.bean.TeacherExtension;
 import com.itbox.grzl.bean.UserLevel;
 import com.itbox.grzl.bean.UserLevelList;
@@ -50,7 +60,7 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		LoaderCallbacks<Cursor> {
 
 	@InjectView(R.id.list)
-	ListView mListView;
+	PullToRefreshListView mListView;
 	private View mHeaderView;
 
 	private ConsultationApi consultationApi;
@@ -70,6 +80,7 @@ public class ConsultationDetialActivity extends BaseActivity implements
 	private String type;
 	private TeacherExtension teacherExtension;
 	private boolean isNotPrice;
+	private int page = 1;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -91,16 +102,16 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		if ("picture".equals(type)) {
 			setTitle("图文咨询详情");
 			if (Double.parseDouble(teacherExtension.getPictureprice()) <= 0) {
-//				tv_description.setText("当前导师未设置购买金额，不能购买");
+				// tv_description.setText("当前导师未设置购买金额，不能购买");
 				isNotPrice = true;
 			}
 		} else {
 			setTitle("电话咨询详情");
 			if (Double.parseDouble(teacherExtension.getPhoneprice()) <= 0) {
-//				tv_description.setText("当前导师未设置购买金额，不能购买");
+				// tv_description.setText("当前导师未设置购买金额，不能购买");
 				isNotPrice = true;
 			} else {
-//				tv_description.setText("通过电话进行咨询专业导师");
+				// tv_description.setText("通过电话进行咨询专业导师");
 			}
 			tv_description.setText("通过电话进行咨询专业导师");
 		}
@@ -152,23 +163,85 @@ public class ConsultationDetialActivity extends BaseActivity implements
 		buyCountTextView.setText(teacher.getBuycount() + "人购买");
 		answerCountTextView.setText("回答" + teacher.getAnswercount() + "次");
 		mRatingBar.setRating(Float.valueOf(teacher.getTeacherlevel()));
-		mListView.addHeaderView(mHeaderView);
+		mListView.getRefreshableView().addHeaderView(mHeaderView);
+		mListView.setMode(Mode.BOTH);
+		mListView.setOnRefreshListener(new OnRefreshListener2<ListView>() {
+
+			@Override
+			public void onPullDownToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				// 刷新数据
+				page = 1;
+				loadData();
+			}
+
+			@Override
+			public void onPullUpToRefresh(
+					PullToRefreshBase<ListView> refreshView) {
+				// 加载更多数据;
+				page++;
+				loadData();
+			}
+
+		});
 
 		adapter = new TeacherCommentAdapter(this, null);
 		mListView.setAdapter(adapter);
 		consultationApi = new ConsultationApi();
-		consultationApi.getTeacherComment(teacher.getUserid());
+		loadData();
 		consultationNameTextView.setText(consultation_name);
 		getSupportLoaderManager().initLoader(0, null, this);
+	}
+
+	private void loadData() {
+		consultationApi.getTeacherComment(teacher.getUserid(), page,
+				new ResponseHandler() {
+					@Override
+					public void onSuccess(int statusCode, String content) {
+						super.onSuccess(statusCode, content);
+						TeacherCommentList mTeacherCommentList = new Gson()
+								.fromJson(content, TeacherCommentList.class);
+						if (page == 1) {
+							new Delete()
+									.from(TeacherCommentGet.class)
+									.where(TeacherCommentGet.TEACHERUSERID
+											+ "=?", teacher.getUserid())
+									.execute();
+						}
+						if (mTeacherCommentList != null
+								&& mTeacherCommentList.getTeacherCommentItem() != null) {
+							ActiveAndroid.beginTransaction();
+							try {
+								for (TeacherCommentGet comment : mTeacherCommentList
+										.getTeacherCommentItem()) {
+									comment.save();
+								}
+								ActiveAndroid.setTransactionSuccessful();
+							} finally {
+								ActiveAndroid.endTransaction();
+							}
+						}
+					}
+
+					@Override
+					public void onFinish() {
+						mListView.onRefreshComplete();
+					}
+
+					@Override
+					public void onFailure(Throwable error, String content) {
+						page--;
+					}
+				});
 	}
 
 	@OnClick(R.id.tv_buy)
 	public void buy() {
 		// TODO 0元先让购买
-//		if (isNotPrice) {
-//			showToast("当前导师未设置购买金额，不能购买");
-//			return;
-//		}
+		// if (isNotPrice) {
+		// showToast("当前导师未设置购买金额，不能购买");
+		// return;
+		// }
 		// 判断会员
 		showLoadProgressDialog();
 		UserEngine.getUserList(new GsonResponseHandler<Account>(Account.class) {
