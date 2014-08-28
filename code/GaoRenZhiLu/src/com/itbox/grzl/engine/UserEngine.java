@@ -115,6 +115,19 @@ public class UserEngine {
 		Net.request(params, Api.getUrl(Api.User.getattentionbyuserid), handler);
 	}
 
+	/**
+	 * 获取关注用户更多信息
+	 * 
+	 * @param teacherid
+	 * @param handler
+	 * @param pageNum
+	 */
+	public static void getAttentionmore(String userid, ResponseHandler handler) {
+		RequestParams params = new RequestParams();
+		params.put("userid", userid);
+		Net.request(params, Api.getUrl(Api.User.getattentionmore), handler);
+	}
+
 	public static class UserAttention {
 		private List<Attention> UserAttention;
 

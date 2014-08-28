@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
+import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.adapter.AttentionListAdapter;
 import com.itbox.grzl.adapter.CommentListAdapter;
 import com.itbox.grzl.bean.Attention;
@@ -69,18 +70,26 @@ public class AttentionMyActivity extends BaseLoadActivity<Attention> {
 			}
 		});
 	}
-	
+
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-//		Attention bean = new Attention();
-//		bean.loadFromCursor((Cursor) mAdapter.getItem(position));
-//		UserEngine.getUserList(userid, handler)
-//		UserListItem teacher = new UserListItem();
-//		teacher.loadFromCursor(cursor);
-//		Intent intent = new Intent(ConsultationSearchActivity.this,
-//				TeacherDetialActivity.class);
-//		intent.putExtra("teacher", teacher);
-//		startActivity(intent);
+		showProgressDialog("获取详情...");
+		Attention bean = new Attention();
+		bean.loadFromCursor((Cursor) mAdapter.getItem(position - 1));
+		UserEngine.getAttentionmore(bean.getUserid(),
+				new GsonResponseHandler<UserListItem>(UserListItem.class) {
+					@Override
+					public void onSuccess(UserListItem object) {
+						Intent intent = new Intent(AttentionMyActivity.this,
+								TeacherDetialActivity.class);
+						intent.putExtra("teacher", object);
+						startActivity(intent);
+					}
+					@Override
+					public void onFinish() {
+						dismissProgressDialog();
+					}
+				});
 	}
 }

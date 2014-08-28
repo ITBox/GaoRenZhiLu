@@ -10,6 +10,13 @@
         android:id="@+id/top_title"
         layout="@layout/unit_top_title" />
 
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/icon"
+        android:layout_margin="10dp" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
@@ -17,8 +24,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/about_content"
             android:padding="5dp"
+            android:layout_margin="5dp"
+            android:text="@string/about_content"
+            android:textColor="@color/gray_text"
             android:textSize="18sp" />
     </ScrollView>
 

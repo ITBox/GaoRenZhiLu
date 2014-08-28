@@ -3,6 +3,7 @@ package com.itbox.grzl.activity;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.app.ExpandableListActivity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -321,6 +322,7 @@ public class UserInfoActivity extends BaseActivity implements
 				String userIntro = data.getStringExtra("userIntro");
 				if (!TextUtils.isEmpty(userIntro)) {
 					mUserInfoIntro.setText(userIntro);
+					postUserInfoMethod();
 				}
 			}
 			break;
@@ -396,7 +398,7 @@ public class UserInfoActivity extends BaseActivity implements
 						case Contasts.RESULT_SUCCES:
 							userinfo();
 							account.save();
-							mActThis.finish();
+							ToastUtils.showToast(mActThis, "保存成功");
 							break;
 						case Contasts.RESULT_FAIL:
 							ToastUtils.showToast(mActThis, "修改失败");

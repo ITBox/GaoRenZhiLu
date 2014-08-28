@@ -10,6 +10,9 @@ import com.activeandroid.query.Delete;
 import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.bean.Account;
+import com.itbox.grzl.bean.Attention;
+import com.itbox.grzl.bean.ExamReport;
+import com.itbox.grzl.bean.UserProblem;
 import com.itbox.grzl.common.util.CheckUpdateVersion;
 
 import android.app.Dialog;
@@ -80,6 +83,10 @@ public class UserSetActivity extends BaseActivity {
 			new Delete().from(Account.class).execute();
 			startActivity(LoginActicity.class);
 			mActThis.finish();
+			// 清除数据
+			new Delete().from(ExamReport.class).execute();
+			new Delete().from(Attention.class).execute();
+			new Delete().from(UserProblem.class).execute();
 			break;
 
 		default:

@@ -36,6 +36,8 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 	protected TextView mTitleTv;
 	@InjectView(R.id.text_right)
 	protected TextView mRightTv;
+	@InjectView(R.id.text_left)
+	protected TextView mLeftTv;
 	@InjectView(R.id.lv_list)
 	protected PullToRefreshListView mListView;
 	@InjectView(R.id.rl_empty)
@@ -58,12 +60,15 @@ public class EventFragment extends BaseLoadFragment<EventGet> {
 		mTitleTv.setText("活动首页");
 		mRightTv.setVisibility(View.VISIBLE);
 		mRightTv.setText("发布活动");
+		mLeftTv.setText("");
+		mLeftTv.setVisibility(View.VISIBLE);
+		mLeftTv.setBackgroundResource(R.drawable.ic_action_search);
 		mListView.setEmptyView(mEmptyView);
 		mAdapter = new EventListAdapter(getActivity(), null);
 		initLoad(mListView, mAdapter, EventGet.class);
 	}
 
-	@OnClick({ R.id.text_right, R.id.bt_add })
+	@OnClick({ R.id.text_right, R.id.bt_add , R.id.text_left})
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.text_right:

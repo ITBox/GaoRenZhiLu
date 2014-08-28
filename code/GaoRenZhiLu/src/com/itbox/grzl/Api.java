@@ -204,6 +204,7 @@ public class Api {
 		public static final String addattention = PartName + "addattention";
 		/** 获取关注 */
 		public static final String getattentionbyuserid = PartName + "getattentionbyuserid";
+		public static final String getattentionmore = PartName + "getattentionmore";
 
 		/**
 		 * 获取用户头像地址
