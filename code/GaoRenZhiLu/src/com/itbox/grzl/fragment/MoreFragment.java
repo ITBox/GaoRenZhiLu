@@ -1,7 +1,12 @@
 package com.itbox.grzl.fragment;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.support.v4.app.LoaderManager.LoaderCallbacks;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +16,10 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
+import com.activeandroid.content.ContentProvider;
 import com.itbox.fx.widget.CircleImageView;
 import com.itbox.grzl.AppContext;
-import com.zhaoliewang.grzl.R;
 import com.itbox.grzl.activity.AttentionMyActivity;
-import com.itbox.grzl.activity.CommentListActivity;
 import com.itbox.grzl.activity.ConsultationFreeActivity;
 import com.itbox.grzl.activity.ConsultationMyActivity;
 import com.itbox.grzl.activity.EventMyActivity;
@@ -25,13 +29,18 @@ import com.itbox.grzl.activity.TeacherIncomingActivity;
 import com.itbox.grzl.activity.TeacherWithdrawalsListActivity;
 import com.itbox.grzl.activity.UserInfoActivity;
 import com.itbox.grzl.activity.UserSetActivity;
+import com.itbox.grzl.api.ConsultationApi;
 import com.itbox.grzl.bean.Account;
+import com.itbox.grzl.bean.UserLevel;
+import com.itbox.grzl.constants.UserLevelTable;
+import com.zhaoliewang.grzl.R;
 
 /**
  * 
  * @author youzh 2014年5月17日 下午4:58:45
  */
-public class MoreFragment extends BaseFragment {
+public class MoreFragment extends BaseFragment implements
+		LoaderCallbacks<Cursor> {
 
 	@InjectView(R.id.more_my_photo)
 	CircleImageView mMorePhoto;
@@ -53,6 +62,7 @@ public class MoreFragment extends BaseFragment {
 	ImageView mMoreShouruLine;
 	@InjectView(R.id.more_my_consult_line)
 	ImageView mMoreConsultLine;
+	private Account account;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,11 +70,15 @@ public class MoreFragment extends BaseFragment {
 		// TODO Auto-generated method stub
 		View layout = inflater.inflate(R.layout.fragment_more, null);
 		ButterKnife.inject(mActThis, layout);
-		Account account = initView();
+		account = initView();
 		// Account bean = new
 		// Select(AccountTable.COLUMN_USERNAME).from(Account.class).executeSingle();
 		// bean.getUsername();
 		showViews(account);
+
+		new ConsultationApi().getUserLevel(AppContext.getInstance()
+				.getAccount().getUserid().toString());
+		getLoaderManager().initLoader(0, null, this);
 		return layout;
 	}
 
@@ -72,7 +86,9 @@ public class MoreFragment extends BaseFragment {
 		Account account = AppContext.getInstance().getAccount();
 		loader.displayImage(account.getUseravatarversion(), mMorePhoto,
 				photoOptions);
-		mMoreName.setText(account.getUsername());
+		if (TextUtils.isEmpty(mMoreName.getText())) {
+			mMoreName.setText(account.getUsername());
+		}
 		return account;
 	}
 
@@ -133,9 +149,32 @@ public class MoreFragment extends BaseFragment {
 		}
 		super.onClick(v);
 	}
-	
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		initView();
+	}
+
+	@Override
+	public Loader<Cursor> onCreateLoader(int arg0, Bundle arg1) {
+		return new CursorLoader(getActivity(), ContentProvider.createUri(
+				UserLevel.class, null), null, UserLevelTable.COLUMN_MEMBERID
+				+ "=?", new String[] { account.getMemberid() + "" }, null);
+	}
+
+	@Override
+	public void onLoadFinished(Loader<Cursor> arg0, Cursor cursor) {
+		if (cursor != null && cursor.moveToNext()) {
+			UserLevel level = new UserLevel();
+			level.loadFromCursor(cursor);
+			mMoreName.setText(account.getUsername() + " [" + level.getTitle()
+					+ "]");
+		}
+	}
+
+	@Override
+	public void onLoaderReset(Loader<Cursor> arg0) {
+		// TODO Auto-generated method stub
+
 	}
 }

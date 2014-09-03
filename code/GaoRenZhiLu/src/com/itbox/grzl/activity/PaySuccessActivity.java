@@ -18,7 +18,7 @@ public class PaySuccessActivity extends BaseActivity {
 		setContentView(R.layout.activity_pay_success);
 		ButterKnife.inject(this);
 		double price = getIntent().getDoubleExtra("price", 0);
-		tv_price.setText("黄浦天禧已收到您的付款" + price + "元");
+		tv_price.setText("高人指路已收到您的付款" + price + "元");
 		setTitle("支付成功");
 		showLeftBackButton();
 	}

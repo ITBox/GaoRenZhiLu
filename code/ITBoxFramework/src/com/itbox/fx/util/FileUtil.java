@@ -1,36 +1,69 @@
 package com.itbox.fx.util;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
 
 public class FileUtil {
-	
+
 	/**
 	 * SD卡是否可用
 	 */
 	public static boolean isSDCardAvailable() {
-		return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
+		return Environment.MEDIA_MOUNTED.equals(Environment
+				.getExternalStorageState());
+	}
+
+	public static void copy(File src, File dist) {
+		FileInputStream in = null;
+		FileOutputStream out = null;
+		try {
+			in = new FileInputStream(src);
+			out = new FileOutputStream(dist);
+			byte[] buf = new byte[1024];
+			int len;
+			while ((len = in.read(buf)) != -1) {
+				out.write(buf, 0, len);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (out != null) {
+				try {
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	/**
 	 * 保存图片到指定的目录
+	 * 
 	 * @param bit
-	 * @param fileName 文件名
+	 * @param fileName
+	 *            文件名
 	 * @return
 	 */
 	public static String saveBitToSD(Bitmap bit, String fileName) {
-		if (bit == null || bit.isRecycled()) return "";
-		
+		if (bit == null || bit.isRecycled())
+			return "";
+
 		File file = new File(Environment.getExternalStorageDirectory(), "/");
 		File dirFile = new File(file.getAbsolutePath());
 		if (!dirFile.exists()) {
@@ -44,7 +77,7 @@ public class FileUtil {
 			return pathFile.getAbsolutePath();
 		}
 	}
-	
+
 	/**
 	 * Bitmap转换为文件
 	 * 
@@ -70,7 +103,7 @@ public class FileUtil {
 			}
 		}
 	}
-	
+
 	/**
 	 * 从SD卡加载图片
 	 * 
@@ -78,14 +111,14 @@ public class FileUtil {
 	 * @return
 	 */
 	public static Bitmap getImageFromLocal(String imagePath) {
-//		File file = new File(imagePath);
-//		if (file.exists()) {
-//			Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
-//			// file.setLastModified(System.currentTimeMillis());
-//			return bitmap;
-//		}
-//       
-//		return null;
+		// File file = new File(imagePath);
+		// if (file.exists()) {
+		// Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+		// // file.setLastModified(System.currentTimeMillis());
+		// return bitmap;
+		// }
+		//
+		// return null;
 		try {
 			FileInputStream fis = new FileInputStream(imagePath);
 			return BitmapFactory.decodeStream(fis);

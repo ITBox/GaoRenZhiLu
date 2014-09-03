@@ -49,6 +49,8 @@ public class MainActivity extends BaseActivity {
 
 	// Tab选项卡的文字
 	private String mTextviewArray[] = { "咨询", "活动", "论坛", "测评", "更多" };
+	
+	public static MainActivity activity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +58,8 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.activity_main);
 		ButterKnife.inject(this);
 		initView();
+		
+		activity = this;
 
 		// new ConsultationApi().searchFreeConsultation("1", "1", "1", "1");
 		// new ConsultationApi().getPhoneConsultation("14");
@@ -83,6 +87,12 @@ public class MainActivity extends BaseActivity {
 			AppContext.getUserPreferences().edit()
 					.putBoolean(Config.NEW_REGISTER, false).commit();
 		}
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		activity = null;
 	}
 
 	/**

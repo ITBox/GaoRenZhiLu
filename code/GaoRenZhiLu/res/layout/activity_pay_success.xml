@@ -46,7 +46,7 @@
         android:background="@drawable/search_bar_bg"
         android:gravity="center"
         android:padding="10dp"
-        android:text="黄浦天禧已收到您的付款120元"
+        android:text="高人指路已收到您的付款120元"
         android:textColor="@android:color/white"
         android:textSize="15sp" />
 
@@ -73,7 +73,7 @@
         android:layout_marginRight="10dp"
         android:background="@android:color/white"
         android:padding="8dp"
-        android:text="如果有不可抗力因素造成导师不能按照预定时间回复的，请致电黄浦天下客户服务，核实后黄浦天下将为您全额退未消费部分的款项"
+        android:text="如果有不可抗力因素造成导师不能按照预定时间回复的，请致电高人指路客户服务，核实后高人指路将为您全额退未消费部分的款项"
         android:textColor="@color/dark"
         android:textSize="15sp" />
 

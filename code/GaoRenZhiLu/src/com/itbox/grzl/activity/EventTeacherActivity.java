@@ -39,6 +39,8 @@ public class EventTeacherActivity extends BaseLoadActivity<EventSearchGet>
 
 	@InjectView(R.id.text_medium)
 	protected TextView mTitleTv;
+	@InjectView(R.id.text_right)
+	protected TextView mRightTv;
 	@InjectView(R.id.lv_list)
 	protected ListView mListView;
 	@InjectView(R.id.searchBar)
@@ -71,6 +73,8 @@ public class EventTeacherActivity extends BaseLoadActivity<EventSearchGet>
 
 	private void initView() {
 		mTitleTv.setText(mTeacher.getUserrealname() + "的课程");
+		mRightTv.setText("发布活动");
+		mRightTv.setVisibility(View.VISIBLE);
 		mSearchBar.setOnSearchListener(this);
 		showLeftBackButton();
 		mListView.setEmptyView(mEmptyView);
@@ -79,7 +83,7 @@ public class EventTeacherActivity extends BaseLoadActivity<EventSearchGet>
 				EventSearchGet.USERID + "=" + mTeacher.getUserid());
 	}
 
-	@OnClick({ R.id.tv_address, R.id.tv_type, R.id.tv_state })
+	@OnClick({ R.id.tv_address, R.id.tv_type, R.id.tv_state, R.id.text_right })
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.tv_address:
@@ -108,6 +112,10 @@ public class EventTeacherActivity extends BaseLoadActivity<EventSearchGet>
 							startSearch();
 						}
 					}).show();
+			break;
+		case R.id.text_right:
+			// 发布活动
+			startActivity(EventAddActivity.class);
 			break;
 		}
 	}

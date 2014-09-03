@@ -83,6 +83,9 @@ public class UserSetActivity extends BaseActivity {
 			new Delete().from(Account.class).execute();
 			startActivity(LoginActicity.class);
 			mActThis.finish();
+			if (MainActivity.activity != null) {
+				MainActivity.activity.finish();
+			}
 			// 清除数据
 			new Delete().from(ExamReport.class).execute();
 			new Delete().from(Attention.class).execute();

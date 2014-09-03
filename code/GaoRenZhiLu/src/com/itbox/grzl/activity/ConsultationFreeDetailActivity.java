@@ -73,7 +73,7 @@ public class ConsultationFreeDetailActivity extends BaseActivity {
 					@Override
 					public void onSuccess(RespResult resp) {
 						if (resp.isSuccess()) {
-							showToast("解答成功");
+							showToast("您已经取得解答资格，请到我的咨询中进行解答");
 							finish();
 						} else if (resp.getResult() == 2) {
 							showToast("别人已经解答");

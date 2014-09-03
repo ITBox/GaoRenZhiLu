@@ -20,6 +20,7 @@ import cn.sharesdk.onekeyshare.OnekeyShare;
 
 import com.itbox.fx.core.L;
 import com.itbox.fx.net.GsonResponseHandler;
+import com.itbox.fx.util.FileUtil;
 import com.itbox.fx.widget.HorizontalListView;
 import com.itbox.grzl.Api;
 import com.itbox.grzl.AppContext;
@@ -120,16 +121,16 @@ public class EventDetialActivity extends BaseActivity {
 					}
 				});
 	}
-	
+
 	@OnItemClick(R.id.hlv_user)
-	public void onUserItemClick(AdapterView<?> parent, View view,
-			int position, long id){
+	public void onUserItemClick(AdapterView<?> parent, View view, int position,
+			long id) {
 		EventUser user = mUserItem.get(position);
-		if (user.getUserid().equals(mBean.getUserid())) {
-			Intent intent = new Intent(this, OtherUserInfoActivity.class);
-			intent.putExtra("userid", user.getUserid());
-			startActivity(intent);
-		}
+		// if (user.getUserid().equals(mBean.getUserid())) {
+		Intent intent = new Intent(this, OtherUserInfoActivity.class);
+		intent.putExtra("userid", user.getUserid());
+		startActivity(intent);
+		// }
 	}
 
 	/**
@@ -172,8 +173,7 @@ public class EventDetialActivity extends BaseActivity {
 			}
 		}
 
-		if (mBean.getUserid().equals(
-				userid)) {
+		if (mBean.getUserid().equals(userid)) {
 			bt_join.setVisibility(View.GONE);
 		}
 	}
@@ -213,27 +213,28 @@ public class EventDetialActivity extends BaseActivity {
 		oks.disableSSOWhenAuthorize();
 
 		// 分享时Notification的图标和文字
-		oks.setNotification(R.drawable.icon,
-				getString(R.string.app_name));
+		oks.setNotification(R.drawable.icon, getString(R.string.app_name));
 		// title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
 		oks.setTitle(getString(R.string.share));
 		// titleUrl是标题的网络链接，仅在人人网和QQ空间使用
-		oks.setTitleUrl("http://sharesdk.cn");
+		oks.setTitleUrl("www.zhaogaoren.com");
 		// text是分享文本，所有平台都需要这个字段
-		oks.setText(mBean.getActivitydescription());
+		oks.setText("下载高人指路APP，参与劲爆校园活动" + mBean.getTitle()
+				+ "，手机下载地址：www.zhaogaoren.com ");
 		// imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
 		File file = ImageLoader.getInstance().getDiscCache()
 				.get(Api.User.getAvatarUrl(mBean.getActivitypicture()));
-		oks.setImagePath(file
-				.getAbsolutePath());
+		// 复制文件，加上后缀
+		File newFile = new File(file.getAbsoluteFile() + ".jpg");
+		FileUtil.copy(file, newFile);
+		oks.setImagePath(newFile.getAbsolutePath());
 		// url仅在微信（包括好友和朋友圈）中使用
-		oks.setUrl("http://sharesdk.cn");
+		oks.setUrl("www.zhaogaoren.com");
 		// comment是我对这条分享的评论，仅在人人网和QQ空间使用
-		oks.setComment("我是测试评论文本");
 		// site是分享此内容的网站名称，仅在QQ空间使用
 		oks.setSite(getString(R.string.app_name));
 		// siteUrl是分享此内容的网站地址，仅在QQ空间使用
-		oks.setSiteUrl("http://sharesdk.cn");
+		oks.setSiteUrl("www.zhaogaoren.com");
 
 		// 启动分享GUI
 		oks.show(this);

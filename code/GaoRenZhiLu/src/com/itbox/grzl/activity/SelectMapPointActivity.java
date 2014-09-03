@@ -144,7 +144,7 @@ public class SelectMapPointActivity extends BaseActivity implements
 			 */
 			public void onGetPoiResult(MKPoiResult res, int type, int error) {
 				// 错误号可参考MKEvent中的定义
-				// LOG.i(Const.AppName,"onGetPoiResult");
+				L.i("onGetPoiResult");
 				if (error != 0 || res == null) {
 					showToast("抱歉，未找到结果");
 					return;
@@ -198,7 +198,7 @@ public class SelectMapPointActivity extends BaseActivity implements
 			}
 
 			public void onGetAddrResult(MKAddrInfo result, int error) {
-				// LOG.i(Const.AppName,"onGetAddrResult");
+				 L.i("onGetAddrResult");
 				if (error != 0 || result == null) {// 加载失败
 					if (!isTag) {
 						addrInfo = null;
@@ -218,7 +218,7 @@ public class SelectMapPointActivity extends BaseActivity implements
 					setResult(RESULT_OK, intent);
 					finish();
 				} else {
-					if (DistanceUtils.CompareGeoPoint(result.geoPt, curGP)) {
+//					if (DistanceUtils.CompareGeoPoint(result.geoPt, curGP)) {
 						// Toast.show("equal");
 						if (null == addrInfo) {
 							addrInfo = new AddrInfoModel(result);
@@ -235,7 +235,7 @@ public class SelectMapPointActivity extends BaseActivity implements
 						touchOverlay.setTouchPoint(result.geoPt,
 								result.strAddr, result.strAddr);
 						setInfoLayout(result.strAddr);
-					}
+//					}
 				}
 			}
 
@@ -266,6 +266,12 @@ public class SelectMapPointActivity extends BaseActivity implements
 		mMapView.setLongClickable(true);
 		mMapView.setBuiltInZoomControls(false);
 		mMapView.setOnTouchListener(new OnLongTouchListener(this) {
+			@Override
+			public boolean onSingleTapUp(MotionEvent e) {
+				onLongPress(e);
+				return super.onSingleTapUp(e);
+			}
+
 			@Override
 			public void onLongPress(MotionEvent e) {
 				e.getRawX();

@@ -16,6 +16,7 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 
 import com.activeandroid.query.Delete;
+import com.activeandroid.query.Update;
 import com.itbox.fx.net.GsonResponseHandler;
 import com.itbox.grzl.AppContext;
 import com.itbox.grzl.adapter.ProblemMsgAdapter;
@@ -79,7 +80,7 @@ public class MyProblemDetailActivity extends BaseLoadActivity<ProblemMsg> {
 
 		mAccount = AppContext.getInstance().getAccount();
 
-		if (!mBean.isSelf()) {
+		if (mBean.isSelf()) {
 			mRightTv.setVisibility(View.VISIBLE);
 			mRightTv.setText("完成对话");
 		}
@@ -111,6 +112,10 @@ public class MyProblemDetailActivity extends BaseLoadActivity<ProblemMsg> {
 						if (resp.isSuccess()) {
 							showToast("结束对话成功");
 							mBean.setFinish();
+							new Update(UserProblem.class)
+									.set(UserProblem.STATUS + "=?", "1")
+									.where(UserProblem.UP_ID + "=?",
+											mBean.getProblemId()).execute();
 							initStatus();
 						} else {
 							showToast("结束对话失败");
