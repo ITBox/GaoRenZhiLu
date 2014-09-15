@@ -33,8 +33,9 @@ public class Const {
 	public static final String BAIDU_KEY = "kwxeOmTf3uzqyerFGarub1D2";
 
 	/** 用于2.1.3及以后版本 */
-	public static final String MapKey_Debug = "kwxeOmTf3uzqyerFGarub1D2",
-			MapKey_Release = "7330289457bcebe623aa2c0434fe7f87";
+	public static final String MapKey_Debug = "KFhX4DI1THqYUKFXrNTAZLtk",
+			MapKey_Release = "KFhX4DI1THqYUKFXrNTAZLtk";
+//	MapKey_Release = "kwxeOmTf3uzqyerFGarub1D2";
 	/** 用于2.1.2及以前版本 */
 	public static final String MapKey = "FD0B4D7BFD32C27ABFF7276C73726A795F3AFA4C";
 

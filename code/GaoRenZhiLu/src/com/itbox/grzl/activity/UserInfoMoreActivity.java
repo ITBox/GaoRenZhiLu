@@ -299,6 +299,12 @@ public class UserInfoMoreActivity extends BaseActivity implements
 	 * 更改用户更多资料
 	 */
 	private void postDataMethod() {
+		final double picPrice = Double.parseDouble(EditTextUtils.getText(mEtUserInfoZixunImg));
+		final double phonePrice = Double.parseDouble(EditTextUtils.getText(mEtUserInfoZixunPhone));
+		if ((picPrice !=0 && picPrice < 1) || (phonePrice !=0 && phonePrice < 1)) {
+			showToast("咨询价格必须等于0或者大于1元");
+			return;
+		}
 		showProgressDialog("更新中...");
 		RequestParams params = new RequestParams();
 		params.put("userid", userExtension.getUserid());
@@ -307,8 +313,8 @@ public class UserInfoMoreActivity extends BaseActivity implements
 				EditTextUtils.getText(mEtUserInfoBankCardName));
 		params.put("teachertype", teacherId + "");
 		params.put("jobtype", jobId + "");
-		params.put("pictureprice", EditTextUtils.getText(mEtUserInfoZixunImg));
-		params.put("phoneprice", EditTextUtils.getText(mEtUserInfoZixunPhone));
+		params.put("pictureprice", picPrice + "");
+		params.put("phoneprice", phonePrice + "");
 		params.put("starttime", time1);
 		params.put("endtime", time2);
 
@@ -328,10 +334,8 @@ public class UserInfoMoreActivity extends BaseActivity implements
 									.getText(mEtUserInfoBankCardName));
 							userExtension.setTeachertype(teacherId + "");
 							userExtension.setJobtype(jobId + "");
-							userExtension.setPictureprice(EditTextUtils
-									.getText(mEtUserInfoZixunImg));
-							userExtension.setPhoneprice(EditTextUtils
-									.getText(mEtUserInfoZixunPhone));
+							userExtension.setPictureprice(picPrice + "");
+							userExtension.setPhoneprice(phonePrice + "");
 							userExtension.setStarttime(time1);
 							userExtension.setEndtime(time2);
 							userExtension.save();
