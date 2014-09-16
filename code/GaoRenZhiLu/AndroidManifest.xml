@@ -77,6 +77,9 @@
             android:name="AA_DB_VERSION"
             android:value="20" />
 
+          <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="KFhX4DI1THqYUKFXrNTAZLtk" />
         <activity
             android:name="com.alipay.android.app.sdk.WapPayActivity"
             android:screenOrientation="portrait" >

@@ -26,7 +26,8 @@ public class MapManager extends BMapManager {
 
 	private MapManager() {
 		super(AppContext.getInstance());
-		if (!init(getKeyStr(), new MyGeneralListener())) {
+		// if (!init(getKeyStr(), new MyGeneralListener())) {
+		if (!init(new MyGeneralListener())) {
 			AppException
 					.handle(new NullPointerException("BMapManager  初始化错误!"));
 		}

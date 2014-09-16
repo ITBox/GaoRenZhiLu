@@ -37,7 +37,7 @@ public class TouchPoiOverlay extends ItemizedOverlay<OverlayItem> {
 			touchItem.setSnippet(snippet);
 		}
 		addItem(touchItem);
-		mMapView.refresh();
+//		mMapView.refresh();
 	}
 	
 }
