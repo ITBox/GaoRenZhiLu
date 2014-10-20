@@ -306,6 +306,15 @@
         <activity
             android:name="com.itbox.grzl.activity.PaySuccessActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.MoreConsulationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.MoreSettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.itbox.grzl.activity.MoreShouruActivity"
+            android:screenOrientation="portrait" />
 
         <service
             android:name="com.baidu.location.f"

@@ -106,7 +106,7 @@ public class UserInfoMoreActivity extends BaseActivity implements
 	private void initViews() {
 		mTVTopCancel.setVisibility(View.VISIBLE);
 		mTVTopSave.setVisibility(View.VISIBLE);
-		mTVTopCancel.setText("个人资料");
+		mTVTopCancel.setText("返回");
 		mTVTopMedium.setText("更多资料");
 		mTVTopSave.setText("保存");
 	}

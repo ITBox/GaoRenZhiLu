@@ -41,152 +41,20 @@
             android:src="@drawable/top_more_line2" />
 
         <TextView
-            android:id="@+id/more_my_action"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/selector_bg_more"
-            android:drawableLeft="@drawable/ic_more_action"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:text="我的活动" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_more_line" />
-
-        <TextView
             android:id="@+id/more_my_ask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/selector_bg_more"
             android:drawableLeft="@drawable/ic_more_ask"
+            android:layout_marginTop="5dp"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
             android:paddingBottom="10dp"
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
-            android:text="我的咨询" />
+            android:text="学生咨询" />
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_more_line" />
-
-        <TextView
-            android:id="@+id/more_my_evaluate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_bg_more"
-            android:drawableLeft="@drawable/ic_more_evaluate"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:text="我的评价" />
-
-        <ImageView
-            android:id="@+id/more_my_evaluate_line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_more_line" />
-
-        <TextView
-            android:id="@+id/more_my_message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_bg_more"
-            android:drawableLeft="@drawable/ic_more_message"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:text="我的消息"
-            android:visibility="gone" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_more_line"
-            android:visibility="gone" />
-
-        <TextView
-            android:id="@+id/more_my_tixian"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_bg_more"
-            android:drawableLeft="@drawable/ic_more_tixian"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:text="提现明细" />
-
-        <ImageView
-            android:id="@+id/more_my_tixian_line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_more_line" />
-
-        <TextView
-            android:id="@+id/more_my_shouru"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_bg_more"
-            android:drawableLeft="@drawable/ic_more_shouru"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:text="收入明细" />
-
-        <ImageView
-            android:id="@+id/more_my_shouru_line"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_more_line" />
-
-        <TextView
-            android:id="@+id/more_my_forum"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_bg_more"
-            android:drawableLeft="@drawable/ic_more_forum"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:text="我的关注" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/bg_more_line" />
-
-        <TextView
-            android:id="@+id/more_my_consult"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_bg_more"
-            android:drawableLeft="@drawable/ic_more_consult"
-            android:drawablePadding="10dp"
-            android:gravity="center_vertical"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingTop="10dp"
-            android:text="免费咨询" />
-
-        <ImageView
-            android:id="@+id/more_my_consult_line"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/bg_more_line" />
@@ -208,6 +76,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/bg_more_line" />
+        <TextView
+            android:id="@+id/more_my_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_bg_more"
+            android:drawableLeft="@drawable/ic_more_action"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:text="我的活动" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_more_line" />
+
+        <TextView
+            android:id="@+id/more_my_shouru"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_bg_more"
+            android:drawableLeft="@drawable/ic_more_shouru"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingTop="10dp"
+            android:text="我的收入" />
+
+        <ImageView
+            android:id="@+id/more_my_shouru_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bg_more_line" />
+
 
         <TextView
             android:id="@+id/more_my_set"

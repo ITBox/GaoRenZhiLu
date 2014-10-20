@@ -24,6 +24,9 @@ import com.itbox.grzl.activity.ConsultationFreeActivity;
 import com.itbox.grzl.activity.ConsultationMyActivity;
 import com.itbox.grzl.activity.EventMyActivity;
 import com.itbox.grzl.activity.ExamReportActivity;
+import com.itbox.grzl.activity.MoreConsulationActivity;
+import com.itbox.grzl.activity.MoreSettingsActivity;
+import com.itbox.grzl.activity.MoreShouruActivity;
 import com.itbox.grzl.activity.TeacherCommentListActivity;
 import com.itbox.grzl.activity.TeacherIncomingActivity;
 import com.itbox.grzl.activity.TeacherWithdrawalsListActivity;
@@ -46,22 +49,10 @@ public class MoreFragment extends BaseFragment implements
 	CircleImageView mMorePhoto;
 	@InjectView(R.id.more_my_name)
 	TextView mMoreName;
-	@InjectView(R.id.more_my_evaluate)
-	TextView mMoreEvaluate;
-	@InjectView(R.id.more_my_tixian)
-	TextView mMoreTixian;
 	@InjectView(R.id.more_my_shouru)
 	TextView mMoreShouru;
-	@InjectView(R.id.more_my_consult)
-	TextView mMoreConsult;
-	@InjectView(R.id.more_my_evaluate_line)
-	ImageView mMoreEvaluateLine;
-	@InjectView(R.id.more_my_tixian_line)
-	ImageView mMoreTixianLine;
 	@InjectView(R.id.more_my_shouru_line)
 	ImageView mMoreShouruLine;
-	@InjectView(R.id.more_my_consult_line)
-	ImageView mMoreConsultLine;
 	private Account account;
 
 	@Override
@@ -95,21 +86,13 @@ public class MoreFragment extends BaseFragment implements
 	private void showViews(Account account) {
 		// TODO Auto-generated method stub
 		if (account.getUsertype() == 2) {
-			mMoreEvaluate.setVisibility(View.GONE);
-			mMoreTixian.setVisibility(View.GONE);
 			mMoreShouru.setVisibility(View.GONE);
-			mMoreConsult.setVisibility(View.GONE);
-			mMoreEvaluateLine.setVisibility(View.GONE);
-			mMoreTixianLine.setVisibility(View.GONE);
 			mMoreShouruLine.setVisibility(View.GONE);
-			mMoreConsultLine.setVisibility(View.GONE);
 		}
 	}
 
 	@OnClick({ R.id.more_my_photo, R.id.more_my_action, R.id.more_my_ask,
-			R.id.more_my_evaluate, R.id.more_my_message, R.id.more_my_tixian,
-			R.id.more_my_shouru, R.id.more_my_forum, R.id.more_my_consult,
-			R.id.more_my_exam, R.id.more_my_set })
+			R.id.more_my_shouru, R.id.more_my_exam, R.id.more_my_set })
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.more_my_photo:
@@ -119,30 +102,16 @@ public class MoreFragment extends BaseFragment implements
 			startActivity(EventMyActivity.class);
 			break;
 		case R.id.more_my_ask:// 我的咨询
-			startActivity(ConsultationMyActivity.class);
-			break;
-		case R.id.more_my_evaluate:// 我的评价
-			startActivity(TeacherCommentListActivity.class);
-			break;
-		case R.id.more_my_message:// 我的消息
-			break;
-		case R.id.more_my_tixian:// 提现明细
-			startActivity(TeacherWithdrawalsListActivity.class);
+			startActivity(MoreConsulationActivity.class);
 			break;
 		case R.id.more_my_shouru:// 收入明细
-			startActivity(TeacherIncomingActivity.class);
-			break;
-		case R.id.more_my_forum:// 行业论坛
-			startActivity(AttentionMyActivity.class);
-			break;
-		case R.id.more_my_consult:// 免费咨询
-			startActivity(ConsultationFreeActivity.class);
+			startActivity(MoreShouruActivity.class);
 			break;
 		case R.id.more_my_exam:// 测评报告
 			startActivity(ExamReportActivity.class);
 			break;
 		case R.id.more_my_set:// 个人设置
-			startActivity(UserSetActivity.class);
+			startActivityForResult(MoreSettingsActivity.class, 0);
 			break;
 		default:
 			break;
